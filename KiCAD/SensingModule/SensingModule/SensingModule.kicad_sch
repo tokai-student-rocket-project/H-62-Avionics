@@ -3837,7 +3837,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://www.hirose.com/ja/product/p/CL0543-0535-7-24"
+		(property "Datasheet" "~"
 			(at 144.78 156.21 0)
 			(effects
 				(font
@@ -3846,7 +3846,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Generic connector, single row, 01x08, script generated (kicad-library-utils/schlib/autogen/connector/)"
 			(at 144.78 156.21 0)
 			(effects
 				(font
@@ -5532,7 +5532,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://www.hirose.com/ja/product/p/CL0543-0535-7-24"
+		(property "Datasheet" "~"
 			(at 35.56 36.83 0)
 			(effects
 				(font
@@ -5541,7 +5541,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Generic connector, single row, 01x08, script generated (kicad-library-utils/schlib/autogen/connector/)"
 			(at 35.56 36.83 0)
 			(effects
 				(font
