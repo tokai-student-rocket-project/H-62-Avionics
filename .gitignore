@@ -36,3 +36,4 @@ _autosave-*
 
 # PlatformIO 生成ファイル
 .pio/build
+.pio
