@@ -677,6 +677,22 @@
     [
       "6c4aa1f5-c08b-4349-85f8-88bb399e711f",
       "Root"
+    ],
+    [
+      "44ad5b2d-22cb-4ed2-bb54-706dcaaae99f",
+      "CanInterface"
+    ],
+    [
+      "68138f6b-698e-4dab-8cce-76242e9c0eb0",
+      "MicroControllerUnit"
+    ],
+    [
+      "5c73a0cd-a157-4ca7-894b-882ccf57262e",
+      "Sensor"
+    ],
+    [
+      "5080f980-61f3-43e2-a69d-110d0de0a5b0",
+      "Power"
     ]
   ],
   "text_variables": {}
