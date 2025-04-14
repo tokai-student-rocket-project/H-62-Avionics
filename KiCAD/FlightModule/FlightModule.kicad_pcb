@@ -1020,7 +1020,7 @@
 	(footprint "Package_TO_SOT_SMD:SOT-23"
 		(layer "F.Cu")
 		(uuid "2ae08573-e2b1-4448-b529-6e23afb2b117")
-		(at 76.5625 47.5)
+		(at 73.4375 47.5)
 		(descr "SOT, 3 Pin (JEDEC TO-236 Var AB https://www.jedec.org/document_search?search_api_views_fulltext=TO-236), generated with kicad-footprint-generator ipc_gullwing_generator.py")
 		(tags "SOT TO_SOT_SMD")
 		(property "Reference" "Q2"
@@ -1217,7 +1217,7 @@
 			(uuid "336bcc95-bbae-401b-a257-1badc71f50b2")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 0)
+			(at -9.0625 0 0)
 			(layer "F.Fab")
 			(uuid "eaa4def0-1618-46e4-a7cc-ad3705945a7d")
 			(effects
@@ -5404,7 +5404,7 @@
 			)
 		)
 		(property "Value" "2.4kR"
-			(at 0 1.43 0)
+			(at -15.625 -0.495 0)
 			(layer "F.Fab")
 			(uuid "a2ac9c6b-001c-4217-8634-66957afac906")
 			(effects
@@ -5590,7 +5590,7 @@
 	(footprint "Package_TO_SOT_SMD:SOT-23"
 		(layer "F.Cu")
 		(uuid "fcfb6c53-de93-42a4-a6eb-db029f69deca")
-		(at 76.5625 42.875)
+		(at 60.9375 40.95)
 		(descr "SOT, 3 Pin (JEDEC TO-236 Var AB https://www.jedec.org/document_search?search_api_views_fulltext=TO-236), generated with kicad-footprint-generator ipc_gullwing_generator.py")
 		(tags "SOT TO_SOT_SMD")
 		(property "Reference" "Q1"
