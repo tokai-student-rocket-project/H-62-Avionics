@@ -98,7 +98,7 @@
 	(net 17 "N$3")
 	(net 18 "N$4")
 	(net 19 "N$2")
-	(footprint "1X14_SMD_TH"
+	(footprint "Library:1X14_SMD_TH"
 		(layer "F.Cu")
 		(uuid "1ae525e8-908d-486f-89fa-857de8f7b1f1")
 		(at 131.9984 115.1636)
@@ -1787,7 +1787,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "1X14_SMD_TH"
+	(footprint "Library:1X14_SMD_TH"
 		(layer "F.Cu")
 		(uuid "35ee81a1-925a-480f-88d6-9cdca17b0814")
 		(at 165.0184 94.8436 180)
@@ -3484,7 +3484,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "0402-1005X55N_3633153"
+	(footprint "Library:0402-1005X55N_3633153"
 		(layer "F.Cu")
 		(uuid "3f469e41-eaac-413a-8d1c-7787041ff767")
 		(at 153.8133 106.8983 -90)
@@ -3674,7 +3674,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "dummyfp2"
+	(footprint "Library:dummyfp2"
 		(layer "F.Cu")
 		(uuid "42772c6f-dff8-4473-91b7-8c4eb93c59a5")
 		(at 169.1136 94.7536)
@@ -3734,7 +3734,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "UBLOXLIB_SAM-M8Q"
+	(footprint "Library:UBLOXLIB_SAM-M8Q"
 		(layer "F.Cu")
 		(uuid "4ad99f2f-ce7a-49ca-ad9a-68b02acf2e48")
 		(at 145.1691 104.9655 90)
@@ -5060,7 +5060,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "MH_RND_F_2.2MM_NM"
+	(footprint "Library:MH_RND_F_2.2MM_NM"
 		(layer "F.Cu")
 		(uuid "4b46c2e4-8527-463c-b6ee-2fd20374b740")
 		(at 169.1136 115.2536 90)
@@ -5247,7 +5247,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "BATT-HOLDER_12MM"
+	(footprint "Library:BATT-HOLDER_12MM"
 		(layer "F.Cu")
 		(uuid "51c6ecd1-b49a-4c29-b93d-5ce813a67b35")
 		(at 161.7447 104.0543 -45)
@@ -5266,7 +5266,7 @@
 			)
 		)
 		(property "Value" "BATT-HOLDER_12MM"
-			(at -3 9.500009 -225)
+			(at -3 9.500009 135)
 			(unlocked yes)
 			(layer "F.Fab")
 			(uuid "5d1e92f5-45b5-4dd6-ad5d-bb0e036d5a92")
@@ -5349,7 +5349,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "0402-1005X55N"
+	(footprint "Library:0402-1005X55N"
 		(layer "F.Cu")
 		(uuid "5a0b68dd-4655-4d14-96e6-d187d0d9e66d")
 		(at 133.8386 104.3036 90)
@@ -5538,7 +5538,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "SOT25"
+	(footprint "Library:SOT25"
 		(layer "F.Cu")
 		(uuid "63bd50ff-59dd-4c22-a336-0b812d2b3135")
 		(at 129.1438 102.035 90)
@@ -5682,7 +5682,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "FD-1-1.5"
+	(footprint "Library:FD-1-1.5"
 		(layer "F.Cu")
 		(uuid "65e28beb-5b61-444b-9f20-c9049e5f0221")
 		(at 127.3136 108.2536)
@@ -5810,7 +5810,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "dummyfp1"
+	(footprint "Library:dummyfp1"
 		(layer "F.Cu")
 		(uuid "6d3b9bae-fd74-4615-b5f4-a8e132d51246")
 		(at 169.1136 115.2536)
@@ -5870,7 +5870,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "FD-1-1.5"
+	(footprint "Library:FD-1-1.5"
 		(layer "F.Cu")
 		(uuid "722b7a07-19b4-4bab-b407-b30b3ecbb4f7")
 		(at 151.8136 98.6036 90)
@@ -5998,7 +5998,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "MH_RND_F_2.2MM_NM"
+	(footprint "Library:MH_RND_F_2.2MM_NM"
 		(layer "F.Cu")
 		(uuid "79589407-46d3-4e20-928b-1695d45cee6e")
 		(at 127.8886 115.2536 90)
@@ -6185,7 +6185,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "0402-1005X55N"
+	(footprint "Library:0402-1005X55N"
 		(layer "F.Cu")
 		(uuid "7fc098b2-33d2-4c36-bb3e-faeed0bffc2c")
 		(at 127.9886 99.4786 180)
@@ -6373,7 +6373,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "dummyfp0"
+	(footprint "Library:dummyfp0"
 		(layer "F.Cu")
 		(uuid "8200aaf4-a811-429f-b1f8-f21adc58027e")
 		(at 127.8886 115.2536)
@@ -6433,7 +6433,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "0402-1005X55N"
+	(footprint "Library:0402-1005X55N"
 		(layer "F.Cu")
 		(uuid "8da8821f-3667-4bae-829d-92a2ee63f602")
 		(at 131.8136 100.5786 -90)
@@ -6621,7 +6621,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "0402-1005X55N"
+	(footprint "Library:0402-1005X55N"
 		(layer "F.Cu")
 		(uuid "9537445e-7a97-4ec0-bec3-878273c661b6")
 		(at 155.746 112.0499 -90)
@@ -6809,7 +6809,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "dummyfp3"
+	(footprint "Library:dummyfp3"
 		(layer "F.Cu")
 		(uuid "a1ce4d83-f5fe-4172-ab78-b54b69a8aaec")
 		(at 127.8886 94.7536)
@@ -6869,7 +6869,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "0402-1005X55N"
+	(footprint "Library:0402-1005X55N"
 		(layer "F.Cu")
 		(uuid "a490f861-cb41-4ad0-8b18-3178efed940c")
 		(at 136.459 98.2631 180)
@@ -7058,7 +7058,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "MH_RND_F_2.2MM_NM"
+	(footprint "Library:MH_RND_F_2.2MM_NM"
 		(layer "F.Cu")
 		(uuid "a52fa5ca-bfef-480e-9e37-3e03ad4b8e74")
 		(at 169.1136 94.7536 90)
@@ -7245,7 +7245,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "SM05B-SRSS-TB"
+	(footprint "Library:SM05B-SRSS-TB"
 		(layer "F.Cu")
 		(uuid "aec62eb8-eb41-44f2-a051-e10f1060b59c")
 		(at 128.3136 108.2536 -90)
@@ -7521,7 +7521,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "MH_RND_F_2.2MM_NM"
+	(footprint "Library:MH_RND_F_2.2MM_NM"
 		(layer "F.Cu")
 		(uuid "b440fa13-058f-4ccf-9cd9-272a24c46ec4")
 		(at 127.8886 94.7536 90)
@@ -7708,7 +7708,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "FRAME"
+	(footprint "Library:FRAME"
 		(layer "F.Cu")
 		(uuid "b6fe6286-214f-497a-b658-f0f5ac89f5cb")
 		(at 125.6386 117.5036)
@@ -83137,7 +83137,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "SOT65P210X110-3N"
+	(footprint "Library:SOT65P210X110-3N"
 		(layer "F.Cu")
 		(uuid "bc022ab9-4a4b-45d0-bfbe-e657ba9f0cfb")
 		(at 130.7496 98.1234)
@@ -83399,7 +83399,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "0402-1005X55N"
+	(footprint "Library:0402-1005X55N"
 		(layer "F.Cu")
 		(uuid "c824bac7-5e42-4935-acbc-a3df443b0eb1")
 		(at 131.6136 105.2786)
@@ -83587,7 +83587,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "FD-1-1.5"
+	(footprint "Library:FD-1-1.5"
 		(layer "F.Cu")
 		(uuid "d1cc6a99-9970-44fa-ad85-307867094376")
 		(at 138.6215 111.5417 90)
@@ -83715,7 +83715,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "LEDC1608X80N-AK"
+	(footprint "Library:LEDC1608X80N-AK"
 		(layer "F.Cu")
 		(uuid "e83a964e-e5c0-4e6e-adcf-5c58a85d98dc")
 		(at 154.0481 111.5438 90)
@@ -84183,7 +84183,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "SOT65P210X110-3N"
+	(footprint "Library:SOT65P210X110-3N"
 		(layer "F.Cu")
 		(uuid "ee2e0994-3613-4624-b67f-3ea8f210b1e9")
 		(at 133.8386 100.1536 -90)
@@ -84444,7 +84444,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "SJ"
+	(footprint "Library:SJ"
 		(layer "B.Cu")
 		(uuid "9115c01c-017a-4230-81d6-5590a9e9242b")
 		(at 139.1386 98.0036 -90)
@@ -84464,7 +84464,7 @@
 			)
 		)
 		(property "Value" "DNP"
-			(at 0.4001 0 -90)
+			(at 0.4001 0 270)
 			(unlocked yes)
 			(layer "B.Fab")
 			(uuid "1a9a680e-65c7-4077-878b-8d55d84c45f3")
@@ -84662,7 +84662,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "SJ"
+	(footprint "Library:SJ"
 		(layer "B.Cu")
 		(uuid "a091c029-7086-4d62-ae64-6b8d9c5fd8a9")
 		(at 162.4386 98.0036 -90)
@@ -84682,7 +84682,7 @@
 			)
 		)
 		(property "Value" "DNP"
-			(at 0.4001 0 -90)
+			(at 0.4001 0 270)
 			(unlocked yes)
 			(layer "B.Fab")
 			(uuid "2f267495-52a7-4a75-a2a3-c7d1f51b9313")
@@ -84880,7 +84880,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "SJ"
+	(footprint "Library:SJ"
 		(layer "B.Cu")
 		(uuid "c3a78baf-a08f-4c88-a28b-cf4f96f7e7ab")
 		(at 141.6886 98.0036 -90)
@@ -84900,7 +84900,7 @@
 			)
 		)
 		(property "Value" "DNP"
-			(at 0.4001 0 -90)
+			(at 0.4001 0 270)
 			(unlocked yes)
 			(layer "B.Fab")
 			(uuid "e4957577-3399-4fb0-bc98-afbff42858a3")
@@ -85098,7 +85098,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "SJ"
+	(footprint "Library:SJ"
 		(layer "B.Cu")
 		(uuid "c774e6c0-432c-495c-af13-210dd0968ea1")
 		(at 144.2386 98.0036 -90)
@@ -85118,7 +85118,7 @@
 			)
 		)
 		(property "Value" "DNP"
-			(at 0.4001 0 -90)
+			(at 0.4001 0 270)
 			(unlocked yes)
 			(layer "B.Fab")
 			(uuid "2517cb84-794c-4572-88cf-ac07e31ffa5f")
@@ -85316,7 +85316,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "SJ"
+	(footprint "Library:SJ"
 		(layer "B.Cu")
 		(uuid "e22fdde5-94a4-4e8b-abaa-726bbcbbcda6")
 		(at 159.9286 98.0091 -90)
@@ -85336,7 +85336,7 @@
 			)
 		)
 		(property "Value" "DNP"
-			(at 0.4001 0 -90)
+			(at 0.4001 0 270)
 			(unlocked yes)
 			(layer "B.Fab")
 			(uuid "052c4326-edde-48ec-90cb-4b0e4f121d5e")
@@ -85534,7 +85534,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "SJ"
+	(footprint "Library:SJ"
 		(layer "B.Cu")
 		(uuid "f52c2b89-3a46-43e2-82ac-8bb6d66831f2")
 		(at 165.0386 98.0036 -90)
@@ -85554,7 +85554,7 @@
 			)
 		)
 		(property "Value" "DNP"
-			(at 0.4001 0 -90)
+			(at 0.4001 0 270)
 			(unlocked yes)
 			(layer "B.Fab")
 			(uuid "6cc8ef62-ff45-4eea-8329-8b3cf99b9a31")
