@@ -611,6 +611,10 @@
     [
       "3507137a-fdd7-4bc0-abe8-370b7c3b390e",
       "Root"
+    ],
+    [
+      "5f21eb00-60ce-4306-a223-a9b9ec9552df",
+      "GPSShield"
     ]
   ],
   "text_variables": {}
