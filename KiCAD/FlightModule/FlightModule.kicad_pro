@@ -615,6 +615,22 @@
     [
       "5f21eb00-60ce-4306-a223-a9b9ec9552df",
       "GPSShield"
+    ],
+    [
+      "155c0154-13dd-4ef8-92f3-1346edd75099",
+      "Power"
+    ],
+    [
+      "39e76429-2e61-4af1-b823-85ad47e16da6",
+      "CanInterface"
+    ],
+    [
+      "bd9513fb-c4ea-4ad2-b808-55246131b9db",
+      "Separation"
+    ],
+    [
+      "aa29dbb0-7bbf-46e2-a197-8a8b68b8a205",
+      "Peripheral"
     ]
   ],
   "text_variables": {}
