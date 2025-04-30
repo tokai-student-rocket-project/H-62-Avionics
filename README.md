@@ -6,8 +6,8 @@ H-62搭載計器　すばる1.3 | 2025年度 夏季 能代
 - 基板径をΦ90に変更
 
 ## ドキュメント
-- [CDR](./Document/)
-- [PDR](./Document/)
+- [PDR](./Document/PDR/すばる1.3_PDR.pdf)
+- [CDR](./Document/CDR/)
 - [報告書](./Document/)
 
 ## ディレクトリ構成
@@ -16,8 +16,8 @@ H-62搭載計器　すばる1.3 | 2025年度 夏季 能代
 
 ### [KiCAD](./KiCAD/)
 KiCADのプロジェクトファイルを格納するディレクトリ
-- [Battery Module](./KiCAD/BatteryModule/)
 - [Flight Module](./KiCAD/FlightModule/)
+- [Battery Module](./KiCAD/BatteryModule/)
 - [Power Module](./KiCAD/PowerModule/)
 - [Sensing Module](./KiCAD/SensingModule/)
 - [Valve Control Module](./KiCAD/ValveControlModule/)
@@ -25,6 +25,7 @@ KiCADのプロジェクトファイルを格納するディレクトリ
 
 ### [lib](./lib/)
 ライブラリを格納するディレクトリ
+
 Lib_ から始まるファイルは自作ライブラリとなっています
 
 ### [src](./src/)
