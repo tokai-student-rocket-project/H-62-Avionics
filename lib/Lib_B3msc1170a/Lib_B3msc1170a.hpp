@@ -21,5 +21,5 @@ public:
     int16_t readCurrent(byte *id);
 
 private:
-    IcsHardSerialClass *_mainSupply;
+    IcsHardSerialClass *_b3msc1170a;
 };

@@ -2,8 +2,8 @@
 
 void B3MSC1170A::initialize(byte *id)
 {
-    _mainSupply = new IcsHardSerialClass(&Serial1, 2, 115200, 10);
-    _mainSupply->begin();
+    _b3msc1170a = new IcsHardSerialClass(&Serial1, 2, 115200, 10);
+    _b3msc1170a->begin();
 
     uint8_t _id = (byte)(id);
 
@@ -48,7 +48,7 @@ int B3MSC1170A::writeCommand(byte* id, byte* TxData, byte* Address)
     txCmd[7] = (byte)(txCmd[7]); // CHECKSUM
 
     // flag = B3M.synchronize(txCmd, sizeof txCmd, rxCmd, sizeof rxCmd);
-    flag = _mainSupply->synchronize(txCmd, 8, rxCmd, 5);
+    flag = _b3msc1170a->synchronize(txCmd, 8, rxCmd, 5);
 
     if (flag == false)
     {
@@ -99,7 +99,7 @@ int B3MSC1170A::setPosition(byte* id, int Pos, int Time)
     txCmd[8] = (byte)(txCmd[8]); // SUM
 
     // flag = B3M.synchronize(txCmd, sizeof txCmd, rxCmd, sizeof rxCmd);
-    flag = _mainSupply->synchronize(txCmd, 9, rxCmd, 7);
+    flag = _b3msc1170a->synchronize(txCmd, 9, rxCmd, 7);
 
     if (flag == false)
     {
@@ -142,7 +142,7 @@ uint16_t B3MSC1170A::readVoltage(byte* id)
     }
 
     txCmd[6] = (byte)(txCmd[6]);
-    flag = _mainSupply->synchronize(txCmd, 7, rxCmd, 7);
+    flag = _b3msc1170a->synchronize(txCmd, 7, rxCmd, 7);
 
     if (flag == false)
     {
@@ -183,7 +183,7 @@ int16_t B3MSC1170A::readCurrent(byte* id)
     }
 
     txCmd[6] = (byte)(txCmd[6]);
-    flag = _mainSupply->synchronize(txCmd, 7, rxCmd, 7);
+    flag = _b3msc1170a->synchronize(txCmd, 7, rxCmd, 7);
 
     if (flag == false)
     {
@@ -227,7 +227,7 @@ int16_t B3MSC1170A::readDesiredPosition(byte* id)
     // Serial.println("");
 
     txCmd[6] = (byte)(txCmd[6]);
-    flag = _mainSupply->synchronize(txCmd, 7, rxCmd, 7);
+    flag = _b3msc1170a->synchronize(txCmd, 7, rxCmd, 7);
 
     if (flag == false)
     {
@@ -272,7 +272,7 @@ int16_t B3MSC1170A::readMotorTemperature(byte* id)
     }
 
     txCmd[6] = (byte)(txCmd[6]);
-    flag = _mainSupply->synchronize(txCmd, 7, rxCmd, 7);
+    flag = _b3msc1170a->synchronize(txCmd, 7, rxCmd, 7);
 
     if (flag == false)
     {
@@ -313,7 +313,7 @@ int16_t B3MSC1170A::readMcuTemperature(byte* id)
     }
 
     txCmd[6] = (byte)(txCmd[6]);
-    flag = _mainSupply->synchronize(txCmd, 7, rxCmd, 7);
+    flag = _b3msc1170a->synchronize(txCmd, 7, rxCmd, 7);
 
     if (flag == false)
     {
@@ -354,7 +354,7 @@ int16_t B3MSC1170A::readCurrentPosition(byte* id)
     }
 
     txCmd[6] = (byte)(txCmd[6]);
-    flag = _mainSupply->synchronize(txCmd, 7, rxCmd, 7);
+    flag = _b3msc1170a->synchronize(txCmd, 7, rxCmd, 7);
 
     if (flag == false)
     {
@@ -395,7 +395,7 @@ int16_t B3MSC1170A::readCurrentVelosity(byte* id)
     }
 
     txCmd[6] = (byte)(txCmd[6]);
-    flag = _mainSupply->synchronize(txCmd, 7, rxCmd, 7);
+    flag = _b3msc1170a->synchronize(txCmd, 7, rxCmd, 7);
 
     if (flag == false)
     {
