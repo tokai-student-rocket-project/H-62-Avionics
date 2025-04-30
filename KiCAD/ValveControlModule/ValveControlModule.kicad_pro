@@ -624,6 +624,246 @@
           "label": "#",
           "name": "${ITEM_NUMBER}",
           "show": false
+        },
+        {
+          "group_by": false,
+          "label": "FOOTPRINT_VARIANT_NAME_0",
+          "name": "FOOTPRINT_VARIANT_NAME_0",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "HEIGHT",
+          "name": "HEIGHT",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "DIGIKEY_DESCRIPTION",
+          "name": "DIGIKEY_DESCRIPTION",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "LEAD_FREE",
+          "name": "LEAD_FREE",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "MAX_SUPPLY_VOLTAGE",
+          "name": "MAX_SUPPLY_VOLTAGE",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "MF",
+          "name": "MF",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "MFG_PACKAGE_IDENT",
+          "name": "MFG_PACKAGE_IDENT",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "MFG_PACKAGE_IDENT_COMPONENT_ID",
+          "name": "MFG_PACKAGE_IDENT_COMPONENT_ID",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "MFG_PACKAGE_IDENT_DATE",
+          "name": "MFG_PACKAGE_IDENT_DATE",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "MFG_PACKAGE_IDENT_REV",
+          "name": "MFG_PACKAGE_IDENT_REV",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "MIN_SUPPLY_VOLTAGE",
+          "name": "MIN_SUPPLY_VOLTAGE",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "MOUSER_DESCRIPTION",
+          "name": "MOUSER_DESCRIPTION",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "MOUSER_PART_NUMBER",
+          "name": "MOUSER_PART_NUMBER",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "MP",
+          "name": "MP",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "MPN",
+          "name": "MPN",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Availability",
+          "name": "Availability",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "CENTROID_NOT_SPECIFIED",
+          "name": "CENTROID_NOT_SPECIFIED",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Check_prices",
+          "name": "Check_prices",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "DEVICE_CLASS_L1",
+          "name": "DEVICE_CLASS_L1",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "NOMINAL_SUPPLY_CURRENT",
+          "name": "NOMINAL_SUPPLY_CURRENT",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "NUMBER_OF_OUTPUTS",
+          "name": "NUMBER_OF_OUTPUTS",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "OUTPUT_CURRENT",
+          "name": "OUTPUT_CURRENT",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "OUTPUT_TYPE",
+          "name": "OUTPUT_TYPE",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "OUTPUT_VOLTAGE",
+          "name": "OUTPUT_VOLTAGE",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "PACKAGE",
+          "name": "PACKAGE",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "PREFIX",
+          "name": "PREFIX",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Package",
+          "name": "Package",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Price",
+          "name": "Price",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "ROHS",
+          "name": "ROHS",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "SWITCHING_FREQUENCY",
+          "name": "SWITCHING_FREQUENCY",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "SWITCHING_TOPOLOGY",
+          "name": "SWITCHING_TOPOLOGY",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "DEVICE_CLASS_L2",
+          "name": "DEVICE_CLASS_L2",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "DEVICE_CLASS_L3",
+          "name": "DEVICE_CLASS_L3",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "SnapEDA_Link",
+          "name": "SnapEDA_Link",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "TEMPERATURE_RANGE_HIGH",
+          "name": "TEMPERATURE_RANGE_HIGH",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "TEMPERATURE_RANGE_LOW",
+          "name": "TEMPERATURE_RANGE_LOW",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "VERIFICATION_VERSION",
+          "name": "VERIFICATION_VERSION",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "AUTOMOTIVE",
+          "name": "AUTOMOTIVE",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "DIGIKEY_PART_NUMBER",
+          "name": "DIGIKEY_PART_NUMBER",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Description_1",
+          "name": "Description_1",
+          "show": false
         }
       ],
       "filter_string": "",
