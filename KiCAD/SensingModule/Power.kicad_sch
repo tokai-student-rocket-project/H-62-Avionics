@@ -1643,7 +1643,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical"
+		(property "Footprint" "TSRP_IC:M78AR03305"
 			(at 100.965 54.61 0)
 			(effects
 				(font
