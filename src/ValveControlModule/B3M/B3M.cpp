@@ -31,11 +31,11 @@ void setup() {
 
 void loop() {
     openMainValve(); // ID: 0x01 のサーボモータが90度方向へ回転
-    delay(100);
+    delay(500);
     closeMainValve(); // ID: 0x01 のサーボモータが0度方向へ回転
-    delay(100);
+    delay(500);
     openSupplyValve(); // ID: 0x02 のサーボモータが90度方向へ回転
-    delay(100);
+    delay(500);
     closeSupplyValve(); // ID: 0x02 のサーボモータが0度方向へ回転
-    delay(100);
+    delay(500);
 }
