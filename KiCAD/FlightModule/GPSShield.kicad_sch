@@ -1632,16 +1632,16 @@
 		)
 	)
 	(junction
+		(at 100.33 66.04)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "0f847c21-66c5-4ada-9c17-0ca71deb20e8")
+	)
+	(junction
 		(at 49.53 59.69)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "24cf9e92-fa81-4b38-9b44-e8182f7184f6")
-	)
-	(junction
-		(at 100.33 66.04)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "4aeaaca3-9d6f-4ee4-9d76-4ef6b8a1be98")
 	)
 	(junction
 		(at 77.47 59.69)
@@ -1666,6 +1666,30 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "e369f33d-2031-45c2-bf6b-509625199d53")
+	)
+	(no_connect
+		(at 113.03 71.12)
+		(uuid "0ddd9d88-0d9d-4fc4-9589-e2accbbe4f27")
+	)
+	(no_connect
+		(at 133.35 50.8)
+		(uuid "12cabca7-51c6-4212-8a88-13b220ce61c3")
+	)
+	(no_connect
+		(at 153.67 66.04)
+		(uuid "719f052b-08f1-4fc1-82dc-22e4959e4e27")
+	)
+	(no_connect
+		(at 133.35 91.44)
+		(uuid "80288879-1d32-432d-b7b2-ccb39e8feb84")
+	)
+	(no_connect
+		(at 128.27 91.44)
+		(uuid "8b99f50b-ca33-4a3d-9af4-fe9529072e5c")
+	)
+	(no_connect
+		(at 153.67 71.12)
+		(uuid "ac45169b-764d-4878-aacf-6221b2fed6bd")
 	)
 	(wire
 		(pts
@@ -1847,6 +1871,141 @@
 		)
 		(uuid "f75718d2-0051-4fb2-bcd4-53dcecc66b6d")
 	)
+	(global_label "WSC_SDA4"
+		(shape input)
+		(at 138.43 91.44 270)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "5719c618-4be2-461f-81ea-2aa48e263d94")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 138.43 104.1013 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "WSC_SCL3"
+		(shape input)
+		(at 153.67 76.2 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "9d71db46-68c3-43a2-ac7e-e3eb79b544a8")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 166.2708 76.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "WSC_EXTINT2"
+		(shape input)
+		(at 128.27 50.8 90)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "e9ddd65d-f8d3-4d07-aee2-a68dc0014ca0")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 128.27 35.4778 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C_Small")
+		(at 77.47 67.31 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "442a42cc-e2ce-4c8e-b7a7-538ee09a41e2")
+		(property "Reference" "C12"
+			(at 80.01 66.6813 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "1uF"
+			(at 80.01 69.2213 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 77.47 67.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://akizukidenshi.com/catalog/g/gP-17338/"
+			(at 77.47 67.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 77.47 67.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "732f2599-27e3-4d76-ae86-3eabc115c05d")
+		)
+		(pin "2"
+			(uuid "ef000db9-3a65-46f9-b5f9-0859de49722b")
+		)
+		(instances
+			(project "FlightModule"
+				(path "/3507137a-fdd7-4bc0-abe8-370b7c3b390e/5f21eb00-60ce-4306-a223-a9b9ec9552df"
+					(reference "C12")
+					(unit 1)
+				)
+			)
+		)
+	)
 	(symbol
 		(lib_id "MKRGPSShield_V4.0-eagle-import:AP2112K-3.3")
 		(at 64.77 62.23 0)
@@ -1922,82 +2081,6 @@
 			(project "GPSShield"
 				(path "/e91f5324-b1bd-4996-81c2-18550b5297b9"
 					(reference "U?")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C_Small")
-		(at 77.47 67.31 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "54ebb19d-1ffb-4c60-9ae0-4b9fb396c13e")
-		(property "Reference" "C2"
-			(at 80.01 66.0462 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "1μF"
-			(at 80.01 68.5862 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 77.47 67.31 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 77.47 67.31 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Unpolarized capacitor, small symbol"
-			(at 77.47 67.31 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "cdf1f21c-4491-469b-af95-092b59f70f2e")
-		)
-		(pin "2"
-			(uuid "603ee9e4-a3e8-4578-99b3-081693774c58")
-		)
-		(instances
-			(project "FlightModule"
-				(path "/3507137a-fdd7-4bc0-abe8-370b7c3b390e/5f21eb00-60ce-4306-a223-a9b9ec9552df"
-					(reference "C2")
-					(unit 1)
-				)
-			)
-			(project ""
-				(path "/e91f5324-b1bd-4996-81c2-18550b5297b9"
-					(reference "C2")
 					(unit 1)
 				)
 			)
@@ -2150,6 +2233,75 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:C_Small")
+		(at 100.33 68.58 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "7f2bcc0e-1a53-415a-9e08-15625cb039eb")
+		(property "Reference" "C11"
+			(at 102.87 67.9513 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100nF"
+			(at 102.87 70.4913 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 100.33 68.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://akizukidenshi.com/catalog/g/gP-17338/"
+			(at 100.33 68.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 100.33 68.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "c16c19fa-c02a-4ab6-861a-42159c0643c4")
+		)
+		(pin "2"
+			(uuid "5cdfa93f-fd6b-4c9b-97d6-cdc7218ff5ca")
+		)
+		(instances
+			(project "FlightModule"
+				(path "/3507137a-fdd7-4bc0-abe8-370b7c3b390e/5f21eb00-60ce-4306-a223-a9b9ec9552df"
+					(reference "C11")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_name "GND_2")
 		(lib_id "power:GND")
 		(at 113.03 76.2 0)
@@ -2217,6 +2369,75 @@
 			(project "GPSShield"
 				(path "/e91f5324-b1bd-4996-81c2-18550b5297b9"
 					(reference "#PWR?")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C_Small")
+		(at 49.53 67.31 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "a41067a5-306b-4a72-a775-9891d1755c10")
+		(property "Reference" "C10"
+			(at 52.07 66.6813 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "1uF"
+			(at 52.07 69.2213 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 49.53 67.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://akizukidenshi.com/catalog/g/gP-17338/"
+			(at 49.53 67.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 49.53 67.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "cf350fd3-e343-41d1-8c83-6b5b07e3abbb")
+		)
+		(pin "2"
+			(uuid "592eb2ba-0eee-451a-a58d-ab97aa91a931")
+		)
+		(instances
+			(project "FlightModule"
+				(path "/3507137a-fdd7-4bc0-abe8-370b7c3b390e/5f21eb00-60ce-4306-a223-a9b9ec9552df"
+					(reference "C10")
 					(unit 1)
 				)
 			)
@@ -2432,82 +2653,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:C_Small")
-		(at 100.33 68.58 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "ddfb9946-f32c-467e-82b8-7a3952c0e235")
-		(property "Reference" "C3"
-			(at 102.87 67.3162 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "100nF"
-			(at 102.87 69.8562 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 100.33 68.58 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 100.33 68.58 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Unpolarized capacitor, small symbol"
-			(at 100.33 68.58 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "4a526918-dc7f-464e-831e-a5829cd07493")
-		)
-		(pin "1"
-			(uuid "712217a7-51fe-4cae-b03e-a6a0c7ef2126")
-		)
-		(instances
-			(project "FlightModule"
-				(path "/3507137a-fdd7-4bc0-abe8-370b7c3b390e/5f21eb00-60ce-4306-a223-a9b9ec9552df"
-					(reference "C3")
-					(unit 1)
-				)
-			)
-			(project ""
-				(path "/e91f5324-b1bd-4996-81c2-18550b5297b9"
-					(reference "C1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:+5V")
 		(at 49.53 59.69 0)
 		(unit 1)
@@ -2646,82 +2791,6 @@
 			(project "GPSShield"
 				(path "/e91f5324-b1bd-4996-81c2-18550b5297b9"
 					(reference "#PWR?")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C_Small")
-		(at 49.53 67.31 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "f0f0487e-7316-4db6-a6f9-3ddb6ed6a634")
-		(property "Reference" "C1"
-			(at 52.07 66.0462 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "1μF"
-			(at 52.07 68.5862 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 49.53 67.31 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 49.53 67.31 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Unpolarized capacitor, small symbol"
-			(at 49.53 67.31 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "44ca2936-1c04-40be-90d1-630a029db58a")
-		)
-		(pin "2"
-			(uuid "26ee624e-728e-4bca-be25-d69156c44b60")
-		)
-		(instances
-			(project "FlightModule"
-				(path "/3507137a-fdd7-4bc0-abe8-370b7c3b390e/5f21eb00-60ce-4306-a223-a9b9ec9552df"
-					(reference "C1")
-					(unit 1)
-				)
-			)
-			(project "GPSShield"
-				(path "/e91f5324-b1bd-4996-81c2-18550b5297b9"
-					(reference "C3")
 					(unit 1)
 				)
 			)
