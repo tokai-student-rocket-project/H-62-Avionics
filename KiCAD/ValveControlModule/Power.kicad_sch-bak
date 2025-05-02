@@ -2118,12 +2118,6 @@
 		(color 0 0 0 0)
 		(uuid "c273cdfd-7f8f-4b79-874a-01fc85e3de5d")
 	)
-	(junction
-		(at 137.16 43.18)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "fce17cca-5d6b-4dd7-9b62-87a17b8980e2")
-	)
 	(no_connect
 		(at 80.01 110.49)
 		(uuid "3b94d34d-34e1-4c84-971d-52ff52ec02ba")
@@ -2262,7 +2256,7 @@
 	)
 	(wire
 		(pts
-			(xy 139.7 43.18) (xy 137.16 43.18)
+			(xy 139.7 43.18) (xy 114.3 43.18)
 		)
 		(stroke
 			(width 0)
@@ -2329,36 +2323,6 @@
 			(type default)
 		)
 		(uuid "60926f8c-3b64-4b1f-b5e1-3d7e2984410e")
-	)
-	(wire
-		(pts
-			(xy 137.16 48.26) (xy 139.7 48.26)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "644dd768-9589-4a52-b48b-f221712b8f67")
-	)
-	(wire
-		(pts
-			(xy 137.16 43.18) (xy 137.16 48.26)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "686ffd01-ddf0-4674-b11c-85bb7b51470a")
-	)
-	(wire
-		(pts
-			(xy 137.16 43.18) (xy 114.3 43.18)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6a67a1b8-ee16-4c32-89db-cffa0d8db869")
 	)
 	(wire
 		(pts
@@ -2660,6 +2624,16 @@
 		)
 		(uuid "ec6bda69-2d81-420a-b726-b2cfe6766d27")
 	)
+	(wire
+		(pts
+			(xy 138.43 48.26) (xy 139.7 48.26)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fe4e8511-9b2f-47f9-a6f8-16163ebfcfc8")
+	)
 	(global_label "P.G._OKL-T{slash}6-W12N-C"
 		(shape input)
 		(at 54.61 116.84 180)
@@ -2673,6 +2647,28 @@
 		(uuid "2dec1c6e-2edc-471c-a913-e55cb305d57b")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 28.5833 116.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "RT9080_EN"
+		(shape input)
+		(at 138.43 48.26 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "e6f4baf2-d2f0-48cd-8853-188d3d9b633e")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 124.9221 48.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2885,10 +2881,10 @@
 		(at 46.99 95.25 0)
 		(mirror y)
 		(unit 1)
-		(exclude_from_sim yes)
-		(in_bom no)
-		(on_board no)
-		(dnp yes)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
 		(uuid "2614354a-ea94-4717-b4ae-91beb1ab8d59")
 		(property "Reference" "C8"
 			(at 43.18 93.9799 0)
@@ -2954,10 +2950,10 @@
 		(lib_id "TSRP_IC:OKL-T_6-W12N-C")
 		(at 82.55 82.55 0)
 		(unit 1)
-		(exclude_from_sim yes)
-		(in_bom no)
-		(on_board no)
-		(dnp yes)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "28bd5705-1c04-4388-9e00-5909ff65df15")
 		(property "Reference" "MD1"
@@ -3586,10 +3582,10 @@
 		(lib_id "Device:C")
 		(at 181.61 95.25 0)
 		(unit 1)
-		(exclude_from_sim yes)
-		(in_bom no)
-		(on_board no)
-		(dnp yes)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "40a93a71-fd6c-473f-b455-7998838876ba")
 		(property "Reference" "C2"
@@ -4061,10 +4057,10 @@
 		(at 71.12 109.22 0)
 		(mirror y)
 		(unit 1)
-		(exclude_from_sim yes)
-		(in_bom no)
-		(on_board no)
-		(dnp yes)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
 		(uuid "7076655e-f27d-48b1-a4e3-4f44c441487c")
 		(property "Reference" "R8"
 			(at 64.77 109.22 90)
@@ -4338,10 +4334,10 @@
 		(lib_id "Device:R")
 		(at 147.32 105.41 90)
 		(unit 1)
-		(exclude_from_sim yes)
-		(in_bom no)
-		(on_board no)
-		(dnp yes)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "87091a4e-13c4-4765-9bb0-93f539a98bd9")
 		(property "Reference" "R2"
@@ -4473,10 +4469,10 @@
 		(at 59.69 95.25 0)
 		(mirror y)
 		(unit 1)
-		(exclude_from_sim yes)
-		(in_bom no)
-		(on_board no)
-		(dnp yes)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
 		(uuid "99a7208a-8d4f-4c41-b679-9ba1e7117f5c")
 		(property "Reference" "R7"
 			(at 53.34 95.25 90)
@@ -4672,10 +4668,10 @@
 		(lib_id "Device:R")
 		(at 167.64 105.41 90)
 		(unit 1)
-		(exclude_from_sim yes)
-		(in_bom no)
-		(on_board no)
-		(dnp yes)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "b4ea0a5e-99d7-4d7a-bcf0-1a11686c801a")
 		(property "Reference" "R5"
@@ -5017,10 +5013,10 @@
 		(lib_id "Device:R")
 		(at 157.48 105.41 90)
 		(unit 1)
-		(exclude_from_sim yes)
-		(in_bom no)
-		(on_board no)
-		(dnp yes)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "ff8809e0-e065-4d06-a3fe-ccce47070ec7")
 		(property "Reference" "R3"
