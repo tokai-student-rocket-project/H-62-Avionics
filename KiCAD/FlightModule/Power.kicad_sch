@@ -5,148 +5,6 @@
 	(uuid "721859c7-6915-44f1-ab65-acb6ad10cbd8")
 	(paper "A4")
 	(lib_symbols
-		(symbol "Connector_Generic:Conn_01x02"
-			(pin_names
-				(offset 1.016)
-				(hide yes)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "J"
-				(at 0 2.54 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "Conn_01x02"
-				(at 0 -5.08 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "~"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_keywords" "connector"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_fp_filters" "Connector*:*_1x??_*"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "Conn_01x02_1_1"
-				(rectangle
-					(start -1.27 1.27)
-					(end 1.27 -3.81)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(rectangle
-					(start -1.27 0.127)
-					(end 0 -0.127)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(rectangle
-					(start -1.27 -2.413)
-					(end 0 -2.667)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(pin passive line
-					(at -5.08 0 0)
-					(length 3.81)
-					(name "Pin_1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at -5.08 -2.54 0)
-					(length 3.81)
-					(name "Pin_2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
 		(symbol "Device:C"
 			(pin_numbers
 				(hide yes)
@@ -1625,12 +1483,6 @@
 		(uuid "f2afe17a-8818-4087-8f37-e26128793d93")
 	)
 	(junction
-		(at 57.15 120.65)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "01d6f54b-2858-4164-8e85-3ea29b22ca82")
-	)
-	(junction
 		(at 152.4 55.88)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -1647,38 +1499,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "8a0f0c31-0c68-4b71-9a5a-47dae2ba19fc")
-	)
-	(junction
-		(at 34.29 120.65)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "a69b6fbe-1f4b-4463-9560-c7e3da1b6cbb")
-	)
-	(junction
-		(at 78.74 120.65)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "c83beaa2-c6f5-4cc0-b546-ff6e9c76405b")
-	)
-	(wire
-		(pts
-			(xy 34.29 105.41) (xy 34.29 111.76)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0dfcef7a-fb83-4df0-88d7-c57402270571")
-	)
-	(wire
-		(pts
-			(xy 78.74 129.54) (xy 78.74 133.35)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1e5b485d-223e-41e9-9cc6-a60ef6d88236")
 	)
 	(wire
 		(pts
@@ -1722,16 +1542,6 @@
 	)
 	(wire
 		(pts
-			(xy 31.75 102.87) (xy 57.15 102.87)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "40be4798-7b28-4bab-9e64-09c140acdbf6")
-	)
-	(wire
-		(pts
 			(xy 198.12 55.88) (xy 208.28 55.88)
 		)
 		(stroke
@@ -1752,26 +1562,6 @@
 	)
 	(wire
 		(pts
-			(xy 57.15 120.65) (xy 59.69 120.65)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "53d55cd9-f2d3-4f0c-a333-53ba23834003")
-	)
-	(wire
-		(pts
-			(xy 57.15 116.84) (xy 57.15 120.65)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "55263e54-8122-453a-98b1-bdd8857946c7")
-	)
-	(wire
-		(pts
 			(xy 175.26 55.88) (xy 152.4 55.88)
 		)
 		(stroke
@@ -1779,36 +1569,6 @@
 			(type default)
 		)
 		(uuid "5982429a-a99f-4411-a27e-2f8ed2d06fbd")
-	)
-	(wire
-		(pts
-			(xy 34.29 120.65) (xy 36.83 120.65)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5b51e322-d3d0-4f8a-9f09-9d580c4ffba0")
-	)
-	(wire
-		(pts
-			(xy 57.15 102.87) (xy 57.15 111.76)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5db516e5-4d88-48f6-8e58-9375c48770c8")
-	)
-	(wire
-		(pts
-			(xy 57.15 129.54) (xy 57.15 133.35)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5fbf03b2-9fef-441f-92d7-a08daadbcfe6")
 	)
 	(wire
 		(pts
@@ -1829,16 +1589,6 @@
 			(type default)
 		)
 		(uuid "668676e4-729d-41a6-929e-55c89efaca05")
-	)
-	(wire
-		(pts
-			(xy 78.74 116.84) (xy 78.74 120.65)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "7c747cdc-011c-4cc0-baa4-75414226e604")
 	)
 	(wire
 		(pts
@@ -1882,26 +1632,6 @@
 	)
 	(wire
 		(pts
-			(xy 57.15 120.65) (xy 57.15 124.46)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "8d2bc472-d0af-4ca8-9d01-cddeb86a8680")
-	)
-	(wire
-		(pts
-			(xy 31.75 105.41) (xy 34.29 105.41)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "8d79d334-751a-449e-b967-b00c450dd701")
-	)
-	(wire
-		(pts
 			(xy 49.53 60.96) (xy 34.29 60.96)
 		)
 		(stroke
@@ -1932,26 +1662,6 @@
 	)
 	(wire
 		(pts
-			(xy 78.74 120.65) (xy 78.74 124.46)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "9cbcf34c-4206-40c9-b540-acb95ca9e63a")
-	)
-	(wire
-		(pts
-			(xy 78.74 120.65) (xy 81.28 120.65)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a1487e4d-a050-40f8-8b11-f4ad04fbe86a")
-	)
-	(wire
-		(pts
 			(xy 48.26 58.42) (xy 48.26 64.77)
 		)
 		(stroke
@@ -1972,16 +1682,6 @@
 	)
 	(wire
 		(pts
-			(xy 34.29 116.84) (xy 34.29 120.65)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b6dffdf5-f457-46c7-af92-957d09c2b95f")
-	)
-	(wire
-		(pts
 			(xy 208.28 55.88) (xy 208.28 57.15)
 		)
 		(stroke
@@ -1989,26 +1689,6 @@
 			(type default)
 		)
 		(uuid "b861ab21-0527-42c4-8bea-413a3ed36361")
-	)
-	(wire
-		(pts
-			(xy 34.29 129.54) (xy 34.29 133.35)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "bbaad66f-8c9b-4bbf-b766-34cbbb2900ff")
-	)
-	(wire
-		(pts
-			(xy 34.29 120.65) (xy 34.29 124.46)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c23c073a-0a5b-4450-b850-2f4a4c25f39f")
 	)
 	(wire
 		(pts
@@ -2029,82 +1709,6 @@
 			(type default)
 		)
 		(uuid "f5063e09-81ef-425c-bef5-7e6700e2e13e")
-	)
-	(wire
-		(pts
-			(xy 78.74 107.95) (xy 78.74 111.76)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f5abe50a-aa4c-49eb-8c25-0c672bdb0803")
-	)
-	(global_label "VREF_12V"
-		(shape output)
-		(at 81.28 120.65 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "8fda40fc-ff4f-48e5-87ab-a28a43817214")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 93.2572 120.65 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "VREF_VSW"
-		(shape output)
-		(at 59.69 120.65 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "b05e60bf-22f7-4e10-ac91-0bf8c3b47c3f")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 71.9091 120.65 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "VREF_BATT"
-		(shape output)
-		(at 36.83 120.65 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "cecc875d-889a-46c1-8ef5-96450b66d461")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 49.5934 120.65 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
 	)
 	(symbol
 		(lib_id "Device:C")
@@ -2177,72 +1781,6 @@
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
-		(at 57.15 133.35 0)
-		(mirror y)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "098e0f27-2190-4b51-8ff8-f117ad613211")
-		(property "Reference" "#PWR015"
-			(at 57.15 139.7 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 57.15 138.43 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 57.15 133.35 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 57.15 133.35 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 57.15 133.35 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "6a4022d8-6bbf-4f6e-bca2-66b0a5cdde10")
-		)
-		(instances
-			(project "FlightModule"
-				(path "/3507137a-fdd7-4bc0-abe8-370b7c3b390e/155c0154-13dd-4ef8-92f3-1346edd75099"
-					(reference "#PWR015")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:+12V")
 		(at 48.26 52.07 0)
 		(unit 1)
@@ -2303,207 +1841,6 @@
 			(project "FlightModule"
 				(path "/3507137a-fdd7-4bc0-abe8-370b7c3b390e/155c0154-13dd-4ef8-92f3-1346edd75099"
 					(reference "#PWR049")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R_Small")
-		(at 34.29 114.3 180)
-		(unit 1)
-		(exclude_from_sim yes)
-		(in_bom no)
-		(on_board no)
-		(dnp yes)
-		(uuid "151856c0-9803-4240-a6c2-27dd14ded554")
-		(property "Reference" "R7"
-			(at 35.56 113.03 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Value" "10kR"
-			(at 35.56 115.57 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
-			(at 34.29 114.3 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://www.chip1stop.com/view/dispDetail/DispDetail?partId=ROHM-0040176"
-			(at 34.29 114.3 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 34.29 114.3 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "cea81db4-eba9-4fbe-bee6-b8530ea9d06e")
-		)
-		(pin "2"
-			(uuid "d9ed44ac-d9e7-405b-9b85-a7ad449b0b36")
-		)
-		(instances
-			(project "FlightModule"
-				(path "/3507137a-fdd7-4bc0-abe8-370b7c3b390e/155c0154-13dd-4ef8-92f3-1346edd75099"
-					(reference "R7")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Connector_Generic:Conn_01x02")
-		(at 26.67 105.41 180)
-		(unit 1)
-		(exclude_from_sim yes)
-		(in_bom no)
-		(on_board no)
-		(dnp yes)
-		(fields_autoplaced yes)
-		(uuid "16685945-277f-4966-860a-0de10fce5109")
-		(property "Reference" "J6"
-			(at 26.67 97.79 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "VREF"
-			(at 26.67 100.33 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Hirose_Connector:Hirose_DF1B"
-			(at 26.67 105.41 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://www.hirose.com/ja/product/p/CL0541-0242-6-01"
-			(at 26.67 105.41 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 26.67 105.41 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "c8758d1a-d2bb-4157-8c22-bc9fa130b973")
-		)
-		(pin "2"
-			(uuid "1fdc26ab-8ac5-44c1-96ce-fb423a1b39e0")
-		)
-		(instances
-			(project "FlightModule"
-				(path "/3507137a-fdd7-4bc0-abe8-370b7c3b390e/155c0154-13dd-4ef8-92f3-1346edd75099"
-					(reference "J6")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 78.74 133.35 0)
-		(mirror y)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "1f8adec6-164d-41ed-9e0a-f50ace6e018b")
-		(property "Reference" "#PWR018"
-			(at 78.74 139.7 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 78.74 138.43 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 78.74 133.35 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 78.74 133.35 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 78.74 133.35 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "308e1099-dd71-4271-b558-c911f6ba86fd")
-		)
-		(instances
-			(project "FlightModule"
-				(path "/3507137a-fdd7-4bc0-abe8-370b7c3b390e/155c0154-13dd-4ef8-92f3-1346edd75099"
-					(reference "#PWR018")
 					(unit 1)
 				)
 			)
@@ -2573,140 +1910,6 @@
 			(project "FlightModule"
 				(path "/3507137a-fdd7-4bc0-abe8-370b7c3b390e/155c0154-13dd-4ef8-92f3-1346edd75099"
 					(reference "D4")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 34.29 133.35 0)
-		(mirror y)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "39b573c6-f015-4839-af37-c086c6f7ddb7")
-		(property "Reference" "#PWR013"
-			(at 34.29 139.7 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 34.29 138.43 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 34.29 133.35 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 34.29 133.35 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 34.29 133.35 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "44c33d53-87a0-43f7-8b36-3874e84132b4")
-		)
-		(instances
-			(project "FlightModule"
-				(path "/3507137a-fdd7-4bc0-abe8-370b7c3b390e/155c0154-13dd-4ef8-92f3-1346edd75099"
-					(reference "#PWR013")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R_Small")
-		(at 78.74 127 180)
-		(unit 1)
-		(exclude_from_sim yes)
-		(in_bom no)
-		(on_board no)
-		(dnp yes)
-		(uuid "3db65444-6873-4c56-95b0-d3b22e0166d3")
-		(property "Reference" "R10"
-			(at 80.01 125.73 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Value" "1.2kR"
-			(at 80.01 128.27 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
-			(at 78.74 127 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://www.chip1stop.com/view/dispDetail/DispDetail?partId=ROHM-0040117"
-			(at 78.74 127 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 78.74 127 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "e3c67833-fc1a-4d0e-8308-473a8ccb979c")
-		)
-		(pin "2"
-			(uuid "5f82429b-f1e5-4faf-a7ac-6e7da0427187")
-		)
-		(instances
-			(project "FlightModule"
-				(path "/3507137a-fdd7-4bc0-abe8-370b7c3b390e/155c0154-13dd-4ef8-92f3-1346edd75099"
-					(reference "R10")
 					(unit 1)
 				)
 			)
@@ -2849,71 +2052,6 @@
 		)
 	)
 	(symbol
-		(lib_id "power:+12V")
-		(at 78.74 107.95 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "51a5d455-5cc6-4d63-8a26-02fb14b60b9a")
-		(property "Reference" "#PWR017"
-			(at 78.74 111.76 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "+12V"
-			(at 78.74 104.14 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 78.74 107.95 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 78.74 107.95 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 78.74 107.95 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "ca16cbbc-38c8-40c6-99a6-052a78e9efaa")
-		)
-		(instances
-			(project "FlightModule"
-				(path "/3507137a-fdd7-4bc0-abe8-370b7c3b390e/155c0154-13dd-4ef8-92f3-1346edd75099"
-					(reference "#PWR017")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:R_Small")
 		(at 114.3 53.34 0)
 		(unit 1)
@@ -2976,74 +2114,6 @@
 			(project "FlightModule"
 				(path "/3507137a-fdd7-4bc0-abe8-370b7c3b390e/155c0154-13dd-4ef8-92f3-1346edd75099"
 					(reference "R6")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R_Small")
-		(at 34.29 127 180)
-		(unit 1)
-		(exclude_from_sim yes)
-		(in_bom no)
-		(on_board no)
-		(dnp yes)
-		(uuid "6f9ef84a-8f08-4a55-8888-fe3caa843f2a")
-		(property "Reference" "R8"
-			(at 35.56 125.73 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Value" "1.2kR"
-			(at 35.56 128.27 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
-			(at 34.29 127 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://www.chip1stop.com/view/dispDetail/DispDetail?partId=ROHM-0040117"
-			(at 34.29 127 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 34.29 127 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "5d01c0e2-ad60-497f-a168-b69494402bcd")
-		)
-		(pin "2"
-			(uuid "b4362b5a-9c4d-476c-8687-3eef04f710c6")
-		)
-		(instances
-			(project "FlightModule"
-				(path "/3507137a-fdd7-4bc0-abe8-370b7c3b390e/155c0154-13dd-4ef8-92f3-1346edd75099"
-					(reference "R8")
 					(unit 1)
 				)
 			)
@@ -3188,74 +2258,6 @@
 			(project "FlightModule"
 				(path "/3507137a-fdd7-4bc0-abe8-370b7c3b390e/155c0154-13dd-4ef8-92f3-1346edd75099"
 					(reference "#PWR059")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R_Small")
-		(at 78.74 114.3 180)
-		(unit 1)
-		(exclude_from_sim yes)
-		(in_bom no)
-		(on_board no)
-		(dnp yes)
-		(uuid "9cc9f6b1-ac3e-4659-b4d9-a6067e6be71e")
-		(property "Reference" "R9"
-			(at 80.01 113.03 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Value" "10kR"
-			(at 80.01 115.57 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
-			(at 78.74 114.3 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://www.chip1stop.com/view/dispDetail/DispDetail?partId=ROHM-0040176"
-			(at 78.74 114.3 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 78.74 114.3 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "da17a676-dc3a-4f97-9614-844d282c9a61")
-		)
-		(pin "2"
-			(uuid "d04fad4c-11cb-441c-9494-3f15ca5b0bd8")
-		)
-		(instances
-			(project "FlightModule"
-				(path "/3507137a-fdd7-4bc0-abe8-370b7c3b390e/155c0154-13dd-4ef8-92f3-1346edd75099"
-					(reference "R9")
 					(unit 1)
 				)
 			)
@@ -3650,142 +2652,6 @@
 			(project "FlightModule"
 				(path "/3507137a-fdd7-4bc0-abe8-370b7c3b390e/155c0154-13dd-4ef8-92f3-1346edd75099"
 					(reference "#PWR057")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R_Small")
-		(at 57.15 127 180)
-		(unit 1)
-		(exclude_from_sim yes)
-		(in_bom no)
-		(on_board no)
-		(dnp yes)
-		(uuid "e1a87db7-fb4a-42de-9548-366a4205fa10")
-		(property "Reference" "R12"
-			(at 58.42 125.73 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Value" "1.2kR"
-			(at 58.42 128.27 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
-			(at 57.15 127 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://www.chip1stop.com/view/dispDetail/DispDetail?partId=ROHM-0040117"
-			(at 57.15 127 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 57.15 127 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "97ee7366-4ce2-4639-b81d-2530c9e83987")
-		)
-		(pin "2"
-			(uuid "9c47cce3-83f0-4421-8fed-a5e1775c2729")
-		)
-		(instances
-			(project "FlightModule"
-				(path "/3507137a-fdd7-4bc0-abe8-370b7c3b390e/155c0154-13dd-4ef8-92f3-1346edd75099"
-					(reference "R12")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R_Small")
-		(at 57.15 114.3 180)
-		(unit 1)
-		(exclude_from_sim yes)
-		(in_bom no)
-		(on_board no)
-		(dnp yes)
-		(uuid "f77ecc40-e01b-458a-9e60-6c86d444542b")
-		(property "Reference" "R11"
-			(at 58.42 113.03 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Value" "10kR"
-			(at 58.42 115.57 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
-			(at 57.15 114.3 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://www.chip1stop.com/view/dispDetail/DispDetail?partId=ROHM-0040176"
-			(at 57.15 114.3 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 57.15 114.3 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "5e568091-6654-4914-b3b4-0296f6cff915")
-		)
-		(pin "2"
-			(uuid "d6d08fb7-2fbe-4b66-bf2b-a809718c4b4c")
-		)
-		(instances
-			(project "FlightModule"
-				(path "/3507137a-fdd7-4bc0-abe8-370b7c3b390e/155c0154-13dd-4ef8-92f3-1346edd75099"
-					(reference "R11")
 					(unit 1)
 				)
 			)

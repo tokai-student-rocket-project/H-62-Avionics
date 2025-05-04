@@ -3365,10 +3365,10 @@
 		(lib_id "Device:R_Small")
 		(at 168.91 142.24 180)
 		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
+		(exclude_from_sim yes)
+		(in_bom no)
+		(on_board no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "2cbc636a-4900-4ba1-89b4-4b39f2d74840")
 		(property "Reference" "R23"
@@ -3434,10 +3434,10 @@
 		(lib_id "Device:Buzzer")
 		(at 184.15 127 0)
 		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
+		(exclude_from_sim yes)
+		(in_bom no)
+		(on_board no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "30795ee3-b4ea-40b6-86dd-1d1e24d9efaa")
 		(property "Reference" "BZ1"
@@ -3503,10 +3503,10 @@
 		(lib_id "Device:R_Small")
 		(at 163.83 137.16 90)
 		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
+		(exclude_from_sim yes)
+		(in_bom no)
+		(on_board no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "33920557-39e8-4600-97eb-67b8a6fde4d1")
 		(property "Reference" "R22"
@@ -3838,10 +3838,10 @@
 		(lib_id "Device:Q_NPN_BEC")
 		(at 176.53 137.16 0)
 		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
+		(exclude_from_sim yes)
+		(in_bom no)
+		(on_board no)
+		(dnp yes)
 		(uuid "703e873a-92a7-4a3c-b052-78386ba42280")
 		(property "Reference" "Q3"
 			(at 167.64 129.54 0)
@@ -4055,7 +4055,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "C"
+		(property "Value" "0.1uF"
 			(at 58.42 38.0999 0)
 			(effects
 				(font
@@ -4064,7 +4064,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder"
 			(at 61.2648 40.64 0)
 			(effects
 				(font
@@ -4658,7 +4658,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "C"
+		(property "Value" "0.1uF"
 			(at 160.02 38.0999 0)
 			(effects
 				(font
@@ -4667,7 +4667,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder"
 			(at 162.8648 40.64 0)
 			(effects
 				(font

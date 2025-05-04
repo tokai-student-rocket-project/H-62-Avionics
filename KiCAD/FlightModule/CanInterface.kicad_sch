@@ -4636,7 +4636,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Hirose_Connector:Hirose_DF11B-8DP-2DS"
+		(property "Footprint" "TSRP_Connector_Hirose:DF11-8DP-2DS"
 			(at 39.37 120.65 0)
 			(effects
 				(font

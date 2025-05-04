@@ -1570,14 +1570,6 @@
 		(at 118.11 80.01)
 		(uuid "9eb1f038-5251-47fd-820e-196da36025d7")
 	)
-	(no_connect
-		(at 52.07 72.39)
-		(uuid "c363c846-575f-4fdd-8cbc-f031fc8d4358")
-	)
-	(no_connect
-		(at 52.07 74.93)
-		(uuid "d7a23220-8b9d-4f80-9c62-f754f80d96e5")
-	)
 	(wire
 		(pts
 			(xy 118.11 44.45) (xy 125.73 44.45)
@@ -2062,7 +2054,7 @@
 			)
 		)
 	)
-	(global_label "SPI_CS_MCP"
+	(global_label "SPI_CS_MCP2515"
 		(shape input)
 		(at 151.13 54.61 0)
 		(fields_autoplaced yes)
@@ -2074,7 +2066,7 @@
 		)
 		(uuid "34071415-c377-4cb9-b6b5-c44d5ccf742f")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 165.6056 54.61 0)
+			(at 170.4436 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2128,6 +2120,28 @@
 			)
 		)
 	)
+	(global_label "I2C_SDA"
+		(shape input)
+		(at 52.07 72.39 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "4099cde5-de83-4b2f-af1a-a5fa3c939641")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 41.4648 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "CAN_SEND_STATUS"
 		(shape input)
 		(at 88.9 146.05 90)
@@ -2146,6 +2160,28 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "I2C_SCL"
+		(shape input)
+		(at 52.07 74.93 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "58f99fa2-57e4-467e-ba90-f88a17a08cea")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 41.5253 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
 				(hide yes)
 			)
 		)
@@ -2367,6 +2403,72 @@
 				)
 				(justify left)
 				(hide yes)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3.3V")
+		(at 125.73 41.91 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "04a36fe5-ee43-4549-949d-64d4b47fb7da")
+		(property "Reference" "#PWR051"
+			(at 125.73 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+3.3V"
+			(at 125.73 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 125.73 41.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 125.73 41.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
+			(at 125.73 41.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "2198e6f2-8f97-4779-96cb-baa87bc0ec93")
+		)
+		(instances
+			(project "FlightModule"
+				(path "/3507137a-fdd7-4bc0-abe8-370b7c3b390e"
+					(reference "#PWR051")
+					(unit 1)
+				)
 			)
 		)
 	)
@@ -3310,72 +3412,6 @@
 	)
 	(symbol
 		(lib_id "power:+3.3V")
-		(at 125.73 41.91 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "85b50f88-8eb1-4113-834b-035acd7fbce4")
-		(property "Reference" "#PWR06"
-			(at 125.73 45.72 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "+3.3V"
-			(at 125.73 36.83 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 125.73 41.91 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 125.73 41.91 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
-			(at 125.73 41.91 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "9acc0527-5e20-4b6e-9c9f-8e18a74150e3")
-		)
-		(instances
-			(project ""
-				(path "/3507137a-fdd7-4bc0-abe8-370b7c3b390e"
-					(reference "#PWR06")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:+3.3V")
 		(at 133.35 45.72 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -3734,7 +3770,7 @@
 				)
 			)
 		)
-		(property "Footprint" "ARDUINO_MKR_WAN_1310:BOARD_ARDUINO_MKR_WAN_1310"
+		(property "Footprint" "TSRP_Arduino:BOARD_ARDUINO_MKR_WAN_1310"
 			(at 85.09 64.77 0)
 			(effects
 				(font
