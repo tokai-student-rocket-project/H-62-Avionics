@@ -5072,7 +5072,7 @@
 			(uuid "5be648dc-0634-4294-b211-5c0740168ab3")
 		)
 		(embedded_fonts no)
-		(model "${KICAD9_3RD_PARTY}/KiCad-Library/TSRP_Seeed_XIAO/Seeed Studio XIAO RP2040 v26.step"
+		(model "${KICAD9_3RD_PARTY}/KiCad-Library/TSRP_Seeed_XIAO/Seeed_Studio_XIAO_RP2040_v26.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -7724,8 +7724,6 @@
 		(fill
 			(thermal_gap 0.5)
 			(thermal_bridge_width 0.5)
-			(smoothing chamfer)
-			(radius 0.2)
 		)
 		(polygon
 			(pts
