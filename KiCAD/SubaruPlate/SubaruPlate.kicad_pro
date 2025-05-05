@@ -48,11 +48,32 @@
         "silk_text_thickness": 0.1,
         "silk_text_upright": false,
         "zones": {
-          "min_clearance": 0.5
+          "min_clearance": 0.3
         }
       },
       "diff_pair_dimensions": [],
-      "drc_exclusions": [],
+      "drc_exclusions": [
+        [
+          "lib_footprint_issues|171085250|98458500|b43a7af4-ce00-437e-893e-156f53117262|00000000-0000-0000-0000-000000000000",
+          "関係ないので除外"
+        ],
+        [
+          "lib_footprint_mismatch|125000000|125000000|ed60c471-6ea2-41a4-aed2-102376dd5ab3|00000000-0000-0000-0000-000000000000",
+          "関係ないので除外"
+        ],
+        [
+          "lib_footprint_mismatch|125000000|75000000|a6131473-0523-469a-a049-292739968bba|00000000-0000-0000-0000-000000000000",
+          "関係ないので除外"
+        ],
+        [
+          "lib_footprint_mismatch|175000000|125000000|829f35e1-11e5-4e34-abcc-d82c2a39a258|00000000-0000-0000-0000-000000000000",
+          "関係ないので除外"
+        ],
+        [
+          "lib_footprint_mismatch|175000000|75000000|9507b777-4e41-408e-ad40-ef1976d06ef4|00000000-0000-0000-0000-000000000000",
+          "関係なので除外"
+        ]
+      ],
       "meta": {
         "version": 2
       },
@@ -488,7 +509,7 @@
       "plot": "",
       "pos_files": "",
       "specctra_dsn": "",
-      "step": "",
+      "step": "SubaruPlate.step",
       "svg": "",
       "vrml": ""
     },
@@ -683,6 +704,198 @@
           "group_by": false,
           "label": "Sim.Device",
           "name": "Sim.Device",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "MIN_SUPPLY_VOLTAGE",
+          "name": "MIN_SUPPLY_VOLTAGE",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "MOUSER_DESCRIPTION",
+          "name": "MOUSER_DESCRIPTION",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "MOUSER_PART_NUMBER",
+          "name": "MOUSER_PART_NUMBER",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "CENTROID_NOT_SPECIFIED",
+          "name": "CENTROID_NOT_SPECIFIED",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "MPN",
+          "name": "MPN",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "LEAD_FREE",
+          "name": "LEAD_FREE",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "FOOTPRINT_VARIANT_NAME_0",
+          "name": "FOOTPRINT_VARIANT_NAME_0",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "DIGIKEY_DESCRIPTION",
+          "name": "DIGIKEY_DESCRIPTION",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "MFG_PACKAGE_IDENT",
+          "name": "MFG_PACKAGE_IDENT",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "NOMINAL_SUPPLY_CURRENT",
+          "name": "NOMINAL_SUPPLY_CURRENT",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "NUMBER_OF_OUTPUTS",
+          "name": "NUMBER_OF_OUTPUTS",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "OUTPUT_CURRENT",
+          "name": "OUTPUT_CURRENT",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "OUTPUT_TYPE",
+          "name": "OUTPUT_TYPE",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "OUTPUT_VOLTAGE",
+          "name": "OUTPUT_VOLTAGE",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "PACKAGE",
+          "name": "PACKAGE",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "PREFIX",
+          "name": "PREFIX",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "MAX_SUPPLY_VOLTAGE",
+          "name": "MAX_SUPPLY_VOLTAGE",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "DEVICE_CLASS_L1",
+          "name": "DEVICE_CLASS_L1",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "DEVICE_CLASS_L2",
+          "name": "DEVICE_CLASS_L2",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "ROHS",
+          "name": "ROHS",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "SWITCHING_FREQUENCY",
+          "name": "SWITCHING_FREQUENCY",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "SWITCHING_TOPOLOGY",
+          "name": "SWITCHING_TOPOLOGY",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "MFG_PACKAGE_IDENT_REV",
+          "name": "MFG_PACKAGE_IDENT_REV",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "MFG_PACKAGE_IDENT_COMPONENT_ID",
+          "name": "MFG_PACKAGE_IDENT_COMPONENT_ID",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "MFG_PACKAGE_IDENT_DATE",
+          "name": "MFG_PACKAGE_IDENT_DATE",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "DEVICE_CLASS_L3",
+          "name": "DEVICE_CLASS_L3",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "TEMPERATURE_RANGE_HIGH",
+          "name": "TEMPERATURE_RANGE_HIGH",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "TEMPERATURE_RANGE_LOW",
+          "name": "TEMPERATURE_RANGE_LOW",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "VERIFICATION_VERSION",
+          "name": "VERIFICATION_VERSION",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "AUTOMOTIVE",
+          "name": "AUTOMOTIVE",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "DIGIKEY_PART_NUMBER",
+          "name": "DIGIKEY_PART_NUMBER",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "HEIGHT",
+          "name": "HEIGHT",
           "show": false
         }
       ],
