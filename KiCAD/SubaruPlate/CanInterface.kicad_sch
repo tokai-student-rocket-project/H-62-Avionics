@@ -1725,156 +1725,6 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Jumper:Jumper_2_Open"
-			(pin_numbers
-				(hide yes)
-			)
-			(pin_names
-				(offset 0)
-				(hide yes)
-			)
-			(exclude_from_sim yes)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "JP"
-				(at 0 2.794 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "Jumper_2_Open"
-				(at 0 -2.286 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "~"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "Jumper, 2-pole, open"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_keywords" "Jumper SPST"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_fp_filters" "Jumper* TestPoint*2Pads* TestPoint*Bridge*"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "Jumper_2_Open_0_0"
-				(circle
-					(center -2.032 0)
-					(radius 0.508)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(circle
-					(center 2.032 0)
-					(radius 0.508)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(symbol "Jumper_2_Open_0_1"
-				(arc
-					(start -1.524 1.27)
-					(mid 0 1.778)
-					(end 1.524 1.27)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(symbol "Jumper_2_Open_1_1"
-				(pin passive line
-					(at -5.08 0 0)
-					(length 2.54)
-					(name "A"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 5.08 0 180)
-					(length 2.54)
-					(name "B"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
 		(symbol "power:+12V"
 			(power)
 			(pin_numbers
@@ -2352,16 +2202,10 @@
 		(uuid "699af378-aea3-4eb5-ba6b-18701cfc657a")
 	)
 	(junction
-		(at 177.8 60.96)
+		(at 177.8 54.61)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "93b47f47-7210-4cdb-b1a1-3835ef7d8b47")
-	)
-	(junction
-		(at 177.8 33.02)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "a0f81cf1-d0ee-44d7-961a-cd8013b5ac75")
+		(uuid "8ffd2723-4b3b-4f1b-8782-6b790bb7b448")
 	)
 	(junction
 		(at 69.85 38.1)
@@ -2374,6 +2218,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "bc941dab-ad08-42b2-9e19-a4ee0b8fb7eb")
+	)
+	(junction
+		(at 177.8 41.91)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "c9398f41-8ae6-4b51-b487-b72614632672")
 	)
 	(no_connect
 		(at 85.09 72.39)
@@ -2415,6 +2265,16 @@
 	)
 	(wire
 		(pts
+			(xy 177.8 41.91) (xy 177.8 44.45)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "02af8d37-b2da-4e30-b19b-e8c6fdcf05ab")
+	)
+	(wire
+		(pts
 			(xy 69.85 38.1) (xy 69.85 46.99)
 		)
 		(stroke
@@ -2432,16 +2292,6 @@
 			(type default)
 		)
 		(uuid "076abfb3-f433-4555-8554-1272191064b5")
-	)
-	(wire
-		(pts
-			(xy 177.8 45.72) (xy 177.8 50.8)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0e5dd669-3962-4e52-b67a-61d775fb569d")
 	)
 	(wire
 		(pts
@@ -2465,7 +2315,7 @@
 	)
 	(wire
 		(pts
-			(xy 177.8 33.02) (xy 182.88 33.02)
+			(xy 177.8 41.91) (xy 182.88 41.91)
 		)
 		(stroke
 			(width 0)
@@ -2555,7 +2405,7 @@
 	)
 	(wire
 		(pts
-			(xy 162.56 33.02) (xy 162.56 45.72)
+			(xy 162.56 41.91) (xy 162.56 45.72)
 		)
 		(stroke
 			(width 0)
@@ -2615,7 +2465,7 @@
 	)
 	(wire
 		(pts
-			(xy 177.8 60.96) (xy 162.56 60.96)
+			(xy 177.8 54.61) (xy 162.56 54.61)
 		)
 		(stroke
 			(width 0)
@@ -2645,7 +2495,7 @@
 	)
 	(wire
 		(pts
-			(xy 162.56 33.02) (xy 177.8 33.02)
+			(xy 162.56 41.91) (xy 177.8 41.91)
 		)
 		(stroke
 			(width 0)
@@ -2685,7 +2535,7 @@
 	)
 	(wire
 		(pts
-			(xy 182.88 60.96) (xy 177.8 60.96)
+			(xy 182.88 54.61) (xy 177.8 54.61)
 		)
 		(stroke
 			(width 0)
@@ -2732,16 +2582,6 @@
 			(type default)
 		)
 		(uuid "b9465e63-d296-49ca-8fa7-2fb2a1bdf958")
-	)
-	(wire
-		(pts
-			(xy 177.8 33.02) (xy 177.8 35.56)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c1173cf0-fbc8-4efd-b540-98ee9d36b960")
 	)
 	(wire
 		(pts
@@ -2805,7 +2645,7 @@
 	)
 	(wire
 		(pts
-			(xy 162.56 60.96) (xy 162.56 50.8)
+			(xy 162.56 54.61) (xy 162.56 50.8)
 		)
 		(stroke
 			(width 0)
@@ -2835,7 +2675,7 @@
 	)
 	(wire
 		(pts
-			(xy 177.8 58.42) (xy 177.8 60.96)
+			(xy 177.8 52.07) (xy 177.8 54.61)
 		)
 		(stroke
 			(width 0)
@@ -2845,7 +2685,7 @@
 	)
 	(global_label "CAN_L"
 		(shape bidirectional)
-		(at 182.88 60.96 0)
+		(at 182.88 54.61 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2855,7 +2695,7 @@
 		)
 		(uuid "10b53742-5e7a-430e-883b-63c16fd80075")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 192.6613 60.96 0)
+			(at 192.6613 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3109,7 +2949,7 @@
 	)
 	(global_label "CAN_H"
 		(shape bidirectional)
-		(at 182.88 33.02 0)
+		(at 182.88 41.91 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3119,7 +2959,7 @@
 		)
 		(uuid "b3290b0f-2bc3-4262-b57c-d98bcb977ca0")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 192.9637 33.02 0)
+			(at 192.9637 41.91 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4438,7 +4278,7 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 177.8 54.61 180)
+		(at 177.8 48.26 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4447,7 +4287,7 @@
 		(fields_autoplaced yes)
 		(uuid "b652c1a1-8f86-4ada-9688-b2041c46972d")
 		(property "Reference" "R6"
-			(at 180.34 53.3399 0)
+			(at 180.34 46.9899 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4456,7 +4296,7 @@
 			)
 		)
 		(property "Value" "120"
-			(at 180.34 55.8799 0)
+			(at 180.34 49.5299 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4465,7 +4305,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
-			(at 179.578 54.61 90)
+			(at 179.578 48.26 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4474,7 +4314,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 177.8 54.61 0)
+			(at 177.8 48.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4483,7 +4323,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 177.8 54.61 0)
+			(at 177.8 48.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4821,76 +4661,6 @@
 			(project ""
 				(path "/6c4aa1f5-c08b-4349-85f8-88bb399e711f/44ad5b2d-22cb-4ed2-bb54-706dcaaae99f"
 					(reference "#PWR013")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Jumper:Jumper_2_Open")
-		(at 177.8 40.64 270)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "f57dd1a0-4a1f-4159-8f8c-83f3b852267c")
-		(property "Reference" "JP1"
-			(at 180.34 39.3699 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "Jumper_2_Open"
-			(at 180.34 41.9099 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Jumper:SolderJumper-2_P1.3mm_Open_TrianglePad1.0x1.5mm"
-			(at 177.8 40.64 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 177.8 40.64 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Jumper, 2-pole, open"
-			(at 177.8 40.64 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "e48ad4d9-0d4d-4958-b461-fa2f3c724efb")
-		)
-		(pin "1"
-			(uuid "54ae8d51-9047-4673-8ced-b483b2242800")
-		)
-		(instances
-			(project ""
-				(path "/6c4aa1f5-c08b-4349-85f8-88bb399e711f/44ad5b2d-22cb-4ed2-bb54-706dcaaae99f"
-					(reference "JP1")
 					(unit 1)
 				)
 			)
