@@ -17,7 +17,7 @@ public:
     int16_t readMcuTemperature(byte id);
     int16_t readCurrentPosition(byte id);
     int16_t readCurrentVelosity(byte id);
-    uint16_t readVoltage(byte id);
+    int16_t readVoltage(byte id);
     int16_t readCurrent(byte id);
 
 private:

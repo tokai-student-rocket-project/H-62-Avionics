@@ -118,7 +118,7 @@ int B3MSC1170A::setPosition(byte id, int Pos, int Time)
     return reData;
 }
 
-uint16_t B3MSC1170A::readVoltage(byte id)
+int16_t B3MSC1170A::readVoltage(byte id)
 {
     byte txCmd[7];
     byte rxCmd[7];
