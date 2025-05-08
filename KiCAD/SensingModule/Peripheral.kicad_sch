@@ -3700,7 +3700,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "TSRP_Connector:DF1B-2S-2.5R"
+		(property "Footprint" "TSRP_Connector_Hirose:DF1B-2S-2.5R"
 			(at 105.41 46.99 0)
 			(effects
 				(font

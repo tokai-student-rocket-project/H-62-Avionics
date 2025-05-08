@@ -4463,7 +4463,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "TSRP_Connector:DF11-8DP-2DS"
+		(property "Footprint" "TSRP_Connector_Hirose:DF11-8DP-2DS"
 			(at 144.78 156.21 0)
 			(effects
 				(font
@@ -6786,7 +6786,7 @@
 				)
 			)
 		)
-		(property "Footprint" "TSRP_Connector:DF11-8DP-2DS"
+		(property "Footprint" "TSRP_Connector_Hirose:DF11-8DP-2DS"
 			(at 35.56 36.83 0)
 			(effects
 				(font
