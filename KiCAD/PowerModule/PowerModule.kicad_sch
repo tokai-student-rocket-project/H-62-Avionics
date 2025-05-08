@@ -2003,6 +2003,89 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "Mechanical:MountingHole"
+			(pin_names
+				(offset 1.016)
+			)
+			(exclude_from_sim yes)
+			(in_bom no)
+			(on_board yes)
+			(property "Reference" "H"
+				(at 0 5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "MountingHole"
+				(at 0 3.175 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Mounting Hole without connection"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "mounting hole"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "MountingHole*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "MountingHole_0_1"
+				(circle
+					(center 0 0)
+					(radius 1.27)
+					(stroke
+						(width 1.27)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Sensor_Energy:INA219BxDCN"
 			(exclude_from_sim no)
 			(in_bom yes)
@@ -3363,6 +3446,16 @@
 			(embedded_fonts no)
 		)
 	)
+	(text "BatteryModule\n"
+		(exclude_from_sim no)
+		(at 202.438 46.228 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "fd11bf61-ea16-4581-b1be-8a6176e42d73")
+	)
 	(junction
 		(at 74.93 115.57)
 		(diameter 0)
@@ -3543,6 +3636,10 @@
 		(color 0 0 0 0)
 		(uuid "f9a0c77e-1ff6-4c48-a1dd-9fd100090475")
 	)
+	(no_connect
+		(at 209.55 46.99)
+		(uuid "47cef08c-6f39-4604-aa04-494bae128ebb")
+	)
 	(wire
 		(pts
 			(xy 269.24 93.98) (xy 271.78 93.98)
@@ -3565,16 +3662,6 @@
 	)
 	(wire
 		(pts
-			(xy 191.77 40.64) (xy 191.77 43.18)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "058057c5-d42e-4400-b3ee-3a5e79bb9c19")
-	)
-	(wire
-		(pts
 			(xy 220.98 119.38) (xy 219.71 119.38)
 		)
 		(stroke
@@ -3582,6 +3669,16 @@
 			(type default)
 		)
 		(uuid "079f832b-4bd5-4e22-875a-e67070108d14")
+	)
+	(wire
+		(pts
+			(xy 191.77 39.37) (xy 196.85 39.37)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "08006c0b-3583-462c-bbc3-b86f19d8c4ac")
 	)
 	(wire
 		(pts
@@ -3692,6 +3789,16 @@
 			(type default)
 		)
 		(uuid "15a780c4-4272-4b52-bec9-84685a219579")
+	)
+	(wire
+		(pts
+			(xy 191.77 46.99) (xy 209.55 46.99)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "193ade66-7476-4cef-b512-e388616a3765")
 	)
 	(wire
 		(pts
@@ -4015,6 +4122,16 @@
 	)
 	(wire
 		(pts
+			(xy 191.77 33.02) (xy 191.77 36.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "48c591e9-4d19-4a57-a8ed-8f2c7712e615")
+	)
+	(wire
+		(pts
 			(xy 57.15 22.86) (xy 57.15 26.67)
 		)
 		(stroke
@@ -4092,6 +4209,16 @@
 			(type default)
 		)
 		(uuid "4d5d8fea-fe33-457b-82de-c6dc67c03c1d")
+	)
+	(wire
+		(pts
+			(xy 191.77 39.37) (xy 191.77 46.99)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4ed2d5a9-e1be-4787-99c4-5df68839e538")
 	)
 	(wire
 		(pts
@@ -4855,6 +4982,16 @@
 	)
 	(wire
 		(pts
+			(xy 191.77 36.83) (xy 196.85 36.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b711750d-7a9a-4bcb-af2f-63e289620dab")
+	)
+	(wire
+		(pts
 			(xy 237.49 90.17) (xy 237.49 85.09)
 		)
 		(stroke
@@ -4912,16 +5049,6 @@
 			(type default)
 		)
 		(uuid "c063dc08-c41a-42fe-8f66-a3929c4e185e")
-	)
-	(wire
-		(pts
-			(xy 191.77 33.02) (xy 191.77 35.56)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c0d604e2-cc98-4f68-a25c-b65af24c02dc")
 	)
 	(wire
 		(pts
@@ -6062,6 +6189,70 @@
 		)
 	)
 	(symbol
+		(lib_id "Mechanical:MountingHole")
+		(at 133.3299 96.5904 0)
+		(unit 1)
+		(exclude_from_sim yes)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "17cac4d1-5c36-4ccb-8e80-3babf2f7f374")
+		(property "Reference" "H1"
+			(at 135.8699 95.3203 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "MountingHole"
+			(at 135.8699 97.8603 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3_DIN965_Pad_TopBottom"
+			(at 133.3299 96.5904 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 133.3299 96.5904 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Mounting Hole without connection"
+			(at 133.3299 96.5904 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "PowerModule"
+				(path "/518e1dd4-af18-469e-8624-8d5e71f7e4ff"
+					(reference "H1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:+5V")
 		(at 172.72 60.96 180)
 		(unit 1)
@@ -6224,7 +6415,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
+		(property "Footprint" "Connector_PinHeader_1.00mm:PinHeader_1x02_P1.00mm_Vertical"
 			(at 30.48 171.45 0)
 			(effects
 				(font
@@ -6796,71 +6987,6 @@
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
-		(at 191.77 43.18 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "4d896847-d0e5-4676-ba37-2a96d64acb5b")
-		(property "Reference" "#PWR013"
-			(at 191.77 49.53 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 191.77 48.26 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 191.77 43.18 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 191.77 43.18 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 191.77 43.18 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "4b366428-3093-47a6-8210-3282acbaf94a")
-		)
-		(instances
-			(project "PowerModule"
-				(path "/518e1dd4-af18-469e-8624-8d5e71f7e4ff"
-					(reference "#PWR013")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:R")
 		(at 168.91 31.75 90)
 		(unit 1)
@@ -6988,6 +7114,76 @@
 			(project ""
 				(path "/518e1dd4-af18-469e-8624-8d5e71f7e4ff"
 					(reference "#PWR029")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector_Generic:Conn_01x02")
+		(at 201.93 36.83 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "59ab4480-3646-4016-8499-ac8ec9daf324")
+		(property "Reference" "J7"
+			(at 204.47 36.8299 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "Conn_01x02"
+			(at 204.47 39.3699 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "TSRP_Connector_Hirose:DF1B-2S-2.5R"
+			(at 201.93 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 201.93 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"
+			(at 201.93 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "923ce4b7-eb0f-40b0-aceb-cf060cca30b4")
+		)
+		(pin "2"
+			(uuid "06ede307-114d-41e3-a312-455bff5fb77c")
+		)
+		(instances
+			(project ""
+				(path "/518e1dd4-af18-469e-8624-8d5e71f7e4ff"
+					(reference "J7")
 					(unit 1)
 				)
 			)
@@ -8019,6 +8215,70 @@
 			(project "PowerModule"
 				(path "/518e1dd4-af18-469e-8624-8d5e71f7e4ff"
 					(reference "#PWR09")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Mechanical:MountingHole")
+		(at 117.2714 106.4172 0)
+		(unit 1)
+		(exclude_from_sim yes)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "7de78d0c-ea0e-401c-b618-4b7882968389")
+		(property "Reference" "H3"
+			(at 119.8114 105.1471 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "MountingHole"
+			(at 119.8114 107.6871 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3_DIN965_Pad_TopBottom"
+			(at 117.2714 106.4172 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 117.2714 106.4172 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Mounting Hole without connection"
+			(at 117.2714 106.4172 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "PowerModule"
+				(path "/518e1dd4-af18-469e-8624-8d5e71f7e4ff"
+					(reference "H3")
 					(unit 1)
 				)
 			)
@@ -9412,6 +9672,70 @@
 		)
 	)
 	(symbol
+		(lib_id "Mechanical:MountingHole")
+		(at 114.3 97.79 0)
+		(unit 1)
+		(exclude_from_sim yes)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "bed7f059-efda-49ca-ac0d-5d6c93575ad9")
+		(property "Reference" "H4"
+			(at 116.84 96.5199 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "MountingHole"
+			(at 116.84 99.0599 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3_DIN965_Pad_TopBottom"
+			(at 114.3 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 114.3 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Mounting Hole without connection"
+			(at 114.3 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project ""
+				(path "/518e1dd4-af18-469e-8624-8d5e71f7e4ff"
+					(reference "H4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
 		(at 97.79 76.2 0)
 		(unit 1)
@@ -9544,17 +9868,17 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:C_Polarized_Small")
-		(at 191.77 38.1 0)
+		(lib_id "Mechanical:MountingHole")
+		(at 127.9611 104.0683 0)
 		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
+		(exclude_from_sim yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "c49b9999-e06b-470e-bd20-ddd935b7f26a")
-		(property "Reference" "C7"
-			(at 194.31 36.9189 0)
+		(uuid "c3e1dfc1-d3c0-4eec-8e65-1778c0859412")
+		(property "Reference" "H2"
+			(at 130.5011 102.7982 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9562,8 +9886,8 @@
 				(justify left)
 			)
 		)
-		(property "Value" "2200uF"
-			(at 194.31 39.4589 0)
+		(property "Value" "MountingHole"
+			(at 130.5011 105.3382 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9571,8 +9895,8 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_THT:CP_Radial_D18.0mm_P7.50mm"
-			(at 191.77 38.1 0)
+		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3_DIN965_Pad_TopBottom"
+			(at 127.9611 104.0683 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9580,8 +9904,8 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://akizukidenshi.com/catalog/g/gP-08427/"
-			(at 191.77 38.1 0)
+		(property "Datasheet" "~"
+			(at 127.9611 104.0683 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9589,24 +9913,19 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
-			(at 191.77 38.1 0)
+		(property "Description" "Mounting Hole without connection"
+			(at 127.9611 104.0683 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
-		)
-		(pin "1"
-			(uuid "2b4adc03-6e72-4476-b138-17cc594c4d2b")
-		)
-		(pin "2"
-			(uuid "5593924a-946d-46d4-b0bf-38741d841a2b")
 		)
 		(instances
 			(project "PowerModule"
 				(path "/518e1dd4-af18-469e-8624-8d5e71f7e4ff"
-					(reference "C7")
+					(reference "H2")
 					(unit 1)
 				)
 			)
