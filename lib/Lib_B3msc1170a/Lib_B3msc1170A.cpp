@@ -1,6 +1,6 @@
 #include "Lib_B3msc1170a.hpp"
 
-void B3MSC1170A::initialize(byte *id)
+void B3MSC1170A::initialize(byte id)
 {
     _b3msc1170a = new IcsHardSerialClass(&Serial1, 2, 115200, 10);
     _b3msc1170a->begin();
@@ -14,12 +14,12 @@ void B3MSC1170A::initialize(byte *id)
     writeCommand(_id, 0x00, 0x28);
 }
 
-void B3MSC1170A::torqueOff(byte* id)
+void B3MSC1170A::torqueOff(byte id)
 {
     writeCommand(id, 0x02, 0x28);
 }
 
-int B3MSC1170A::writeCommand(byte* id, byte* TxData, byte* Address)
+int B3MSC1170A::writeCommand(byte id, byte TxData, byte Address)
 {
     byte txCmd[8];
     byte rxCmd[5];
@@ -68,7 +68,7 @@ int B3MSC1170A::writeCommand(byte* id, byte* TxData, byte* Address)
     return reData;
 }
 
-int B3MSC1170A::setPosition(byte* id, int Pos, int Time)
+int B3MSC1170A::setPosition(byte id, int Pos, int Time)
 {
     byte txCmd[9];
     byte rxCmd[7];
@@ -118,7 +118,7 @@ int B3MSC1170A::setPosition(byte* id, int Pos, int Time)
     return reData;
 }
 
-uint16_t B3MSC1170A::readVoltage(byte* id)
+int16_t B3MSC1170A::readVoltage(byte id)
 {
     byte txCmd[7];
     byte rxCmd[7];
@@ -159,7 +159,7 @@ uint16_t B3MSC1170A::readVoltage(byte* id)
     return reData;
 }
 
-int16_t B3MSC1170A::readCurrent(byte* id)
+int16_t B3MSC1170A::readCurrent(byte id)
 {
     byte txCmd[7];
     byte rxCmd[7];
@@ -200,7 +200,7 @@ int16_t B3MSC1170A::readCurrent(byte* id)
     return reData;
 }
 
-int16_t B3MSC1170A::readDesiredPosition(byte* id)
+int16_t B3MSC1170A::readDesiredPosition(byte id)
 {
     byte txCmd[7];
     byte rxCmd[7];
@@ -248,7 +248,7 @@ int16_t B3MSC1170A::readDesiredPosition(byte* id)
     return reData;
 }
 
-int16_t B3MSC1170A::readMotorTemperature(byte* id)
+int16_t B3MSC1170A::readMotorTemperature(byte id)
 {
     byte txCmd[7];
     byte rxCmd[7];
@@ -289,7 +289,7 @@ int16_t B3MSC1170A::readMotorTemperature(byte* id)
     return reData;
 }
 
-int16_t B3MSC1170A::readMcuTemperature(byte* id)
+int16_t B3MSC1170A::readMcuTemperature(byte id)
 {
     byte txCmd[7];
     byte rxCmd[7];
@@ -330,7 +330,7 @@ int16_t B3MSC1170A::readMcuTemperature(byte* id)
     return reData;
 }
 
-int16_t B3MSC1170A::readCurrentPosition(byte* id)
+int16_t B3MSC1170A::readCurrentPosition(byte id)
 {
     byte txCmd[7];
     byte rxCmd[7];
@@ -371,7 +371,7 @@ int16_t B3MSC1170A::readCurrentPosition(byte* id)
     return reData;
 }
 
-int16_t B3MSC1170A::readCurrentVelosity(byte* id)
+int16_t B3MSC1170A::readCurrentVelosity(byte id)
 {
     byte txCmd[7];
     byte rxCmd[7];
