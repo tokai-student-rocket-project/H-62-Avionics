@@ -1806,7 +1806,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
 			(at 152.4 45.72 0)
 			(effects
 				(font
@@ -1815,7 +1815,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://akizukidenshi.com/catalog/g/gP-17338/"
+		(property "Datasheet" "https://akizukidenshi.com/catalog/g/g113699/"
 			(at 152.4 45.72 0)
 			(effects
 				(font
@@ -2111,7 +2111,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "4.7k"
+		(property "Value" "4.7kR"
 			(at 53.34 67.3099 0)
 			(effects
 				(font
@@ -2387,7 +2387,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "4.7k"
+		(property "Value" "4.7kR"
 			(at 43.18 67.3099 0)
 			(effects
 				(font
@@ -2598,7 +2598,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
 			(at 100.33 40.64 0)
 			(effects
 				(font
@@ -2607,7 +2607,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://akizukidenshi.com/catalog/g/gP-17338/"
+		(property "Datasheet" "https://akizukidenshi.com/catalog/g/g113699/"
 			(at 100.33 40.64 0)
 			(effects
 				(font
@@ -2658,7 +2658,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "100k"
+		(property "Value" "100kR"
 			(at 143.51 67.3099 0)
 			(effects
 				(font
@@ -2860,7 +2860,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "0"
+		(property "Value" "0R"
 			(at 128.27 50.7999 0)
 			(effects
 				(font

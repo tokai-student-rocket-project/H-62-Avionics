@@ -2059,7 +2059,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "10k"
+		(property "Value" "10kR"
 			(at 48.26 69.215 0)
 			(effects
 				(font
@@ -2202,7 +2202,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "2.4k"
+		(property "Value" "2.4kR"
 			(at 58.42 43.815 0)
 			(effects
 				(font
@@ -2402,7 +2402,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "10k"
+		(property "Value" "10kR"
 			(at 49.53 145.415 0)
 			(effects
 				(font
@@ -2470,7 +2470,7 @@
 				)
 			)
 		)
-		(property "Value" "300"
+		(property "Value" "300R"
 			(at 40.64 59.69 90)
 			(effects
 				(font
@@ -2612,7 +2612,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "2.4k"
+		(property "Value" "2.4kR"
 			(at 59.69 120.015 0)
 			(effects
 				(font
@@ -2988,7 +2988,7 @@
 				)
 			)
 		)
-		(property "Value" "300"
+		(property "Value" "300R"
 			(at 41.91 135.89 90)
 			(effects
 				(font
