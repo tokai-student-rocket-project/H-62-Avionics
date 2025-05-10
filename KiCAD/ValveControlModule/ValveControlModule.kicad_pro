@@ -132,7 +132,7 @@
         "min_track_width": 0.0,
         "min_via_annular_width": 0.1,
         "min_via_diameter": 0.5,
-        "solder_mask_to_copper_clearance": 0.0,
+        "solder_mask_to_copper_clearance": 0.005,
         "use_height_for_length_calcs": true
       },
       "teardrop_options": [
@@ -485,7 +485,7 @@
       "gencad": "",
       "idf": "",
       "netlist": "",
-      "plot": "",
+      "plot": "./",
       "pos_files": "",
       "specctra_dsn": "",
       "step": "C:/Users/hirok/Downloads/ValveControlModule.stl",
@@ -509,7 +509,7 @@
     },
     "bom_presets": [],
     "bom_settings": {
-      "exclude_dnp": false,
+      "exclude_dnp": true,
       "fields_ordered": [
         {
           "group_by": false,
@@ -933,6 +933,10 @@
     [
       "1a4e5e05-0a78-4189-a4ff-f4de07798bc1",
       "ServoMotor"
+    ],
+    [
+      "1cad62e1-3567-4277-b82c-d37b91e22413",
+      "Periferal"
     ]
   ],
   "text_variables": {}

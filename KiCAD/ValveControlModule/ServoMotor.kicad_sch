@@ -1186,7 +1186,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "power:+5V"
+		(symbol "power:+3.3V"
 			(power)
 			(pin_numbers
 				(hide yes)
@@ -1207,7 +1207,7 @@
 					(hide yes)
 				)
 			)
-			(property "Value" "+5V"
+			(property "Value" "+3.3V"
 				(at 0 3.556 0)
 				(effects
 					(font
@@ -1233,7 +1233,7 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "Power symbol creates a global label with name \"+5V\""
+			(property "Description" "Power symbol creates a global label with name \"+3.3V\""
 				(at 0 0 0)
 				(effects
 					(font
@@ -1251,7 +1251,7 @@
 					(hide yes)
 				)
 			)
-			(symbol "+5V_0_1"
+			(symbol "+3.3V_0_1"
 				(polyline
 					(pts
 						(xy -0.762 1.27) (xy 0 2.54)
@@ -1289,7 +1289,7 @@
 					)
 				)
 			)
-			(symbol "+5V_1_1"
+			(symbol "+3.3V_1_1"
 				(pin power_in line
 					(at 0 0 90)
 					(length 0)
@@ -1437,7 +1437,7 @@
 		)
 		(uuid eef7d486-8965-47d1-b14a-c91cf1986484)
 	)
-	(text "ピンコンパチなので本当はMAX485ED"
+	(text "ピンコンパチなので本当はLTC1480"
 		(exclude_from_sim no)
 		(at 79.248 40.894 0)
 		(effects
@@ -2008,7 +2008,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://akizukidenshi.com/catalog/g/g116568/"
+		(property "Datasheet" "https://www.analog.com/media/en/technical-documentation/data-sheets/1480fa.pdf"
 			(at 44.45 59.69 0)
 			(effects
 				(font
@@ -2214,7 +2214,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "D"
+		(property "Value" "SB34AFC"
 			(at 109.22 40.6399 90)
 			(effects
 				(font
@@ -2223,7 +2223,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Diode_SMD:D_SMA_Handsoldering"
 			(at 106.68 39.37 0)
 			(effects
 				(font
@@ -2232,7 +2232,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://akizukidenshi.com/catalog/g/g106125/"
 			(at 106.68 39.37 0)
 			(effects
 				(font
@@ -2427,72 +2427,6 @@
 		)
 	)
 	(symbol
-		(lib_id "power:+5V")
-		(at 57.15 33.02 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "34a6bda8-2211-42db-a4df-6fe4b05a05ac")
-		(property "Reference" "#PWR06"
-			(at 57.15 36.83 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "+5V"
-			(at 57.15 27.94 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 57.15 33.02 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 57.15 33.02 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"+5V\""
-			(at 57.15 33.02 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "ece82044-c782-4802-903d-61920129629e")
-		)
-		(instances
-			(project ""
-				(path "/cd791ee8-0dde-470b-85a8-76474a846dd3/1a4e5e05-0a78-4189-a4ff-f4de07798bc1"
-					(reference "#PWR06")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:C")
 		(at 50.8 36.83 90)
 		(unit 1)
@@ -2510,7 +2444,7 @@
 				)
 			)
 		)
-		(property "Value" "0.1u"
+		(property "Value" "0.1uF"
 			(at 50.8 31.75 90)
 			(effects
 				(font
@@ -2527,7 +2461,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://akizukidenshi.com/catalog/g/g113374/"
 			(at 50.8 36.83 0)
 			(effects
 				(font
@@ -2687,6 +2621,72 @@
 			(project ""
 				(path "/cd791ee8-0dde-470b-85a8-76474a846dd3/1a4e5e05-0a78-4189-a4ff-f4de07798bc1"
 					(reference "#PWR08")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3.3V")
+		(at 57.15 33.02 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "ce676833-8bb1-4b03-ae26-e921e8c6dac0")
+		(property "Reference" "#PWR06"
+			(at 57.15 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+3.3V"
+			(at 57.15 27.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 57.15 33.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 57.15 33.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
+			(at 57.15 33.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "5772ad4c-5c4c-4234-92e0-ba8fd0d847dc")
+		)
+		(instances
+			(project ""
+				(path "/cd791ee8-0dde-470b-85a8-76474a846dd3/1a4e5e05-0a78-4189-a4ff-f4de07798bc1"
+					(reference "#PWR06")
 					(unit 1)
 				)
 			)

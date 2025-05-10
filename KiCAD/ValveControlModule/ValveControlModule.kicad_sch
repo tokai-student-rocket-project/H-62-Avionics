@@ -48,6 +48,48 @@
 		)
 	)
 	(sheet
+		(at 127 38.1)
+		(size 25.4 12.7)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "1cad62e1-3567-4277-b82c-d37b91e22413")
+		(property "Sheetname" "Periferal"
+			(at 127 37.3884 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "Periferal.kicad_sch"
+			(at 127 51.3846 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "ValveControlModule"
+				(path "/cd791ee8-0dde-470b-85a8-76474a846dd3"
+					(page "6")
+				)
+			)
+		)
+	)
+	(sheet
 		(at 25.4 38.1)
 		(size 25.4 12.7)
 		(exclude_from_sim no)
