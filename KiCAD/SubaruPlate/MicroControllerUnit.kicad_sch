@@ -2103,7 +2103,7 @@
 				)
 			)
 		)
-		(property "Value" "750"
+		(property "Value" "750R"
 			(at 146.05 52.07 90)
 			(effects
 				(font
@@ -2710,7 +2710,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "600"
+		(property "Value" "600R"
 			(at 162.56 39.3699 0)
 			(effects
 				(font
@@ -2780,7 +2780,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "10k"
+		(property "Value" "10kR"
 			(at 148.59 62.2299 0)
 			(effects
 				(font
