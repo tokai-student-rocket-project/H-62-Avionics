@@ -1264,6 +1264,16 @@
 			(embedded_fonts no)
 		)
 	)
+	(text "THERMISTOR"
+		(exclude_from_sim no)
+		(at 105.156 40.386 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "cc4435a2-ec46-443f-aa53-45574af9ef0a")
+	)
 	(junction
 		(at 55.88 25.4)
 		(diameter 0)
@@ -3729,7 +3739,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "TERMISTOR"
+		(property "Value" "DF51-2P-2DS"
 			(at 102.87 43.815 0)
 			(effects
 				(font
@@ -3738,7 +3748,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "TSRP_Connector_Hirose:DF1B-2S-2.5R"
+		(property "Footprint" "TSRP_Connector_Hirose:DF51-2P-2DS"
 			(at 105.41 46.99 0)
 			(effects
 				(font
