@@ -1222,131 +1222,6 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "power:+12V"
-			(power)
-			(pin_numbers
-				(hide yes)
-			)
-			(pin_names
-				(offset 0)
-				(hide yes)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "#PWR"
-				(at 0 -3.81 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Value" "+12V"
-				(at 0 3.556 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "Power symbol creates a global label with name \"+12V\""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_keywords" "global power"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "+12V_0_1"
-				(polyline
-					(pts
-						(xy -0.762 1.27) (xy 0 2.54)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 2.54) (xy 0.762 1.27)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 0) (xy 0 2.54)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(symbol "+12V_1_1"
-				(pin power_in line
-					(at 0 0 90)
-					(length 0)
-					(name "~"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
 		(symbol "power:+5V"
 			(power)
 			(pin_numbers
@@ -1691,6 +1566,14 @@
 		(uuid "0cbfe125-9790-4017-bf84-87dae0cf36a6")
 	)
 	(no_connect
+		(at 48.26 36.83)
+		(uuid "cf3fad06-2276-432b-8b6b-4bcea3b894f3")
+	)
+	(no_connect
+		(at 48.26 40.64)
+		(uuid "e6df73b8-8a9e-4f79-ad53-293d6b844cfc")
+	)
+	(no_connect
 		(at 48.26 59.69)
 		(uuid "f48b5706-bf94-4ab7-b431-d4af4d0d9b08")
 	)
@@ -1746,7 +1629,7 @@
 	)
 	(wire
 		(pts
-			(xy 160.02 33.02) (xy 160.02 34.29)
+			(xy 160.02 31.75) (xy 160.02 34.29)
 		)
 		(stroke
 			(width 0)
@@ -1816,6 +1699,16 @@
 	)
 	(wire
 		(pts
+			(xy 158.75 31.75) (xy 160.02 31.75)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "beb32e36-6b26-45d8-81d0-e203a7547755")
+	)
+	(wire
+		(pts
 			(xy 160.02 67.31) (xy 160.02 66.04)
 		)
 		(stroke
@@ -1882,29 +1775,6 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "Servo_PWM"
-		(shape output)
-		(at 48.26 40.64 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "312ae09c-846f-4985-b1ad-d5157ed1b51e")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 34.9335 40.64 0)
-			(show_name yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
 				(hide yes)
 			)
 		)
@@ -2019,9 +1889,9 @@
 			)
 		)
 	)
-	(global_label "SPI_CS"
+	(global_label "VIN(12V)"
 		(shape input)
-		(at 48.26 36.83 180)
+		(at 158.75 31.75 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2029,9 +1899,9 @@
 			)
 			(justify right)
 		)
-		(uuid "b54c71cd-f55c-4af2-a5ce-e171af32fe3d")
+		(uuid "c30dd20d-0ab3-4fd1-a49f-38c687e22dbf")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 38.7434 36.83 0)
+			(at 147.5399 31.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2522,72 +2392,6 @@
 		)
 	)
 	(symbol
-		(lib_id "power:+12V")
-		(at 160.02 33.02 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "cdbacfd7-f870-40ef-b217-615772962cad")
-		(property "Reference" "#PWR031"
-			(at 160.02 36.83 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "+12V"
-			(at 160.02 27.94 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 160.02 33.02 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 160.02 33.02 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"+12V\""
-			(at 160.02 33.02 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "91ba5e68-761e-4861-8e8c-6e0c74328287")
-		)
-		(instances
-			(project ""
-				(path "/6c4aa1f5-c08b-4349-85f8-88bb399e711f/68138f6b-698e-4dab-8cce-76242e9c0eb0"
-					(reference "#PWR031")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Seeed_Studio_XIAO_Series:XIAO-RP2040-DIP")
 		(at 52.07 31.75 0)
 		(unit 1)
@@ -2613,7 +2417,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Seeed_XIAO:XIAO-RP2040-SMD"
+		(property "Footprint" "TSRP_Seeed_XIAO:XIAO-RP2040-SMD"
 			(at 66.548 64.008 0)
 			(effects
 				(font
