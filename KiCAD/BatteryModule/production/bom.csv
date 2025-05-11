@@ -1,0 +1,8 @@
+﻿Designator,Footprint,Quantity,Value,LCSC Part #
+"BT1, BT2, BT3, BT4, BT5",BHC-CR123A,5,CR123A,
+D1,0603,1,Green,
+F1,Fuse_Bourns_MF-RHT300,1,Polyfuse,
+J2,DF1B-2S-2.5R,1,DF1B-2S-2.5R,
+J3,DF11-8DP-2DS,1,DF11-8DP-2DS,
+R1,0603,1,2.4kR,
+"TP1, TP2",TestPoint_THTPad_D2.0mm_Drill1.0mm,2,TestPoint,
