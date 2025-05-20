@@ -68,9 +68,9 @@ void setup() {
     closeSupplyValve(); // サプライ（ID:0x02）の角度を0度に
 
     Tasks.add(&readMainValveData)->startFps(2); // メイン（ID:0x01）の情報を取得
-    Tasks.add(&openMainValve)->startFps(1); // メイン（ID:0x01）の角度を更新
+    // Tasks.add(&openMainValve)->startFps(1); // メイン（ID:0x01）の角度を更新
     Tasks.add(&readSupplyValve)->startFps(2); // サプライ（ID:0x02）の情報を取得
-    Tasks.add(&openSupplyValve)->startFps(1); // サプライ（ID:0x02）の角度を更新
+    // Tasks.add(&openSupplyValve)->startFps(1); // サプライ（ID:0x02）の角度を更新
 }
 
 
