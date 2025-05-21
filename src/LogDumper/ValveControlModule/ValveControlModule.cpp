@@ -1,8 +1,11 @@
 #include <MsgPacketizer.h>
 #include "Lib_FRAM.hpp"
 
-FRAM fram0(28); // A2
-FRAM fram1(29); // A3
+const uint32_t FRAM_CS_PIN0 = 28; // A2
+const uint32_t FRAM_CS_PIN1 = 29; // A3 
+
+FRAM fram0(FRAM_CS_PIN0);
+FRAM fram1(FRAM_CS_PIN1);
 
 
 const uint8_t redled = 17; //GPIO17
@@ -40,8 +43,6 @@ void dump(FRAM *fram)
 void printHeader()
 {
   Serial.print("millis");
-  Serial.print(",");
-  Serial.print("doLogging");
   Serial.print("\n");
 }
 
@@ -51,11 +52,9 @@ void setup()
   SPI.begin();
 
   MsgPacketizer::subscribe_manual(0x0A,
-                                  [&](uint32_t millis, bool doLogging)
+                                  [&](uint32_t millis)
                                   {
                                     Serial.print(millis);
-                                    Serial.print(",");
-                                    Serial.print(doLogging);
                                     Serial.print("\n");
                                   });
 
@@ -66,7 +65,7 @@ void setup()
   digitalWrite(redled, HIGH); // RGB LED OFF
   digitalWrite(greenled, HIGH); // RGB LED OFF
   while (!Serial);
-  delay(2000);
+  delay(5000);
   printHeader();
 
   dump(&fram0);
