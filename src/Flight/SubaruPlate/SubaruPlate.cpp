@@ -2,89 +2,45 @@
 #include <Wire.h>
 #include <Adafruit_LPS28.h>
 #include <TaskManager.h>
+#include "Lib_Altimeter.hpp"
 
 
 namespace sensor {
-    Adafruit_LPS28 primaryPressure;
-    Adafruit_LPS28 secondaryPressure;
+    Altimeter primary;
+    Altimeter secondary;
 
     void measurePressure();
+    void referencePressure();
 }
 
 void sensor::measurePressure(){
+  sensor::primary.setReferencePressure(1013.25);
+  Serial.print(">Primary Pressure: ");
+  Serial.println(sensor::primary.getPressure());
 
+  Serial.print(">Sencondary Pressure: ");
+  Serial.println(sensor::secondary.getPressure());
 
-  float pressurePrimary = sensor::primaryPressure.getPressure();
-  float temperaturePrimary = sensor::primaryPressure.getTemperature();
+  float temperature_C = (sensor::primary.getTemperature()+sensor::secondary.getTemperature()) / 2;
+  Serial.print(">Altitude: ");
+  Serial.println(sensor::primary.getAltitude(temperature_C));
 
-  Serial.print(">Pressure_MAIN:");
-  Serial.println(pressurePrimary);
-//   Serial.print(", ");
-//   Serial.print("Temperature (°C): ");
-//   Serial.println(temperaturePrimary);
+  Serial.print(">Primary ReferencePressure: ");
+  Serial.println(sensor::primary.getReferencePressure()); 
 
-  float pressureSecondary = sensor::secondaryPressure.getPressure();
-  float temperatureSecondary = sensor::secondaryPressure.getTemperature();
-
-  Serial.print(">Pressure_BACKUP:");
-  Serial.println(pressureSecondary);
-//   Serial.print(", ");
-//   Serial.print("Temperature (°C): ");
-//   Serial.println(temperatureSecondary);
+  Serial.print(">Secondary ReferencePressure: ");
+  Serial.println(sensor::secondary.getReferencePressure());
 }
 
 void setup() {
   Serial.begin(115200);
 
-  // Initialize the sensor
-  sensor::primaryPressure.begin(&Wire, 0x5C);
-  sensor::secondaryPressure.begin(&Wire, 0x5D);
-
-  sensor::primaryPressure.setDataRate(LPS28_ODR_200_HZ);
-  sensor::primaryPressure.setAveraging(LPS28_AVG_512);
-//   sensor::primaryPressure.setLowPassODR9(true);
-  sensor::primaryPressure.setFIFOmode(false, LPS28_FIFO_BYPASS_TO_CONTINUOUS);
-  sensor::primaryPressure.setFIFOWatermark(10);
-
-  sensor::secondaryPressure.setDataRate(LPS28_ODR_200_HZ);
-  sensor::secondaryPressure.setAveraging(LPS28_AVG_512);
-  sensor::secondaryPressure.setLowPassODR9(true);
-  sensor::secondaryPressure.setFIFOmode(false, LPS28_FIFO_CONTINUOUS);
-  sensor::secondaryPressure.setFIFOWatermark(10);
+  sensor::primary.initialize(0x5C);
+  sensor::secondary.initialize(0x5D);
 
 
 
-  // Enable DRDY interrupt on the interrupt pin
-  sensor::primaryPressure.setInterruptPin(
-    true,  // Polarity: Active high
-    false  // Pin mode: Push-pull
-  );
-
-  sensor::secondaryPressure.setInterruptPin(
-    true,  // Polarity: Active high
-    false  // Pin mode: Push-pull
-  );
-
-  // Enable DRDY interrupt output on INT pin (we could use this with an interrupt)
-  sensor::primaryPressure.setIntPinOutput(
-    false,  // DRDY active
-    false, // DRDY pulse not enabled
-    false, // INT output not enabled
-    false, // FIFO full interrupt not enabled
-    true, // FIFO watermark interrupt not enabled
-    false  // FIFO overrun interrupt not enabled
-  );
-
-  sensor::secondaryPressure.setIntPinOutput(
-    true,  // DRDY active
-    false, // DRDY pulse not enabled
-    false, // INT output not enabled
-    false, // FIFO full interrupt not enabled
-    true, // FIFO watermark interrupt not enabled
-    false  // FIFO overrun interrupt not enabled
-  );
-
-  Tasks.add(&sensor::measurePressure)->startFps(400); // 200Hz
+  Tasks.add(&sensor::measurePressure)->startFps(400); // 400Hz
 }
 
 void loop() {
