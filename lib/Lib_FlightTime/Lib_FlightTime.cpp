@@ -6,12 +6,12 @@ void FlightTime::setZero() {
 }
 
 
-uint16_t FlightTime::get() {
-  return (uint16_t)(millis() - _referenceTime);
+uint32_t FlightTime::get() {
+  return (uint32_t)(millis() - _referenceTime);
 }
 
 
-bool FlightTime::isElapsed(uint16_t time) {
+bool FlightTime::isElapsed(uint32_t time) {
   return get() >= time;
 }
 

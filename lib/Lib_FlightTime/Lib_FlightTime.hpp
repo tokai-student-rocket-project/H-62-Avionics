@@ -6,15 +6,15 @@
 
 class FlightTime {
 public:
-  uint16_t SEPARATION_1_PROTECTION_TIME;
-  uint16_t SEPARATION_1_FORCE_TIME;
-  uint16_t SEPARATION_2_PROTECTION_TIME;
-  uint16_t SEPARATION_2_FORCE_TIME;
-  uint16_t LANDING_TIME;
+  uint32_t SEPARATION_1_PROTECTION_TIME;
+  uint32_t SEPARATION_1_FORCE_TIME;
+  uint32_t SEPARATION_2_PROTECTION_TIME;
+  uint32_t SEPARATION_2_FORCE_TIME;
+  uint32_t LANDING_TIME;
 
   void setZero();
-  uint16_t get();
-  bool isElapsed(uint16_t time);
+  uint32_t get();
+  bool isElapsed(uint32_t time);
 
   void print();
 
