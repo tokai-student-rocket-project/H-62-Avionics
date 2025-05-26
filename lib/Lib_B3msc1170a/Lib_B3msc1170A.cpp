@@ -2,7 +2,7 @@
 
 void B3MSC1170A::initialize(byte id)
 {
-    _b3msc1170a = new IcsHardSerialClass(&Serial1, 2, 115200, 10);
+    _b3msc1170a = new IcsHardSerialClass(&Serial1, 27, 115200, 10);
     _b3msc1170a->begin();
 
     uint8_t _id = (byte)(id);
