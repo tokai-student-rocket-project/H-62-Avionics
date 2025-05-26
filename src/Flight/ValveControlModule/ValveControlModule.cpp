@@ -23,18 +23,18 @@ Neopixel Status(12); // OK
 
 const uint32_t FRAM_CS_PIN0 = 28; // A2
 const uint32_t FRAM_CS_PIN1 = 29; // A3
-// CAN can(26);
+CAN can(26);
 Logger logger(FRAM_CS_PIN0, FRAM_CS_PIN1);
 
 
 B3MSC1170A mainValve;
 void openMainValve() { mainValve.setPosition(0x01, -5500, 0); }
-void closeMainValve() { mainValve.setPosition(0x01, 0, 1000); }
+void closeMainValve() { mainValve.setPosition(0x01, 0, 0); }
 
 
 B3MSC1170A supplyValve;
-void openSupplyValve() { supplyValve.setPosition(0x02, 0, 200); }
-void closeSupplyValve() { supplyValve.setPosition(0x02, -800, 300); }
+void openSupplyValve() { supplyValve.setPosition(0x02, -8000, 0); }
+void closeSupplyValve() { supplyValve.setPosition(0x02, 0, 1000); }
 
 Var::ValveMode currentValveMode = Var::ValveMode::LAUNCH;
 Var::GseSignal currentGseSignal = Var::GseSignal::IGNITION_ON;
@@ -156,126 +156,126 @@ void changeIgnition(Var::GseSignal nextMode)
   currentGseSignal = nextMode;
 }
 
-// void syncFlightMode()
-// {
-//   if (can.available())
-//   {
-//     switch (can.getLatestLabel())
-//     {
-//     case Var::Label::FLIGHT_DATA:
-//     {
-//       can.receiveFlight(&flightMode, &flightTime, &doLogging, &ident);
-//       switch (flightMode) {
-//         case (0): // STANDBY
-//         {
-//           igniterSignalCounter.update(gseIgniter.isSignaled());
+void syncFlightMode()
+{
+  if (can.available())
+  {
+    switch (can.getLatestLabel())
+    {
+    case Var::Label::FLIGHT_DATA:
+    {
+      can.receiveFlight(&flightMode, &flightTime, &doLogging, &ident);
+      switch (flightMode) {
+        case (0): // STANDBY
+        {
+          igniterSignalCounter.update(gseIgniter.isSignaled());
 
-//           if (igniterSignalCounter.isExceeded())
-//           {
-//             changeIgnition(Var::GseSignal::IGNITION_ON);
-//           }
-//           else
-//           {
-//             changeIgnition(Var::GseSignal::IGNITION_OFF);
-//           }
+          if (igniterSignalCounter.isExceeded())
+          {
+            changeIgnition(Var::GseSignal::IGNITION_ON);
+          }
+          else
+          {
+            changeIgnition(Var::GseSignal::IGNITION_OFF);
+          }
 
-//           valveSignalCounter.update(gseValve.isSignaled());
-//           if (valveSignalCounter.isExceeded())
-//           {
-//             changeMode(Var::ValveMode::LAUNCH);
-//           }
-//           else
-//           {
-//             changeMode(Var::ValveMode::WAITING);
-//           }
-//           verifyValve();
+          valveSignalCounter.update(gseValve.isSignaled());
+          if (valveSignalCounter.isExceeded())
+          {
+            changeMode(Var::ValveMode::LAUNCH);
+          }
+          else
+          {
+            changeMode(Var::ValveMode::WAITING);
+          }
+          verifyValve();
 
-//           Serial.println("STANDBY");
-//           break;
-//         }
+          Serial.println("STANDBY");
+          break;
+        }
 
-//         case (1): // READY_TO_FLY
-//         {
-//           igniterSignalCounter.update(gseIgniter.isSignaled());
+        case (1): // READY_TO_FLY
+        {
+          igniterSignalCounter.update(gseIgniter.isSignaled());
 
-//           if (igniterSignalCounter.isExceeded())
-//           {
-//             changeIgnition(Var::GseSignal::IGNITION_ON);
-//           }
-//           else
-//           {
-//             changeIgnition(Var::GseSignal::IGNITION_OFF);
-//           }
+          if (igniterSignalCounter.isExceeded())
+          {
+            changeIgnition(Var::GseSignal::IGNITION_ON);
+          }
+          else
+          {
+            changeIgnition(Var::GseSignal::IGNITION_OFF);
+          }
 
-//           valveSignalCounter.update(gseValve.isSignaled());
-//           if (valveSignalCounter.isExceeded())
-//           {
-//             changeMode(Var::ValveMode::LAUNCH);
-//           }
-//           else
-//           {
-//             changeMode(Var::ValveMode::WAITING);
-//           }
-//           verifyValve();
+          valveSignalCounter.update(gseValve.isSignaled());
+          if (valveSignalCounter.isExceeded())
+          {
+            changeMode(Var::ValveMode::LAUNCH);
+          }
+          else
+          {
+            changeMode(Var::ValveMode::WAITING);
+          }
+          verifyValve();
 
-//           Serial.println("READY_TO_FLY");
-//           break;
-//         }
+          Serial.println("READY_TO_FLY");
+          break;
+        }
 
-//         case (2): // POWERED_CLIMB
-//         {
-//           changeMode(Var::ValveMode::LAUNCH);
-//           Serial.println("POWERED_CLIMB");
-//           break;
-//         }
+        case (2): // POWERED_CLIMB
+        {
+          changeMode(Var::ValveMode::LAUNCH);
+          Serial.println("POWERED_CLIMB");
+          break;
+        }
 
-//         case (3): // FREE_CLIMB
-//         {
-//           changeMode(Var::ValveMode::LAUNCH);
-//           Serial.println("FREE_CLIMB");
-//           break;
-//         }
+        case (3): // FREE_CLIMB
+        {
+          changeMode(Var::ValveMode::LAUNCH);
+          Serial.println("FREE_CLIMB");
+          break;
+        }
 
-//         case (4): // FREE_DESCENT
-//         {
-//           changeMode(Var::ValveMode::LAUNCH);
-//           Serial.println("FREE_DESCENT");
-//           break;
-//         }
+        case (4): // FREE_DESCENT
+        {
+          changeMode(Var::ValveMode::LAUNCH);
+          Serial.println("FREE_DESCENT");
+          break;
+        }
 
-//         case (5): // DROGUE_CHUTE_DESCENT
-//         {
-//           changeMode(Var::ValveMode::LAUNCH);
-//           Serial.println("DROGUE_CHUTE_DESCENT");
-//           break;
-//         }
+        case (5): // DROGUE_CHUTE_DESCENT
+        {
+          changeMode(Var::ValveMode::LAUNCH);
+          Serial.println("DROGUE_CHUTE_DESCENT");
+          break;
+        }
 
-//         case (6): // MAIN_CHUTE_DESCENT
-//         {
-//           changeMode(Var::ValveMode::LAUNCH);
-//           Serial.println("MAIN_CHUTE_DESCENT");
-//           break;
-//         }
+        case (6): // MAIN_CHUTE_DESCENT
+        {
+          changeMode(Var::ValveMode::LAUNCH);
+          Serial.println("MAIN_CHUTE_DESCENT");
+          break;
+        }
 
-//         case (7): // LANDED
-//         {
-//           closeSupplyValve();
-//           closeMainValve();
-//           Serial.println("LANDED");
-//           break;
-//         }
+        case (7): // LANDED
+        {
+          closeSupplyValve();
+          closeMainValve();
+          Serial.println("LANDED");
+          break;
+        }
 
-//         case (8): // SHUTDOWN
-//         {
-//           mainValve.torqueOff(0x01);
-//           Serial.println("SHUTDOWN");
-//           break;
-//         }
-//       }
-//     }
-//     }
-//   }
-// }
+        case (8): // SHUTDOWN
+        {
+          mainValve.torqueOff(0x01);
+          Serial.println("SHUTDOWN");
+          break;
+        }
+      }
+    }
+    }
+  }
+}
 
 // void sendValveMode()
 // {
@@ -309,6 +309,8 @@ void readData()
 {
   // Serial.println(digitalRead(7)); // Signal Valve
   // Serial.println(digitalRead(6)); // Signal Ignition
+  Serial.println(mainValve.readVoltage(0x01));
+  Serial.println(supplyValve.readVoltage(0x02));
 }
 
 void task10Hz() {
@@ -318,19 +320,26 @@ void task10Hz() {
   digitalWrite(redled, !digitalRead(redled));
 }
 
+void valve() {
+  if(digitalRead(7) == HIGH)
+  {
+    openMainValve();
+    openSupplyValve();
+  }
+  else{
+    closeMainValve();
+    closeSupplyValve();
+  }
+
+}
+
 void setup()
 {
   Serial.begin(115200);
   Serial1.begin(115200, SERIAL_8N1);
 
   SPI.begin();
-  // can.begin();
-
-  Serial.println("Initializing FRAM and clearing...");
-  logger.clear();
-  Serial.println("FRAM cleared.");
-
-
+  can.begin();
 
   pinMode(redled, OUTPUT);
   pinMode(greenled, OUTPUT); 
@@ -345,14 +354,17 @@ void setup()
   logger.reset();
   
   supplyValve.initialize(0x01);
+  delay(100);
   mainValve.initialize(0x02);
 
   // Tasks.add(&syncFlightMode)->startFps(100);
   // Tasks.add(&sendValveMode)->startFps(60);
   // Tasks.add(&sendIgnition)->startFps(60);
   // Tasks.add(&sendValveData)->startFps(10);
-  // Tasks.add(&readData)->startFps(5);
+  // Tasks.add(&changeMode)->startFps(10);
+  Tasks.add(&readData)->startFps(5);
   Tasks.add(&task10Hz)->startFps(10);
+  Tasks.add(&valve)->startFps(50);
 
   changeMode(Var::ValveMode::WAITING);
   changeIgnition(Var::GseSignal::IGNITION_OFF);
@@ -361,5 +373,4 @@ void setup()
 void loop()
 {
   Tasks.update();
-
 }
