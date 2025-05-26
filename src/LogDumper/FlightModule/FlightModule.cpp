@@ -51,6 +51,8 @@ void printHeader()
   Serial.print(",");
   Serial.print("sn3IsOn");
   Serial.print(",");
+  Serial.print("sn4IsOn");
+  Serial.print(",");
 
   Serial.print("isFalling");
   Serial.print(",");
@@ -106,8 +108,8 @@ void setup()
   SPI.begin();
 
   MsgPacketizer::subscribe_manual(0x0A,
-                                  [&](char ident, uint32_t millis, uint16_t flightTime, uint8_t flightMode, float loggerUsage,
-                                      bool flightPinIsOpen, bool buzzerIsOn, bool sn3IsOn,
+                                  [&](char ident, uint32_t millis, uint32_t flightTime, uint8_t flightMode, float loggerUsage,
+                                      bool flightPinIsOpen, bool buzzerIsOn, bool sn3IsOn, bool sn4IsOn,
                                       bool isFalling, float altitude, bool isLaunchMode, float forceX_N, float jerkX_mps3,
                                       bool gnssIsAvailable, uint32_t unixEpoch, bool isFixed, uint8_t fixType, uint8_t satelliteCount, float latitude, float longitude, float accuracy,
                                       float motorTemperature, float mcuTemperature, float current, float inputVoltage,
@@ -122,6 +124,7 @@ void setup()
                                     Serial.print(flightPinIsOpen); Serial.print(",");
                                     Serial.print(buzzerIsOn); Serial.print(",");
                                     Serial.print(sn3IsOn); Serial.print(",");
+                                    Serial.print(sn4IsOn); Serial.print(",");
 
                                     Serial.print(isFalling); Serial.print(",");
                                     Serial.print(altitude); Serial.print(",");
@@ -155,9 +158,26 @@ void setup()
   delay(5000);
   printHeader();
   pinMode(LED_BUILTIN, OUTPUT);
+  pinMode(0, OUTPUT);
+  pinMode(1, OUTPUT);
+  pinMode(5, OUTPUT);
+  pinMode(A5, OUTPUT);
+  pinMode(A6, OUTPUT);
   digitalWrite(LED_BUILTIN, HIGH);
+  digitalWrite(0, HIGH);
+  digitalWrite(1, HIGH);
+  digitalWrite(5, HIGH);
+  digitalWrite(A5, HIGH);
+  digitalWrite(A6, HIGH);
   dump(&fram0);
+  dump(&fram1);
+  dump(&fram2);
   digitalWrite(LED_BUILTIN, LOW);
+  digitalWrite(0, LOW);
+  digitalWrite(1, LOW);
+  digitalWrite(5, LOW);
+  digitalWrite(A5, LOW);
+  digitalWrite(A6, LOW);
 }
 
 void loop()
