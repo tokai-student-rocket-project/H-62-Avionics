@@ -10,8 +10,9 @@ Neopixel::Neopixel(uint8_t pin)
 void Neopixel::init(uint8_t power)
 {
     _neopixel->begin();
-    pinMode(power, OUTPUT);
-    digitalWrite(power, HIGH);
+    _power = power;
+    pinMode(_power, OUTPUT);
+    digitalWrite(_power, HIGH);
 }
 
 void Neopixel::noticedPink()
@@ -32,6 +33,13 @@ void Neopixel::noticedBlue()
 {
     _neopixel->clear();
     _neopixel->setPixelColor(0, _neopixel->Color(0, 0, 150));
+    _neopixel->show();
+}
+
+void Neopixel::noticedRed()
+{
+    _neopixel->clear();
+    _neopixel->setPixelColor(0, _neopixel->Color(255, 0, 0));
     _neopixel->show();
 }
 

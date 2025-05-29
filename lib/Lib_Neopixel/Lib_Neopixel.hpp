@@ -9,8 +9,12 @@ class Neopixel
 public:
     Neopixel(uint8_t pin);
     void init(uint8_t power);
-    void noticedGreen();
-    void noticedBlue();
     void noticedPink();
+    void noticedGreen();
+    void noticedRed();
+    void noticedBlue();
     void noticedTime(bool permiddionTime);
+
+private:
+    uint8_t _power;
 };
