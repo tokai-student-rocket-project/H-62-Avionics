@@ -44,18 +44,18 @@ uint32_t Logger::write(const uint8_t* data, uint32_t size) {
   _offset += size;
 
   ////////////////////////////////////////////////////////////
-  Serial.print("[");
-  Serial.print(getUsage(), 0);
-  Serial.print("% | ");
-  Serial.print(_offset);
-  Serial.print("b / ");
-  Serial.print(FRAM::LENGTH * 2);
-  Serial.print("b] ");
+  // Serial.print("[");
+  // Serial.print(getUsage(), 0);
+  // Serial.print("% | ");
+  // Serial.print(_offset);
+  // Serial.print("b / ");
+  // Serial.print(FRAM::LENGTH * 2);
+  // Serial.print("b] ");
 
-  for (uint32_t i = 0; i < size; i++) {
-    Serial.print(data[i], HEX);
-    Serial.print((data[i] == 0x00) ? "\n" : " ");
-  }
+  // for (uint32_t i = 0; i < size; i++) {
+  //   Serial.print(data[i], HEX);
+  //   Serial.print((data[i] == 0x00) ? "\n" : " ");
+  // }
   ////////////////////////////////////////////////////////////
 
   return size;
