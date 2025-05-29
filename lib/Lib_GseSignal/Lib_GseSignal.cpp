@@ -8,5 +8,5 @@ GseSignal::GseSignal(uint8_t pinNumber) {
 
 
 bool GseSignal::isSignaled() {
-  return digitalRead(_pinNumber) == LOW;
+  return digitalRead(_pinNumber) == HIGH;
 }
