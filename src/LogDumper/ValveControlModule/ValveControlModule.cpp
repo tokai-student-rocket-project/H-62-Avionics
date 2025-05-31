@@ -1,17 +1,15 @@
 #include <MsgPacketizer.h>
 #include "Lib_FRAM.hpp"
+#include "Lib_NeoPixel.hpp"
 
-const uint32_t FRAM_CS_PIN0 = 28; // A2
-const uint32_t FRAM_CS_PIN1 = 29; // A3 
+FRAM fram0(28);
+FRAM fram1(29);
 
-FRAM fram0(FRAM_CS_PIN0);
-FRAM fram1(FRAM_CS_PIN1);
+const uint8_t redled = 17;   // GPIO17
+const uint8_t greenled = 16; // GPIO16
+const uint8_t blueled = 25;  // GPIO25
 
-
-const uint8_t redled = 17; //GPIO17
-const uint8_t greenled = 16; //GPIO16
-const uint8_t blueled = 25; //GPIO25
-
+Neopixel Status(12);
 
 void dump(FRAM *fram)
 {
@@ -43,6 +41,20 @@ void dump(FRAM *fram)
 void printHeader()
 {
   Serial.print("millis");
+  Serial.print(",");
+  Serial.print("motorTemperature");
+  Serial.print(",");
+  Serial.print("mcuTemperature");
+  Serial.print(",");
+  Serial.print("current");
+  Serial.print(",");
+  Serial.print("inputVoltage");
+  Serial.print(",");
+  Serial.print("currentPosition");
+  Serial.print(",");
+  Serial.print("currentDesiredPosition");
+  Serial.print(",");
+  Serial.print("currentVelocity");
   Serial.print("\n");
 }
 
@@ -52,25 +64,50 @@ void setup()
   SPI.begin();
 
   MsgPacketizer::subscribe_manual(0x0A,
-                                  [&](uint32_t millis)
+                                  [&](uint32_t millis,
+                                      float motorTemperature,
+                                      float mcuTemperature,
+                                      float current,
+                                      float inputVoltage,
+                                      float currentPosition,
+                                      float currentDesiredPosition,
+                                      float currentVelocity)
                                   {
                                     Serial.print(millis);
+                                    Serial.print(",");
+                                    Serial.print(motorTemperature);
+                                    Serial.print(",");
+                                    Serial.print(mcuTemperature);
+                                    Serial.print(",");
+                                    Serial.print(current);
+                                    Serial.print(",");
+                                    Serial.print(inputVoltage);
+                                    Serial.print(",");
+                                    Serial.print(currentPosition);
+                                    Serial.print(",");
+                                    Serial.print(currentDesiredPosition);
+                                    Serial.print(",");
+                                    Serial.print(currentVelocity);
                                     Serial.print("\n");
                                   });
 
   pinMode(redled, OUTPUT);
-  pinMode(greenled, OUTPUT); 
+  pinMode(greenled, OUTPUT);
   pinMode(blueled, OUTPUT);
-  digitalWrite(blueled, LOW);
-  digitalWrite(redled, HIGH); // RGB LED OFF
+  digitalWrite(blueled, HIGH);  // RGB LED OFF
+  digitalWrite(redled, HIGH);   // RGB LED OFF
   digitalWrite(greenled, HIGH); // RGB LED OFF
-  while (!Serial);
+  Status.init(11);
+  while (!Serial)
+    ;
   delay(5000);
   printHeader();
+  Status.noticedBlue();
+  digitalWrite(blueled, LOW);
 
   dump(&fram0);
   dump(&fram1);
-  
+
   digitalWrite(blueled, HIGH);
 }
 
