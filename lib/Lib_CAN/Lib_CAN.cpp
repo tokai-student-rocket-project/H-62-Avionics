@@ -147,27 +147,56 @@ void CAN::receiveValveDataPart2(float *currentPosition, float *currentDesiredPos
 
   *currentPosition = (float)currentPositionRaw / 100.0;
   *currentDesiredPosition = (float)currentDesiredPositionRaw / 100.0;
-  *currentVelocity = (float)currentVelocityRaw / 100.0;
+  *currentVelocity = (float)currentVelocityRaw / 10.0;
 }
 
-void CAN::sendValveDataPart3(int16_t currentPositionSupply, int16_t voltageSupply)
+void CAN::sendValveDataPart3(int16_t motorTemperature, int16_t mcuTemperature, int16_t current, int16_t inputVoltage)
 {
-  uint8_t data[4];
-  memcpy(data, &currentPositionSupply, 2);
-  memcpy(data + 2, &voltageSupply, 2);
+  uint8_t data[8];
+  memcpy(data, &motorTemperature, 2);
+  memcpy(data + 2, &mcuTemperature, 2);
+  memcpy(data + 4, &current, 2);
+  memcpy(data + 6, &inputVoltage, 2);
 
-  _can->sendMsgBuf(static_cast<uint32_t>(Var::Label::VALVE_DATA_PART_3), 0, 4, data);
+  _can->sendMsgBuf(static_cast<uint32_t>(Var::Label::VALVE_DATA_PART_3), 0, 8, data);
 }
 
-void CAN::receiveValveDataPart3(float *currentPositionSupply, float *voltageSupply)
+void CAN::receiveValveDataPart3(float *motorTemperature, float *mcuTemperature, float *current, float *inputVoltage)
 {
-  int16_t currentPositionSupplyRaw, voltageSupplyRaw;
+  int16_t motorTemperatureRaw, mcuTemperatureRaw, currentRaw, inputVoltageRaw;
 
-  memcpy(&currentPositionSupplyRaw, _latestData, 2);
-  memcpy(&voltageSupplyRaw, _latestData + 4, 2);
+  memcpy(&motorTemperatureRaw, _latestData, 2);
+  memcpy(&mcuTemperatureRaw, _latestData + 2, 2);
+  memcpy(&currentRaw, _latestData + 4, 2);
+  memcpy(&inputVoltageRaw, _latestData + 6, 2);
 
-  *currentPositionSupply = (float)currentPositionSupplyRaw / 10.0;
-  *voltageSupply = (float)voltageSupplyRaw / 100.0;
+  *motorTemperature = (float)motorTemperatureRaw / 100.0;
+  *mcuTemperature = (float)mcuTemperatureRaw / 100.0;
+  *current = (float)currentRaw;
+  *inputVoltage = (float)inputVoltageRaw / 1000.0;
+}
+
+void CAN::sendValveDataPart4(int16_t currentPosition, int16_t currentDesiredPosition, int16_t currentVelocity)
+{
+  uint8_t data[6];
+  memcpy(data, &currentPosition, 2);
+  memcpy(data + 2, &currentDesiredPosition, 2);
+  memcpy(data + 4, &currentVelocity, 2);
+
+  _can->sendMsgBuf(static_cast<uint32_t>(Var::Label::VALVE_DATA_PART_4), 0, 6, data);
+}
+
+void CAN::receiveValveDataPart4(float *currentPosition, float *currentDesiredPosition, float *currentVelocity)
+{
+  int16_t currentPositionRaw, currentDesiredPositionRaw, currentVelocityRaw;
+
+  memcpy(&currentPositionRaw, _latestData, 2);
+  memcpy(&currentDesiredPositionRaw, _latestData + 2, 2);
+  memcpy(&currentVelocityRaw, _latestData + 4, 2);
+
+  *currentPosition = (float)currentPositionRaw / 100.0;
+  *currentDesiredPosition = (float)currentDesiredPositionRaw / 100.0;
+  *currentVelocity = (float)currentVelocityRaw / 10.0;
 }
 
 void CAN::sendDynamics(float force, float jerk)
