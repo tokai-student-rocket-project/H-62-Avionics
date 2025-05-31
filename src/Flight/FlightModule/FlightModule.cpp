@@ -59,7 +59,8 @@ float accuracy;
 
 float motorTemperature, mcuTemperature, current, inputVoltage;
 float currentPosition, currentDesiredPosition, currentVelocity;
-float currentSupplyPosition, voltage;
+float motorTemperature_SUPPLY, mcuTemperature_SUPPLY, current_SUPPLY, inputVoltage_SUPPLY;
+float currentPosition_SUPPLY, currentDesiredPosition_SUPPLY, currentVelocity_SUPPLY;
 
 bool sensingModuleAvailable = false;
 bool sensingModuleAvailableAnnounced = false;
@@ -113,8 +114,8 @@ void task100Hz()
     satelliteCount = gnss.getSatelliteCount();
     latitude = gnss.getLatitude();
     longitude = gnss.getLongitude();
-    // height = gnss.getAltitude();
-    // speed = gnss.getSpeed();
+    height = gnss.getAltitude();
+    speed = gnss.getSpeed();
     accuracy = gnss.getAccuracy();
 
     ledGnssRx.set(fixType == 3);
@@ -275,25 +276,57 @@ void task100Hz()
   ledWork.set(doLogging);
 
   // フライトモードの表示
-  Serial.println(flightMode.currentNumber());
+  // Serial.println(flightMode.currentNumber());
 
-//
-//   const auto &logPacket = MsgPacketizer::encode(0x0A,
-//                                                 ident, millis(), flightTime.get(), flightMode.currentNumber(), logger.getUsage(),
-//                                                 flightPin.isOpen(), buzzer.isOn(), sn3.isOn(), sn4.isOn(),
-//                                                 isFalling, altitude, isLaunchMode, forceX_N, jerkX_mps3,
-//                                                 gnssIsAvailable, unixEpoch, isFixed, fixType, satelliteCount, latitude, longitude, height, speed, accuracy,
-//                                                 motorTemperature, mcuTemperature, current, inputVoltage,
-//                                                 currentPosition, currentDesiredPosition, currentVelocity, currentSupplyPosition, voltage);
-//
+  //
+  //   const auto &logPacket = MsgPacketizer::encode(0x0A,
+  //                                                 ident, millis(), flightTime.get(), flightMode.currentNumber(), logger.getUsage(),
+  //                                                 flightPin.isOpen(), buzzer.isOn(), sn3.isOn(), sn4.isOn(),
+  //                                                 isFalling, altitude, isLaunchMode, forceX_N, jerkX_mps3,
+  //                                                 gnssIsAvailable, unixEpoch, isFixed, fixType, satelliteCount, latitude, longitude, height, speed, accuracy,
+  //                                                 motorTemperature, mcuTemperature, current, inputVoltage,
+  //                                                 currentPosition, currentDesiredPosition, currentVelocity, currentSupplyPosition, voltage);
+  //
 
   const auto &logPacket = MsgPacketizer::encode(0x0A,
-                                                  ident, millis(), flightTime.get(), flightMode.currentNumber(), logger.getUsage(),
-                                                  flightPin.isOpen(), buzzer.isOn(), sn3.isOn(), sn4.isOn(),
-                                                  isFalling, altitude, isLaunchMode, forceX_N, jerkX_mps3,
-                                                  gnssIsAvailable, unixEpoch, isFixed, fixType, satelliteCount, latitude, longitude, accuracy,
-                                                  motorTemperature, mcuTemperature, current, inputVoltage,
-                                                  currentPosition, currentDesiredPosition, currentVelocity, currentSupplyPosition, voltage);
+                                                ident,
+                                                millis(),
+                                                flightTime.get(),
+                                                flightMode.currentNumber(),
+                                                logger.getUsage(),
+                                                flightPin.isOpen(),
+                                                buzzer.isOn(),
+                                                sn3.isOn(),
+                                                sn4.isOn(),
+                                                isFalling,
+                                                altitude,
+                                                isLaunchMode,
+                                                forceX_N,
+                                                jerkX_mps3,
+                                                gnssIsAvailable,
+                                                unixEpoch,
+                                                isFixed,
+                                                fixType,
+                                                satelliteCount,
+                                                latitude,
+                                                longitude,
+                                                height,
+                                                speed,
+                                                accuracy,
+                                                motorTemperature,
+                                                mcuTemperature,
+                                                current,
+                                                inputVoltage,
+                                                currentPosition,
+                                                currentDesiredPosition,
+                                                currentVelocity,
+                                                motorTemperature_SUPPLY,
+                                                mcuTemperature_SUPPLY,
+                                                current_SUPPLY,
+                                                inputVoltage_SUPPLY,
+                                                currentPosition_SUPPLY,
+                                                currentDesiredPosition_SUPPLY,
+                                                currentVelocity_SUPPLY);
 
   if (doLogging)
   {
@@ -331,8 +364,8 @@ void task2Hz()
                                                       static_cast<uint8_t>(satelliteCount),
                                                       static_cast<float>(latitude),
                                                       static_cast<float>(longitude),
-                                                      // static_cast<int16_t>(height * 10),
-                                                      // static_cast<int16_t>(speed * 10),
+                                                      static_cast<int16_t>(height * 10),
+                                                      static_cast<int16_t>(speed * 10),
                                                       static_cast<uint16_t>(accuracy * 10),
                                                       static_cast<int16_t>(motorTemperature * 100),
                                                       static_cast<int16_t>(mcuTemperature * 100),
@@ -340,14 +373,15 @@ void task2Hz()
                                                       static_cast<int16_t>(currentPosition * 100),
                                                       static_cast<int16_t>(currentDesiredPosition * 100),
                                                       static_cast<int16_t>(currentVelocity * 100),
-                                                      static_cast<int16_t>(currentSupplyPosition * 100),
-                                                      static_cast<int16_t>(voltage * 100),
+                                                      static_cast<int16_t>(motorTemperature_SUPPLY * 100),
+                                                      static_cast<int16_t>(mcuTemperature_SUPPLY * 100),
+                                                      static_cast<int16_t>(current_SUPPLY * 100),
+                                                      static_cast<int16_t>(inputVoltage_SUPPLY * 100),
                                                       static_cast<uint16_t>(flightTime.SEPARATION_1_PROTECTION_TIME),
                                                       static_cast<uint16_t>(flightTime.SEPARATION_1_FORCE_TIME),
                                                       static_cast<uint16_t>(flightTime.SEPARATION_2_PROTECTION_TIME),
                                                       static_cast<uint16_t>(flightTime.SEPARATION_2_FORCE_TIME),
-                                                      static_cast<uint16_t>(flightTime.LANDING_TIME)
-                                                      );
+                                                      static_cast<uint16_t>(flightTime.LANDING_TIME));
 
   telemeter.reserveData(telemetryPacket.data.data(), telemetryPacket.data.size());
   telemeter.sendReservedData();
@@ -375,12 +409,9 @@ void setup()
   telemeter.initialize(925.6E6, 500E3);
 
   gnss.begin();
-  Serial.println(" logger clearing...");
-  logger.clear();
-  Serial.println(" logger cleared");
 
   setTimer(
-      20000,  // SEPARATION_1_PROTECTION_TIME
+      20000, // SEPARATION_1_PROTECTION_TIME
       21000, // SEPARATION_1_FORCE_TIME
       50000, // SEPARATION_2_PROTECTION_TIME // 18382
       51000, // SEPARATION_2_FORCE_TIME // 19382
@@ -495,9 +526,17 @@ void loop()
 
     case Var::Label::VALVE_DATA_PART_3:
     {
-      can.receiveValveDataPart3(&currentSupplyPosition, &voltage);
+      can.receiveValveDataPart3(&motorTemperature_SUPPLY, &mcuTemperature_SUPPLY, &current_SUPPLY, &inputVoltage_SUPPLY);
       ledCanRx.toggle();
-      
+
+      break;
+    }
+
+    case Var::Label::VALVE_DATA_PART_4:
+    {
+      can.receiveValveDataPart4(&currentPosition_SUPPLY, &currentDesiredPosition_SUPPLY, &currentVelocity_SUPPLY);
+      ledCanRx.toggle();
+
       break;
     }
     }
