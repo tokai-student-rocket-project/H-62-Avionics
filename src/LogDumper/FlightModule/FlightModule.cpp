@@ -79,6 +79,10 @@ void printHeader()
   Serial.print(",");
   Serial.print("longitude");
   Serial.print(",");
+  Serial.print("height");
+  Serial.print(",");
+  Serial.print("speed");
+  Serial.print(",");
   Serial.print("accuracy");
   Serial.print(",");
 
@@ -96,9 +100,19 @@ void printHeader()
   Serial.print(",");
   Serial.print("currentVelocity");
   Serial.print(",");
-  Serial.print("currentSupplyPosition");
+  Serial.print("motorTemperature_SUPPLY");
   Serial.print(",");
-  Serial.print("voltage");
+  Serial.print("mcuTemperature_SUPPLY");
+  Serial.print(",");
+  Serial.print("current_SUPPLY");
+  Serial.print(",");
+  Serial.print("inputVoltage_SUPPLY");
+  Serial.print(",");
+  Serial.print("currentPosition_SUPPLY");
+  Serial.print(",");
+  Serial.print("currentDesiredPosition_SUPPLY");
+  Serial.print(",");
+  Serial.print("currentVelocity_SUPPLY");
   Serial.print("\n");
 }
 
@@ -108,48 +122,124 @@ void setup()
   SPI.begin();
 
   MsgPacketizer::subscribe_manual(0x0A,
-                                  [&](char ident, uint32_t millis, uint32_t flightTime, uint8_t flightMode, float loggerUsage,
-                                      bool flightPinIsOpen, bool buzzerIsOn, bool sn3IsOn, bool sn4IsOn,
-                                      bool isFalling, float altitude, bool isLaunchMode, float forceX_N, float jerkX_mps3,
-                                      bool gnssIsAvailable, uint32_t unixEpoch, bool isFixed, uint8_t fixType, uint8_t satelliteCount, float latitude, float longitude, float accuracy,
-                                      float motorTemperature, float mcuTemperature, float current, float inputVoltage,
-                                      float currentPosition, float currentDesiredPosition, float currentVelocity, float currentSupplyPosition, float voltage)
+                                  [&](char ident,
+                                      uint32_t millis,
+                                      uint32_t flightTime,
+                                      uint8_t flightMode,
+                                      float loggerUsage,
+                                      bool flightPinIsOpen,
+                                      bool buzzerIsOn,
+                                      bool sn3IsOn,
+                                      bool sn4IsOn,
+                                      bool isFalling,
+                                      float altitude,
+                                      bool isLaunchMode,
+                                      float forceX_N,
+                                      float jerkX_mps3,
+                                      bool gnssIsAvailable,
+                                      uint32_t unixEpoch,
+                                      bool isFixed,
+                                      uint8_t fixType,
+                                      uint8_t satelliteCount,
+                                      float latitude,
+                                      float longitude,
+                                      float height,
+                                      float speed,
+                                      float accuracy,
+                                      float motorTemperature,
+                                      float mcuTemperature,
+                                      float current,
+                                      float inputVoltage,
+                                      float currentPosition,
+                                      float currentDesiredPosition,
+                                      float currentVelocity,
+                                      float motorTemperature_SUPPLY,
+                                      float mcuTemperature_SUPPLY,
+                                      float current_SUPPLY,
+                                      float inputVoltage_SUPPLY,
+                                      float currentPosition_SUPPLY,
+                                      float currentDesiredPosition_SUPPLY,
+                                      float currentVelocity_SUPPLY)
                                   {
-                                    Serial.print(ident); Serial.print(",");
-                                    Serial.print(millis); Serial.print(",");
-                                    Serial.print(flightTime); Serial.print(",");
-                                    Serial.print(flightMode); Serial.print(",");
-                                    Serial.print(loggerUsage); Serial.print(",");
+                                    Serial.print(ident);
+                                    Serial.print(",");
+                                    Serial.print(millis);
+                                    Serial.print(",");
+                                    Serial.print(flightTime);
+                                    Serial.print(",");
+                                    Serial.print(flightMode);
+                                    Serial.print(",");
+                                    Serial.print(loggerUsage);
+                                    Serial.print(",");
 
-                                    Serial.print(flightPinIsOpen); Serial.print(",");
-                                    Serial.print(buzzerIsOn); Serial.print(",");
-                                    Serial.print(sn3IsOn); Serial.print(",");
-                                    Serial.print(sn4IsOn); Serial.print(",");
+                                    Serial.print(flightPinIsOpen);
+                                    Serial.print(",");
+                                    Serial.print(buzzerIsOn);
+                                    Serial.print(",");
+                                    Serial.print(sn3IsOn);
+                                    Serial.print(",");
+                                    Serial.print(sn4IsOn);
+                                    Serial.print(",");
 
-                                    Serial.print(isFalling); Serial.print(",");
-                                    Serial.print(altitude); Serial.print(",");
-                                    Serial.print(isLaunchMode); Serial.print(",");
-                                    Serial.print(forceX_N); Serial.print(",");
-                                    Serial.print(jerkX_mps3); Serial.print(",");
+                                    Serial.print(isFalling);
+                                    Serial.print(",");
+                                    Serial.print(altitude);
+                                    Serial.print(",");
+                                    Serial.print(isLaunchMode);
+                                    Serial.print(",");
+                                    Serial.print(forceX_N);
+                                    Serial.print(",");
+                                    Serial.print(jerkX_mps3);
+                                    Serial.print(",");
 
-                                    Serial.print(gnssIsAvailable); Serial.print(",");
-                                    Serial.print(unixEpoch); Serial.print(",");
-                                    Serial.print(isFixed); Serial.print(",");
-                                    Serial.print(fixType); Serial.print(",");
-                                    Serial.print(satelliteCount); Serial.print(",");
-                                    Serial.print(latitude, 8); Serial.print(",");
-                                    Serial.print(longitude, 8); Serial.print(",");
-                                    Serial.print(accuracy); Serial.print(",");
+                                    Serial.print(gnssIsAvailable);
+                                    Serial.print(",");
+                                    Serial.print(unixEpoch);
+                                    Serial.print(",");
+                                    Serial.print(isFixed);
+                                    Serial.print(",");
+                                    Serial.print(fixType);
+                                    Serial.print(",");
+                                    Serial.print(satelliteCount);
+                                    Serial.print(",");
+                                    Serial.print(latitude, 8);
+                                    Serial.print(",");
+                                    Serial.print(longitude, 8);
+                                    Serial.print(",");
+                                    Serial.print(height);
+                                    Serial.print(",");
+                                    Serial.print(speed);
+                                    Serial.print(",");
+                                    Serial.print(accuracy);
+                                    Serial.print(",");
 
-                                    Serial.print(motorTemperature); Serial.print(",");
-                                    Serial.print(mcuTemperature); Serial.print(",");
-                                    Serial.print(current); Serial.print(",");
-                                    Serial.print(inputVoltage); Serial.print(",");
-                                    Serial.print(currentPosition); Serial.print(",");
-                                    Serial.print(currentDesiredPosition); Serial.print(",");
-                                    Serial.print(currentVelocity); Serial.print(", ");
-                                    Serial.print(currentSupplyPosition); Serial.print(", ");
-                                    Serial.print(voltage); Serial.print(", ");
+                                    Serial.print(motorTemperature);
+                                    Serial.print(",");
+                                    Serial.print(mcuTemperature);
+                                    Serial.print(",");
+                                    Serial.print(current);
+                                    Serial.print(",");
+                                    Serial.print(inputVoltage);
+                                    Serial.print(",");
+                                    Serial.print(currentPosition);
+                                    Serial.print(",");
+                                    Serial.print(currentDesiredPosition);
+                                    Serial.print(",");
+                                    Serial.print(currentVelocity);
+                                    Serial.print(", ");
+                                    Serial.print(motorTemperature_SUPPLY);
+                                    Serial.print(",");
+                                    Serial.print(mcuTemperature_SUPPLY);
+                                    Serial.print(",");
+                                    Serial.print(current_SUPPLY);
+                                    Serial.print(",");
+                                    Serial.print(inputVoltage_SUPPLY);
+                                    Serial.print(",");
+                                    Serial.print(currentPosition_SUPPLY);
+                                    Serial.print(",");
+                                    Serial.print(currentDesiredPosition_SUPPLY);
+                                    Serial.print(",");
+                                    Serial.print(currentVelocity_SUPPLY);
                                     Serial.print("\n");
                                   });
 
