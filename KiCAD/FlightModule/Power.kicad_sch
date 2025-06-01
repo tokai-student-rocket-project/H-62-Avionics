@@ -2254,7 +2254,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://akizukidenshi.com/catalog/g/g114450/"
 			(at 44.45 67.31 0)
 			(effects
 				(font
@@ -2324,7 +2324,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://akizukidenshi.com/catalog/g/gI-03978/"
+		(property "Datasheet" "https://akizukidenshi.com/catalog/g/gI-06417/"
 			(at 138.43 60.96 90)
 			(effects
 				(font

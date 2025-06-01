@@ -3997,7 +3997,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://www.chip1stop.com/view/dispDetail/DispDetail?partId=ROHM-0040161"
+		(property "Datasheet" "https://akizukidenshi.com/catalog/g/gI-03978/"
 			(at 149.86 137.16 0)
 			(effects
 				(font
@@ -4334,7 +4334,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.ramxeed.com/jp/home/wp-content/uploads/2024/12/MB85RQ8MX-DS1v1-J.pdf"
 			(at 219.71 49.276 0)
 			(effects
 				(font
@@ -4666,7 +4666,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://akizukidenshi.com/catalog/g/gP-16143/"
 			(at 48.26 36.83 0)
 			(effects
 				(font
@@ -4736,7 +4736,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.ramxeed.com/jp/home/wp-content/uploads/2024/12/MB85RQ8MX-DS1v1-J.pdf"
 			(at 41.91 49.276 0)
 			(effects
 				(font
@@ -4866,7 +4866,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.ramxeed.com/jp/home/wp-content/uploads/2024/12/MB85RQ8MX-DS1v1-J.pdf"
 			(at 130.81 49.276 0)
 			(effects
 				(font
@@ -5267,7 +5267,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://akizukidenshi.com/catalog/g/gP-16143/"
 			(at 226.06 36.83 0)
 			(effects
 				(font
@@ -5406,7 +5406,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://akizukidenshi.com/catalog/g/gP-16143/"
 			(at 137.16 36.83 0)
 			(effects
 				(font

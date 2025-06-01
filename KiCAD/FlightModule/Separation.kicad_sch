@@ -2764,7 +2764,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://akizukidenshi.com/catalog/g/gI-06014/"
+		(property "Datasheet" "https://akizukidenshi.com/catalog/g/g106014/"
 			(at 66.04 45.72 90)
 			(effects
 				(font
@@ -2920,7 +2920,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://akizukidenshi.com/catalog/g/gI-06014/"
+		(property "Datasheet" "https://akizukidenshi.com/catalog/g/g106014/"
 			(at 67.31 121.92 90)
 			(effects
 				(font

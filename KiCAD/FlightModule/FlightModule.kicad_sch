@@ -1111,27 +1111,23 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Mechanical:MountingHole_Pad"
-			(pin_numbers
-				(hide yes)
-			)
+		(symbol "Mechanical:MountingHole"
 			(pin_names
 				(offset 1.016)
-				(hide yes)
 			)
 			(exclude_from_sim yes)
 			(in_bom no)
 			(on_board yes)
 			(property "Reference" "H"
-				(at 0 6.35 0)
+				(at 0 5.08 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
 				)
 			)
-			(property "Value" "MountingHole_Pad"
-				(at 0 4.445 0)
+			(property "Value" "MountingHole"
+				(at 0 3.175 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -1156,7 +1152,7 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "Mounting Hole with connection"
+			(property "Description" "Mounting Hole without connection"
 				(at 0 0 0)
 				(effects
 					(font
@@ -1174,7 +1170,7 @@
 					(hide yes)
 				)
 			)
-			(property "ki_fp_filters" "MountingHole*Pad*"
+			(property "ki_fp_filters" "MountingHole*"
 				(at 0 0 0)
 				(effects
 					(font
@@ -1183,9 +1179,9 @@
 					(hide yes)
 				)
 			)
-			(symbol "MountingHole_Pad_0_1"
+			(symbol "MountingHole_0_1"
 				(circle
-					(center 0 1.27)
+					(center 0 0)
 					(radius 1.27)
 					(stroke
 						(width 1.27)
@@ -1193,26 +1189,6 @@
 					)
 					(fill
 						(type none)
-					)
-				)
-			)
-			(symbol "MountingHole_Pad_1_1"
-				(pin input line
-					(at 0 -2.54 90)
-					(length 2.54)
-					(name "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
 					)
 				)
 			)
@@ -1581,7 +1557,7 @@
 	)
 	(rectangle
 		(start 106.68 119.38)
-		(end 213.36 138.43)
+		(end 213.36 132.08)
 		(stroke
 			(width 0)
 			(type default)
@@ -1602,6 +1578,36 @@
 			(type none)
 		)
 		(uuid bdd80953-38ac-4b88-99b7-991df124d526)
+	)
+	(text "付属品"
+		(exclude_from_sim no)
+		(at 143.002 83.82 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "cf21b127-9541-4f73-80b9-98fde3cdffbc")
+	)
+	(text_box "GSMダイポールアンテナ(Arduino MKR WAN用アンテナ)"
+		(exclude_from_sim no)
+		(at 139.7 85.09 0)
+		(size 50.8 8.89)
+		(margins 0.9525 0.9525 0.9525 0.9525)
+		(stroke
+			(width 0)
+			(type solid)
+		)
+		(fill
+			(type none)
+		)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(href "https://akizukidenshi.com/catalog/g/g116733")
+		)
+		(uuid "008aff3e-ccfc-4db5-98ad-45b205a1430d")
 	)
 	(text_box "Mount"
 		(exclude_from_sim no)
@@ -1670,34 +1676,16 @@
 		(uuid "12da4b7a-6925-4429-ab63-996a47ceecc8")
 	)
 	(junction
-		(at 114.3 129.54)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "591f393f-c6fa-410c-a2a4-9978a3289e1f")
-	)
-	(junction
 		(at 144.78 54.61)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "611f4c38-bda6-4a63-ac36-e5a7467b5adc")
 	)
 	(junction
-		(at 162.56 129.54)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "7e8a28d3-f111-45f7-a688-ab3737567968")
-	)
-	(junction
 		(at 184.15 67.31)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "81b96337-4fc2-4ba3-a361-98919173c1c8")
-	)
-	(junction
-		(at 139.7 129.54)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "8a749689-d297-4149-aa3f-645df5995722")
 	)
 	(junction
 		(at 172.72 69.85)
@@ -1732,16 +1720,6 @@
 	(no_connect
 		(at 118.11 80.01)
 		(uuid "9eb1f038-5251-47fd-820e-196da36025d7")
-	)
-	(wire
-		(pts
-			(xy 114.3 128.27) (xy 114.3 129.54)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "03a49bd2-e677-422b-a932-1a2fcc93726b")
 	)
 	(wire
 		(pts
@@ -1795,16 +1773,6 @@
 	)
 	(wire
 		(pts
-			(xy 139.7 128.27) (xy 139.7 129.54)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "299e863f-5493-4cf0-be6a-b057499e03e4")
-	)
-	(wire
-		(pts
 			(xy 63.5 153.67) (xy 63.5 156.21)
 		)
 		(stroke
@@ -1812,16 +1780,6 @@
 			(type default)
 		)
 		(uuid "2bbfa696-f338-4a35-83a6-2c5f3559131d")
-	)
-	(wire
-		(pts
-			(xy 189.23 129.54) (xy 162.56 129.54)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2cbd03c1-1ccd-485b-9b14-afff74f01398")
 	)
 	(wire
 		(pts
@@ -1975,16 +1933,6 @@
 	)
 	(wire
 		(pts
-			(xy 114.3 129.54) (xy 114.3 130.81)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "8e2500db-b22b-4515-b65b-275bc581baae")
-	)
-	(wire
-		(pts
 			(xy 50.8 161.29) (xy 50.8 163.83)
 		)
 		(stroke
@@ -1992,16 +1940,6 @@
 			(type default)
 		)
 		(uuid "961cc94e-a9b2-4e14-a370-ed1b654f7b57")
-	)
-	(wire
-		(pts
-			(xy 162.56 128.27) (xy 162.56 129.54)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "96fcd0e2-0e81-4124-b104-32005dea2bb7")
 	)
 	(wire
 		(pts
@@ -2085,16 +2023,6 @@
 	)
 	(wire
 		(pts
-			(xy 189.23 128.27) (xy 189.23 129.54)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b2c5c74e-4ac5-4114-89ca-334ca225a44e")
-	)
-	(wire
-		(pts
 			(xy 184.15 58.42) (xy 184.15 59.69)
 		)
 		(stroke
@@ -2102,26 +2030,6 @@
 			(type default)
 		)
 		(uuid "b65b7494-fef2-4879-ae38-cde783df0646")
-	)
-	(wire
-		(pts
-			(xy 139.7 129.54) (xy 114.3 129.54)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "bc4bb940-7af8-4228-bec3-14e927c3d8ab")
-	)
-	(wire
-		(pts
-			(xy 162.56 129.54) (xy 139.7 129.54)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "be57c6fc-8695-4636-97ae-26531f382a58")
 	)
 	(wire
 		(pts
@@ -3111,7 +3019,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Mechanical:MountingHole_Pad")
+		(lib_id "Mechanical:MountingHole")
 		(at 189.23 125.73 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -3121,7 +3029,7 @@
 		(fields_autoplaced yes)
 		(uuid "203d555c-8021-4135-91c7-b81f072bc01c")
 		(property "Reference" "H4"
-			(at 191.77 123.1899 0)
+			(at 191.77 124.4599 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3130,7 +3038,7 @@
 			)
 		)
 		(property "Value" "MountingHole_Pad"
-			(at 191.77 125.7299 0)
+			(at 191.77 126.9999 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3156,7 +3064,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Mounting Hole with connection"
+		(property "Description" "Mounting Hole without connection"
 			(at 189.23 125.73 0)
 			(effects
 				(font
@@ -3164,9 +3072,6 @@
 				)
 				(hide yes)
 			)
-		)
-		(pin "1"
-			(uuid "9d81f235-fec1-455b-9ecd-1efaf3ec0cbc")
 		)
 		(instances
 			(project "FlightModule"
@@ -3448,7 +3353,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Mechanical:MountingHole_Pad")
+		(lib_id "Mechanical:MountingHole")
 		(at 162.56 125.73 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -3458,7 +3363,7 @@
 		(fields_autoplaced yes)
 		(uuid "3f6ea9e5-a782-44fd-84d1-d9f3e4f8b56d")
 		(property "Reference" "H3"
-			(at 165.1 123.1899 0)
+			(at 165.1 124.4599 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3467,7 +3372,7 @@
 			)
 		)
 		(property "Value" "MountingHole_Pad"
-			(at 165.1 125.7299 0)
+			(at 165.1 126.9999 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3493,7 +3398,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Mounting Hole with connection"
+		(property "Description" "Mounting Hole without connection"
 			(at 162.56 125.73 0)
 			(effects
 				(font
@@ -3501,9 +3406,6 @@
 				)
 				(hide yes)
 			)
-		)
-		(pin "1"
-			(uuid "d47221a8-3925-463e-abb1-0e7e8fe2649d")
 		)
 		(instances
 			(project "FlightModule"
@@ -3651,7 +3553,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Mechanical:MountingHole_Pad")
+		(lib_id "Mechanical:MountingHole")
 		(at 139.7 125.73 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -3661,7 +3563,7 @@
 		(fields_autoplaced yes)
 		(uuid "4d424a5e-406e-4a3c-8b6e-924a849f560e")
 		(property "Reference" "H2"
-			(at 142.24 123.1899 0)
+			(at 142.24 124.4599 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3670,7 +3572,7 @@
 			)
 		)
 		(property "Value" "MountingHole_Pad"
-			(at 142.24 125.7299 0)
+			(at 142.24 126.9999 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3696,7 +3598,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Mounting Hole with connection"
+		(property "Description" "Mounting Hole without connection"
 			(at 139.7 125.73 0)
 			(effects
 				(font
@@ -3704,9 +3606,6 @@
 				)
 				(hide yes)
 			)
-		)
-		(pin "1"
-			(uuid "f675b7a9-786c-44d4-8d79-eca8b53a64eb")
 		)
 		(instances
 			(project "FlightModule"
@@ -3842,71 +3741,6 @@
 			(project "FlightModule"
 				(path "/3507137a-fdd7-4bc0-abe8-370b7c3b390e"
 					(reference "#PWR03")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 114.3 130.81 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "72c84d72-a5bb-406a-b6f3-80308653425c")
-		(property "Reference" "#PWR053"
-			(at 114.3 137.16 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 114.3 135.89 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 114.3 130.81 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 114.3 130.81 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 114.3 130.81 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "04cd28ad-5ec5-4b67-a527-c7f7a4e29b00")
-		)
-		(instances
-			(project "FlightModule"
-				(path "/3507137a-fdd7-4bc0-abe8-370b7c3b390e"
-					(reference "#PWR053")
 					(unit 1)
 				)
 			)
@@ -4182,7 +4016,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Mechanical:MountingHole_Pad")
+		(lib_id "Mechanical:MountingHole")
 		(at 114.3 125.73 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -4192,7 +4026,7 @@
 		(fields_autoplaced yes)
 		(uuid "9cc16b06-908f-4473-a5b5-b176ac379115")
 		(property "Reference" "H1"
-			(at 116.84 123.1899 0)
+			(at 116.84 124.4599 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4201,7 +4035,7 @@
 			)
 		)
 		(property "Value" "MountingHole_Pad"
-			(at 116.84 125.7299 0)
+			(at 116.84 126.9999 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4227,7 +4061,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Mounting Hole with connection"
+		(property "Description" "Mounting Hole without connection"
 			(at 114.3 125.73 0)
 			(effects
 				(font
@@ -4235,9 +4069,6 @@
 				)
 				(hide yes)
 			)
-		)
-		(pin "1"
-			(uuid "9760a72e-38b1-4bfb-8428-3d6f1e082a13")
 		)
 		(instances
 			(project ""
@@ -4552,7 +4383,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://akizukidenshi.com/catalog/g/g116557/"
 			(at 85.09 64.77 0)
 			(effects
 				(font
