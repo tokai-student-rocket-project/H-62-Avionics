@@ -9,11 +9,11 @@
 #include "Lib_FlightMode.hpp"
 #include "Lib_CountDetector.hpp"
 #include "Lib_B3MSC1170A.hpp"
-#include "Lib_Logger2.hpp"
+#include "Lib_Logger1.hpp"
 #include "Lib_Neopixel.hpp"
 
 char ident = '\0';
-bool doLogging = false;
+bool doLogging = true;
 uint8_t flightMode = 0;
 uint16_t flightTime = 0;
 
@@ -23,7 +23,7 @@ const uint8_t blueled = 25;  // GPIO25 // OK
 Neopixel Status(12);         // OK
 
 CAN can(26);
-Logger logger(28, 29);
+Logger logger(28);
 
 B3MSC1170A supplyValve;
 void openSupplyValve()
@@ -88,9 +88,13 @@ uint32_t retryCount = 0;
 uint32_t lastSendTime = 0;
 bool isVerified = true;
 
-// float motorTemperature, mcuTemperature, current, inputVoltage;
-// float currentPosition, currentDesiredPosition, currentVelocity;
-// float currentSupplyPosition, voltage;
+int16_t motorTemperature;
+int16_t mcuTemperature;
+int16_t current;
+int16_t inputVoltage;
+int16_t currentPosition;
+int16_t currentDesiredPosition;
+int16_t currentVelocity;
 
 void verifyValve()
 {
@@ -211,18 +215,18 @@ void syncFlightMode()
     case Var::Label::FLIGHT_DATA:
     {
       bool newDoLogging;
-      can.receiveFlight(&flightMode, &flightTime, &newDoLogging, &ident);
       digitalWrite(blueled, !digitalRead(blueled));
+      can.receiveFlight(&flightMode, &flightTime, &newDoLogging, &ident);
 
-      if (doLogging != newDoLogging)
-      {
-        doLogging = newDoLogging;
+      // if (doLogging != newDoLogging)
+      // {
+      //   doLogging = newDoLogging;
 
-        if (doLogging)
-        {
-          logger.reset();
-        }
-      }
+      //   if (doLogging)
+      //   {
+      //     logger.reset();
+      //   }
+      // }
 
       switch (flightMode)
       {
@@ -248,9 +252,10 @@ void syncFlightMode()
         {
           changeMode(Var::ValveMode::WAITING);
         }
+
         // verifyValve();
-        digitalWrite(redled, LOW);
-        digitalWrite(greenled, LOW);
+        digitalWrite(redled, HIGH);
+        digitalWrite(greenled, HIGH);
         Serial.println("STANDBY");
         break;
       }
@@ -314,7 +319,7 @@ void syncFlightMode()
       case (6): // MAIN_CHUTE_DESCENT
       {
         closeSupplyValve();
-        closeMainValve();
+        closeMainValveToFlight();
         Serial.println("MAIN_CHUTE_DESCENT");
         break;
       }
@@ -327,7 +332,8 @@ void syncFlightMode()
 
       case (8): // SHUTDOWN
       {
-        mainValve.torqueOff(0x01);
+        supplyValve.torqueOff(0x01);
+        mainValve.torqueOff(0x02);
         Status.noticedBlue();
         Serial.println("SHUTDOWN");
         break;
@@ -342,56 +348,56 @@ void syncFlightMode()
 void sendValveMode()
 {
   can.sendValveMode(currentValveMode == Var::ValveMode::LAUNCH);
+  digitalWrite(greenled, !digitalRead(greenled));
+  // digitalWrite(greenled, HIGH);
 }
 
 void sendIgnition()
 {
   can.sendIgnition(currentGseSignal == Var::GseSignal::IGNITION_ON);
+  digitalWrite(redled, !digitalRead(redled));
+  // digitalWrite(redled, HIGH);
 }
 
-// void task10Hz()
-// {
-//   motorTemperature = mainValve.readMotorTemperature(0x02);
-//   mcuTemperature = mainValve.readMcuTemperature(0x02);
-//   current = mainValve.readCurrent(0x02);
-//   inputVoltage = mainValve.readVoltage(0x02);
-//   currentPosition = mainValve.readCurrentPosition(0x02);
-//   currentDesiredPosition = mainValve.readDesiredPosition(0x02);
-//   currentVelocity = mainValve.readCurrentVelosity(0x02);
+void task10Hz()
+{
+  motorTemperature = mainValve.readMotorTemperature(0x02);
+  mcuTemperature = mainValve.readMcuTemperature(0x02);
+  current = mainValve.readCurrent(0x02);
+  inputVoltage = mainValve.readVoltage(0x02);
+  currentPosition = mainValve.readCurrentPosition(0x02);
+  currentDesiredPosition = mainValve.readDesiredPosition(0x02);
+  currentVelocity = mainValve.readCurrentVelosity(0x02);
 
-//   const auto &logPacket = MsgPacketizer::encode(0x0A,
-//                                                 millis(),
-//                                                 motorTemperature,
-//                                                 mcuTemperature,
-//                                                 current,
-//                                                 inputVoltage,
-//                                                 currentPosition,
-//                                                 currentDesiredPosition,
-//                                                 currentVelocity);
+  const auto &logPacket = MsgPacketizer::encode(0x0A,
+                                                millis(),
+                                                motorTemperature,
+                                                mcuTemperature,
+                                                current,
+                                                inputVoltage,
+                                                currentPosition,
+                                                currentDesiredPosition,
+                                                currentVelocity);
 
-//   if (doLogging)
-//   {
-//     // Serial.println("doLogging is TRUE, writing log...");
-//     logger.write(logPacket.data.data(), logPacket.data.size());
-//     // Serial.print("First byte: ");
-//     // Serial.println(logPacket.data[0], HEX);
-//     // Serial.print("Packet size: ");
-//     // Serial.println(logPacket.data.size());
-//     digitalWrite(redled, LOW);
-//   }
-//   ////////////////////////////////////////////////////
-//   // Serial.print("VALVE: ");
-//   // Serial.println(digitalRead(6) ? "ON" : "OFF");
-//   // Serial.print("IGN: ");
-//   // Serial.println(digitalRead(7) ? "ON" : "OFF");
-//   ////////////////////////////////////////////////////
-//   digitalWrite(redled, HIGH);
-//   digitalWrite(greenled, HIGH);
-// }
+  if (doLogging)
+  {
+    // Serial.println("doLogging is TRUE, writing log...");
+    logger.write(logPacket.data.data(), logPacket.data.size());
+    // Serial.print("First byte: ");
+    // Serial.println(logPacket.data[0], HEX);
+    // Serial.print("Packet size: ");
+    // Serial.println(logPacket.data.size());
+  }
+  ////////////////////////////////////////////////////
+  // Serial.print("VALVE: ");
+  // Serial.println(digitalRead(6) ? "ON" : "OFF");
+  // Serial.print("IGN: ");
+  // Serial.println(digitalRead(7) ? "ON" : "OFF");
+  ////////////////////////////////////////////////////
+}
 
 void sendValveData()
 {
-  digitalWrite(redled, HIGH);
   can.sendValveDataPart1(
       mainValve.readMotorTemperature(0x02),
       mainValve.readMcuTemperature(0x02),
@@ -428,13 +434,7 @@ void setup()
   pinMode(greenled, OUTPUT);
   pinMode(blueled, OUTPUT);
 
-  digitalWrite(redled, HIGH);   // RGB LED OFF
-  digitalWrite(greenled, HIGH); // RGB LED OFF
-  digitalWrite(blueled, HIGH);  // RGB LED OFF
-
   Status.init(11);
-
-  // logger.reset();
 
   supplyValve.initialize(0x01);
   mainValve.initialize(0x02);
@@ -445,17 +445,11 @@ void setup()
   Tasks.add(&syncFlightMode)->startFps(200);
   Tasks.add(&sendValveMode)->startFps(20);
   Tasks.add(&sendIgnition)->startFps(20);
-  Tasks.add(&sendValveData)->startFps(10);
-  // Tasks.add(&task10Hz)->startFps(10);
-
-  // Tasks.add("waterProofOn", [&]()
-  //           { closeMainValve(); });
-  // Tasks.add(&changeMode)->startFps(10);
-  // Tasks.add(&readData)->startFps(5);
+  Tasks.add(&sendValveData)->startFps(20);
+  Tasks.add(&task10Hz)->startFps(10);
 }
 
 void loop()
 {
   Tasks.update();
-  // logger.dump();
 }

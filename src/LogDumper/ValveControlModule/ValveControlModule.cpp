@@ -3,7 +3,6 @@
 #include "Lib_NeoPixel.hpp"
 
 FRAM fram0(28);
-FRAM fram1(29);
 
 const uint8_t redled = 17;   // GPIO17
 const uint8_t greenled = 16; // GPIO16
@@ -65,13 +64,13 @@ void setup()
 
   MsgPacketizer::subscribe_manual(0x0A,
                                   [&](uint32_t millis,
-                                      float motorTemperature,
-                                      float mcuTemperature,
-                                      float current,
-                                      float inputVoltage,
-                                      float currentPosition,
-                                      float currentDesiredPosition,
-                                      float currentVelocity)
+                                      int16_t motorTemperature,
+                                      int16_t mcuTemperature,
+                                      int16_t current,
+                                      int16_t inputVoltage,
+                                      int16_t currentPosition,
+                                      int16_t currentDesiredPosition,
+                                      int16_t currentVelocity)
                                   {
                                     Serial.print(millis);
                                     Serial.print(",");
@@ -106,7 +105,6 @@ void setup()
   digitalWrite(blueled, LOW);
 
   dump(&fram0);
-  dump(&fram1);
 
   digitalWrite(blueled, HIGH);
 }
