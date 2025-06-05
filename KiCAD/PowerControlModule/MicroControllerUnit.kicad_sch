@@ -893,6 +893,18 @@
 		(color 0 0 0 0)
 		(uuid "1b9d381d-3a18-4f0e-9e9a-5ed397a241b1")
 	)
+	(no_connect
+		(at 97.79 59.69)
+		(uuid "5552203c-4136-4558-ba4b-4b0c7a199505")
+	)
+	(no_connect
+		(at 97.79 48.26)
+		(uuid "638921e0-ca72-4549-8033-f18d7099e947")
+	)
+	(no_connect
+		(at 133.35 59.69)
+		(uuid "a70db741-582b-48f5-805c-d1a655810e38")
+	)
 	(wire
 		(pts
 			(xy 133.35 52.07) (xy 134.62 52.07)
@@ -1756,7 +1768,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://akizukidenshi.com/catalog/g/g117044/"
 			(at 100.33 31.75 0)
 			(effects
 				(font
