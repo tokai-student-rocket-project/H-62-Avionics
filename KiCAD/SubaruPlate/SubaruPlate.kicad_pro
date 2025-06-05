@@ -48,7 +48,7 @@
         "silk_text_thickness": 0.1,
         "silk_text_upright": false,
         "zones": {
-          "min_clearance": 0.5
+          "min_clearance": 0.3
         }
       },
       "diff_pair_dimensions": [],
@@ -931,24 +931,8 @@
       "Root"
     ],
     [
-      "44ad5b2d-22cb-4ed2-bb54-706dcaaae99f",
-      "CanInterface"
-    ],
-    [
-      "68138f6b-698e-4dab-8cce-76242e9c0eb0",
-      "MicroControllerUnit"
-    ],
-    [
       "5c73a0cd-a157-4ca7-894b-882ccf57262e",
       "Sensor"
-    ],
-    [
-      "5080f980-61f3-43e2-a69d-110d0de0a5b0",
-      "Power"
-    ],
-    [
-      "f7f44c04-947a-4937-9801-601d1f41f1cc",
-      "ServoMotor"
     ]
   ],
   "text_variables": {}
