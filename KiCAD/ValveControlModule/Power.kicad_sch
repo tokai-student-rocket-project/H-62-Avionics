@@ -144,7 +144,168 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Device:D"
+		(symbol "Device:C_Polarized"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0.254)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "C"
+				(at 0.635 2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Value" "C_Polarized"
+				(at 0.635 -2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Footprint" ""
+				(at 0.9652 -3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Polarized capacitor"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "cap capacitor"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "CP_*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "C_Polarized_0_1"
+				(rectangle
+					(start -2.286 0.508)
+					(end 2.286 1.016)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.778 2.286) (xy -0.762 2.286)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.27 2.794) (xy -1.27 1.778)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start 2.286 -0.508)
+					(end -2.286 -1.016)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+			)
+			(symbol "C_Polarized_1_1"
+				(pin passive line
+					(at 0 3.81 270)
+					(length 2.794)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -3.81 90)
+					(length 2.794)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "Device:D_Schottky"
 			(pin_numbers
 				(hide yes)
 			)
@@ -163,7 +324,7 @@
 					)
 				)
 			)
-			(property "Value" "D"
+			(property "Value" "D_Schottky"
 				(at 0 -2.54 0)
 				(effects
 					(font
@@ -189,7 +350,7 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "Diode"
+			(property "Description" "Schottky diode"
 				(at 0 0 0)
 				(effects
 					(font
@@ -198,25 +359,7 @@
 					(hide yes)
 				)
 			)
-			(property "Sim.Device" "D"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Sim.Pins" "1=K 2=A"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_keywords" "diode"
+			(property "ki_keywords" "diode Schottky"
 				(at 0 0 0)
 				(effects
 					(font
@@ -234,10 +377,10 @@
 					(hide yes)
 				)
 			)
-			(symbol "D_0_1"
+			(symbol "D_Schottky_0_1"
 				(polyline
 					(pts
-						(xy -1.27 1.27) (xy -1.27 -1.27)
+						(xy -1.905 0.635) (xy -1.905 1.27) (xy -1.27 1.27) (xy -1.27 -1.27) (xy -0.635 -1.27) (xy -0.635 -0.635)
 					)
 					(stroke
 						(width 0.254)
@@ -272,7 +415,7 @@
 					)
 				)
 			)
-			(symbol "D_1_1"
+			(symbol "D_Schottky_1_1"
 				(pin passive line
 					(at -3.81 0 0)
 					(length 2.54)
@@ -2637,16 +2780,6 @@
 	)
 	(wire
 		(pts
-			(xy 67.31 43.18) (xy 77.47 43.18)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "693efef7-3884-4316-9c0e-63a74b5174ee")
-	)
-	(wire
-		(pts
 			(xy 162.56 43.18) (xy 139.7 43.18)
 		)
 		(stroke
@@ -2954,6 +3087,16 @@
 			(type default)
 		)
 		(uuid "ec6bda69-2d81-420a-b726-b2cfe6766d27")
+	)
+	(wire
+		(pts
+			(xy 67.31 43.18) (xy 77.47 43.18)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ecf41c29-24e7-4486-8792-79f876c08f33")
 	)
 	(wire
 		(pts
@@ -4775,92 +4918,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:D")
-		(at 63.5 43.18 180)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "998173e8-7407-4908-b5cb-99701971e7be")
-		(property "Reference" "D5"
-			(at 63.5 36.83 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "GS1010FL"
-			(at 63.5 39.37 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Diode_SMD:D_SOD-123F"
-			(at 63.5 43.18 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://akizukidenshi.com/catalog/g/g106014/"
-			(at 63.5 43.18 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Diode"
-			(at 63.5 43.18 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Sim.Device" "D"
-			(at 63.5 43.18 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Sim.Pins" "1=K 2=A"
-			(at 63.5 43.18 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "a393280c-80a1-4aeb-9501-61e6ac4eb1cc")
-		)
-		(pin "2"
-			(uuid "ef6a4dff-a5cb-4f9b-a3e5-572387aba7db")
-		)
-		(instances
-			(project "ValveControlModule"
-				(path "/cd791ee8-0dde-470b-85a8-76474a846dd3/5c0153bc-724d-4d52-ad0e-0ba1914d580f"
-					(reference "D5")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:R")
 		(at 59.69 95.25 0)
 		(mirror y)
@@ -5129,8 +5186,8 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:C")
-		(at 48.26 54.61 180)
+		(lib_id "Device:C_Polarized")
+		(at 48.26 54.61 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -5139,25 +5196,25 @@
 		(fields_autoplaced yes)
 		(uuid "b5a70927-86c2-4735-a8c5-1f9b6e3df9e8")
 		(property "Reference" "C15"
-			(at 52.07 53.3399 0)
+			(at 52.07 52.4509 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify right)
+				(justify left)
 			)
 		)
 		(property "Value" "330uF"
-			(at 52.07 55.8799 0)
+			(at 52.07 54.9909 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify right)
+				(justify left)
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:CP_Elec_10x10"
-			(at 47.2948 50.8 0)
+			(at 49.2252 58.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5174,7 +5231,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Unpolarized capacitor"
+		(property "Description" "Polarized capacitor"
 			(at 48.26 54.61 0)
 			(effects
 				(font
@@ -5259,6 +5316,74 @@
 			(project "ValveControlModule"
 				(path "/cd791ee8-0dde-470b-85a8-76474a846dd3/5c0153bc-724d-4d52-ad0e-0ba1914d580f"
 					(reference "#PWR067")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:D_Schottky")
+		(at 63.5 43.18 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "d26603fb-7a7b-4d09-8cef-e6b058790f70")
+		(property "Reference" "D9"
+			(at 63.8175 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "SB34AFC"
+			(at 63.8175 39.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Diode_SMD:D_SMA_Handsoldering"
+			(at 63.5 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://akizukidenshi.com/catalog/g/g117502/"
+			(at 63.5 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Schottky diode"
+			(at 63.5 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "a4f9ebaf-a364-4f70-972b-e16ad86c931e")
+		)
+		(pin "2"
+			(uuid "b8f861dc-27c2-4a39-9f06-eb0b73665222")
+		)
+		(instances
+			(project "ValveControlModule"
+				(path "/cd791ee8-0dde-470b-85a8-76474a846dd3/5c0153bc-724d-4d52-ad0e-0ba1914d580f"
+					(reference "D9")
 					(unit 1)
 				)
 			)
