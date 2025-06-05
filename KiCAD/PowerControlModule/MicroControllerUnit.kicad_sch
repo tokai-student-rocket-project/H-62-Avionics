@@ -1073,6 +1073,28 @@
 		)
 		(uuid "fe1045fd-cee6-4447-bee3-0c28799ffada")
 	)
+	(global_label "VREF_T1"
+		(shape input)
+		(at 96.52 44.45 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "168e8279-7187-4ea4-9e3a-ff87dd8976c5")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 85.7939 44.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "SPI_MISO"
 		(shape input)
 		(at 134.62 52.07 0)
@@ -1205,28 +1227,6 @@
 			)
 		)
 	)
-	(global_label "GPU_ENSW"
-		(shape input)
-		(at 96.52 44.45 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "e3d4427a-8fc7-40cc-bfc5-89e114abee81")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 83.5563 44.45 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-				(hide yes)
-			)
-		)
-	)
 	(global_label "I2C_SCL"
 		(shape input)
 		(at 45.72 55.88 180)
@@ -1259,7 +1259,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "08fc12c1-63c5-481e-97ef-e6824bff88d4")
-		(property "Reference" "#PWR049"
+		(property "Reference" "#PWR01"
 			(at 52.07 45.72 0)
 			(effects
 				(font
@@ -1309,7 +1309,7 @@
 		(instances
 			(project "PowerControlModule"
 				(path "/cd54ca1c-60d1-49a2-85aa-1c2ce8b76912/b3d71d1b-7a87-43b2-b3d1-d977f5dcfe8c"
-					(reference "#PWR049")
+					(reference "#PWR01")
 					(unit 1)
 				)
 			)
@@ -1325,7 +1325,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "0de54073-a57d-4a64-8fba-f41f1cef06dc")
-		(property "Reference" "R23"
+		(property "Reference" "R2"
 			(at 66.04 45.7199 0)
 			(effects
 				(font
@@ -1379,7 +1379,7 @@
 		(instances
 			(project "PowerControlModule"
 				(path "/cd54ca1c-60d1-49a2-85aa-1c2ce8b76912/b3d71d1b-7a87-43b2-b3d1-d977f5dcfe8c"
-					(reference "R23")
+					(reference "R2")
 					(unit 1)
 				)
 			)
@@ -1395,7 +1395,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "582565f7-6a9b-4bb9-be5a-4a8c4dfd2b28")
-		(property "Reference" "#PWR03"
+		(property "Reference" "#PWR05"
 			(at 149.86 48.26 0)
 			(effects
 				(font
@@ -1445,7 +1445,7 @@
 		(instances
 			(project ""
 				(path "/cd54ca1c-60d1-49a2-85aa-1c2ce8b76912/b3d71d1b-7a87-43b2-b3d1-d977f5dcfe8c"
-					(reference "#PWR03")
+					(reference "#PWR05")
 					(unit 1)
 				)
 			)
@@ -1461,7 +1461,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "584748fb-2fc0-4354-89f2-fe9b476b6398")
-		(property "Reference" "#PWR02"
+		(property "Reference" "#PWR04"
 			(at 130.81 44.45 0)
 			(effects
 				(font
@@ -1512,7 +1512,7 @@
 		(instances
 			(project ""
 				(path "/cd54ca1c-60d1-49a2-85aa-1c2ce8b76912/b3d71d1b-7a87-43b2-b3d1-d977f5dcfe8c"
-					(reference "#PWR02")
+					(reference "#PWR04")
 					(unit 1)
 				)
 			)
@@ -1528,7 +1528,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "68ac3b7e-58b9-4e86-b934-88e9d18d09af")
-		(property "Reference" "R22"
+		(property "Reference" "R1"
 			(at 54.61 45.7199 0)
 			(effects
 				(font
@@ -1582,7 +1582,7 @@
 		(instances
 			(project ""
 				(path "/cd54ca1c-60d1-49a2-85aa-1c2ce8b76912/b3d71d1b-7a87-43b2-b3d1-d977f5dcfe8c"
-					(reference "R22")
+					(reference "R1")
 					(unit 1)
 				)
 			)
@@ -1598,7 +1598,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "aec7cf09-a168-4920-ba61-2e519f523553")
-		(property "Reference" "#PWR050"
+		(property "Reference" "#PWR02"
 			(at 63.5 45.72 0)
 			(effects
 				(font
@@ -1648,7 +1648,7 @@
 		(instances
 			(project "PowerControlModule"
 				(path "/cd54ca1c-60d1-49a2-85aa-1c2ce8b76912/b3d71d1b-7a87-43b2-b3d1-d977f5dcfe8c"
-					(reference "#PWR050")
+					(reference "#PWR02")
 					(unit 1)
 				)
 			)
@@ -1664,7 +1664,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "e2b7eadf-5269-4276-8a99-35d6e718b081")
-		(property "Reference" "#PWR01"
+		(property "Reference" "#PWR03"
 			(at 130.81 36.83 0)
 			(effects
 				(font
@@ -1715,7 +1715,7 @@
 		(instances
 			(project ""
 				(path "/cd54ca1c-60d1-49a2-85aa-1c2ce8b76912/b3d71d1b-7a87-43b2-b3d1-d977f5dcfe8c"
-					(reference "#PWR01")
+					(reference "#PWR03")
 					(unit 1)
 				)
 			)
