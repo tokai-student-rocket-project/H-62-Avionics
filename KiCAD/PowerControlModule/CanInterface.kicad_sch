@@ -4248,6 +4248,14 @@
 				(hide yes)
 			)
 		)
+		(property "Sim.Type" ""
+			(at 59.69 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "2"
 			(uuid "7bdc2623-d143-4b4d-bc33-b484536ca516")
 		)
@@ -4625,7 +4633,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Crystal:Crystal_SMD_HC49-SD"
+		(property "Footprint" "Crystal:Crystal_HC49-4H_Vertical"
 			(at 64.77 107.95 0)
 			(effects
 				(font
@@ -4634,7 +4642,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://akizukidenshi.com/catalog/g/gP-08667/"
+		(property "Datasheet" "https://akizukidenshi.com/catalog/g/g108667/"
 			(at 64.77 107.95 0)
 			(effects
 				(font
@@ -4650,6 +4658,14 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
+			)
+		)
+		(property "Sim.Type" ""
+			(at 64.77 107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(pin "1"
@@ -4788,6 +4804,14 @@
 				(hide yes)
 			)
 		)
+		(property "Sim.Type" ""
+			(at 129.54 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "2"
 			(uuid "04e9f4fe-6564-458e-b3a6-73a81ca87a06")
 		)
@@ -4859,6 +4883,14 @@
 				(hide yes)
 			)
 		)
+		(property "Sim.Type" ""
+			(at 69.85 114.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "27e78da5-a9be-43cc-a47f-d6b53fcd6e12")
 		)
@@ -4893,7 +4925,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "GS1010FL"
+		(property "Value" "SMAJ45A"
 			(at 138.43 134.6199 90)
 			(effects
 				(font
@@ -4902,7 +4934,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SOD-123"
+		(property "Footprint" "Diode_SMD:D_SMA"
 			(at 135.89 133.35 0)
 			(effects
 				(font
@@ -4911,7 +4943,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://akizukidenshi.com/catalog/g/g106014/"
+		(property "Datasheet" "https://akizukidenshi.com/catalog/g/g107409/"
 			(at 135.89 133.35 0)
 			(effects
 				(font
@@ -4945,6 +4977,14 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
+			)
+		)
+		(property "Sim.Type" ""
+			(at 135.89 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(pin "2"
@@ -5083,6 +5123,14 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
+			)
+		)
+		(property "Sim.Type" ""
+			(at 156.21 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(pin "6"
@@ -5370,6 +5418,14 @@
 				(hide yes)
 			)
 		)
+		(property "Sim.Type" ""
+			(at 149.86 59.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "5d07e56e-4e18-4268-a206-bef579f8e694")
 		)
@@ -5570,6 +5626,14 @@
 				(hide yes)
 			)
 		)
+		(property "Sim.Type" ""
+			(at 69.85 101.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "c47562a9-2d6e-4582-ab64-acfe127e3864")
 		)
@@ -5637,6 +5701,14 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
+			)
+		)
+		(property "Sim.Type" ""
+			(at 116.84 121.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(pin "6"
@@ -5727,6 +5799,14 @@
 				(hide yes)
 			)
 		)
+		(property "Sim.Type" ""
+			(at 119.38 41.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "e116f010-ba58-4fa0-a29f-0545f97b9a50")
 		)
@@ -5797,6 +5877,14 @@
 				(hide yes)
 			)
 		)
+		(property "Sim.Type" ""
+			(at 128.27 78.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "97e2b7a8-bb2f-49bf-9a13-c1038e366fd7")
 		)
@@ -5831,7 +5919,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "120"
+		(property "Value" "120R"
 			(at 194.31 73.6599 0)
 			(effects
 				(font
@@ -5865,6 +5953,14 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
+			)
+		)
+		(property "Sim.Type" ""
+			(at 191.77 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(pin "2"
@@ -5936,6 +6032,14 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
+			)
+		)
+		(property "Sim.Type" ""
+			(at 63.5 66.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(pin "15"
@@ -6151,7 +6255,7 @@
 				)
 			)
 		)
-		(property "Value" "10K"
+		(property "Value" "10kR"
 			(at 85.09 77.47 90)
 			(effects
 				(font
@@ -6184,6 +6288,14 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
+			)
+		)
+		(property "Sim.Type" ""
+			(at 85.09 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(pin "2"
@@ -6321,6 +6433,14 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
+			)
+		)
+		(property "Sim.Type" ""
+			(at 143.51 41.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(pin "1"
