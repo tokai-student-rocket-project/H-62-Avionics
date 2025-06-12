@@ -339,9 +339,9 @@ void task10Hz()
   can.sendFlight(flightMode.currentNumber(), flightTime.get(), doLogging, ident);
   ledCanTx.toggle();
 
-  // Serial.print(gnss.getLatitude(), 8);    // GNSSのテスト用
-  // Serial.print(",");                      // GNSSのテスト用
-  // Serial.println(gnss.getLongitude(), 8); // GNSSのテスト用
+  Serial.print(gnss.getLatitude(), 8);    // GNSSのテスト用
+  Serial.print(",");                      // GNSSのテスト用
+  Serial.println(gnss.getLongitude(), 8); // GNSSのテスト用
 }
 
 void task2Hz()
@@ -411,11 +411,11 @@ void setup()
   gnss.begin();
 
   setTimer(
-      20000, // SEPARATION_1_PROTECTION_TIME
-      21000, // SEPARATION_1_FORCE_TIME
-      50000, // SEPARATION_2_PROTECTION_TIME // 18382
-      51000, // SEPARATION_2_FORCE_TIME // 19382
-      90000  // LANDING_TIME
+      5000,  // SEPARATION_1_PROTECTION_TIME
+      10000, // SEPARATION_1_FORCE_TIME
+      15000, // SEPARATION_2_PROTECTION_TIME // 18382
+      20000, // SEPARATION_2_FORCE_TIME // 19382
+      25000  // LANDING_TIME
   );
 
   if (flightPin.isOpen())
