@@ -1,0 +1,5 @@
+﻿Designator,Footprint,Quantity,Value,LCSC Part #
+C1,0603,1,0.1uF,
+"J1, J2",PinHeader_1x08_P2.54mm_Vertical,2,Conn_01x08,
+R1,0603,1,4.7kR,
+U1,SOIC-16W_7.5x10.3mm_P1.27mm,1,MB85RQ8MX,
