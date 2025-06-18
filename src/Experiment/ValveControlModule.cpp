@@ -21,21 +21,21 @@ Neopixel Status(12);         // OK
 B3MSC1170A mainValve;
 void closeMainValve()
 {
-    mainValve.setPosition(0x01, 500, 0);
+    mainValve.setPosition(0x01, -6000, 0);
     int16_t mainValveCurrentPossition = mainValve.readCurrentPosition(0x01);
-    if (mainValveCurrentPossition < 400 || mainValveCurrentPossition > 600)
-    {
-        mainValve.setPosition(0x01, 500, 0);
-    }
+    // if (mainValveCurrentPossition < -5000 || mainValveCurrentPossition > -6000)
+    // {
+    mainValve.setPosition(0x01, -6000, 0);
+    // }
 }
 void openMainValve()
 {
-    mainValve.setPosition(0x01, -5500, 0);
+    mainValve.setPosition(0x01, 1000, 0);
     int16_t mainValveCurrentPossition = mainValve.readCurrentPosition(0x01);
-    if (mainValveCurrentPossition < -5600 || mainValveCurrentPossition > -5400)
-    {
-        mainValve.setPosition(0x01, -5500, 0);
-    }
+    // if (mainValveCurrentPossition < -500 || mainValveCurrentPossition > 500)
+    // {
+    mainValve.setPosition(0x01, 1000, 0);
+    // }
 }
 void closeMainValveToFlight()
 {
@@ -51,20 +51,20 @@ void closeMainValveToFlight()
 B3MSC1170A supplyValve;
 void openSupplyValve()
 {
-    supplyValve.setPosition(0x02, -9000, 0);
+    supplyValve.setPosition(0x02, 0, 0);
     int16_t supplyValveCurrentPossition = supplyValve.readCurrentPosition(0x02);
-    if (supplyValveCurrentPossition < -9100 || supplyValveCurrentPossition > -8900)
+    if (supplyValveCurrentPossition < -500 || supplyValveCurrentPossition > 500)
     {
-        supplyValve.setPosition(0x02, -9000, 0);
+        supplyValve.setPosition(0x02, 0, 0);
     }
 }
 void closeSupplyValve()
 {
-    supplyValve.setPosition(0x02, 0, 0);
+    supplyValve.setPosition(0x02, -9000, 0);
     int16_t supplyValveCurrentPossition = supplyValve.readCurrentPosition(0x02);
-    if (supplyValveCurrentPossition < -100 || supplyValveCurrentPossition > 100)
+    if (supplyValveCurrentPossition < -8500 || supplyValveCurrentPossition > -9500)
     {
-        supplyValve.setPosition(0x02, 0, 0);
+        supplyValve.setPosition(0x02, -9000, 0);
     }
 }
 
