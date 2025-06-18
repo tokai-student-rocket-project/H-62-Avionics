@@ -10,10 +10,14 @@
 #include "Lib_Neopixel.hpp"
 #include "Lib_Var.hpp"
 
+// LED Config
 const uint8_t redled = 17;   // GPIO17 // OK
 const uint8_t greenled = 16; // GPIO16 // OK
 const uint8_t blueled = 25;  // GPIO25 // OK
 Neopixel Status(12);         // OK
+
+// LoadSwitch Config
+const uint8_t powerEN = 29;
 
 // ID:0x01--MAIN
 // ID:0x02--SUPPLY
@@ -89,7 +93,12 @@ void task100Hz()
         closeSupplyValve();
         Tasks["openMainValve"]->startOnceAfterMsec(300.0);
         openMainValve();
-        Status.noticedRed();
+        // Status.noticedRed(); // ロードスイッチの動作確認のためコメントアウト
+        digitalWrite(powerEN, HIGH);
+        if (digitalWrite(powerEN))
+        {
+            Status.noticedPink();
+        }
     }
     else
     {
@@ -97,6 +106,7 @@ void task100Hz()
         Tasks["closeSupplyVAlve"]->startOnceAfterMsec(500.0);
         openSupplyValve();
         Status.noticedGreen();
+        digitalWrite(powerEN, LOW);
     }
 }
 
@@ -109,6 +119,9 @@ void setup()
     pinMode(redled, OUTPUT);
     pinMode(greenled, OUTPUT);
     pinMode(blueled, OUTPUT);
+
+    pinMode(powerEN, OUTPUT);
+    digitalWrite(powerEN, LOW);
 
     Status.init(11);
 
