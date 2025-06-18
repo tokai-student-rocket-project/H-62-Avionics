@@ -16,13 +16,14 @@
 #include "Lib_PowerMonitor.hpp"
 #include "Lib_RateMonitor.hpp"
 #include "Lib_OutputPin.hpp"
+#include <Adafruit_LPS28.h>
 
 char ident = '\0';
-bool doLogging = false;
+bool doLogging = true;
 
 CAN can(7);
 Telemeter telemeter;
-Logger logger(A1, A2, 2);
+Logger logger(14, A2, 13);
 
 OutputPin ledWork(LED_BUILTIN);
 OutputPin ledCanRx(0);
@@ -88,6 +89,35 @@ float forceX_N;
 Calculus::Differential<float> linearAccelerationGradient(0.25);
 float jerkX_mps3;
 
+namespace sensor
+{
+    Altimeter primary;
+    Altimeter secondary;
+
+    void measurePressure();
+    void referencePressure();
+}
+
+void sensor::measurePressure()
+{
+    sensor::primary.setReferencePressure(1013.25);
+    Serial.print(">Primary Pressure: ");
+    Serial.println(sensor::primary.getPressure());
+
+    Serial.print(">Sencondary Pressure: ");
+    Serial.println(sensor::secondary.getPressure());
+
+    float temperature_C = (sensor::primary.getTemperature() + sensor::secondary.getTemperature()) / 2;
+    Serial.print(">Altitude: ");
+    Serial.println(sensor::primary.getAltitude(temperature_C));
+
+    Serial.print(">Primary ReferencePressure: ");
+    Serial.println(sensor::primary.getReferencePressure());
+
+    Serial.print(">Secondary ReferencePressure: ");
+    Serial.println(sensor::secondary.getReferencePressure());
+}
+
 void task100Hz()
 {
     ledWork.toggle();
@@ -105,6 +135,19 @@ void task100Hz()
     gravityY_mps2 = gravity_mps2 * sin(radians(yaw_deg)) * cos(radians(roll_deg));
     gravityZ_mps2 = gravity_mps2 * cos(radians(pitch_deg)) * cos(radians(roll_deg));
 
+    Serial.print(">gravityX_mps2:");
+    Serial.println(gravityX_mps2);
+    Serial.print(">gravityY_mps2:");
+    Serial.println(gravityY_mps2);
+    Serial.print(">gravityZ_mps2:");
+    Serial.println(gravityZ_mps2);
+    Serial.print(">roll_deg:");
+    Serial.println(roll_deg);
+    Serial.print(">pitch_deg:");
+    Serial.println(pitch_deg);
+    Serial.print(">yaw_deg:");
+    Serial.println(yaw_deg);
+
     linearAccelerationX_mps2 = accelerationHighPassX.get(accelerationX_mps2 - gravityX_mps2, deltaTime);
     linearAccelerationY_mps2 = accelerationHighPassY.get(accelerationY_mps2 - gravityY_mps2, deltaTime);
     linearAccelerationZ_mps2 = accelerationHighPassZ.get(accelerationZ_mps2 - gravityZ_mps2, deltaTime);
@@ -121,8 +164,7 @@ void task100Hz()
                                                   groundCurrent_mA, batteryCurrent_mA, tieCurrent_mA, busCurrent_mA,
                                                   groundPower_mW, batteryPower_mW, tiePower_mW, busPower_mW,
                                                   temperatureRegulator1_degC, temperatureRegulator2_degC, temperatureRegulator3_degC, temperatureConduction_degC,
-                                                  temperatureOutside_degC, temperatureInside_degC,
-                                                  temperatureVentPort_degC, temperatureTankAtmosphere_degC);
+                                                  temperatureOutside_degC);
 
     if (doLogging)
     {
@@ -257,12 +299,16 @@ void setup()
 
     altitudeAverage.begin();
 
+    sensor::primary.initialize(0x5C);
+    sensor::secondary.initialize(0x5D);
+
     Tasks.add(&task100Hz)->startFps(100);
     Tasks.add(&task50Hz)->startFps(50);
     Tasks.add(&task20Hz)->startFps(20);
     Tasks.add(&task10Hz)->startFps(10);
     Tasks.add(&task5Hz)->startFps(5);
     Tasks.add(&task2Hz)->startFps(2);
+    Tasks.add(&sensor::measurePressure)->startFps(200);
 }
 
 void loop()

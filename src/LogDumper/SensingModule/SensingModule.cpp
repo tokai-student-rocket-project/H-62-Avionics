@@ -1,10 +1,9 @@
 #include <MsgPacketizer.h>
 #include "Lib_FRAM.hpp"
 
-FRAM fram0(A1);
+FRAM fram0(14);
 FRAM fram1(A2);
-FRAM fram2(2);
-// FRAM fram3(3);
+FRAM fram2(13);
 
 void dump(FRAM *fram)
 {
@@ -257,13 +256,6 @@ void setup()
                                     Serial.print(F(","));
 
                                     Serial.print(temperatureOutside_degC);
-                                    Serial.print(F(","));
-                                    Serial.print(temperatureInside_degC);
-                                    Serial.print(F(","));
-
-                                    Serial.print(temperatureVentPort_degC);
-                                    Serial.print(F(","));
-                                    Serial.print(temperatureTankAtmosphere_degC);
                                     Serial.print(F("\n"));
                                   });
 
@@ -272,12 +264,27 @@ void setup()
   delay(5000);
   printHeader();
   pinMode(LED_BUILTIN, OUTPUT);
+  pinMode(0, OUTPUT);
+  pinMode(1, OUTPUT);
+  pinMode(4, OUTPUT);
+  pinMode(5, OUTPUT);
+
   digitalWrite(LED_BUILTIN, HIGH);
+  digitalWrite(0, HIGH);
+  digitalWrite(1, HIGH);
+  digitalWrite(4, HIGH);
+  digitalWrite(5, HIGH);
+
   dump(&fram0);
   dump(&fram1);
   dump(&fram2);
-  dump(&fram3);
   digitalWrite(LED_BUILTIN, LOW);
+
+  digitalWrite(LED_BUILTIN, LOW);
+  digitalWrite(0, LOW);
+  digitalWrite(1, LOW);
+  digitalWrite(4, LOW);
+  digitalWrite(5, LOW);
 }
 
 void loop()
