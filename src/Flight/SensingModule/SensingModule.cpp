@@ -96,6 +96,7 @@ namespace sensor
 
     void measurePressure();
     void referencePressure();
+    void calibrationPressure();
 }
 
 void sensor::measurePressure()
@@ -118,6 +119,17 @@ void sensor::measurePressure()
     Serial.println(sensor::secondary.getReferencePressure());
 }
 
+void sensor::calibrationPressure()
+{
+    float pressureSum = 0;
+    const int calibrationSamples = 100;
+    for (int i = 0; i < calibrationSamples; i++)
+    {
+        sensors_event_t pressure, temp;
+        sensor::primary.getEvent(&pressure, &temp);
+    }
+}
+
 void task100Hz()
 {
     ledWork.toggle();
@@ -135,18 +147,18 @@ void task100Hz()
     gravityY_mps2 = gravity_mps2 * sin(radians(yaw_deg)) * cos(radians(roll_deg));
     gravityZ_mps2 = gravity_mps2 * cos(radians(pitch_deg)) * cos(radians(roll_deg));
 
-    Serial.print(">gravityX_mps2:");
-    Serial.println(gravityX_mps2);
-    Serial.print(">gravityY_mps2:");
-    Serial.println(gravityY_mps2);
-    Serial.print(">gravityZ_mps2:");
-    Serial.println(gravityZ_mps2);
-    Serial.print(">roll_deg:");
-    Serial.println(roll_deg);
-    Serial.print(">pitch_deg:");
-    Serial.println(pitch_deg);
-    Serial.print(">yaw_deg:");
-    Serial.println(yaw_deg);
+    // Serial.print(">gravityX_mps2:");
+    // Serial.println(gravityX_mps2);
+    // Serial.print(">gravityY_mps2:");
+    // Serial.println(gravityY_mps2);
+    // Serial.print(">gravityZ_mps2:");
+    // Serial.println(gravityZ_mps2);
+    // Serial.print(">roll_deg:");
+    // Serial.println(roll_deg);
+    // Serial.print(">pitch_deg:");
+    // Serial.println(pitch_deg);
+    // Serial.print(">yaw_deg:");
+    // Serial.println(yaw_deg);
 
     linearAccelerationX_mps2 = accelerationHighPassX.get(accelerationX_mps2 - gravityX_mps2, deltaTime);
     linearAccelerationY_mps2 = accelerationHighPassY.get(accelerationY_mps2 - gravityY_mps2, deltaTime);
