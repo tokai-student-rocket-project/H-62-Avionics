@@ -3109,7 +3109,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Transistor_FET:QM6015D"
+		(symbol "Transistor_FET:AO3401A"
 			(pin_names
 				(hide yes)
 			)
@@ -3125,7 +3125,7 @@
 					(justify left)
 				)
 			)
-			(property "Value" "QM6015D"
+			(property "Value" "AO3401A"
 				(at 5.08 0 0)
 				(effects
 					(font
@@ -3134,7 +3134,7 @@
 					(justify left)
 				)
 			)
-			(property "Footprint" "Package_TO_SOT_SMD:TO-252-2"
+			(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
 				(at 5.08 -1.905 0)
 				(effects
 					(font
@@ -3145,8 +3145,8 @@
 					(hide yes)
 				)
 			)
-			(property "Datasheet" "http://www.jaolen.com/images/pdf/QM6015D.pdf"
-				(at 0 0 90)
+			(property "Datasheet" "http://www.aosmd.com/pdfs/datasheet/AO3401A.pdf"
+				(at 5.08 -3.81 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -3155,7 +3155,7 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "-35A Id, -60V Vds, P-Channel Power MOSFET, 25mOhm Ron, 25.0nC Qg (typ), TO252"
+			(property "Description" "-4.0A Id, -30V Vds, P-Channel MOSFET, SOT-23"
 				(at 0 0 0)
 				(effects
 					(font
@@ -3173,7 +3173,7 @@
 					(hide yes)
 				)
 			)
-			(property "ki_fp_filters" "TO?252*"
+			(property "ki_fp_filters" "SOT?23*"
 				(at 0 0 0)
 				(effects
 					(font
@@ -3182,7 +3182,7 @@
 					(hide yes)
 				)
 			)
-			(symbol "QM6015D_0_1"
+			(symbol "AO3401A_0_1"
 				(polyline
 					(pts
 						(xy 0.254 1.905) (xy 0.254 -1.905)
@@ -3349,8 +3349,8 @@
 					)
 				)
 			)
-			(symbol "QM6015D_1_1"
-				(pin passive line
+			(symbol "AO3401A_1_1"
+				(pin input line
 					(at -5.08 0 0)
 					(length 2.54)
 					(name "G"
@@ -3378,7 +3378,7 @@
 							)
 						)
 					)
-					(number "2"
+					(number "3"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -3396,7 +3396,7 @@
 							)
 						)
 					)
-					(number "3"
+					(number "2"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -4294,6 +4294,16 @@
 		)
 		(uuid "2369a1b9-3396-4f79-ba7c-4b483ed05b39")
 	)
+	(text "今までの接続\nH-59\nH-60"
+		(exclude_from_sim no)
+		(at 75.184 -0.254 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "3952e40f-17ba-43e8-adc4-e3b6119340d5")
+	)
 	(text "From\nGround Power Unit [GPU]\n(External)"
 		(exclude_from_sim no)
 		(at 26.67 26.416 0)
@@ -4345,6 +4355,16 @@
 		)
 		(uuid "87b255e0-eff4-490e-a0ff-22fdd3842f17")
 	)
+	(text "AO3401A"
+		(exclude_from_sim no)
+		(at 102.87 -7.874 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "9c0ec4b2-5058-4272-830e-3b2ee9c68a50")
+	)
 	(text "SLAVE ADDRESS: 100 0101"
 		(exclude_from_sim no)
 		(at 229.87 138.938 0)
@@ -4354,6 +4374,26 @@
 			)
 		)
 		(uuid "a8fa3294-e7bd-4af1-a969-18fe1497f0dc")
+	)
+	(text "2:S"
+		(exclude_from_sim no)
+		(at 106.68 -0.762 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "bad59595-a7ab-40b4-938d-b6f659716206")
+	)
+	(text "3:D"
+		(exclude_from_sim no)
+		(at 102.87 -15.494 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "c4ba9f49-64bd-47dd-ae42-99b7e07fb1b6")
 	)
 	(text "From\nBattery Module\n(Internal)"
 		(exclude_from_sim no)
@@ -4365,6 +4405,16 @@
 			(justify left)
 		)
 		(uuid "e208d506-bcf8-4090-ad9a-61b84edcca86")
+	)
+	(text "1:G"
+		(exclude_from_sim no)
+		(at 99.06 -0.762 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "f46b6876-dd9d-4662-961a-ba29141c9f6e")
 	)
 	(text "R7, R8 で分圧して5.5Vくらい"
 		(exclude_from_sim no)
@@ -4395,6 +4445,25 @@
 			)
 		)
 		(uuid "ffda15f2-fdc6-4cc0-b7f1-4772b85a5c6b")
+	)
+	(text_box "ソースとドレインのピン番号が反対で接続されていた"
+		(exclude_from_sim no)
+		(at 55.88 -26.67 0)
+		(size 40.64 5.08)
+		(margins 0.9525 0.9525 0.9525 0.9525)
+		(stroke
+			(width 0)
+			(type solid)
+		)
+		(fill
+			(type none)
+		)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "79e32199-8edf-4b19-be1b-c81d728c349c")
 	)
 	(junction
 		(at 209.55 60.96)
@@ -5146,6 +5215,16 @@
 	)
 	(wire
 		(pts
+			(xy 261.62 40.64) (xy 262.89 40.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3115b6b8-0575-4e85-839a-3a830bf513e9")
+	)
+	(wire
+		(pts
 			(xy 147.32 134.62) (xy 147.32 133.35)
 		)
 		(stroke
@@ -5213,6 +5292,16 @@
 			(type default)
 		)
 		(uuid "3a6bf2da-8367-4371-b7db-98b01f5894bc")
+	)
+	(polyline
+		(pts
+			(xy 105.41 -6.35) (xy 105.41 -2.54)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3a8874ae-f07e-4683-bbe5-d391f7e075d0")
 	)
 	(wire
 		(pts
@@ -5454,6 +5543,16 @@
 		)
 		(uuid "50127283-3b7e-4c85-8c02-c7139a4045a3")
 	)
+	(polyline
+		(pts
+			(xy 97.79 -2.54) (xy 100.33 -2.54)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5088ef02-1901-4192-b8b7-f40d9504b9d5")
+	)
 	(wire
 		(pts
 			(xy 195.58 60.96) (xy 196.85 60.96)
@@ -5503,6 +5602,16 @@
 			(type default)
 		)
 		(uuid "54935737-4d74-438e-9f68-7fd7a9c8f34c")
+	)
+	(polyline
+		(pts
+			(xy 107.95 -10.16) (xy 107.95 -6.35)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "57c1162f-7661-4055-97ea-eb04007aaa35")
 	)
 	(wire
 		(pts
@@ -5644,16 +5753,6 @@
 		)
 		(uuid "60199e00-5d4b-4b13-9106-b52d51e50c39")
 	)
-	(wire
-		(pts
-			(xy 261.62 40.64) (xy 262.89 40.64)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "61febf65-1be3-4b7a-886f-ce0e72b44adb")
-	)
 	(polyline
 		(pts
 			(xy 80.01 66.04) (xy 87.63 66.04)
@@ -5704,6 +5803,16 @@
 		)
 		(uuid "63c022fb-88db-4cca-83e7-2c16bfd8ed74")
 	)
+	(polyline
+		(pts
+			(xy 97.79 -10.16) (xy 97.79 -6.35)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "66ca7aea-344c-472f-8c80-784a5d4e73ba")
+	)
 	(wire
 		(pts
 			(xy 224.79 50.8) (xy 224.79 49.53)
@@ -5733,6 +5842,16 @@
 			(type default)
 		)
 		(uuid "69870bcd-8bf6-44b4-a267-d5a26577b7a0")
+	)
+	(polyline
+		(pts
+			(xy 100.33 -6.35) (xy 100.33 -2.54)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6a4a4725-0283-4438-9e23-204c158a9040")
 	)
 	(wire
 		(pts
@@ -5954,6 +6073,16 @@
 		)
 		(uuid "7c314e3e-adf1-4845-9d77-287be96955b3")
 	)
+	(polyline
+		(pts
+			(xy 107.95 -2.54) (xy 105.41 -2.54)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7c330e51-d766-43d1-b2ac-9f830bc35d83")
+	)
 	(wire
 		(pts
 			(xy 99.06 72.39) (xy 99.06 95.25)
@@ -6004,6 +6133,16 @@
 		)
 		(uuid "8175b2b3-2d88-4b09-9295-0583a43ff521")
 	)
+	(polyline
+		(pts
+			(xy 97.79 -6.35) (xy 97.79 -2.54)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "82283c1f-c3d1-4c1c-9a3d-c4ed29703e0a")
+	)
 	(wire
 		(pts
 			(xy 125.73 77.47) (xy 125.73 78.74)
@@ -6013,6 +6152,16 @@
 			(type default)
 		)
 		(uuid "83f765e1-3900-4409-a94b-d08324cd7765")
+	)
+	(polyline
+		(pts
+			(xy 107.95 -6.35) (xy 97.79 -6.35)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "84865d53-dc7c-4667-b071-c7b4e0bc1870")
 	)
 	(wire
 		(pts
@@ -6073,6 +6222,16 @@
 			(type default)
 		)
 		(uuid "8c2eec31-ef87-4ea5-9e33-9c2bece9f016")
+	)
+	(polyline
+		(pts
+			(xy 101.6 -13.97) (xy 104.14 -13.97)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8c9b1c79-bbcf-400e-8d01-274442ccb972")
 	)
 	(wire
 		(pts
@@ -6273,6 +6432,16 @@
 			(type default)
 		)
 		(uuid "9fce1afa-44c0-4c70-a3e2-8b6f2c61503f")
+	)
+	(polyline
+		(pts
+			(xy 104.14 -13.97) (xy 104.14 -10.16)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a072973f-988c-48bf-bf03-55873909472a")
 	)
 	(wire
 		(pts
@@ -6633,6 +6802,16 @@
 			(type default)
 		)
 		(uuid "be25c6c3-9d3b-4715-83e3-b7edf3f87e91")
+	)
+	(polyline
+		(pts
+			(xy 107.95 -6.35) (xy 107.95 -2.54)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "be69656b-df82-4dd2-974b-c1ddaa54c37d")
 	)
 	(wire
 		(pts
@@ -7084,6 +7263,16 @@
 		)
 		(uuid "efcc9e2f-ad03-416b-be8b-dca2585562ce")
 	)
+	(polyline
+		(pts
+			(xy 97.79 -10.16) (xy 107.95 -10.16)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f18351aa-60eb-41e4-a54e-63e22ac3e3d8")
+	)
 	(wire
 		(pts
 			(xy 22.86 123.19) (xy 22.86 124.46)
@@ -7103,6 +7292,16 @@
 			(type default)
 		)
 		(uuid "f2ecb994-fa52-4af6-8cdb-f5d52e125567")
+	)
+	(polyline
+		(pts
+			(xy 101.6 -13.97) (xy 101.6 -10.16)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f599589b-2374-4257-9b6c-5538bd75cdaa")
 	)
 	(wire
 		(pts
@@ -8053,17 +8252,17 @@
 		)
 	)
 	(symbol
-		(lib_id "Transistor_FET:QM6015D")
-		(at 67.31 129.54 270)
-		(mirror x)
+		(lib_id "Transistor_FET:AO3401A")
+		(at 267.97 43.18 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "112d955c-21ff-4e86-bd28-106483316abd")
-		(property "Reference" "Q2"
-			(at 67.31 120.65 90)
+		(fields_autoplaced yes)
+		(uuid "1175c025-6a5d-4ec2-afc4-89604035e017")
+		(property "Reference" "Q7"
+			(at 267.97 34.29 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8071,7 +8270,7 @@
 			)
 		)
 		(property "Value" "AO3401A"
-			(at 67.31 123.19 90)
+			(at 267.97 36.83 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8079,7 +8278,7 @@
 			)
 		)
 		(property "Footprint" "Package_TO_SOT_SMD:SOT-23_Handsoldering"
-			(at 65.405 124.46 0)
+			(at 269.875 38.1 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8089,8 +8288,8 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://akizukidenshi.com/catalog/g/gI-14654/"
-			(at 67.31 129.54 90)
+		(property "Datasheet" "http://www.aosmd.com/pdfs/datasheet/AO3401A.pdf"
+			(at 271.78 38.1 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8099,16 +8298,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
-			(at 67.31 129.54 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "LCSC" ""
-			(at 67.31 129.54 0)
+		(property "Description" "-4.0A Id, -30V Vds, P-Channel MOSFET, SOT-23"
+			(at 267.97 43.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8116,27 +8307,19 @@
 				(hide yes)
 			)
 		)
-		(property "Sim.Type" ""
-			(at 67.31 129.54 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
+		(pin "3"
+			(uuid "6999b557-2624-43f8-b03a-b52744644bb9")
 		)
 		(pin "1"
-			(uuid "493e512f-2568-4725-ba21-7130898cb917")
+			(uuid "bf8d96c5-b2e0-4af0-a72b-195ae54decbd")
 		)
 		(pin "2"
-			(uuid "3fdf64f1-a1f2-4f6c-b3f0-4dfcbae98aed")
-		)
-		(pin "3"
-			(uuid "a46f3486-ff80-4903-aeee-92145114b338")
+			(uuid "5bf7a8a1-affb-458a-a024-98a08dd39d19")
 		)
 		(instances
 			(project "PowerControlModule"
 				(path "/cd54ca1c-60d1-49a2-85aa-1c2ce8b76912/5813b286-426d-4bcb-9d26-3aa7caccb176"
-					(reference "Q2")
+					(reference "Q7")
 					(unit 1)
 				)
 			)
@@ -8299,6 +8482,80 @@
 		)
 	)
 	(symbol
+		(lib_id "Transistor_FET:AO3401A")
+		(at 67.31 129.54 270)
+		(mirror x)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "2bc199d0-2994-4603-88ad-8c1798cf466b")
+		(property "Reference" "Q2"
+			(at 67.31 120.65 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "AO3401A"
+			(at 67.31 123.19 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23_Handsoldering"
+			(at 65.405 124.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "http://www.aosmd.com/pdfs/datasheet/AO3401A.pdf"
+			(at 63.5 124.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "-4.0A Id, -30V Vds, P-Channel MOSFET, SOT-23"
+			(at 67.31 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "14175716-d21b-4389-8c9d-e905461f5ac2")
+		)
+		(pin "3"
+			(uuid "4e77326a-d886-4c20-85af-03654c686e06")
+		)
+		(pin "2"
+			(uuid "e2e45482-4984-4236-9e0e-f64a57d6fd0d")
+		)
+		(instances
+			(project ""
+				(path "/cd54ca1c-60d1-49a2-85aa-1c2ce8b76912/5813b286-426d-4bcb-9d26-3aa7caccb176"
+					(reference "Q2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:Thermistor_NTC")
 		(at 24.13 184.15 0)
 		(unit 1)
@@ -8326,7 +8583,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Connector_PinHeader_1.27mm:PinHeader_1x02_P1.27mm_Vertical"
+		(property "Footprint" "Connector_PinHeader_2.00mm:PinHeader_1x02_P2.00mm_Vertical"
 			(at 24.13 182.88 0)
 			(effects
 				(font
@@ -9419,6 +9676,153 @@
 		)
 	)
 	(symbol
+		(lib_id "Transistor_FET:AO3401A")
+		(at 68.58 -10.16 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(dnp no)
+		(uuid "478dc4e8-ac47-4416-a527-cde0817c8a1e")
+		(property "Reference" "Q10"
+			(at 68.58 -19.05 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "AO3401A"
+			(at 68.58 -16.51 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+			(at 70.485 -15.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "http://www.aosmd.com/pdfs/datasheet/AO3401A.pdf"
+			(at 72.39 -15.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "-4.0A Id, -30V Vds, P-Channel MOSFET, SOT-23"
+			(at 68.58 -10.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "b8d9430b-e2aa-48dd-aaa0-943a2ccea714")
+		)
+		(pin "1"
+			(uuid "92f7bbb7-e9b9-43b5-80d9-2de7268e4363")
+		)
+		(pin "2"
+			(uuid "83cf61aa-a81e-477e-8df9-1521229dd80d")
+		)
+		(instances
+			(project "PowerControlModule"
+				(path "/cd54ca1c-60d1-49a2-85aa-1c2ce8b76912/5813b286-426d-4bcb-9d26-3aa7caccb176"
+					(reference "Q10")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Transistor_FET:AO3401A")
+		(at 55.88 43.18 270)
+		(mirror x)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "485a688c-925c-433c-963d-1b7f9d6b9aa4")
+		(property "Reference" "Q5"
+			(at 55.88 34.29 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "AO3401A"
+			(at 55.88 36.83 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23_Handsoldering"
+			(at 53.975 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "http://www.aosmd.com/pdfs/datasheet/AO3401A.pdf"
+			(at 52.07 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "-4.0A Id, -30V Vds, P-Channel MOSFET, SOT-23"
+			(at 55.88 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "4dd8616f-8fb9-4d21-b461-6a173de190d8")
+		)
+		(pin "1"
+			(uuid "1249d75f-3b75-4514-bee4-b078b4365a20")
+		)
+		(pin "2"
+			(uuid "93c8ca83-821d-4cdb-9696-c911609cd6f1")
+		)
+		(instances
+			(project "PowerControlModule"
+				(path "/cd54ca1c-60d1-49a2-85aa-1c2ce8b76912/5813b286-426d-4bcb-9d26-3aa7caccb176"
+					(reference "Q5")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:LED_Small")
 		(at 135.89 154.94 90)
 		(unit 1)
@@ -10222,96 +10626,6 @@
 			(project "PowerControlModule"
 				(path "/cd54ca1c-60d1-49a2-85aa-1c2ce8b76912/5813b286-426d-4bcb-9d26-3aa7caccb176"
 					(reference "#PWR014")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Transistor_FET:QM6015D")
-		(at 55.88 43.18 270)
-		(mirror x)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "715e8a2f-a97d-4d89-a278-d23dbd8aa0c3")
-		(property "Reference" "Q5"
-			(at 55.88 34.29 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "AO3401A"
-			(at 55.88 36.83 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23_Handsoldering"
-			(at 53.975 38.1 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-					(italic yes)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://akizukidenshi.com/catalog/g/gI-14654/"
-			(at 55.88 43.18 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 55.88 43.18 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "LCSC" ""
-			(at 55.88 43.18 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Sim.Type" ""
-			(at 55.88 43.18 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "042f2ff6-c370-4c1f-98bb-cfd753880490")
-		)
-		(pin "2"
-			(uuid "76a52069-5dec-473f-9331-36905c04f231")
-		)
-		(pin "3"
-			(uuid "89fccaae-18cb-454f-8a05-a53791c212b8")
-		)
-		(instances
-			(project "PowerControlModule"
-				(path "/cd54ca1c-60d1-49a2-85aa-1c2ce8b76912/5813b286-426d-4bcb-9d26-3aa7caccb176"
-					(reference "Q5")
 					(unit 1)
 				)
 			)
@@ -11299,95 +11613,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Transistor_FET:QM6015D")
-		(at 267.97 43.18 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "951f4e86-9f1e-4df8-9584-77552fe548a2")
-		(property "Reference" "Q8"
-			(at 267.97 34.29 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "AO3401A"
-			(at 267.97 36.83 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23_Handsoldering"
-			(at 269.875 38.1 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-					(italic yes)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://akizukidenshi.com/catalog/g/gI-14654/"
-			(at 267.97 43.18 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 267.97 43.18 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "LCSC" ""
-			(at 267.97 43.18 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Sim.Type" ""
-			(at 267.97 43.18 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "380a08e6-0ab1-404b-84d1-8a981bb6edf5")
-		)
-		(pin "2"
-			(uuid "a09ccddc-9b15-45d1-8dc8-9e1a3ad6567a")
-		)
-		(pin "3"
-			(uuid "e2d3fb16-0a13-4dc8-b851-db6a5fd0b440")
-		)
-		(instances
-			(project "PowerControlModule"
-				(path "/cd54ca1c-60d1-49a2-85aa-1c2ce8b76912/5813b286-426d-4bcb-9d26-3aa7caccb176"
-					(reference "Q8")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:LED_Small")
 		(at 104.14 85.09 90)
 		(unit 1)
@@ -11475,6 +11700,79 @@
 		)
 	)
 	(symbol
+		(lib_id "Transistor_FET:AO3401A")
+		(at 78.74 129.54 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "99f3586a-3ac0-4298-b63f-7c87e02fa958")
+		(property "Reference" "Q4"
+			(at 78.74 120.65 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "AO3401A"
+			(at 78.74 123.19 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23_Handsoldering"
+			(at 80.645 124.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "http://www.aosmd.com/pdfs/datasheet/AO3401A.pdf"
+			(at 82.55 124.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "-4.0A Id, -30V Vds, P-Channel MOSFET, SOT-23"
+			(at 78.74 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "4dfc59b0-124c-4475-91ce-567c91e983a3")
+		)
+		(pin "3"
+			(uuid "8db84053-5e31-43ab-b0f5-2179e9584b93")
+		)
+		(pin "2"
+			(uuid "ccf00e1f-c34e-4135-9f89-5fa7b430cb0c")
+		)
+		(instances
+			(project "PowerControlModule"
+				(path "/cd54ca1c-60d1-49a2-85aa-1c2ce8b76912/5813b286-426d-4bcb-9d26-3aa7caccb176"
+					(reference "Q4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Transistor_FET:AO3400A")
 		(at 64.77 148.59 0)
 		(unit 1)
@@ -11545,6 +11843,80 @@
 			(project ""
 				(path "/cd54ca1c-60d1-49a2-85aa-1c2ce8b76912/5813b286-426d-4bcb-9d26-3aa7caccb176"
 					(reference "Q3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Transistor_FET:AO3401A")
+		(at 256.54 43.18 270)
+		(mirror x)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "a0ba42b4-b969-4156-a2a9-e47ed4556d12")
+		(property "Reference" "Q1"
+			(at 256.54 34.29 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "AO3401A"
+			(at 256.54 36.83 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23_Handsoldering"
+			(at 254.635 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "http://www.aosmd.com/pdfs/datasheet/AO3401A.pdf"
+			(at 252.73 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "-4.0A Id, -30V Vds, P-Channel MOSFET, SOT-23"
+			(at 256.54 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "ad5b2b22-4f7c-4cff-8bd9-10da97c0b059")
+		)
+		(pin "1"
+			(uuid "0243de6a-81b3-47d9-9826-954fe1adfe28")
+		)
+		(pin "2"
+			(uuid "3b31e5e0-dfd7-4bb5-9f7c-4280d9283e54")
+		)
+		(instances
+			(project "PowerControlModule"
+				(path "/cd54ca1c-60d1-49a2-85aa-1c2ce8b76912/5813b286-426d-4bcb-9d26-3aa7caccb176"
+					(reference "Q1")
 					(unit 1)
 				)
 			)
@@ -11897,95 +12269,6 @@
 			(project "PowerControlModule"
 				(path "/cd54ca1c-60d1-49a2-85aa-1c2ce8b76912/5813b286-426d-4bcb-9d26-3aa7caccb176"
 					(reference "#PWR012")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Transistor_FET:QM6015D")
-		(at 78.74 129.54 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "b0678e74-ffa1-493c-8975-6dd3b46047f6")
-		(property "Reference" "Q4"
-			(at 78.74 120.65 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "AO3401A"
-			(at 78.74 123.19 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23_Handsoldering"
-			(at 80.645 124.46 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-					(italic yes)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://akizukidenshi.com/catalog/g/gI-14654/"
-			(at 78.74 129.54 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 78.74 129.54 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "LCSC" ""
-			(at 78.74 129.54 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Sim.Type" ""
-			(at 78.74 129.54 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "29fe3325-41d8-4c06-81d8-75504e81b3ec")
-		)
-		(pin "2"
-			(uuid "5758c5bc-45a7-4fc8-98d8-ec0eced0e054")
-		)
-		(pin "3"
-			(uuid "e8beb69d-09cd-405c-abdf-20c87e71f799")
-		)
-		(instances
-			(project "PowerControlModule"
-				(path "/cd54ca1c-60d1-49a2-85aa-1c2ce8b76912/5813b286-426d-4bcb-9d26-3aa7caccb176"
-					(reference "Q4")
 					(unit 1)
 				)
 			)
@@ -13194,95 +13477,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Transistor_FET:QM6015D")
-		(at 67.31 43.18 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "dd608223-ccd2-4b1d-9135-033dc76bd160")
-		(property "Reference" "Q6"
-			(at 67.31 34.29 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "AO3401A"
-			(at 67.31 36.83 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23_Handsoldering"
-			(at 69.215 38.1 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-					(italic yes)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://akizukidenshi.com/catalog/g/gI-14654/"
-			(at 67.31 43.18 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 67.31 43.18 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "LCSC" ""
-			(at 67.31 43.18 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Sim.Type" ""
-			(at 67.31 43.18 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "abcefa18-0ceb-4bef-ac66-40ef7bc99ae0")
-		)
-		(pin "2"
-			(uuid "0dfb2043-0c3b-403d-9f91-3cdeebb97598")
-		)
-		(pin "3"
-			(uuid "c3e75a5c-c947-448a-aa0f-59b1fa468fd3")
-		)
-		(instances
-			(project "PowerControlModule"
-				(path "/cd54ca1c-60d1-49a2-85aa-1c2ce8b76912/5813b286-426d-4bcb-9d26-3aa7caccb176"
-					(reference "Q6")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:GND")
 		(at 139.7 71.12 0)
 		(unit 1)
@@ -13343,6 +13537,80 @@
 			(project "PowerControlModule"
 				(path "/cd54ca1c-60d1-49a2-85aa-1c2ce8b76912/5813b286-426d-4bcb-9d26-3aa7caccb176"
 					(reference "#PWR026")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Transistor_FET:AO3401A")
+		(at 67.31 43.18 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "e2c99168-a8a9-41fb-980b-b604f8d5ad5b")
+		(property "Reference" "Q9"
+			(at 67.31 34.29 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "AO3401A"
+			(at 67.31 36.83 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23_Handsoldering"
+			(at 69.215 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "http://www.aosmd.com/pdfs/datasheet/AO3401A.pdf"
+			(at 71.12 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "-4.0A Id, -30V Vds, P-Channel MOSFET, SOT-23"
+			(at 67.31 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "06f99357-c4b5-48bf-8c19-dd11018b60ff")
+		)
+		(pin "1"
+			(uuid "bc0bdefa-80d3-47b0-b97f-0dd17de196d8")
+		)
+		(pin "2"
+			(uuid "eab97fb0-5667-413e-acbd-7a72d6a39fd1")
+		)
+		(instances
+			(project ""
+				(path "/cd54ca1c-60d1-49a2-85aa-1c2ce8b76912/5813b286-426d-4bcb-9d26-3aa7caccb176"
+					(reference "Q9")
 					(unit 1)
 				)
 			)
@@ -13619,6 +13887,80 @@
 			(project "PowerControlModule"
 				(path "/cd54ca1c-60d1-49a2-85aa-1c2ce8b76912/5813b286-426d-4bcb-9d26-3aa7caccb176"
 					(reference "#PWR055")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Transistor_FET:AO3401A")
+		(at 82.55 -10.16 270)
+		(mirror x)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(dnp no)
+		(uuid "ebfeaf0f-f2c5-4fc3-b5f6-952611543b6d")
+		(property "Reference" "Q6"
+			(at 82.55 -19.05 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "AO3401A"
+			(at 82.55 -16.51 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+			(at 80.645 -15.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "http://www.aosmd.com/pdfs/datasheet/AO3401A.pdf"
+			(at 78.74 -15.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "-4.0A Id, -30V Vds, P-Channel MOSFET, SOT-23"
+			(at 82.55 -10.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "6f5bf228-bd6e-4bcc-83d6-e21330347e5d")
+		)
+		(pin "1"
+			(uuid "4857fed4-3713-443f-8eb8-f16a72220922")
+		)
+		(pin "2"
+			(uuid "722a113c-8a8d-45b7-8513-b60a9e7cea6d")
+		)
+		(instances
+			(project "PowerControlModule"
+				(path "/cd54ca1c-60d1-49a2-85aa-1c2ce8b76912/5813b286-426d-4bcb-9d26-3aa7caccb176"
+					(reference "Q6")
 					(unit 1)
 				)
 			)
@@ -14036,96 +14378,6 @@
 			(project "PowerControlModule"
 				(path "/cd54ca1c-60d1-49a2-85aa-1c2ce8b76912/5813b286-426d-4bcb-9d26-3aa7caccb176"
 					(reference "#PWR028")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Transistor_FET:QM6015D")
-		(at 256.54 43.18 270)
-		(mirror x)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "f6e19bf3-10a3-4bf5-be40-3f7929b274bf")
-		(property "Reference" "Q7"
-			(at 256.54 34.29 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "AO3401A"
-			(at 256.54 36.83 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23_Handsoldering"
-			(at 254.635 38.1 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-					(italic yes)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://akizukidenshi.com/catalog/g/gI-14654/"
-			(at 256.54 43.18 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 256.54 43.18 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "LCSC" ""
-			(at 256.54 43.18 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Sim.Type" ""
-			(at 256.54 43.18 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "566fee6b-b3e5-42e6-8100-04db73c2ef35")
-		)
-		(pin "2"
-			(uuid "07c541fc-a471-47b6-9aed-df49fb2b451b")
-		)
-		(pin "3"
-			(uuid "d21fda5b-2b09-4b84-b633-386b16f238a5")
-		)
-		(instances
-			(project "PowerControlModule"
-				(path "/cd54ca1c-60d1-49a2-85aa-1c2ce8b76912/5813b286-426d-4bcb-9d26-3aa7caccb176"
-					(reference "Q7")
 					(unit 1)
 				)
 			)
