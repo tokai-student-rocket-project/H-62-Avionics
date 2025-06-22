@@ -58,12 +58,7 @@
           "width": 0.0
         }
       ],
-      "drc_exclusions": [
-        [
-          "lib_footprint_mismatch|149098000|123698000|74eb6f1c-f01d-47be-a8f9-e7f8a94a9e89|00000000-0000-0000-0000-000000000000",
-          "はんだづけしやすいように変更した"
-        ]
-      ],
+      "drc_exclusions": [],
       "meta": {
         "version": 2
       },
