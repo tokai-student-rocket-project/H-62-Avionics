@@ -1,0 +1,9 @@
+﻿Designator,Footprint,Quantity,Value,LCSC Part #
+"BT1, BT2, BT3, BT4",BAT_1042,4,1042,
+D1,0603,1,Green,
+F1,Fuse_Bourns_MF-RHT300,1,Polyfuse,
+J1,DF1B-2S-2.5R,1,DF1B-2S-2.5R,
+J2,DF11-8DP-2DS,1,DF11-8DP-2DS,
+R1,0603,1,2.4kR,
+TP1,TestPoint_THTPad_D1.0mm_Drill0.5mm,1,TestPoint,
+TP2,TestPoint_THTPad_1.0x1.0mm_Drill0.5mm,1,TestPoint_GND,
