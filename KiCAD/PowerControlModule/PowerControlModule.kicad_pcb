@@ -27494,7 +27494,7 @@
 			(justify left bottom)
 		)
 	)
-	(gr_text "Power Module  Build-3"
+	(gr_text "Power Module  Build-4"
 		(at 161.406 134.288 0)
 		(layer "B.SilkS")
 		(uuid "091c5612-7051-4623-8082-6ae75cd1d5db")
