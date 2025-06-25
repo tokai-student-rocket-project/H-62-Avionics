@@ -489,7 +489,7 @@
       "plot": "./",
       "pos_files": "",
       "specctra_dsn": "",
-      "step": "C:/Users/hirok/Downloads/ValveControlModule.step",
+      "step": "ValveControlModule.step",
       "svg": "",
       "vrml": ""
     },
