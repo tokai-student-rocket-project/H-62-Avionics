@@ -474,11 +474,12 @@ void loop()
 
   if (can.available())
   {
+    sensingModuleAvailable = true; // CAN 通信できているかの確認用 // モールス信号OK
     switch (can.getLatestLabel())
     {
     case Var::Label::TRAJECTORY_DATA:
     {
-      can.receiveTrajectory(&isFalling, &altitude);
+      // can.receiveTrajectory(&isFalling, &altitude); // Altitude を送信していないのでいったんコメントアウト．
       ledCanRx.toggle();
       sensingModuleAvailable = true;
 
