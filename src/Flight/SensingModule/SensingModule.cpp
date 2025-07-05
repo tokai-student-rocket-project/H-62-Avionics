@@ -13,13 +13,12 @@
 #include "Lib_Logger3.hpp"
 #include "Lib_Altimeter.hpp"
 #include "Lib_Thermistor.hpp"
-#include "Lib_PowerMonitor.hpp"
 #include "Lib_RateMonitor.hpp"
 #include "Lib_OutputPin.hpp"
 #include <Adafruit_LPS28.h>
 
 char ident = '\0';
-bool doLogging = true;
+bool doLogging = false;
 
 CAN can(7);
 Telemeter telemeter;
@@ -38,7 +37,6 @@ RateMonitor monitor100Hz;
 
 // Altimeter altimeter;
 BNO055 bno055;
-PowerMonitor powerMonitor;
 Thermistor regulator1(A3);
 Thermistor regulator2(A4);
 Thermistor regulator3(A5);
@@ -119,16 +117,16 @@ void sensor::measurePressure()
     Serial.println(sensor::secondary.getReferencePressure());
 }
 
-void sensor::calibrationPressure()
-{
-    float pressureSum = 0;
-    const int calibrationSamples = 100;
-    for (int i = 0; i < calibrationSamples; i++)
-    {
-        sensors_event_t pressure, temp;
-        sensor::primary.getEvent(&pressure, &temp);
-    }
-}
+// void sensor::calibrationPressure()
+// {
+//     float pressureSum = 0;
+//     const int calibrationSamples = 100;
+//     for (int i = 0; i < calibrationSamples; i++)
+//     {
+//         sensors_event_t pressure, temp;
+//         sensor::primary.getEvent(&pressure, &temp);
+//     }
+// }
 
 void task100Hz()
 {
@@ -235,14 +233,6 @@ void task10Hz()
 void task5Hz()
 {
     ledWork.toggle();
-
-    powerMonitor.getVoltage(&groundVoltage_V, &batteryVoltage_V, &tieVoltage_V, &busVoltage_V);
-    powerMonitor.getCurrent(&groundCurrent_mA, &batteryCurrent_mA, &tieCurrent_mA, &busCurrent_mA);
-    powerMonitor.getPower(&groundPower_mW, &batteryPower_mW, &tiePower_mW, &busPower_mW);
-    temperatureRegulator1_degC = regulator1.getTemperature_degC();
-    temperatureRegulator2_degC = regulator2.getTemperature_degC();
-    temperatureRegulator3_degC = regulator3.getTemperature_degC();
-    temperatureConduction_degC = conduction.getTemperature_degC();
     // temperatureInside_degC = altimeter.getTemperature();
 }
 
@@ -303,16 +293,14 @@ void setup()
     can.begin();
     telemeter.initialize(924.2E6, 500E3);
 
-    powerMonitor.initialize();
-
     bno055.begin();
     // altimeter.initialize();
     // altimeter.setReferencePressure();
 
-    altitudeAverage.begin();
+    // altitudeAverage.begin();
 
-    sensor::primary.initialize(0x5C);
-    sensor::secondary.initialize(0x5D);
+    // sensor::primary.initialize(0x5C);
+    // sensor::secondary.initialize(0x5D);
 
     Tasks.add(&task100Hz)->startFps(100);
     Tasks.add(&task50Hz)->startFps(50);
@@ -320,7 +308,7 @@ void setup()
     Tasks.add(&task10Hz)->startFps(10);
     Tasks.add(&task5Hz)->startFps(5);
     Tasks.add(&task2Hz)->startFps(2);
-    Tasks.add(&sensor::measurePressure)->startFps(200);
+    // Tasks.add(&sensor::measurePressure)->startFps(200);
 }
 
 void loop()
