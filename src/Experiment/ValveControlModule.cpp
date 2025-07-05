@@ -86,30 +86,6 @@ uint32_t retryCount = 0;
 uint32_t lastSendTime = 0;
 bool isVerified = true;
 
-void task100Hz()
-{
-    if (gseValve.isSignaled())
-    {
-        closeSupplyValve();
-        Tasks["openMainValve"]->startOnceAfterMsec(300.0);
-        openMainValve();
-        // Status.noticedRed(); // ロードスイッチの動作確認のためコメントアウト
-        digitalWrite(powerEN, HIGH);
-        if (digitalWrite(powerEN))
-        {
-            Status.noticedPink();
-        }
-    }
-    else
-    {
-        closeMainValve();
-        Tasks["closeSupplyVAlve"]->startOnceAfterMsec(500.0);
-        openSupplyValve();
-        Status.noticedGreen();
-        digitalWrite(powerEN, LOW);
-    }
-}
-
 void setup()
 {
     Serial.begin(115200);
@@ -128,7 +104,6 @@ void setup()
     mainValve.initialize(0x01);
     supplyValve.initialize(0x02);
 
-    Tasks.add(&task100Hz)->startFps(100);
     Tasks.add("openMainValve", [&]()
               { openMainValve(); });
     Tasks.add("openSupplyValve", [&]()
