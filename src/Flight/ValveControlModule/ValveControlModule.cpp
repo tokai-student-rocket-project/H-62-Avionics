@@ -11,6 +11,7 @@
 #include "Lib_B3MSC1170A.hpp"
 #include "Lib_Logger1.hpp"
 #include "Lib_Neopixel.hpp"
+#include "Lib_OutputPin.hpp"
 
 char ident = '\0';
 bool doLogging = true;
@@ -24,6 +25,8 @@ Neopixel Status(12);         // OK
 
 CAN can(26);
 Logger logger(28);
+
+OutputPin servoEn(29);
 
 B3MSC1170A supplyValve;
 void openSupplyValve()
@@ -334,6 +337,7 @@ void syncFlightMode()
       {
         supplyValve.torqueOff(0x01);
         mainValve.torqueOff(0x02);
+        servoEn.low();
         Status.noticedBlue();
         Serial.println("SHUTDOWN");
         break;
@@ -423,6 +427,7 @@ void sendValveData()
 
 void setup()
 {
+  servoEn.high();
   Serial.begin(115200);
   // Serial1.begin(115200, SERIAL_8N1);
   Serial.begin(115200, SERIAL_8N1);
