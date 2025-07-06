@@ -1619,7 +1619,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Interface_CAN_LIN:MCP2515-xSO"
+		(symbol "Interface_CAN_LIN:MCP2515-xST"
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -1632,7 +1632,7 @@
 					(justify right)
 				)
 			)
-			(property "Value" "MCP2515-xSO"
+			(property "Value" "MCP2515-xST"
 				(at 19.05 20.32 0)
 				(effects
 					(font
@@ -1641,7 +1641,7 @@
 					(justify right top)
 				)
 			)
-			(property "Footprint" "Package_SO:SOIC-18W_7.5x11.6mm_P1.27mm"
+			(property "Footprint" "Package_SO:TSSOP-20_4.4x6.5mm_P0.65mm"
 				(at 0 -22.86 0)
 				(effects
 					(font
@@ -1660,7 +1660,7 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "Stand-Alone CAN Controller with SPI Interface, SOIC-18"
+			(property "Description" "Stand-Alone CAN Controller with SPI Interface, TSSOP-20"
 				(at 0 0 0)
 				(effects
 					(font
@@ -1678,7 +1678,7 @@
 					(hide yes)
 				)
 			)
-			(property "ki_fp_filters" "SOIC*7.5x11.6mm*P1.27mm*"
+			(property "ki_fp_filters" "TSSOP*4.4x6.5mm*P0.65mm*"
 				(at 0 0 0)
 				(effects
 					(font
@@ -1687,7 +1687,7 @@
 					(hide yes)
 				)
 			)
-			(symbol "MCP2515-xSO_0_1"
+			(symbol "MCP2515-xST_0_1"
 				(rectangle
 					(start -12.7 17.78)
 					(end 12.7 -17.78)
@@ -1700,7 +1700,7 @@
 					)
 				)
 			)
-			(symbol "MCP2515-xSO_1_1"
+			(symbol "MCP2515-xST_1_1"
 				(pin input line
 					(at -15.24 15.24 0)
 					(length 2.54)
@@ -1711,7 +1711,7 @@
 							)
 						)
 					)
-					(number "14"
+					(number "16"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1729,7 +1729,7 @@
 							)
 						)
 					)
-					(number "15"
+					(number "17"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1747,7 +1747,7 @@
 							)
 						)
 					)
-					(number "16"
+					(number "18"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1765,7 +1765,7 @@
 							)
 						)
 					)
-					(number "13"
+					(number "14"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1783,7 +1783,7 @@
 							)
 						)
 					)
-					(number "7"
+					(number "8"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1801,7 +1801,7 @@
 							)
 						)
 					)
-					(number "8"
+					(number "9"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1827,6 +1827,44 @@
 						)
 					)
 				)
+				(pin no_connect line
+					(at -12.7 0 0)
+					(length 2.54)
+					(hide yes)
+					(name "NC"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin no_connect line
+					(at -12.7 -2.54 0)
+					(length 2.54)
+					(hide yes)
+					(name "NC"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "15"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
 				(pin power_in line
 					(at 0 20.32 270)
 					(length 2.54)
@@ -1837,7 +1875,7 @@
 							)
 						)
 					)
-					(number "18"
+					(number "20"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1855,7 +1893,7 @@
 							)
 						)
 					)
-					(number "9"
+					(number "10"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1909,7 +1947,7 @@
 							)
 						)
 					)
-					(number "12"
+					(number "13"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1927,7 +1965,7 @@
 							)
 						)
 					)
-					(number "11"
+					(number "12"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1945,7 +1983,7 @@
 							)
 						)
 					)
-					(number "10"
+					(number "11"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1999,7 +2037,7 @@
 							)
 						)
 					)
-					(number "6"
+					(number "7"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2017,7 +2055,7 @@
 							)
 						)
 					)
-					(number "17"
+					(number "19"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -6269,7 +6307,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Interface_CAN_LIN:MCP2515-xSO")
+		(lib_id "Interface_CAN_LIN:MCP2515-xST")
 		(at 63.5 66.04 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -6277,8 +6315,8 @@
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "c0e2df9a-7aff-4563-bfc5-738c049f6120")
-		(property "Reference" "U7"
+		(uuid "c5826abf-ec14-4154-b5b4-a39094492932")
+		(property "Reference" "U2"
 			(at 65.6433 43.18 0)
 			(effects
 				(font
@@ -6287,7 +6325,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "MCP2515-xSO"
+		(property "Value" "MCP2515-xST"
 			(at 65.6433 45.72 0)
 			(effects
 				(font
@@ -6315,7 +6353,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Stand-Alone CAN Controller with SPI Interface, SOIC-18"
+		(property "Description" "Stand-Alone CAN Controller with SPI Interface, TSSOP-20"
 			(at 63.5 66.04 0)
 			(effects
 				(font
@@ -6324,72 +6362,70 @@
 				(hide yes)
 			)
 		)
-		(property "Sim.Type" ""
-			(at 63.5 66.04 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
+		(pin "17"
+			(uuid "abbcfc09-8325-4bd5-8d7a-ddffb14d16e7")
 		)
-		(pin "15"
-			(uuid "d188d127-775a-4398-a6b5-a94d543ee9d4")
-		)
-		(pin "18"
-			(uuid "99d6aded-57a3-4a23-b705-bba2da564fff")
-		)
-		(pin "9"
-			(uuid "f97f4d78-07dd-4fa2-898a-00012741bb98")
-		)
-		(pin "16"
-			(uuid "2801f8ac-63f4-4e38-b2c4-6da7540a4a50")
-		)
-		(pin "8"
-			(uuid "34218116-3722-45ff-ac1e-5cb1924c330d")
-		)
-		(pin "13"
-			(uuid "d2825a72-c7df-4a05-bb21-85341f414e40")
-		)
-		(pin "11"
-			(uuid "81ce471a-a5a5-4651-8a86-c30e6e09e4ab")
-		)
-		(pin "7"
-			(uuid "fe8acb48-476a-4163-8072-09ca618d9614")
+		(pin "20"
+			(uuid "2165af70-6c87-420f-ac79-34c4a6e9c25a")
 		)
 		(pin "2"
-			(uuid "d6637989-6d21-490e-af64-5e2ed861160a")
+			(uuid "9ea777fc-3738-479a-b85e-b30406576a53")
 		)
-		(pin "4"
-			(uuid "2b0da383-886c-4e77-8108-04f73cb7bacd")
-		)
-		(pin "6"
-			(uuid "59df7750-2287-4ca0-8926-eccbcb3063f7")
-		)
-		(pin "17"
-			(uuid "96beb753-9de7-4edf-8891-081549384781")
-		)
-		(pin "3"
-			(uuid "4cca271d-5d29-453d-907f-c89138042fc2")
-		)
-		(pin "1"
-			(uuid "32d4ff6d-3b4f-49a2-a72c-8545bd213d5b")
-		)
-		(pin "5"
-			(uuid "d0bb24f7-9540-4ce7-9b28-a9282b1d3f8b")
-		)
-		(pin "12"
-			(uuid "cb0671af-4a17-4af3-82a2-c30f26b841d3")
-		)
-		(pin "10"
-			(uuid "59eef58d-4d24-43ab-b229-41e8b2e76f83")
+		(pin "16"
+			(uuid "9e9062fc-8130-46c5-af84-6a456650df97")
 		)
 		(pin "14"
-			(uuid "2e3aabf4-a0ca-4791-a7e0-e4d2da5dfe59")
+			(uuid "1d7ca58d-221b-4aa5-802b-13783e531050")
+		)
+		(pin "8"
+			(uuid "26b54af6-72ee-4e35-a05d-d34bc3ea324c")
+		)
+		(pin "18"
+			(uuid "8ddadd7f-8f73-46cb-94a8-724daa5a23df")
+		)
+		(pin "3"
+			(uuid "96274445-6747-4321-b5b5-291a75d3b8af")
+		)
+		(pin "6"
+			(uuid "151ce975-e855-4f57-a09b-a803bb100334")
+		)
+		(pin "15"
+			(uuid "0749a89c-97ed-4860-a2f8-1ce96f91b4b7")
+		)
+		(pin "9"
+			(uuid "c4aa217d-97f9-4243-9f89-004a46e8db43")
+		)
+		(pin "10"
+			(uuid "a4093b11-2b01-44d7-a688-37d311ef2c14")
+		)
+		(pin "13"
+			(uuid "0c182820-66bb-4395-b14a-abf67e654057")
+		)
+		(pin "5"
+			(uuid "359c7af8-337a-4fea-961c-918e3a48d93f")
+		)
+		(pin "19"
+			(uuid "0ab0f602-bdda-4526-868a-e0552a971228")
+		)
+		(pin "7"
+			(uuid "8d5bf58d-1627-4ffe-b5c9-a090deef1188")
+		)
+		(pin "11"
+			(uuid "1964cd2b-f068-4c65-a717-3f034d40fefb")
+		)
+		(pin "1"
+			(uuid "cc8bd0e8-df3c-4e2c-9162-d9bbdd1b3da4")
+		)
+		(pin "12"
+			(uuid "5a6d8f2e-6485-4ade-ba19-78ef8f4c6c58")
+		)
+		(pin "4"
+			(uuid "e1b46ac9-f957-4a83-91c7-a930286f0e8a")
 		)
 		(instances
-			(project "PowerControlModule"
+			(project ""
 				(path "/cd54ca1c-60d1-49a2-85aa-1c2ce8b76912/4bc17551-98e8-4384-b981-0ab382368ca6"
-					(reference "U7")
+					(reference "U2")
 					(unit 1)
 				)
 			)
