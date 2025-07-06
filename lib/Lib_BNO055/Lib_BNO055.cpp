@@ -1,7 +1,7 @@
 #include "Lib_BNO055.hpp"
 
-
-void BNO055::begin() {
+void BNO055::begin()
+{
   delay(850);
 
   // OPR_MODE <- Config mode
@@ -43,31 +43,31 @@ void BNO055::begin() {
   delay(20);
 }
 
-
-void BNO055::getAcceleration(float* x_mps2, float* y_mps2, float* z_mps2) {
+void BNO055::getAcceleration(float *x_mps2, float *y_mps2, float *z_mps2)
+{
   readVector3D(0x08, 100.0, x_mps2, y_mps2, z_mps2);
 }
 
-
-void BNO055::getMagnetometer(float* x_nT, float* y_nT, float* z_nT) {
+void BNO055::getMagnetometer(float *x_nT, float *y_nT, float *z_nT)
+{
   readVector3D(0x0E, 16.0, x_nT, y_nT, z_nT);
 }
 
-
-void BNO055::getGyroscope(float* x_dps, float* y_dps, float* z_dps) {
+void BNO055::getGyroscope(float *x_dps, float *y_dps, float *z_dps)
+{
   readVector3D(0x14, 16.0, x_dps, y_dps, z_dps);
 }
 
-
-void BNO055::write(uint8_t address, uint8_t data) {
+void BNO055::write(uint8_t address, uint8_t data)
+{
   Wire.beginTransmission(0x28);
   Wire.write(address);
   Wire.write(data);
   Wire.endTransmission();
 }
 
-
-void BNO055::readVector3D(uint8_t address, float lsb, float* x, float* y, float* z) {
+void BNO055::readVector3D(uint8_t address, float lsb, float *x, float *y, float *z)
+{
   Wire.beginTransmission(0x28);
   Wire.write(address);
   Wire.endTransmission();
@@ -79,6 +79,6 @@ void BNO055::readVector3D(uint8_t address, float lsb, float* x, float* y, float*
 
   // 座標軸を合わせるためにxyzを入れ替えているので注意
   *x = ((float)zRaw) / lsb;
-  *y = ((float)yRaw) / lsb;
-  *z = ((float)xRaw) / -lsb;
+  *y = ((float)yRaw) / lsb;  // 軸の初期設定から90度反時計回りに動かしたので xRaw / Lsb のはず
+  *z = ((float)xRaw) / -lsb; // 軸の初期設定から90度反時計回りに動かしたので yRaw / -Lsb のはず
 }
