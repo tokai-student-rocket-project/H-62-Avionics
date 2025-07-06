@@ -35,7 +35,8 @@ uint16_t flightTime;
 RateMonitor monitor10Hz;
 RateMonitor monitor100Hz;
 
-// Altimeter altimeter;
+Altimeter primary;
+Altimeter secondary;
 BNO055 bno055;
 Thermistor regulator1(A3);
 Thermistor regulator2(A4);
@@ -48,21 +49,17 @@ float gyroscopeX_dps, gyroscopeY_dps, gyroscopeZ_dps;
 float roll_deg, pitch_deg, yaw_deg;
 float magnetometerX_nT, magnetometerY_nT, magnetometerZ_nT;
 
-float groundVoltage_V, batteryVoltage_V, tieVoltage_V, busVoltage_V;
-float groundCurrent_mA, batteryCurrent_mA, tieCurrent_mA, busCurrent_mA;
-float groundPower_mW, batteryPower_mW, tiePower_mW, busPower_mW;
+float groundVoltage_V, batteryVoltage_V, busVoltage_V;
+float groundCurrent_mA, batteryCurrent_mA, busCurrent_mA;
+float groundPower_mW, batteryPower_mW, busPower_mW;
+float groundDieTemperature_C, batteryDieTemperature_C, busDieTemperature_C;
 
-float temperatureRegulator1_degC, temperatureRegulator2_degC, temperatureRegulator3_degC, temperatureConduction_degC;
-float temperatureOutside_degC, temperatureInside_degC;
-
-float temperatureVentPort_degC, temperatureTankAtmosphere_degC;
-// uint32_t sutegomaTime_ms;
-// float sutegomeTaskRate_Hz;
-
-float pressure_kPa;
-float altitude_m;
+float referencePressure_hPa;
+float primaryPressure_hPa, secondaryPressure_hPa;
+float primaryAltitude_m, secondaryAltitude_m, altitude_m;
+float primaryTemperature_C, secondaryTemperature_C;
 movingAvg altitudeAverage(10);
-Calculus::Differential<float> altitudeGradient(5);
+Calculus::Differential<float> altitudeGradient(2); // 初期値 5
 Calculus::Differential<float> verticalSpeedGradient(0.5);
 float verticalSpeed_mps;
 float verticalAcceleration_msp2;
@@ -87,46 +84,46 @@ float forceX_N;
 Calculus::Differential<float> linearAccelerationGradient(0.25);
 float jerkX_mps3;
 
-namespace sensor
+// 気象庁，毎日の全国データ一覧　https://www.data.jma.go.jp/stats/data/mdrr/synopday/index.html
+void calibrationPressure()
 {
-    Altimeter primary;
-    Altimeter secondary;
+    float referencePrimaryPressure_hPa = 0;
+    float referenceSecondaryPressure_hPa = 0;
+    const int calibrationSamples = 100;
+    for (int i = 0; i < calibrationSamples; i++)
+    {
+        referencePrimaryPressure_hPa += primary.getPressure();
+        referenceSecondaryPressure_hPa += secondary.getPressure();
+    }
+    primary.setReferencePressure(referencePrimaryPressure_hPa / calibrationSamples);
+    secondary.setReferencePressure(referenceSecondaryPressure_hPa / calibrationSamples);
 
-    void measurePressure();
-    void referencePressure();
-    void calibrationPressure();
+    // Serial.print(">referencePrimaryPressure_hPa: ");
+    // Serial.println(primary.getReferencePressure());
+
+    // Serial.print(">referenceSecondaryPressure_hPa: ");
+    // Serial.println(secondary.getReferencePressure());
+
+    doLogging = false;
 }
 
-void sensor::measurePressure()
+void task200Hz()
 {
-    sensor::primary.setReferencePressure(1013.25);
-    Serial.print(">Primary Pressure: ");
-    Serial.println(sensor::primary.getPressure());
+    primaryTemperature_C = primary.getTemperature();
+    secondaryTemperature_C = secondary.getTemperature();
 
-    Serial.print(">Sencondary Pressure: ");
-    Serial.println(sensor::secondary.getPressure());
+    primaryPressure_hPa = primary.getPressure();
+    secondaryPressure_hPa = secondary.getPressure();
 
-    float temperature_C = (sensor::primary.getTemperature() + sensor::secondary.getTemperature()) / 2;
+    float temperature_C = (primaryTemperature_C + secondaryTemperature_C) / 2;
+    altitude_m = (primary.getAltitude(temperature_C) + secondary.getAltitude(temperature_C)) / 2;
+
     Serial.print(">Altitude: ");
-    Serial.println(sensor::primary.getAltitude(temperature_C));
+    Serial.println(altitude_m);
 
-    Serial.print(">Primary ReferencePressure: ");
-    Serial.println(sensor::primary.getReferencePressure());
-
-    Serial.print(">Secondary ReferencePressure: ");
-    Serial.println(sensor::secondary.getReferencePressure());
+    Serial.print(">primaryAltitude_m: ");
+    Serial.println(primary.getAltitude(temperature_C));
 }
-
-// void sensor::calibrationPressure()
-// {
-//     float pressureSum = 0;
-//     const int calibrationSamples = 100;
-//     for (int i = 0; i < calibrationSamples; i++)
-//     {
-//         sensors_event_t pressure, temp;
-//         sensor::primary.getEvent(&pressure, &temp);
-//     }
-// }
 
 void task100Hz()
 {
@@ -169,12 +166,10 @@ void task100Hz()
                                                   magnetometerX_nT, magnetometerY_nT, magnetometerZ_nT,
                                                   roll_deg, pitch_deg, yaw_deg,
                                                   forceX_N, jerkX_mps3,
-                                                  pressure_kPa, altitude_m, verticalSpeed_mps, verticalAcceleration_msp2, estimated, apogee, isFalling,
-                                                  groundVoltage_V, batteryVoltage_V, tieVoltage_V, busVoltage_V,
-                                                  groundCurrent_mA, batteryCurrent_mA, tieCurrent_mA, busCurrent_mA,
-                                                  groundPower_mW, batteryPower_mW, tiePower_mW, busPower_mW,
-                                                  temperatureRegulator1_degC, temperatureRegulator2_degC, temperatureRegulator3_degC, temperatureConduction_degC,
-                                                  temperatureOutside_degC);
+                                                  referencePressure_hPa, altitude_m, verticalSpeed_mps, verticalAcceleration_msp2, estimated, apogee, isFalling,
+                                                  groundVoltage_V, batteryVoltage_V, busVoltage_V,
+                                                  groundCurrent_mA, batteryCurrent_mA, busCurrent_mA,
+                                                  groundPower_mW, batteryPower_mW, busPower_mW);
 
     if (doLogging)
     {
@@ -184,20 +179,7 @@ void task100Hz()
 
 void task50Hz()
 {
-    ledWork.toggle();
-
-    temperatureOutside_degC = outside.getTemperature_degC();
-    // pressure_kPa = altimeter.getPressure();
-    // altitude_m = altimeter.getAltitude(temperatureOutside_degC + 273.15);
-
-    /*
-    ////////////////////////// Teleplot出力
-    Serial.print(">pressure:");
-    Serial.println(pressure_kPa);
-    Serial.print(">alti:");
-    Serial.println(altitude_m);
-    //////////////////////////
-    */
+    // 現状特になし
 }
 
 void task20Hz()
@@ -218,7 +200,9 @@ void task10Hz()
 
     can.sendDynamics(forceX_N, jerkX_mps3);
 
-    verticalSpeed_mps = altitudeGradient.get((float)altitudeAverage.reading((int16_t)(altitude_m * 10)) / 10.0, deltaTime);
+    // verticalSpeed_mps = altitudeGradient.get((float)altitudeAverage.reading((int16_t)(altitude_m * 10)) / 10.0, deltaTime); // LPS28DFW内で平均化処理を行ってもらう．
+
+    verticalSpeed_mps = altitudeGradient.get(altitude_m, deltaTime);
     verticalAcceleration_msp2 = verticalSpeedGradient.get(verticalSpeed_mps, deltaTime);
 
     estimated = -verticalSpeed_mps / verticalAcceleration_msp2;
@@ -228,6 +212,12 @@ void task10Hz()
     can.sendTrajectory(isFalling, altitude_m);
 
     ledCanTx.toggle();
+
+    Serial.print(">isFalling: ");
+    Serial.println(isFalling);
+
+    Serial.print(">verticalSpeed_mps: ");
+    Serial.println(verticalSpeed_mps);
 }
 
 void task5Hz()
@@ -259,24 +249,13 @@ void task2Hz()
                                                            static_cast<int16_t>(apogee * 10),
                                                            static_cast<uint8_t>(groundVoltage_V * 10),
                                                            static_cast<uint8_t>(batteryVoltage_V * 10),
-                                                           static_cast<uint8_t>(tieVoltage_V * 10),
                                                            static_cast<uint8_t>(busVoltage_V * 10),
                                                            static_cast<int16_t>(groundCurrent_mA * 10),
                                                            static_cast<int16_t>(batteryCurrent_mA * 10),
-                                                           static_cast<int16_t>(tieCurrent_mA * 10),
                                                            static_cast<int16_t>(busCurrent_mA * 10),
                                                            static_cast<int8_t>(groundPower_mW / 100),
                                                            static_cast<int8_t>(batteryPower_mW / 100),
-                                                           static_cast<int8_t>(tiePower_mW / 100),
-                                                           static_cast<int8_t>(busPower_mW / 100),
-                                                           static_cast<int16_t>(temperatureRegulator1_degC * 10),
-                                                           static_cast<int16_t>(temperatureRegulator2_degC * 10),
-                                                           static_cast<int16_t>(temperatureRegulator3_degC * 10),
-                                                           static_cast<int16_t>(temperatureConduction_degC * 10),
-                                                           static_cast<int16_t>(temperatureOutside_degC * 10),
-                                                           static_cast<int16_t>(temperatureInside_degC * 10),
-                                                           static_cast<int16_t>(temperatureVentPort_degC * 10),
-                                                           static_cast<int16_t>(temperatureTankAtmosphere_degC * 10));
+                                                           static_cast<int8_t>(busPower_mW / 100));
 
     telemeter.reserveData(airTelemetryPacket.data.data(), airTelemetryPacket.data.size());
     telemeter.sendReservedData();
@@ -299,21 +278,25 @@ void setup()
 
     // altitudeAverage.begin();
 
-    // sensor::primary.initialize(0x5C);
-    // sensor::secondary.initialize(0x5D);
+    primary.initialize(0x5C);
+    secondary.initialize(0x5D);
+    primary.setReferencePressure(1003.5);
+    secondary.setReferencePressure(1003.5);
 
+    Tasks.add(&task200Hz)->startFps(200);
     Tasks.add(&task100Hz)->startFps(100);
-    Tasks.add(&task50Hz)->startFps(50);
+    // Tasks.add(&task50Hz)->startFps(50);
     Tasks.add(&task20Hz)->startFps(20);
     Tasks.add(&task10Hz)->startFps(10);
     Tasks.add(&task5Hz)->startFps(5);
     Tasks.add(&task2Hz)->startFps(2);
-    // Tasks.add(&sensor::measurePressure)->startFps(200);
+    Tasks.add(&calibrationPressure)->startOnceAfterSec(10);
 }
 
 void loop()
 {
     Tasks.update();
+    Serial.println(doLogging);
 
     if (can.available())
     {
@@ -344,26 +327,16 @@ void loop()
 
             break;
         }
+        case Var::Label::MONITOR_VOLTAGE:
+        {
+            can.receiveVoltage(&groundVoltage_V, &batteryVoltage_V, &busVoltage_V);
+            ledCanRx.toggle();
 
-            /*
-            case Var::Label::SUTEGOMA_TEMPERATURE:
-            {
-              can.receiveSutegomaTemperature(&temperatureVentPort_degC, &temperatureTankAtmosphere_degC);
-              ledCanRx.toggle();
+            Serial.print(">groundVoltage_V: ");
+            Serial.println(groundVoltage_V);
 
-              break;
-            }
-            */
-
-            /*
-            case Var::Label::SUTEGOMA_PERFORMANCE:
-            {
-              can.receiveSutegomaPerformance(&sutegomaTime_ms, &sutegomeTaskRate_Hz);
-              ledCanRx.toggle();
-
-              break;
-            }
-            */
+            break;
+        }
         }
     }
 }
