@@ -4,9 +4,8 @@
 #include <Wire.h>
 #include <Adafruit_LPS28.h>
 
-
-
-class Altimeter {
+class Altimeter
+{
 public:
     void initialize(uint32_t i2cAddress);
     void getConfiguration();
@@ -23,8 +22,8 @@ public:
     int16_t getReferencePressure();
 
 private:
-    Adafruit_LPS28* _lps28;
+    Adafruit_LPS28 *_lps28;
 
-    float _pressure_kPa;
-    int16_t _referencePressure_kPa;
+    float _pressure_hPa;
+    int16_t _referencePressure_hPa;
 };
