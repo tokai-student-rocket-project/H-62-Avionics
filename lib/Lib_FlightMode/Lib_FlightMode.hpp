@@ -1,11 +1,10 @@
 #pragma once
 
-
 #include <Arduino.h>
 #include "Lib_Var.hpp"
 
-
-class FlightMode {
+class FlightMode
+{
 public:
   FlightMode();
   FlightMode(Var::FlightMode initialMode);
