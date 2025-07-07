@@ -1049,10 +1049,6 @@
 		(color 0 0 0 0)
 		(uuid "1b9d381d-3a18-4f0e-9e9a-5ed397a241b1")
 	)
-	(no_connect
-		(at 146.05 59.69)
-		(uuid "a70db741-582b-48f5-805c-d1a655810e38")
-	)
 	(wire
 		(pts
 			(xy 146.05 52.07) (xy 147.32 52.07)
@@ -1295,6 +1291,16 @@
 	)
 	(wire
 		(pts
+			(xy 146.05 59.69) (xy 147.32 59.69)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fa2e457e-0d0f-4160-a3c1-53b3ff64a06a")
+	)
+	(wire
+		(pts
 			(xy 162.56 40.64) (xy 162.56 41.91)
 		)
 		(stroke
@@ -1470,6 +1476,28 @@
 		(uuid "801cfdbf-9bc7-4741-bf2e-785f4e5dda2e")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 158.1066 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "LTC3119_PGOOD"
+		(shape input)
+		(at 147.32 59.69 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "b7d109a7-0039-4de0-a8c5-aafff3ee21a2")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 165.8475 59.69 0)
 			(effects
 				(font
 					(size 1.27 1.27)

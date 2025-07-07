@@ -3223,6 +3223,131 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "R_Small_1"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0.254)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "R"
+				(at 0 0 90)
+				(effects
+					(font
+						(size 1.016 1.016)
+					)
+				)
+			)
+			(property "Value" "R_Small"
+				(at 1.778 0 90)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Resistor, small symbol"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "R resistor"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "R_*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "R_Small_1_0_1"
+				(rectangle
+					(start -0.762 1.778)
+					(end 0.762 -1.778)
+					(stroke
+						(width 0.2032)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "R_Small_1_1_1"
+				(pin passive line
+					(at 0 2.54 270)
+					(length 0.762)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -2.54 90)
+					(length 0.762)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Sensor_Energy:INA228"
 			(exclude_from_sim no)
 			(in_bom yes)
@@ -6369,6 +6494,12 @@
 		(uuid "76ee169b-1b3e-4de0-aae3-485cef02f92b")
 	)
 	(junction
+		(at 170.18 119.38)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "7ab5986b-a8f3-4f64-8010-edbbcf94c406")
+	)
+	(junction
 		(at 245.11 106.68)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -6952,16 +7083,6 @@
 	)
 	(wire
 		(pts
-			(xy 170.18 115.57) (xy 170.18 116.84)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2ec2f452-21c4-4af1-89f7-aeb8223c2db9")
-	)
-	(wire
-		(pts
 			(xy 67.31 135.89) (xy 59.69 135.89)
 		)
 		(stroke
@@ -7152,6 +7273,16 @@
 	)
 	(wire
 		(pts
+			(xy 170.18 119.38) (xy 167.64 119.38)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "43560a46-5f12-485d-813c-0b671f5af6f6")
+	)
+	(wire
+		(pts
 			(xy 24.13 179.07) (xy 27.94 179.07)
 		)
 		(stroke
@@ -7252,6 +7383,16 @@
 	)
 	(wire
 		(pts
+			(xy 170.18 118.11) (xy 170.18 119.38)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4a3112bd-2213-4dd1-b83c-ae156de6f68e")
+	)
+	(wire
+		(pts
 			(xy 256.54 48.26) (xy 256.54 49.53)
 		)
 		(stroke
@@ -7349,16 +7490,6 @@
 			(type default)
 		)
 		(uuid "521ab566-e79f-48ec-9bbc-fb5f2c2946e2")
-	)
-	(wire
-		(pts
-			(xy 170.18 121.92) (xy 170.18 124.46)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "535065a7-9991-427f-a488-439bc8970c84")
 	)
 	(wire
 		(pts
@@ -8352,16 +8483,6 @@
 	)
 	(wire
 		(pts
-			(xy 170.18 109.22) (xy 170.18 110.49)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "acd91ed4-587a-4b06-abfd-d5d6520d0b10")
-	)
-	(wire
-		(pts
 			(xy 52.07 148.59) (xy 59.69 148.59)
 		)
 		(stroke
@@ -8379,6 +8500,16 @@
 			(type default)
 		)
 		(uuid "afceb779-6a71-449e-a812-28ccc7924f5e")
+	)
+	(wire
+		(pts
+			(xy 170.18 119.38) (xy 170.18 124.46)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b07097cf-50c8-4586-a97b-973ad06b3aed")
 	)
 	(wire
 		(pts
@@ -8789,6 +8920,16 @@
 			(type default)
 		)
 		(uuid "d00992f2-ddef-47b6-8fed-9c0d943e70fe")
+	)
+	(wire
+		(pts
+			(xy 170.18 111.76) (xy 170.18 113.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d15a15bc-61a6-4a99-9cf1-876de92338dd")
 	)
 	(wire
 		(pts
@@ -9402,6 +9543,28 @@
 			)
 		)
 	)
+	(global_label "LTC3119_PGOOD"
+		(shape input)
+		(at 167.64 119.38 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "89784bae-abfe-4d9d-953f-d679b3aa3a3f")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 149.1125 119.38 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "I2C_SCL"
 		(shape input)
 		(at 118.11 154.94 270)
@@ -9729,72 +9892,6 @@
 			(project "PowerControlModule"
 				(path "/cd54ca1c-60d1-49a2-85aa-1c2ce8b76912/5813b286-426d-4bcb-9d26-3aa7caccb176"
 					(reference "#PWR052")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:+12V")
-		(at 170.18 109.22 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "0cd48e5c-e600-4fbb-83ab-c5d423441214")
-		(property "Reference" "#PWR025"
-			(at 170.18 113.03 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "+12V"
-			(at 170.18 104.14 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 170.18 109.22 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 170.18 109.22 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"+12V\""
-			(at 170.18 109.22 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "80f8076b-dc57-4cfb-aa45-613a08a707fc")
-		)
-		(instances
-			(project "PowerControlModule"
-				(path "/cd54ca1c-60d1-49a2-85aa-1c2ce8b76912/5813b286-426d-4bcb-9d26-3aa7caccb176"
-					(reference "#PWR025")
 					(unit 1)
 				)
 			)
@@ -10709,84 +10806,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:R_Small")
-		(at 170.18 113.03 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "375e4d3d-f5c2-4a3a-b98a-db427816c316")
-		(property "Reference" "R21"
-			(at 172.72 111.7599 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "3.6kR"
-			(at 172.72 114.2999 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
-			(at 170.18 113.03 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 170.18 113.03 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Resistor, small symbol"
-			(at 170.18 113.03 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Sim.Type" ""
-			(at 170.18 113.03 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "ff15c1b6-0d1e-4a07-ae05-2b3f2874ecde")
-		)
-		(pin "2"
-			(uuid "78215114-0f7a-4e3b-9b05-686cb4dcc543")
-		)
-		(instances
-			(project ""
-				(path "/cd54ca1c-60d1-49a2-85aa-1c2ce8b76912/5813b286-426d-4bcb-9d26-3aa7caccb176"
-					(reference "R21")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:GND")
 		(at 215.9 116.84 0)
 		(unit 1)
@@ -10998,93 +11017,6 @@
 			(project "PowerControlModule"
 				(path "/cd54ca1c-60d1-49a2-85aa-1c2ce8b76912/5813b286-426d-4bcb-9d26-3aa7caccb176"
 					(reference "#PWR061")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:LED_Small")
-		(at 170.18 119.38 270)
-		(mirror x)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "3d3ccdc7-0b59-4a68-8396-e106b68f2db0")
-		(property "Reference" "D3"
-			(at 167.64 118.0464 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Value" "Green"
-			(at 167.64 120.5864 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Footprint" "LED_SMD:LED_0603_1608Metric_Pad1.05x0.95mm_HandSolder"
-			(at 170.18 119.38 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 170.18 119.38 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Light emitting diode, small symbol"
-			(at 170.18 119.38 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Sim.Pin" "1=K 2=A"
-			(at 170.18 119.38 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Sim.Type" ""
-			(at 170.18 119.38 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "2"
-			(uuid "c44f3b29-2a17-436f-833c-09dea3bd1702")
-		)
-		(pin "1"
-			(uuid "60a0a796-621f-44c8-a55d-d851a6e51db7")
-		)
-		(instances
-			(project "PowerControlModule"
-				(path "/cd54ca1c-60d1-49a2-85aa-1c2ce8b76912/5813b286-426d-4bcb-9d26-3aa7caccb176"
-					(reference "D3")
 					(unit 1)
 				)
 			)
@@ -11847,6 +11779,77 @@
 			(project "PowerControlModule"
 				(path "/cd54ca1c-60d1-49a2-85aa-1c2ce8b76912/5813b286-426d-4bcb-9d26-3aa7caccb176"
 					(reference "D2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_name "R_Small_1")
+		(lib_id "Device:R_Small")
+		(at 170.18 115.57 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "5cfc6840-84ea-4142-8a24-2da63e30e28a")
+		(property "Reference" "R27"
+			(at 172.72 114.2999 0)
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "10k"
+			(at 172.72 116.8399 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 170.18 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 170.18 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor, small symbol"
+			(at 170.18 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "f1c86b82-91a9-45d2-bf4b-efda17425e19")
+		)
+		(pin "2"
+			(uuid "3dae468d-612b-476f-82c3-f0463eef7516")
+		)
+		(instances
+			(project ""
+				(path "/cd54ca1c-60d1-49a2-85aa-1c2ce8b76912/5813b286-426d-4bcb-9d26-3aa7caccb176"
+					(reference "R27")
 					(unit 1)
 				)
 			)
@@ -12769,6 +12772,72 @@
 			(project "PowerControlModule"
 				(path "/cd54ca1c-60d1-49a2-85aa-1c2ce8b76912/5813b286-426d-4bcb-9d26-3aa7caccb176"
 					(reference "#PWR054")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3.3V")
+		(at 170.18 111.76 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "808a4500-8dca-45ed-8042-c90442faad95")
+		(property "Reference" "#PWR018"
+			(at 170.18 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+3.3V"
+			(at 170.18 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 170.18 111.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 170.18 111.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
+			(at 170.18 111.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "0e3f2be5-04af-4672-b245-41a24b3c0f3d")
+		)
+		(instances
+			(project ""
+				(path "/cd54ca1c-60d1-49a2-85aa-1c2ce8b76912/5813b286-426d-4bcb-9d26-3aa7caccb176"
+					(reference "#PWR018")
 					(unit 1)
 				)
 			)
