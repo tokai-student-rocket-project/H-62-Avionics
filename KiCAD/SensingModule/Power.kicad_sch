@@ -3180,7 +3180,7 @@
 				)
 			)
 		)
-		(property "Value" "SB34AFC"
+		(property "Value" "SS2040FL"
 			(at 77.7875 45.72 0)
 			(effects
 				(font
@@ -3188,7 +3188,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SMA_Handsoldering"
+		(property "Footprint" "Diode_SMD:D_SOD-123F"
 			(at 77.47 49.53 0)
 			(effects
 				(font
@@ -3197,7 +3197,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://akizukidenshi.com/catalog/g/g117502/"
+		(property "Datasheet" "https://akizukidenshi.com/catalog/g/g102073/"
 			(at 77.47 49.53 0)
 			(effects
 				(font
