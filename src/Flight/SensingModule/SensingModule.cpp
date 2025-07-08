@@ -15,7 +15,6 @@
 #include "Lib_Thermistor.hpp"
 #include "Lib_RateMonitor.hpp"
 #include "Lib_OutputPin.hpp"
-#include <Adafruit_LPS28.h>
 
 char ident = '\0';
 bool doLogging = false;
@@ -142,6 +141,23 @@ void task100Hz()
     gravityY_mps2 = gravity_mps2 * sin(radians(yaw_deg)) * cos(radians(roll_deg));
     gravityZ_mps2 = gravity_mps2 * cos(radians(pitch_deg)) * cos(radians(roll_deg));
 
+    /*
+    // task10Hzから移植
+    verticalSpeed_mps = altitudeGradient.get(altitude_m, deltaTime);
+    verticalAcceleration_msp2 = verticalSpeedGradient.get(verticalSpeed_mps, deltaTime);
+
+    estimated = -verticalSpeed_mps / verticalAcceleration_msp2;
+    apogee = altitude_m + (verticalSpeed_mps * estimated + 0.5 * verticalAcceleration_msp2 * estimated * estimated);
+    isFalling = verticalSpeed_mps < 0;
+
+    Serial.print(">isFalling: ");
+    Serial.println(isFalling);
+
+    Serial.print(">verticalSpeed_mps: ");
+    Serial.println(verticalSpeed_mps);
+    ////
+    */
+
     // Serial.print(">gravityX_mps2:");
     // Serial.println(gravityX_mps2);
     // Serial.print(">gravityY_mps2:");
@@ -218,6 +234,12 @@ void task10Hz()
 
     Serial.print(">verticalSpeed_mps: ");
     Serial.println(verticalSpeed_mps);
+
+    Serial.print(">jerkX_mps3: ");
+    Serial.println(jerkX_mps3);
+
+    Serial.print(">Altitude: ");
+    Serial.println(altitude_m);
 }
 
 void task5Hz()
@@ -273,15 +295,13 @@ void setup()
     telemeter.initialize(924.2E6, 500E3);
 
     bno055.begin();
-    // altimeter.initialize();
-    // altimeter.setReferencePressure();
 
-    // altitudeAverage.begin();
+    // altitudeAverage.begin(); // LPS28DFW内部で実行してもらっているのでソフト側では処理しない．
 
     primary.initialize(0x5C);
     secondary.initialize(0x5D);
-    primary.setReferencePressure(1003.5);
-    secondary.setReferencePressure(1003.5);
+    primary.setReferencePressure(1006.0);   // METARのQから始まる値を基準気圧に設定してみる．
+    secondary.setReferencePressure(1006.0); // METARのQから始まる値を基準気圧に設定してみる．
 
     Tasks.add(&task200Hz)->startFps(200);
     Tasks.add(&task100Hz)->startFps(100);
@@ -296,7 +316,6 @@ void setup()
 void loop()
 {
     Tasks.update();
-    Serial.println(doLogging);
 
     if (can.available())
     {
