@@ -66,6 +66,7 @@ void task5Hz()
     Serial.println(busTemperature_C);
 
     greenLed.toggle();
+    can.sendVoltage(groundVoltage_V, batteryVoltage_V, busVoltage_V);
 }
 
 void setup()
