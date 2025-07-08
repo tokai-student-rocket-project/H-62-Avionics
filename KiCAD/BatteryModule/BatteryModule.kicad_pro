@@ -486,7 +486,7 @@
       "gencad": "",
       "idf": "",
       "netlist": "./",
-      "plot": "",
+      "plot": "../../../../../Users/hirok/Downloads/A4ClearFile/BatteryModule/",
       "pos_files": "",
       "specctra_dsn": "",
       "step": "BatteryModule.step",
