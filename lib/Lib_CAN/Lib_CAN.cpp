@@ -101,6 +101,29 @@ void CAN::receiveIgnition(bool *isIgnition)
   *isIgnition = _latestData[0];
 }
 
+void CAN::sendVoltage(float groundVoltage, float batteryVoltage, float busVoltage)
+{
+  uint8_t data[6];
+  memcpy(data, &groundVoltage, 2);
+  memcpy(data + 2, &batteryVoltage, 2);
+  memcpy(data + 4, &busVoltage, 2);
+
+  _can->sendMsgBuf(static_cast<uint32_t>(Var::Label::MONITOR_VOLTAGE), 0, 6, data);
+}
+
+void CAN::receiveVoltage(float *groundVoltage, float *batteryVoltage, float *busVoltage)
+{
+  float groundVoltageRaw, batteryVoltageRaw, busVoltageRaw;
+
+  memcpy(&groundVoltageRaw, _latestData, 2);
+  memcpy(&batteryVoltageRaw, _latestData + 2, 2);
+  memcpy(&busVoltageRaw, _latestData + 4, 2);
+
+  *groundVoltage = (float)groundVoltageRaw;
+  *batteryVoltage = (float)batteryVoltageRaw;
+  *busVoltage = (float)busVoltageRaw;
+}
+
 void CAN::sendValveDataPart1(int16_t motorTemperature, int16_t mcuTemperature, int16_t current, uint16_t inputVoltage)
 {
   uint8_t data[8];
