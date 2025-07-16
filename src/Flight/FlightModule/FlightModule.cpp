@@ -65,6 +65,9 @@ float currentPosition_SUPPLY, currentDesiredPosition_SUPPLY, currentVelocity_SUP
 bool sensingModuleAvailable = false;
 bool sensingModuleAvailableAnnounced = false;
 
+// test
+float groundVoltage_V, batteryVoltage_V, busVoltage_V;
+
 void flightModeOn()
 {
   if (flightMode.isNot(Var::FlightMode::STANDBY))
@@ -538,6 +541,12 @@ void loop()
       can.receiveValveDataPart4(&currentPosition_SUPPLY, &currentDesiredPosition_SUPPLY, &currentVelocity_SUPPLY);
       ledCanRx.toggle();
 
+      break;
+    }
+    case Var::Label::MONITOR_VOLTAGE:
+    {
+      can.receiveVoltage(&groundVoltage_V, &batteryVoltage_V);
+      ledCanRx.toggle();
       break;
     }
     }
