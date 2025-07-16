@@ -1,0 +1,147 @@
+[Cursor1]
+Text=
+X=-Inf
+Y=0.000000E+0
+[Cursor2]
+Text=
+X=-Inf
+Y=0.000000E+0
+[Cursor3]
+Text=
+X=-Inf
+Y=0.000000E+0
+[Cursor4]
+Text=
+X=-Inf
+Y=0.000000E+0
+[Cursor5]
+Text=
+X=-Inf
+Y=0.000000E+0
+[Cursor6]
+Text=
+X=-Inf
+Y=0.000000E+0
+[Cursor7]
+Text=
+X=-Inf
+Y=0.000000E+0
+[Cursor8]
+Text=
+X=-Inf
+Y=0.000000E+0
+[Cursor9]
+Text=
+X=-Inf
+Y=0.000000E+0
+[Cursor10]
+Text=
+X=-Inf
+Y=0.000000E+0
+[Cursor11]
+Text=
+X=-Inf
+Y=0.000000E+0
+[Cursor12]
+Text=
+X=-Inf
+Y=0.000000E+0
+[Cursor13]
+Text=
+X=-Inf
+Y=0.000000E+0
+[Cursor14]
+Text=
+X=-Inf
+Y=0.000000E+0
+[Cursor15]
+Text=
+X=-Inf
+Y=0.000000E+0
+[Cursor16]
+Text=
+X=-Inf
+Y=0.000000E+0
+[Cursor17]
+Text=
+X=-Inf
+Y=0.000000E+0
+[Cursor18]
+Text=
+X=-Inf
+Y=0.000000E+0
+[Cursor19]
+Text=
+X=-Inf
+Y=0.000000E+0
+[Cursor20]
+Text=
+X=-Inf
+Y=0.000000E+0
+[CALC1]
+Select=OFF
+N=0
+X=0
+Y=0
+dX=1.000000E+0
+dY=1.000000E+0
+O=0.000000E+0
+[CALC2]
+Select=OFF
+N=0
+X=0
+Y=0
+dX=1.000000E+0
+dY=1.000000E+0
+O=0.000000E+0
+[CALC3]
+Select=OFF
+N=0
+X=0
+Y=0
+dX=1.000000E+0
+dY=1.000000E+0
+O=0.000000E+0
+[CALC4]
+Select=OFF
+N=0
+X=0
+Y=0
+dX=1.000000E+0
+dY=1.000000E+0
+O=0.000000E+0
+[Initialize]
+MainTime=sec
+Divisions=R1
+Plot=Off
+Width=0
+SC1 1=0
+SC1 2=-1
+SC1 3=-1
+SC1 4=-1
+SC2 1=0
+SC2 2=-1
+SC2 3=-1
+SC2 4=-1
+SC2 5=-1
+SC2 6=-1
+SC2 7=-1
+SC2 8=-1
+SC2 9=-1
+SC2 10=-1
+Range=0/0,0/0,0,0/0,0,0,0/0,0/0,0,0,0,0/0,0,0,0,0,0,0,0,0,0/0/0/0,0,0,0,0,0,0,0
+[CHARGE]
+MODE=ON
+UNITA=‰~
+UNITB=
+1P2W=0.000000E+0
+1P3W=0.000000E+0
+3P3W=0.000000E+0
+[ACCUM_CH]
+SEL=M
+Y=2025
+M=7
+W=28
+D=10
+H=16
+CH=0
