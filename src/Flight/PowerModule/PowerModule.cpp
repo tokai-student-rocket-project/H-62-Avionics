@@ -65,8 +65,10 @@ void task5Hz()
     Serial.print(">Bus_Temperature_C: ");
     Serial.println(busTemperature_C);
 
+    Serial.print(">Battery EN: ");
+    Serial.println(batteryEn.get());
     greenLed.toggle();
-    can.sendVoltage(groundVoltage_V, batteryVoltage_V, busVoltage_V);
+    can.sendVoltage(groundVoltage_V, batteryVoltage_V);
 }
 
 void setup()
@@ -74,7 +76,8 @@ void setup()
     Serial.begin(115200);
     SPI.begin();
 
-    batteryEn.low();
+    // batteryEn.low(); // 実際の実装
+    batteryEn.high(); // テスト実装
 
     can.begin();
     powerMonitor.initialize();
@@ -184,4 +187,11 @@ void loop()
         }
         }
     }
+
+    if (batteryVoltage_V < 10.8)
+    {
+        batteryEn.low();
+    }
+    else
+        batteryEn.high();
 }
