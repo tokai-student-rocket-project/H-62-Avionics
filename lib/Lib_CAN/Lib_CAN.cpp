@@ -101,27 +101,24 @@ void CAN::receiveIgnition(bool *isIgnition)
   *isIgnition = _latestData[0];
 }
 
-void CAN::sendVoltage(float groundVoltage, float batteryVoltage, float busVoltage)
+void CAN::sendVoltage(float groundVoltage, float batteryVoltage)
 {
-  uint8_t data[6];
-  memcpy(data, &groundVoltage, 2);
-  memcpy(data + 2, &batteryVoltage, 2);
-  memcpy(data + 4, &busVoltage, 2);
+  uint8_t data[8];
+  memcpy(data, &groundVoltage, 4);
+  memcpy(data + 4, &batteryVoltage, 4);
 
-  _can->sendMsgBuf(static_cast<uint32_t>(Var::Label::MONITOR_VOLTAGE), 0, 6, data);
+  _can->sendMsgBuf(static_cast<uint32_t>(Var::Label::MONITOR_VOLTAGE), 0, 8, data);
 }
 
-void CAN::receiveVoltage(float *groundVoltage, float *batteryVoltage, float *busVoltage)
+void CAN::receiveVoltage(float *groundVoltage, float *batteryVoltage)
 {
-  float groundVoltageRaw, batteryVoltageRaw, busVoltageRaw;
+  memcpy(groundVoltage, _latestData + 0, 4);
+  memcpy(batteryVoltage, _latestData + 4, 4);
 
-  memcpy(&groundVoltageRaw, _latestData, 2);
-  memcpy(&batteryVoltageRaw, _latestData + 2, 2);
-  memcpy(&busVoltageRaw, _latestData + 4, 2);
-
-  *groundVoltage = (float)groundVoltageRaw;
-  *batteryVoltage = (float)batteryVoltageRaw;
-  *busVoltage = (float)busVoltageRaw;
+  Serial.print(">groundVoltage_V: ");
+  Serial.println(*groundVoltage);
+  Serial.print(">batteryVoltage_V");
+  Serial.println(*batteryVoltage);
 }
 
 void CAN::sendValveDataPart1(int16_t motorTemperature, int16_t mcuTemperature, int16_t current, uint16_t inputVoltage)
@@ -171,6 +168,9 @@ void CAN::receiveValveDataPart2(float *currentPosition, float *currentDesiredPos
   *currentPosition = (float)currentPositionRaw / 100.0;
   *currentDesiredPosition = (float)currentDesiredPositionRaw / 100.0;
   *currentVelocity = (float)currentVelocityRaw / 10.0;
+
+  Serial.print(">currentPosition_Main: ");
+  Serial.println(*currentPosition);
 }
 
 void CAN::sendValveDataPart3(int16_t motorTemperature, int16_t mcuTemperature, int16_t current, int16_t inputVoltage)
@@ -220,6 +220,9 @@ void CAN::receiveValveDataPart4(float *currentPosition, float *currentDesiredPos
   *currentPosition = (float)currentPositionRaw / 100.0;
   *currentDesiredPosition = (float)currentDesiredPositionRaw / 100.0;
   *currentVelocity = (float)currentVelocityRaw / 10.0;
+
+  Serial.print(">currentPosition_Supply: ");
+  Serial.println(*currentPosition);
 }
 
 void CAN::sendDynamics(float force, float jerk)
