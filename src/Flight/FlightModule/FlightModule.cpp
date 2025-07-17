@@ -66,7 +66,7 @@ bool sensingModuleAvailable = false;
 bool sensingModuleAvailableAnnounced = false;
 
 // test
-float groundVoltage_V, batteryVoltage_V, busVoltage_V;
+float busVoltage_V, busCurrent_mA, busPower_mW, busTemperature_C;
 
 void flightModeOn()
 {
@@ -543,9 +543,9 @@ void loop()
 
       break;
     }
-    case Var::Label::MONITOR_VOLTAGE:
+    case Var::Label::MONITOR_BUS:
     {
-      can.receiveVoltage(&groundVoltage_V, &batteryVoltage_V);
+      can.receiveBusMonitor(&busVoltage_V, &busCurrent_mA, &busPower_mW, &busTemperature_C);
       ledCanRx.toggle();
       break;
     }
