@@ -28,8 +28,8 @@ public:
   void sendIgnition(bool isIgnition);
   void receiveIgnition(bool *isIgnition);
 
-  void sendVoltage(float groundVoltage, float batteryVoltage);
-  void receiveVoltage(float *groundVoltage, float *batteryVoltage);
+  void sendBusMonitor(float busVoltage, float busCurrent, float busPower, float busTemperature);
+  void receiveBusMonitor(float *busVoltage, float *busCurrent, float *busPower, float *busTemperature);
 
   void sendValveDataPart1(int16_t motorTemperature, int16_t mcuTemperature, int16_t current, uint16_t inputVoltage);
   void receiveValveDataPart1(float *motorTemperature, float *mcuTemperature, float *current, float *inputVoltage);

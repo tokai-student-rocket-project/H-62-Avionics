@@ -101,24 +101,44 @@ void CAN::receiveIgnition(bool *isIgnition)
   *isIgnition = _latestData[0];
 }
 
-void CAN::sendVoltage(float groundVoltage, float batteryVoltage)
+void CAN::sendBusMonitor(float busVoltage, float busCurrent, float busPower, float busTemperature)
 {
-  uint8_t data[8];
-  memcpy(data, &groundVoltage, 4);
-  memcpy(data + 4, &batteryVoltage, 4);
+  int16_t busVoltage_int = static_cast<int16_t>(busVoltage * 100.0);
+  int16_t busCurrent_int = static_cast<int16_t>(busCurrent * 100.0);
+  int16_t busPower_int = static_cast<int16_t>(busPower * 100.0);
+  int16_t busTemperature_int = static_cast<int16_t>(busTemperature * 100.0);
 
-  _can->sendMsgBuf(static_cast<uint32_t>(Var::Label::MONITOR_VOLTAGE), 0, 8, data);
+  uint8_t data[8];
+  memcpy(data, &busVoltage_int, 2);
+  memcpy(data + 2, &busCurrent_int, 2);
+  memcpy(data + 4, &busPower_int, 2);
+  memcpy(data + 6, &busTemperature_int, 2);
+
+  _can->sendMsgBuf(static_cast<uint32_t>(Var::Label::MONITOR_BUS), 0, 8, data);
 }
 
-void CAN::receiveVoltage(float *groundVoltage, float *batteryVoltage)
+void CAN::receiveBusMonitor(float *busVoltage, float *busCurrent, float *busPower, float *busTemperature)
 {
-  memcpy(groundVoltage, _latestData + 0, 4);
-  memcpy(batteryVoltage, _latestData + 4, 4);
+  int16_t busVoltage_int, busCurrent_int, busPower_int, busTemperature_int;
 
-  Serial.print(">groundVoltage_V: ");
-  Serial.println(*groundVoltage);
-  Serial.print(">batteryVoltage_V");
-  Serial.println(*batteryVoltage);
+  memcpy(&busVoltage_int, _latestData + 0, 2);
+  memcpy(&busCurrent_int, _latestData + 2, 2);
+  memcpy(&busPower_int, _latestData + 4, 2);
+  memcpy(&busTemperature_int, _latestData + 6, 2);
+
+  *busVoltage = static_cast<float>(busVoltage_int) / 100.0;
+  *busCurrent = static_cast<float>(busCurrent_int) / 100.0;
+  *busPower = static_cast<float>(busPower_int) / 1000.0;
+  *busTemperature = static_cast<float>(busTemperature_int) / 100.0;
+
+  Serial.print(">busVoltage_V: ");
+  Serial.println(*busVoltage);
+  Serial.print(">busCurrent_mA: ");
+  Serial.println(*busCurrent);
+  Serial.print(">busPower_mW: ");
+  Serial.println(*busPower);
+  Serial.print(">busTemperature_C: ");
+  Serial.println(*busTemperature);
 }
 
 void CAN::sendValveDataPart1(int16_t motorTemperature, int16_t mcuTemperature, int16_t current, uint16_t inputVoltage)
