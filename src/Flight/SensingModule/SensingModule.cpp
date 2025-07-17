@@ -117,11 +117,14 @@ void task200Hz()
     float temperature_C = (primaryTemperature_C + secondaryTemperature_C) / 2;
     altitude_m = (primary.getAltitude(temperature_C) + secondary.getAltitude(temperature_C)) / 2;
 
-    Serial.print(">Altitude: ");
+    Serial.print(">temperature: ");
+    Serial.println(temperature_C);
+
+    Serial.print(">altitude_m: ");
     Serial.println(altitude_m);
 
-    Serial.print(">primaryAltitude_m: ");
-    Serial.println(primary.getAltitude(temperature_C));
+    // Serial.print(">primaryAltitude_m: ");
+    // Serial.println(primary.getAltitude(temperature_C));
 }
 
 void task100Hz()
@@ -300,8 +303,8 @@ void setup()
 
     primary.initialize(0x5C);
     secondary.initialize(0x5D);
-    primary.setReferencePressure(1006.0);   // METARのQから始まる値を基準気圧に設定してみる．
-    secondary.setReferencePressure(1006.0); // METARのQから始まる値を基準気圧に設定してみる．
+    primary.setReferencePressure(1013.0);   // METARのQから始まる値を基準気圧に設定してみる．
+    secondary.setReferencePressure(1013.0); // METARのQから始まる値を基準気圧に設定してみる．
 
     Tasks.add(&task200Hz)->startFps(200);
     Tasks.add(&task100Hz)->startFps(100);
@@ -310,7 +313,7 @@ void setup()
     Tasks.add(&task10Hz)->startFps(10);
     Tasks.add(&task5Hz)->startFps(5);
     Tasks.add(&task2Hz)->startFps(2);
-    Tasks.add(&calibrationPressure)->startOnceAfterSec(10);
+    // Tasks.add(&calibrationPressure)->startOnceAfterSec(10);
 }
 
 void loop()
