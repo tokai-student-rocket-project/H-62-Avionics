@@ -31,6 +31,12 @@ public:
   void sendBusMonitor(float busVoltage, float busCurrent, float busPower, float busTemperature);
   void receiveBusMonitor(float *busVoltage, float *busCurrent, float *busPower, float *busTemperature);
 
+  void sendBatteryMonitor(float batteryVoltage, float batteryCurrent, float batteryPower, float batteryTemperture);
+  void receiveBatteryMonitor(float *batteryVoltage, float *batteryCurrent, float *batteryPower, float *batteryTemperature);
+
+  void sendExternalMonitor(float externalVoltage, float externalCurrent, float externalPower, float externalTemperture);
+  void receiveExternalMonitor(float *externalVoltage, float *externalCurrent, float *externalPower, float *externalTemperature);
+
   void sendValveDataPart1(int16_t motorTemperature, int16_t mcuTemperature, int16_t current, uint16_t inputVoltage);
   void receiveValveDataPart1(float *motorTemperature, float *mcuTemperature, float *current, float *inputVoltage);
 
