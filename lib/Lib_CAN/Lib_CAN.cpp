@@ -128,7 +128,7 @@ void CAN::receiveBusMonitor(float *busVoltage, float *busCurrent, float *busPowe
 
   *busVoltage = static_cast<float>(busVoltage_int) / 100.0;
   *busCurrent = static_cast<float>(busCurrent_int) / 100.0;
-  *busPower = static_cast<float>(busPower_int) / 1000.0;
+  *busPower = static_cast<float>(busPower_int) / 100.0;
   *busTemperature = static_cast<float>(busTemperature_int) / 100.0;
 
   Serial.print(">busVoltage_V: ");
@@ -171,13 +171,13 @@ void CAN::receiveBatteryMonitor(float *batteryVoltage, float *batteryCurrent, fl
   *batteryPower = static_cast<float>(batteryPower_int) / 100.0;
   *batteryTemperature = static_cast<float>(batteryTemperature_int) / 100.0;
 
-  Serial.print(">busVoltage_V: ");
+  Serial.print(">battexternalVoltage_V: ");
   Serial.println(*batteryVoltage);
-  Serial.print(">busCurrent_mA: ");
+  Serial.print(">battexternalCurrent_mA: ");
   Serial.println(*batteryCurrent);
-  Serial.print(">busPower_mW: ");
+  Serial.print(">battexternalPower_mW: ");
   Serial.println(*batteryPower);
-  Serial.print(">busTemperature_C: ");
+  Serial.print(">battexternalTemperature_C: ");
   Serial.println(*batteryTemperature);
 }
 
@@ -222,13 +222,13 @@ void CAN::receiveExternalMonitor(float *externalVoltage, float *externalCurrent,
   *externalPower = static_cast<float>(externalPower_int) / 100.0;
   *externalTemperature = static_cast<float>(externalTemperature_int) / 100.0;
 
-  Serial.print(">busVoltage_V: ");
+  Serial.print(">externalVoltage_V: ");
   Serial.println(*externalVoltage);
-  Serial.print(">busCurrent_mA: ");
+  Serial.print(">externalCurrent_mA: ");
   Serial.println(*externalCurrent);
-  Serial.print(">busPower_mW: ");
+  Serial.print(">externalPower_mW: ");
   Serial.println(*externalPower);
-  Serial.print(">busTemperature_C: ");
+  Serial.print(">externalTemperature_C: ");
   Serial.println(*externalTemperature);
 }
 
