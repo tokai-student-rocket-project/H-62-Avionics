@@ -13,6 +13,7 @@ public:
     void noticedGreen();
     void noticedRed();
     void noticedBlue();
+    void noticedWhite();
     void noticedTime(bool permiddionTime);
 
 private:

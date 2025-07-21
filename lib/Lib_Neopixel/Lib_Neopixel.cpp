@@ -43,6 +43,13 @@ void Neopixel::noticedRed()
     _neopixel->show();
 }
 
+void Neopixel::noticedWhite()
+{
+    _neopixel->clear();
+    _neopixel->setPixelColor(0, _neopixel->Color(255, 255, 255));
+    _neopixel->show();
+}
+
 void Neopixel::noticedTime(bool permissionTime)
 {
     if (permissionTime == 1)
