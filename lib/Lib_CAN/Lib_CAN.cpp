@@ -181,17 +181,6 @@ void CAN::receiveBatteryMonitor(float *batteryVoltage, float *batteryCurrent, fl
   Serial.println(*batteryTemperature);
 }
 
-void CAN::sendValveDataPart1(int16_t motorTemperature, int16_t mcuTemperature, int16_t current, uint16_t inputVoltage)
-{
-  uint8_t data[8];
-  memcpy(data, &motorTemperature, 2);
-  memcpy(data + 2, &mcuTemperature, 2);
-  memcpy(data + 4, &current, 2);
-  memcpy(data + 6, &inputVoltage, 2);
-
-  _can->sendMsgBuf(static_cast<uint32_t>(Var::Label::VALVE_DATA_PART_1), 0, 8, data);
-}
-
 void CAN::sendExternalMonitor(float externalVoltage, float externalCurrent, float externalPower, float externalTemperature)
 {
   int16_t externalVoltage_int = static_cast<int16_t>(externalVoltage * 100.0);
@@ -230,6 +219,17 @@ void CAN::receiveExternalMonitor(float *externalVoltage, float *externalCurrent,
   Serial.println(*externalPower);
   Serial.print(">externalTemperature_C: ");
   Serial.println(*externalTemperature);
+}
+
+void CAN::sendValveDataPart1(int16_t motorTemperature, int16_t mcuTemperature, int16_t current, uint16_t inputVoltage)
+{
+  uint8_t data[8];
+  memcpy(data, &motorTemperature, 2);
+  memcpy(data + 2, &mcuTemperature, 2);
+  memcpy(data + 4, &current, 2);
+  memcpy(data + 6, &inputVoltage, 2);
+
+  _can->sendMsgBuf(static_cast<uint32_t>(Var::Label::VALVE_DATA_PART_1), 0, 8, data);
 }
 
 void CAN::receiveValveDataPart1(float *motorTemperature, float *mcuTemperature, float *current, float *inputVoltage)
