@@ -49,11 +49,18 @@ void setup()
                                int16_t motorTemperature,
                                int16_t mcuTemperature,
                                uint16_t inputVoltage,
+                               int16_t current,
                                int16_t currentPosition,
                                int16_t currentDesiredPosition,
                                int16_t currentVelocity,
-                               int16_t currentSupplyPosition,
-                               int16_t voltage,
+
+                               int16_t motorTemperature_SUPPLY,
+                               int16_t mcuTemperature_SUPPLY,
+                               int16_t inputVoltage_SUPPLY,
+                               int16_t current_SUPPLY,
+                               int16_t currentPosition_SUPPLY,
+                               int16_t currentDesiredPosition_SUPPLY,
+                               int16_t currentVelocity_SUPPLY,
                                uint16_t separation1ProtectionTime,
                                uint16_t separation1ForceTime,
                                uint16_t separation2ProtectionTime,
@@ -91,12 +98,19 @@ void setup()
 
                              packet["valve"]["motorTemperature_degC"] = (float)motorTemperature / 100.0;
                              packet["valve"]["mcuTemperature_degC"] = (float)mcuTemperature / 100.0;
-                             packet["valve"]["inputVoltage_V"] = (float)inputVoltage / 1000.0;
+                             packet["valve"]["inputVoltage_V"] = (float)inputVoltage / 100.0;
+                             packet["valve"]["current"] = (float)current / 100.0;
                              packet["valve"]["currentPosition_deg"] = (float)currentPosition / 100.0;
                              packet["valve"]["currentDesiredPosition_deg"] = (float)currentDesiredPosition / 100.0;
                              packet["valve"]["currentVelocity_degps"] = (float)currentVelocity / 100.0;
-                             packet["valve"]["currentSupplyPosition_deg"] = (float)currentSupplyPosition / 100.0;
-                             packet["valve"]["voltage"] = (float)voltage / 100.0;
+
+                             packet["valve"]["motorTemperatureSupply_degC"] = (float)motorTemperature_SUPPLY / 100.0;
+                             packet["valve"]["mcuTemperatureSupply_degC"] = (float)mcuTemperature_SUPPLY / 100.0;
+                             packet["valve"]["inputVoltageSupply_V"] = (float)inputVoltage_SUPPLY / 100.0;
+                             packet["valve"]["currentSupply_A"] = (float)current_SUPPLY / 100.0;
+                             packet["valve"]["currentPositionSupply_deg"] = (float)currentPosition_SUPPLY / 100.0;
+                             packet["valve"]["currentDesiredPositionSupply_deg"] = (float)currentDesiredPosition_SUPPLY / 100.0;
+                             packet["valve"]["currentVelocitySupply_deg"] = (float)currentVelocity_SUPPLY / 100.0;
 
                              packet["timer"]["separation_1_protection_time"] = (float)separation1ProtectionTime / 1000.0;
                              packet["timer"]["separation_1_force_time"] = (float)separation1ForceTime / 1000.0;
