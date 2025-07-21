@@ -1,3 +1,4 @@
+
 #include <Arduino.h>
 #include <SPI.h>
 #include <TaskManager.h>
@@ -14,7 +15,7 @@
 #include "Lib_OutputPin.hpp"
 
 char ident = '\0';
-bool doLogging = true;
+bool doLogging = false;
 uint8_t flightMode = 0;
 uint16_t flightTime = 0;
 
@@ -27,6 +28,28 @@ OutputPin servoEn(29);
 OutputPin redLed(17);
 OutputPin greenLed(16);
 OutputPin blueLed(25);
+
+Var::ValveMode currentValveMode = Var::ValveMode::LAUNCH;
+Var::GseSignal currentGseSignal = Var::GseSignal::IGNITION_ON;
+
+GseSignal gseValve(6);   // OK
+GseSignal gseIgniter(7); // OK
+
+constexpr uint16_t MODE_CHANGING_THRESHOLD = 3;
+CountDetector valveSignalCounter(MODE_CHANGING_THRESHOLD);
+CountDetector igniterSignalCounter(MODE_CHANGING_THRESHOLD);
+
+uint32_t retryCount = 0;
+uint32_t lastSendTime = 0;
+bool isVerified = true;
+
+int16_t motorTemperature;
+int16_t mcuTemperature;
+int16_t current;
+int16_t inputVoltage;
+int16_t currentPosition;
+int16_t currentDesiredPosition;
+int16_t currentVelocity;
 
 B3MSC1170A supplyValve;
 void openSupplyValve()
@@ -68,39 +91,17 @@ void closeMainValve()
   // }
 }
 
-// void closeMainValveToFlight()
-// {
-//   mainValve.setPosition(0x02, 0, 1000);
-//   int16_t mainValveCurrentPossition = mainValve.readCurrentPosition(0x02);
-//   if (mainValveCurrentPossition < -100 || mainValveCurrentPossition < 100)
-//   {
-//     mainValve.setPosition(0x02, 0, 1000);
-//   }
-// }
+void closeMainValveToFlight()
+{
+  mainValve.setPosition(0x01, -7000, 0);
+}
 
-bool currentValveMode = static_cast<uint8_t>(Var::ValveMode::LAUNCH);
-bool currentGseSignal = static_cast<uint8_t>(Var::GseSignal::IGNITION_ON);
+void valveInitialize()
+{
+  mainValve.initialize(0x01);
+  supplyValve.initialize(0x02);
+}
 
-GseSignal gseValve(6);   // OK
-GseSignal gseIgniter(7); // OK
-
-constexpr uint16_t MODE_CHANGING_THRESHOLD = 3;
-CountDetector valveSignalCounter(MODE_CHANGING_THRESHOLD);
-CountDetector igniterSignalCounter(MODE_CHANGING_THRESHOLD);
-
-uint32_t retryCount = 0;
-uint32_t lastSendTime = 0;
-bool isVerified = true;
-
-int16_t motorTemperature;
-int16_t mcuTemperature;
-int16_t current;
-int16_t inputVoltage;
-int16_t currentPosition;
-int16_t currentDesiredPosition;
-int16_t currentVelocity;
-
-/*
 void verifyValve()
 {
   if (isVerified)
@@ -155,7 +156,6 @@ void verifyValve()
     }
   }
 }
-*/
 
 void addTaskIfNotExisted(const String &name, void (*callback)())
 {
@@ -165,7 +165,7 @@ void addTaskIfNotExisted(const String &name, void (*callback)())
   }
 }
 
-void changeMode(bool nextMode)
+void changeMode(Var::ValveMode nextMode)
 {
   if (nextMode == currentValveMode)
     return;
@@ -174,14 +174,15 @@ void changeMode(bool nextMode)
   lastSendTime = millis();
   isVerified = false;
 
-  if (nextMode)
+  if (nextMode == Var::ValveMode::LAUNCH)
   {
     closeSupplyValve();
     addTaskIfNotExisted("delayed-open-main-valve", &openMainValve);
     Tasks["delayed-open-main-valve"]->startOnceAfterMsec(500.0);
     Status.noticedRed();
   }
-  else
+
+  if (nextMode == Var::ValveMode::WAITING)
   {
     closeMainValve();
     addTaskIfNotExisted("delayed-open-supply-valve", &openSupplyValve);
@@ -192,10 +193,19 @@ void changeMode(bool nextMode)
   currentValveMode = nextMode;
 }
 
-void changeIgnition(bool nextMode)
+void changeIgnition(Var::GseSignal nextMode)
 {
   if (nextMode == currentGseSignal)
     return;
+  if (nextMode == Var::GseSignal::IGNITION_ON)
+  {
+    Status.noticedPink();
+  }
+
+  if (nextMode == Var::GseSignal::IGNITION_OFF)
+  {
+    Status.noticedWhite();
+  }
 
   currentGseSignal = nextMode;
 }
@@ -208,21 +218,11 @@ void syncFlightMode()
     {
     case Var::Label::FLIGHT_DATA:
     {
-      bool newDoLogging;
       blueLed.toggle();
+      bool newDoLogging;
       can.receiveFlight(&flightMode, &flightTime, &newDoLogging, &ident);
       Serial.print(">flightMode: ");
       Serial.println(flightMode);
-
-      // if (doLogging != newDoLogging)
-      // {
-      //   doLogging = newDoLogging;
-
-      //   if (doLogging)
-      //   {
-      //     logger.reset();
-      //   }
-      // }
 
       switch (flightMode)
       {
@@ -230,27 +230,28 @@ void syncFlightMode()
       {
         changeMode(Var::ValveMode::WAITING);
 
-        // igniterSignalCounter.update(gseIgniter.isSignaled());
-        // if (igniterSignalCounter.isExceeded())
-        // {
-        //   changeIgnition(Var::GseSignal::IGNITION_ON);
-        // }
-        // else
-        // {
-        //   changeIgnition(Var::GseSignal::IGNITION_OFF);
-        // }
+        igniterSignalCounter.update(gseIgniter.isSignaled());
+        if (igniterSignalCounter.isExceeded())
+        {
+          changeIgnition(Var::GseSignal::IGNITION_ON);
+        }
+        else
+        {
+          changeIgnition(Var::GseSignal::IGNITION_OFF);
+        }
 
-        // valveSignalCounter.update(gseValve.isSignaled());
-        // if (valveSignalCounter.isExceeded())
-        // {
-        //   changeMode(Var::ValveMode::LAUNCH);
-        // }
-        // else
-        // {
-        //   changeMode(Var::ValveMode::WAITING);
-        // }
+        valveSignalCounter.update(gseValve.isSignaled());
+        if (valveSignalCounter.isExceeded())
+        {
+          changeMode(Var::ValveMode::LAUNCH);
+        }
+        else
+        {
+          changeMode(Var::ValveMode::WAITING);
+        }
 
-        // verifyValve();
+        servoEn.high();
+        verifyValve();
         Serial.println("STANDBY");
         break;
       }
@@ -299,13 +300,16 @@ void syncFlightMode()
       case (4): // FREE_DESCENT
       {
         changeMode(Var::ValveMode::LAUNCH);
+
         Serial.println("FREE_DESCENT");
         break;
       }
 
       case (5): // DROGUE_CHUTE_DESCENT
       {
-        changeMode(Var::ValveMode::LAUNCH);
+        addTaskIfNotExisted("flight-close-main-valve", &closeMainValveToFlight);
+        Tasks["flight-close-main-valve"]->startOnceAfterSec(1.0);
+        closeSupplyValve();
         Serial.println("DROGUE_CHUTE_DESCENT");
         break;
       }
@@ -313,7 +317,6 @@ void syncFlightMode()
       case (6): // MAIN_CHUTE_DESCENT
       {
         closeSupplyValve();
-        // closeMainValveToFlight();
         Serial.println("MAIN_CHUTE_DESCENT");
         break;
       }
@@ -383,10 +386,10 @@ void task10Hz()
   */
 
   //////////////////////////////////////////////////
-  // Serial.print(">VALVE: ");
-  // Serial.println(digitalRead(6) ? "ON" : "OFF");
-  // Serial.print(">IGN: ");
-  // Serial.println(digitalRead(7) ? "ON" : "OFF");
+  Serial.print(">VALVE: ");
+  Serial.println(gseValve.isSignaled());
+  Serial.print(">IGN: ");
+  Serial.println(gseIgniter.isSignaled());
   //////////////////////////////////////////////////
 }
 
@@ -447,6 +450,3 @@ void loop()
 {
   Tasks.update();
 }
-
-// TODO
-// gseValveSignal から信号を受け取れない．
