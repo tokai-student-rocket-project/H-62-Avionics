@@ -48,10 +48,10 @@ float gyroscopeX_dps, gyroscopeY_dps, gyroscopeZ_dps;
 float roll_deg, pitch_deg, yaw_deg;
 float magnetometerX_nT, magnetometerY_nT, magnetometerZ_nT;
 
-float groundVoltage_V, batteryVoltage_V, busVoltage_V;
-float groundCurrent_mA, batteryCurrent_mA, busCurrent_mA;
-float groundPower_mW, batteryPower_mW, busPower_mW;
-float groundDieTemperature_C, batteryDieTemperature_C, busDieTemperature_C;
+float externalVoltage_V, batteryVoltage_V, busVoltage_V;
+float externalCurrent_mA, batteryCurrent_mA, busCurrent_mA;
+float externalPower_mW, batteryPower_mW, busPower_mW;
+float externalDieTemperature_C, batteryDieTemperature_C, busDieTemperature_C;
 
 float referencePressure_hPa;
 float primaryPressure_hPa, secondaryPressure_hPa;
@@ -186,9 +186,9 @@ void task100Hz()
                                                   roll_deg, pitch_deg, yaw_deg,
                                                   forceX_N, jerkX_mps3,
                                                   referencePressure_hPa, altitude_m, verticalSpeed_mps, verticalAcceleration_msp2, estimated, apogee, isFalling,
-                                                  groundVoltage_V, batteryVoltage_V, busVoltage_V,
-                                                  groundCurrent_mA, batteryCurrent_mA, busCurrent_mA,
-                                                  groundPower_mW, batteryPower_mW, busPower_mW);
+                                                  externalVoltage_V, batteryVoltage_V, busVoltage_V,
+                                                  externalCurrent_mA, batteryCurrent_mA, busCurrent_mA,
+                                                  externalPower_mW, batteryPower_mW, busPower_mW);
 
     if (doLogging)
     {
@@ -232,6 +232,7 @@ void task10Hz()
 
     ledCanTx.toggle();
 
+    /*x
     Serial.print(">isFalling: ");
     Serial.println(isFalling);
 
@@ -243,6 +244,7 @@ void task10Hz()
 
     Serial.print(">Altitude: ");
     Serial.println(altitude_m);
+    */
 }
 
 void task5Hz()
@@ -272,13 +274,13 @@ void task2Hz()
                                                            static_cast<int16_t>(verticalSpeed_mps * 10),
                                                            static_cast<int16_t>(estimated * 10),
                                                            static_cast<int16_t>(apogee * 10),
-                                                           static_cast<uint8_t>(groundVoltage_V * 10),
+                                                           static_cast<uint8_t>(externalVoltage_V * 10),
                                                            static_cast<uint8_t>(batteryVoltage_V * 10),
                                                            static_cast<uint8_t>(busVoltage_V * 10),
-                                                           static_cast<int16_t>(groundCurrent_mA * 10),
+                                                           static_cast<int16_t>(externalCurrent_mA * 10),
                                                            static_cast<int16_t>(batteryCurrent_mA * 10),
                                                            static_cast<int16_t>(busCurrent_mA * 10),
-                                                           static_cast<int8_t>(groundPower_mW / 100),
+                                                           static_cast<int8_t>(externalPower_mW / 100),
                                                            static_cast<int8_t>(batteryPower_mW / 100),
                                                            static_cast<int8_t>(busPower_mW / 100));
 
@@ -349,13 +351,18 @@ void loop()
 
             break;
         }
-        case Var::Label::MONITOR_VOLTAGE:
+        case Var::Label::MONITOR_BUS:
         {
-            can.receiveVoltage(&groundVoltage_V, &batteryVoltage_V, &busVoltage_V);
+            can.receiveBusMonitor(&busVoltage_V, &busCurrent_mA, &busPower_mW, &busDieTemperature_C);
             ledCanRx.toggle();
 
-            Serial.print(">groundVoltage_V: ");
-            Serial.println(groundVoltage_V);
+            break;
+        }
+
+        case Var::Label::MONITOR_BATTERY:
+        {
+            can.receiveBatteryMonitor(&batteryVoltage_V, &batteryCurrent_mA, &batteryPower_mW, &batteryDieTemperature_C);
+            ledCanRx.toggle();
 
             break;
         }
