@@ -6,6 +6,7 @@
 #include <TaskManager.h>
 #include <ArduinoJson.h>
 #include "LoRaBoards.h"
+#include <TinyGPS++.h>
 
 StaticJsonDocument<4096> packet;
 
@@ -14,6 +15,56 @@ uint16_t separation1ForceTime = 11605;
 uint16_t separation2ProtectionTime = 1000;
 uint16_t separation2ForceTime = 1000;
 uint16_t landingTime = 30305;
+
+float onbordLatitude;
+float onbordLongtitude;
+TinyGPSPlus onbordGps;
+
+void task5Hz(){
+
+   while (SerialGPS.available()) {
+    onbordGps.encode(SerialGPS.read());
+  }
+
+  // GPSデータが有効な場合にのみ表示
+  if (onbordGps.location.isValid()) {
+    Serial.print(F("Lat: "));
+    Serial.print(onbordGps.location.lat(), 6); // 緯度 (小数点以下6桁まで)
+    Serial.print(F(", Lng: "));
+    Serial.print(onbordGps.location.lng(), 6); // 経度 (小数点以下6桁まで)
+    Serial.print(F(", Alt: "));
+    Serial.print(onbordGps.altitude.meters(), 2); // 高度 (メートル、小数点以下2桁まで)
+    Serial.print(F("m"));
+    
+
+    // 日付と時刻の表示
+    if (onbordGps.date.isValid() && onbordGps.time.isValid()) {
+      Serial.print(F(", Date: "));
+      Serial.print(onbordGps.date.year());
+      Serial.print(F("-"));
+      Serial.print(onbordGps.date.month(), DEC);
+      Serial.print(F("-"));
+      Serial.print(onbordGps.date.day(), DEC);
+      Serial.print(F(", Time: "));
+      Serial.print(onbordGps.time.hour(), DEC);
+      Serial.print(F(":"));
+      Serial.print(onbordGps.time.minute(), DEC);
+      Serial.print(F(":"));
+      Serial.print(onbordGps.time.second(), DEC);
+    }
+
+    Serial.print(F(", Sats: "));
+    Serial.print(onbordGps.satellites.value()); // 捕捉衛星数
+    Serial.print(F(", HDOP: "));
+    Serial.print(onbordGps.hdop.hdop(), 1);     // 水平精度低下率
+
+    Serial.println(); // 改行
+  } else {
+    // GPSデータがまだ有効でない場合
+    Serial.println(F("No valid GPS data yet."));
+  }
+}
+
 
 void setup()
 {
@@ -123,6 +174,8 @@ void setup()
                              Serial.println();
                              Serial.flush();
                            });
+
+    Tasks.add(&task5Hz)->startFps(5);
 }
 
 void loop()
