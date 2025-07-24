@@ -1,169 +1,237 @@
-#include <Arduino.h>
-#include <SPI.h>
-#include <Wire.h>
-#include <LoRa.h>
-#include <MsgPacketizer.h>
-#include <TaskManager.h>
-#include <ArduinoJson.h>
+// #include <Arduino.h>
+// #include <SPI.h>
+// #include <Wire.h>
+// #include <LoRa.h>
+// #include <MsgPacketizer.h>
+// #include <TaskManager.h>
+// #include <ArduinoJson.h>
 
-StaticJsonDocument<4096> packet;
+// StaticJsonDocument<4096> packet;
 
-uint16_t separation1ProtectionTime = 8605;
-uint16_t separation1ForceTime = 11605;
-uint16_t separation2ProtectionTime = 1000;
-uint16_t separation2ForceTime = 1000;
-uint16_t landingTime = 30305;
+// uint16_t separation1ProtectionTime = 8605;
+// uint16_t separation1ForceTime = 11605;
+// uint16_t separation2ProtectionTime = 1000;
+// uint16_t separation2ForceTime = 1000;
+// uint16_t landingTime = 30305;
 
-void setup()
-{
-  Serial.begin(115200);
+// void setup()
+// {
+//   Serial.begin(115200);
 
-  pinMode(LED_BUILTIN, OUTPUT);
+//   pinMode(LED_BUILTIN, OUTPUT);
 
-  LoRa.begin(925.6E6);
-  LoRa.setSignalBandwidth(500E3);
+//   LoRa.begin(925.6E6);
+//   LoRa.setSignalBandwidth(500E3);
 
-  MsgPacketizer::subscribe(LoRa, 0x0A,
+//   MsgPacketizer::subscribe(LoRa, 0x0A,
 
-                           [](
-                               char ident,
-                               uint32_t millis,
-                               uint8_t flightMode,
-                               uint16_t flightTime,
-                               uint8_t loggerUsage,
-                               bool doLogging,
-                               uint8_t framNumber,
-                               bool flightPinIsOpen,
-                               bool sn3IsOn,
-                               bool sn4IsOn,
-                               bool isLaunchMode,
-                               bool isFalling,
-                               uint32_t unixEpoch,
-                               uint8_t fixType,
-                               uint8_t satelliteCount,
-                               float latitude,
-                               float longitude,
-                               int16_t height,
-                               int16_t speed,
-                               uint16_t accuracy,
-                               int16_t motorTemperature,
-                               int16_t mcuTemperature,
-                               uint16_t inputVoltage,
-                               int16_t current,
-                               int16_t currentPosition,
-                               int16_t currentDesiredPosition,
-                               int16_t currentVelocity,
+//                            [](
+//                                char ident,
+//                                uint32_t millis,
+//                                uint8_t flightMode,
+//                                uint16_t flightTime,
+//                                uint8_t loggerUsage,
+//                                bool doLogging,
+//                                uint8_t framNumber,
+//                                bool flightPinIsOpen,
+//                                bool sn3IsOn,
+//                                bool sn4IsOn,
+//                                bool isLaunchMode,
+//                                bool isFalling,
+//                                uint32_t unixEpoch,
+//                                uint8_t fixType,
+//                                uint8_t satelliteCount,
+//                                float latitude,
+//                                float longitude,
+//                                int16_t height,
+//                                int16_t speed,
+//                                uint16_t accuracy,
+//                                int16_t motorTemperature,
+//                                int16_t mcuTemperature,
+//                                uint16_t inputVoltage,
+//                                int16_t current,
+//                                int16_t currentPosition,
+//                                int16_t currentDesiredPosition,
+//                                int16_t currentVelocity,
 
-                               int16_t motorTemperature_SUPPLY,
-                               int16_t mcuTemperature_SUPPLY,
-                               int16_t inputVoltage_SUPPLY,
-                               int16_t current_SUPPLY,
-                               int16_t currentPosition_SUPPLY,
-                               int16_t currentDesiredPosition_SUPPLY,
-                               int16_t currentVelocity_SUPPLY,
-                               uint16_t separation1ProtectionTime,
-                               uint16_t separation1ForceTime,
-                               uint16_t separation2ProtectionTime,
-                               uint16_t separation2ForceTime,
-                               uint16_t landingTime)
-                           {
-                             packet.clear();
+//                                int16_t motorTemperature_SUPPLY,
+//                                int16_t mcuTemperature_SUPPLY,
+//                                int16_t inputVoltage_SUPPLY,
+//                                int16_t current_SUPPLY,
+//                                int16_t currentPosition_SUPPLY,
+//                                int16_t currentDesiredPosition_SUPPLY,
+//                                int16_t currentVelocity_SUPPLY,
+//                                uint16_t separation1ProtectionTime,
+//                                uint16_t separation1ForceTime,
+//                                uint16_t separation2ProtectionTime,
+//                                uint16_t separation2ForceTime,
+//                                uint16_t landingTime)
+//                            {
+//                              packet.clear();
 
-                             packet["packet"]["module"] = "F";
-                             packet["packet"]["rssi_dBm"] = LoRa.packetRssi();
-                             packet["packet"]["snr_dBm"] = LoRa.packetSnr();
-                             packet["packet"]["ident"] = (String)ident;
-                             packet["packet"]["uptime_s"] = (float)millis / 1000.0;
+//                              packet["packet"]["module"] = "F";
+//                              packet["packet"]["rssi_dBm"] = LoRa.packetRssi();
+//                              packet["packet"]["snr_dBm"] = LoRa.packetSnr();
+//                              packet["packet"]["ident"] = (String)ident;
+//                              packet["packet"]["uptime_s"] = (float)millis / 1000.0;
 
-                             packet["logger"]["doLogging"] = doLogging;
-                             packet["logger"]["usage"] = loggerUsage;
-                             packet["logger"]["number"] = framNumber;
+//                              packet["logger"]["doLogging"] = doLogging;
+//                              packet["logger"]["usage"] = loggerUsage;
+//                              packet["logger"]["number"] = framNumber;
 
-                             packet["flight"]["mode"] = flightMode;
-                             packet["flight"]["time_s"] = (float)flightTime / 1000.0;
-                             packet["flight"]["detection"]["valveModeIsLaunch"] = isLaunchMode;
-                             packet["flight"]["detection"]["flightPinIsOpen"] = flightPinIsOpen;
-                             packet["flight"]["detection"]["isFalling"] = isFalling;
-                             packet["flight"]["separation"]["sn3IsOn"] = sn3IsOn;
-                             packet["flight"]["separation"]["sn4IsOn"] = sn4IsOn;
+//                              packet["flight"]["mode"] = flightMode;
+//                              packet["flight"]["time_s"] = (float)flightTime / 1000.0;
+//                              packet["flight"]["detection"]["valveModeIsLaunch"] = isLaunchMode;
+//                              packet["flight"]["detection"]["flightPinIsOpen"] = flightPinIsOpen;
+//                              packet["flight"]["detection"]["isFalling"] = isFalling;
+//                              packet["flight"]["separation"]["sn3IsOn"] = sn3IsOn;
+//                              packet["flight"]["separation"]["sn4IsOn"] = sn4IsOn;
 
-                             packet["gnss"]["unixEpoch"] = unixEpoch;
-                             packet["gnss"]["fixType"] = fixType;
-                             packet["gnss"]["satellites"] = satelliteCount;
-                             packet["gnss"]["latitude_deg"] = latitude;
-                             packet["gnss"]["longitude_deg"] = longitude;
-                             packet["gnss"]["height_m"] = (float)height / 10.0;
-                             packet["gnss"]["speed_mps"] = (float)speed / 10.0;
-                             packet["gnss"]["accuracy_m"] = (float)accuracy / 10.0;
+//                              packet["gnss"]["unixEpoch"] = unixEpoch;
+//                              packet["gnss"]["fixType"] = fixType;
+//                              packet["gnss"]["satellites"] = satelliteCount;
+//                              packet["gnss"]["latitude_deg"] = latitude;
+//                              packet["gnss"]["longitude_deg"] = longitude;
+//                              packet["gnss"]["height_m"] = (float)height / 10.0;
+//                              packet["gnss"]["speed_mps"] = (float)speed / 10.0;
+//                              packet["gnss"]["accuracy_m"] = (float)accuracy / 10.0;
 
-                             packet["valve"]["motorTemperature_degC"] = (float)motorTemperature / 100.0;
-                             packet["valve"]["mcuTemperature_degC"] = (float)mcuTemperature / 100.0;
-                             packet["valve"]["inputVoltage_V"] = (float)inputVoltage / 100.0;
-                             packet["valve"]["current"] = (float)current / 100.0;
-                             packet["valve"]["currentPosition_deg"] = (float)currentPosition / 100.0;
-                             packet["valve"]["currentDesiredPosition_deg"] = (float)currentDesiredPosition / 100.0;
-                             packet["valve"]["currentVelocity_degps"] = (float)currentVelocity / 100.0;
+//                              packet["valve"]["motorTemperature_degC"] = (float)motorTemperature / 100.0;
+//                              packet["valve"]["mcuTemperature_degC"] = (float)mcuTemperature / 100.0;
+//                              packet["valve"]["inputVoltage_V"] = (float)inputVoltage / 100.0;
+//                              packet["valve"]["current"] = (float)current / 100.0;
+//                              packet["valve"]["currentPosition_deg"] = (float)currentPosition / 100.0;
+//                              packet["valve"]["currentDesiredPosition_deg"] = (float)currentDesiredPosition / 100.0;
+//                              packet["valve"]["currentVelocity_degps"] = (float)currentVelocity / 100.0;
 
-                             packet["valve"]["motorTemperatureSupply_degC"] = (float)motorTemperature_SUPPLY / 100.0;
-                             packet["valve"]["mcuTemperatureSupply_degC"] = (float)mcuTemperature_SUPPLY / 100.0;
-                             packet["valve"]["inputVoltageSupply_V"] = (float)inputVoltage_SUPPLY / 100.0;
-                             packet["valve"]["currentSupply_A"] = (float)current_SUPPLY / 100.0;
-                             packet["valve"]["currentPositionSupply_deg"] = (float)currentPosition_SUPPLY / 100.0;
-                             packet["valve"]["currentDesiredPositionSupply_deg"] = (float)currentDesiredPosition_SUPPLY / 100.0;
-                             packet["valve"]["currentVelocitySupply_deg"] = (float)currentVelocity_SUPPLY / 100.0;
+//                              packet["valve"]["motorTemperatureSupply_degC"] = (float)motorTemperature_SUPPLY / 100.0;
+//                              packet["valve"]["mcuTemperatureSupply_degC"] = (float)mcuTemperature_SUPPLY / 100.0;
+//                              packet["valve"]["inputVoltageSupply_V"] = (float)inputVoltage_SUPPLY / 100.0;
+//                              packet["valve"]["currentSupply_A"] = (float)current_SUPPLY / 100.0;
+//                              packet["valve"]["currentPositionSupply_deg"] = (float)currentPosition_SUPPLY / 100.0;
+//                              packet["valve"]["currentDesiredPositionSupply_deg"] = (float)currentDesiredPosition_SUPPLY / 100.0;
+//                              packet["valve"]["currentVelocitySupply_deg"] = (float)currentVelocity_SUPPLY / 100.0;
 
-                             packet["timer"]["separation_1_protection_time"] = (float)separation1ProtectionTime / 1000.0;
-                             packet["timer"]["separation_1_force_time"] = (float)separation1ForceTime / 1000.0;
-                             packet["timer"]["separation_2_protection_time"] = (float)separation2ProtectionTime / 1000.0;
-                             packet["timer"]["separation_2_force_time"] = (float)separation2ForceTime / 1000.0;
-                             packet["timer"]["landing_time"] = (float)landingTime / 1000.0;
+//                              packet["timer"]["separation_1_protection_time"] = (float)separation1ProtectionTime / 1000.0;
+//                              packet["timer"]["separation_1_force_time"] = (float)separation1ForceTime / 1000.0;
+//                              packet["timer"]["separation_2_protection_time"] = (float)separation2ProtectionTime / 1000.0;
+//                              packet["timer"]["separation_2_force_time"] = (float)separation2ForceTime / 1000.0;
+//                              packet["timer"]["landing_time"] = (float)landingTime / 1000.0;
 
-                             serializeJson(packet, Serial);
-                             Serial.println();
-                             Serial.flush();
+//                              serializeJson(packet, Serial);
+//                              Serial.println();
+//                              Serial.flush();
 
-                             digitalWrite(LED_BUILTIN, !digitalRead(LED_BUILTIN));
-                           });
+//                              digitalWrite(LED_BUILTIN, !digitalRead(LED_BUILTIN));
+//                            });
+// }
+
+// void loop()
+// {
+//   Tasks.update();
+
+//   if (Serial.available())
+//   {
+//     char command = Serial.read();
+
+//     // F: フライトモードオン
+//     if (command == 'F')
+//     {
+//       const auto &packet = MsgPacketizer::encode(0xF1, (uint8_t)0);
+//       LoRa.beginPacket();
+//       LoRa.write(packet.data.data(), packet.data.size());
+//       LoRa.endPacket();
+//     }
+
+//     // R: フライトモードリセット
+//     if (command == 'R')
+//     {
+//       const auto &packet = MsgPacketizer::encode(0xF2, (uint8_t)0);
+//       LoRa.beginPacket();
+//       LoRa.write(packet.data.data(), packet.data.size());
+//       LoRa.endPacket();
+//     }
+
+//     // C: タイマー設定
+//     if (command == 'C')
+//     {
+//       const auto &packet = MsgPacketizer::encode(0xF3, separation1ProtectionTime, separation1ForceTime, separation2ProtectionTime, separation2ForceTime, landingTime);
+//       LoRa.beginPacket();
+//       LoRa.write(packet.data.data(), packet.data.size());
+//       LoRa.endPacket();
+//     }
+//   }
+
+//   if (LoRa.parsePacket())
+//   {
+//     MsgPacketizer::parse();
+//   }
+// }
+
+#include <TinyGPS++.h>
+#include "LoRaBoards.h" // TTGO T-BEAM特有のピン設定などが含まれるため必要
+
+// TinyGPS++ オブジェクトを宣言
+TinyGPSPlus gps;
+
+void setup() {
+  // ボードのセットアップ (シリアルポートの初期化など)
+  setupBoards();
+
+  // シリアルモニターの初期化 (デバッグ出力用)
+  // LoRaBoards.h 内の setupBoards() で Serial.begin() が呼ばれる場合があるが、
+  // 明示的にSerial.begin(115200); などで初期化しても良いかな。
+  // Serial.begin(115200); // 必要であればコメントを外して
+
+  Serial.println(F("TTGO T-BEAM GPS Receiver"));
+  Serial.println(F("-------------------------"));
+  Serial.println(F("Waiting for GPS data..."));
 }
 
-void loop()
-{
-  Tasks.update();
-
-  if (Serial.available())
-  {
-    char command = Serial.read();
-
-    // F: フライトモードオン
-    if (command == 'F')
-    {
-      const auto &packet = MsgPacketizer::encode(0xF1, (uint8_t)0);
-      LoRa.beginPacket();
-      LoRa.write(packet.data.data(), packet.data.size());
-      LoRa.endPacket();
-    }
-
-    // R: フライトモードリセット
-    if (command == 'R')
-    {
-      const auto &packet = MsgPacketizer::encode(0xF2, (uint8_t)0);
-      LoRa.beginPacket();
-      LoRa.write(packet.data.data(), packet.data.size());
-      LoRa.endPacket();
-    }
-
-    // C: タイマー設定
-    if (command == 'C')
-    {
-      const auto &packet = MsgPacketizer::encode(0xF3, separation1ProtectionTime, separation1ForceTime, separation2ProtectionTime, separation2ForceTime, landingTime);
-      LoRa.beginPacket();
-      LoRa.write(packet.data.data(), packet.data.size());
-      LoRa.endPacket();
-    }
+void loop() {
+  // GPSデータを読み込み、TinyGPS++オブジェクトにエンコードする
+  // SerialGPSはLoRaBoards.hで定義されているGPSモジュールへのシリアル通信。
+  while (SerialGPS.available()) {
+    gps.encode(SerialGPS.read());
   }
 
-  if (LoRa.parsePacket())
-  {
-    MsgPacketizer::parse();
+  // GPSデータが有効な場合にのみ表示
+  if (gps.location.isValid()) {
+    Serial.print(F("Lat: "));
+    Serial.print(gps.location.lat(), 6); // 緯度 (小数点以下6桁まで)
+    Serial.print(F(", Lng: "));
+    Serial.print(gps.location.lng(), 6); // 経度 (小数点以下6桁まで)
+    Serial.print(F(", Alt: "));
+    Serial.print(gps.altitude.meters(), 2); // 高度 (メートル、小数点以下2桁まで)
+    Serial.print(F("m"));
+
+    // 日付と時刻の表示
+    if (gps.date.isValid() && gps.time.isValid()) {
+      Serial.print(F(", Date: "));
+      Serial.print(gps.date.year());
+      Serial.print(F("-"));
+      Serial.print(gps.date.month(), DEC);
+      Serial.print(F("-"));
+      Serial.print(gps.date.day(), DEC);
+      Serial.print(F(", Time: "));
+      Serial.print(gps.time.hour(), DEC);
+      Serial.print(F(":"));
+      Serial.print(gps.time.minute(), DEC);
+      Serial.print(F(":"));
+      Serial.print(gps.time.second(), DEC);
+    }
+
+    Serial.print(F(", Sats: "));
+    Serial.print(gps.satellites.value()); // 捕捉衛星数
+    Serial.print(F(", HDOP: "));
+    Serial.print(gps.hdop.hdop(), 1);     // 水平精度低下率
+
+    Serial.println(); // 改行
+  } else {
+    // GPSデータがまだ有効でない場合
+    Serial.println(F("No valid GPS data yet."));
   }
+
+  // 短い遅延 (GPSデータの処理を妨げないように短くする)
+  delay(1000);
 }
