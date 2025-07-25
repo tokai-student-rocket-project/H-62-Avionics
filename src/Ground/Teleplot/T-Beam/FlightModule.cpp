@@ -17,8 +17,10 @@ uint16_t landingTime = 30305;
 
 void setup()
 {
+    setupBoards();
     Serial.begin(115200);
 
+    LoRa.setPins(RADIO_CS_PIN, RADIO_RST_PIN, RADIO_DIO0_PIN);
     LoRa.begin(925.6E6);
     LoRa.setSignalBandwidth(500E3);
 
