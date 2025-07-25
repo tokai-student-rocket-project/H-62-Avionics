@@ -65,9 +65,6 @@ float currentPosition_SUPPLY, currentDesiredPosition_SUPPLY, currentVelocity_SUP
 bool sensingModuleAvailable = false;
 bool sensingModuleAvailableAnnounced = false;
 
-// test
-float busVoltage_V, busCurrent_mA, busPower_mW, busTemperature_C;
-
 void flightModeOn()
 {
   if (flightMode.isNot(Var::FlightMode::STANDBY))
@@ -418,11 +415,11 @@ void setup()
   gnss.begin();
 
   setTimer(
-      5000,  // SEPARATION_1_PROTECTION_TIME
-      10000, // SEPARATION_1_FORCE_TIME
-      15000, // SEPARATION_2_PROTECTION_TIME // 18382
-      20000, // SEPARATION_2_FORCE_TIME // 19382
-      25000  // LANDING_TIME
+      23000, // SEPARATION_1_PROTECTION_TIME
+      30000, // SEPARATION_1_FORCE_TIME
+      40000, // SEPARATION_2_PROTECTION_TIME // 18382
+      45000, // SEPARATION_2_FORCE_TIME // 19382
+      50000  // LANDING_TIME
   );
 
   if (flightPin.isOpen())
@@ -481,12 +478,12 @@ void loop()
 
   if (can.available())
   {
-    sensingModuleAvailable = true; // CAN 通信できているかの確認用 // モールス信号OK
+    // sensingModuleAvailable = true; // CAN 通信できているかの確認用 // モールス信号OK
     switch (can.getLatestLabel())
     {
     case Var::Label::TRAJECTORY_DATA:
     {
-      // can.receiveTrajectory(&isFalling, &altitude); // Altitude を送信していないのでいったんコメントアウト．
+      can.receiveTrajectory(&isFalling, &altitude); // Altitude を送信していないのでいったんコメントアウト．
       ledCanRx.toggle();
       sensingModuleAvailable = true;
 
@@ -545,12 +542,6 @@ void loop()
       can.receiveValveDataPart4(&currentPosition_SUPPLY, &currentDesiredPosition_SUPPLY, &currentVelocity_SUPPLY);
       ledCanRx.toggle();
 
-      break;
-    }
-    case Var::Label::MONITOR_BUS:
-    {
-      can.receiveBusMonitor(&busVoltage_V, &busCurrent_mA, &busPower_mW, &busTemperature_C);
-      ledCanRx.toggle();
       break;
     }
     }
