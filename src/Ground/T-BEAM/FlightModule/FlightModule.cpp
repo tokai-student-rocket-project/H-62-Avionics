@@ -7,6 +7,8 @@
 #include <ArduinoJson.h>
 #include "LoRaBoards.h"
 #include <TinyGPS++.h>
+#include <Adafruit_SSD1306.h>
+#include <Adafruit_GFX.h> 
 
 StaticJsonDocument<4096> packet;
 
@@ -16,8 +18,17 @@ uint16_t separation2ProtectionTime = 1000;
 uint16_t separation2ForceTime = 1000;
 uint16_t landingTime = 30305;
 
+
+#define SCREEN_WIDTH 128 // OLED display width, in pixels
+#define SCREEN_HEIGHT 64 // OLED display height, in pixels
+#define OLED_RESET -1    // Reset pin 
+Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
+
+
+
 float onbordLatitude;
 float onbordLongtitude;
+float onbordAltitude;
 TinyGPSPlus onbordGps;
 
 void task5Hz(){
@@ -36,7 +47,6 @@ void task5Hz(){
     Serial.print(onbordGps.altitude.meters(), 2); // 高度 (メートル、小数点以下2桁まで)
     Serial.print(F("m"));
     
-
     // 日付と時刻の表示
     if (onbordGps.date.isValid() && onbordGps.time.isValid()) {
       Serial.print(F(", Date: "));
@@ -65,11 +75,37 @@ void task5Hz(){
   }
 }
 
-
 void setup()
 {
   setupBoards();
   // Serial.begin(115200);
+
+  if(!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) { // 128x64用のアドレス0x3C (一般的なアドレス)
+    Serial.println(F("SSD1306 allocation failed"));
+    for(;;); // 初期化失敗したら停止
+  }
+  display.display();
+  delay(100); //初期表示を短くした
+  display.clearDisplay();
+  display.setTextColor(SSD1306_WHITE); //テキストの色を白に設定
+  display.setTextSize(1); //テキストサイズを1に設定
+
+  //GPSシリアルポートの初期化 (T-BEAMのGPSは通常UART1, 9600bps)
+  SerialGPS.begin(9600, SERIAL_8N1, 12, 15); // ESP32のGPIO12(RX), GPIO15(TX)
+
+  LoRa.setPins(RADIO_CS_PIN, RADIO_RST_PIN, RADIO_DIO0_PIN);
+  //LoRa初期化の成功チェックを追加
+  if (!LoRa.begin(925.6E6)) {
+    Serial.println("LoRa initialization failed!");
+    display.println("LoRa Init Fail!"); // ここを変更した: OLEDにも表示
+    display.display();
+    while (1);
+  }
+  LoRa.setSignalBandwidth(500E3);
+  Serial.println("LoRa initialized."); //成功メッセージ
+  display.println("LoRa Init OK."); //OLEDにも表示
+  display.display();
+  delay(100); //初期化成功メッセージ表示
 
   LoRa.setPins(RADIO_CS_PIN, RADIO_RST_PIN, RADIO_DIO0_PIN);
   LoRa.begin(925.6E6);
@@ -173,6 +209,46 @@ void setup()
                              serializeJson(packet, Serial);
                              Serial.println();
                              Serial.flush();
+
+                             // ディスプレイ表示,追記箇所
+                             display.clearDisplay(); // 画面クリア
+                             display.setTextSize(1); // テキストサイズを1に設定 (すべての情報に適用)
+
+                             //1. GNSSにて測位した情報から現在の時間を表示
+                             display.setCursor(0, 0); // Y座標0
+                             display.print("TIME: ");
+                             if (onbordGps.time.isValid()) { // GPS時刻が有効な場合のみ表示
+                                 if (onbordGps.time.hour() < 10) display.print("0"); // 1桁の場合はゼロ埋め
+                                 display.print(onbordGps.time.hour());
+                                 display.print(":");
+                                 if (onbordGps.time.minute() < 10) display.print("0");
+                                 display.print(onbordGps.time.minute());
+                                 display.print(":");
+                                 if (onbordGps.time.second() < 10) display.print("0");
+                                 display.println(onbordGps.time.second());
+                             } else {
+                                 display.println("--:--:--"); // 無効な場合はハイフン表示
+                             }
+
+                             //フライトモードの表示
+                             display.setCursor(0, 10); // Y座標10
+                             display.print("Elapsed Time:"); display.println((float)flightTime / 1000.0);
+
+                             //「すばる」からの測位データをT-Beamのディスプレイに映す．小数点以下6桁
+                             display.setCursor(0, 20); // Y座標20
+                             display.print("TX Lat:"); display.println(latitude, 6); // 小数点以下6桁
+                             display.setCursor(0, 30); // Y座標30
+                             display.print("TX Lon:"); display.println(longitude, 6); // 小数点以下6桁
+
+                             //T-Beam内部のGPSモジュールからの測位データをディスプレイに映す．小数点以下6桁
+                             display.setCursor(0, 40); // Y座標40
+                             display.print("RX Lat:"); display.println(onbordLatitude, 6); // 小数点以下6桁
+                             display.setCursor(0, 50); // Y座標50(これがギリギリ128x64ディスプレイの最終行)
+                             display.print("RX Lon:"); display.println(onbordLongtitude, 6); // 小数点以下6桁
+                             // 注: RX Altは画面スペースの制約上、このレイアウトでは表示できない→すばる側の高度を消した
+
+                             display.display(); // 画面更新
+
                            });
 
     Tasks.add(&task5Hz)->startFps(5);
