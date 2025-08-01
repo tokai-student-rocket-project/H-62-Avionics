@@ -16,34 +16,38 @@ Neopixel status(12);
 CAN can(26);
 PowerMonitor powerMonitor;
 
+int16_t batteryMinimumVoltage_V = 11.0;
+int16_t externalThresholdVoltage = 10.0;
 OutputPin batteryEn(0);
 OutputPin ltc4353GroundEn(28);
 OutputPin ltc4353BatteryEn(29);
+
+// RGB LED Config
 OutputPin redLed(17);
 OutputPin greenLed(16);
 OutputPin blueLed(25);
 
-float groundVoltage_V, batteryVoltage_V, busVoltage_V;
-float groundCurrent_mA, batteryCurrent_mA, busCurrent_mA;
-float groundPower_mW, batteryPower_mW, busPower_mW;
-float groundTemperature_C, batteryTemperature_C, busTemperature_C;
+float externalVoltage_V, batteryVoltage_V, busVoltage_V;
+float externalCurrent_mA, batteryCurrent_mA, busCurrent_mA;
+float externalPower_mW, batteryPower_mW, busPower_mW;
+float externalTemperature_C, batteryTemperature_C, busTemperature_C;
 
 void task5Hz()
 {
-    powerMonitor.getVoltage(&groundVoltage_V, &batteryVoltage_V, &busVoltage_V);
-    powerMonitor.getCurrent(&groundCurrent_mA, &batteryCurrent_mA, &busCurrent_mA);
-    powerMonitor.getPower(&groundPower_mW, &batteryPower_mW, &busPower_mW);
-    powerMonitor.getTemperature(&groundTemperature_C, &batteryTemperature_C, &busTemperature_C);
+    powerMonitor.getVoltage(&externalVoltage_V, &batteryVoltage_V, &busVoltage_V);
+    powerMonitor.getCurrent(&externalCurrent_mA, &batteryCurrent_mA, &busCurrent_mA);
+    powerMonitor.getPower(&externalPower_mW, &batteryPower_mW, &busPower_mW);
+    powerMonitor.getTemperature(&externalTemperature_C, &batteryTemperature_C, &busTemperature_C);
 
     // Ground
     Serial.print(">Gpu_Voltage_V: ");
-    Serial.println(groundVoltage_V);
+    Serial.println(externalVoltage_V);
     Serial.print(">Gpu_Current_mA: ");
-    Serial.println(groundCurrent_mA);
+    Serial.println(externalCurrent_mA);
     Serial.print(">Gpu_Power_mW: ");
-    Serial.println(groundPower_mW);
+    Serial.println(externalPower_mW);
     Serial.print(">Gpu_Temperature_C: ");
-    Serial.println(groundTemperature_C);
+    Serial.println(externalTemperature_C);
 
     // Battery
     Serial.print(">Bat_Voltage_V: ");
@@ -65,10 +69,20 @@ void task5Hz()
     Serial.print(">Bus_Temperature_C: ");
     Serial.println(busTemperature_C);
 
-    Serial.print(">Battery EN: ");
-    Serial.println(batteryEn.get());
     greenLed.toggle();
     can.sendBusMonitor(busVoltage_V, busCurrent_mA, busPower_mW, busTemperature_C);
+    can.sendBatteryMonitor(batteryVoltage_V, batteryCurrent_mA, batteryPower_mW, batteryTemperature_C);
+    can.sendExternalMonitor(externalVoltage_V, externalCurrent_mA, externalPower_mW, externalTemperature_C);
+}
+
+void task2Hz()
+{
+    Serial.print(">batteryEnable: ");
+    Serial.println(batteryEn.get());
+
+    Serial.print(">ltc3119Powergood: ");
+    Serial.println(digitalRead(1));
+    status.noticedRainbow();
 }
 
 void setup()
@@ -76,21 +90,24 @@ void setup()
     Serial.begin(115200);
     SPI.begin();
 
-    // batteryEn.low(); // 実際の実装
-    batteryEn.high(); // テスト実装
+    pinMode(1, INPUT);
+
+    batteryEn.low(); // 実際の実装
+    ltc4353BatteryEn.high();
+    // batteryEn.high(); // テスト実装
 
     can.begin();
     powerMonitor.initialize();
 
     status.init(11);
-    status.noticedGreen();
+    // status.noticedGreen();
 
     redLed.high();
     blueLed.high();
     greenLed.high();
 
-    Tasks.add(&task5Hz)
-        ->startFps(5);
+    Tasks.add(&task5Hz)->startFps(5);
+    Tasks.add(&task2Hz)->startFps(2);
 }
 
 void loop()
@@ -110,57 +127,84 @@ void loop()
             {
             case (0):
             {
-                batteryEn.low();
-                Serial.println(batteryEn.get());
+                if (externalVoltage_V > externalThresholdVoltage)
+                {
+                    batteryEn.high();
+                }
+                else
+                    batteryEn.low();
 
-                Serial.println("STANDBY");
                 break;
             }
 
             case (1):
             {
-                batteryEn.high();
-                Serial.println(batteryEn.get());
+                if (externalVoltage_V > externalThresholdVoltage)
+                {
+                    batteryEn.high();
+                }
+                else
+                    batteryEn.low();
 
-                Serial.println("READT_TO_FLY");
                 break;
             }
 
             case (2):
             {
-                batteryEn.high();
-                Serial.println(batteryEn.get());
+                if (batteryVoltage_V < batteryMinimumVoltage_V)
+                {
+                    batteryEn.low();
+                }
+                else
+                    batteryEn.high();
 
                 break;
             }
 
             case (3):
             {
-                batteryEn.high();
-                Serial.println(batteryEn.get());
+                if (batteryVoltage_V < batteryMinimumVoltage_V)
+                {
+                    batteryEn.low();
+                }
+                else
+                    batteryEn.high();
 
                 break;
             }
 
             case (4):
             {
-                batteryEn.high();
-                Serial.println(batteryEn.get());
+                if (batteryVoltage_V < batteryMinimumVoltage_V)
+                {
+                    batteryEn.low();
+                }
+                else
+                    batteryEn.high();
 
                 break;
             }
 
             case (5):
             {
-                batteryEn.high();
-                Serial.println(batteryEn.get());
+                if (batteryVoltage_V < batteryMinimumVoltage_V)
+                {
+                    batteryEn.low();
+                }
+                else
+                    batteryEn.high();
 
                 break;
             }
 
             case (6):
             {
-                batteryEn.high();
+                if (batteryVoltage_V < batteryMinimumVoltage_V)
+                {
+                    batteryEn.low();
+                }
+                else
+                    batteryEn.high();
                 Serial.println(batteryEn.get());
 
                 break;
@@ -168,16 +212,24 @@ void loop()
 
             case (7):
             {
-                batteryEn.high();
-                Serial.println(batteryEn.get());
+                if (batteryVoltage_V < batteryMinimumVoltage_V)
+                {
+                    batteryEn.low();
+                }
+                else
+                    batteryEn.high();
 
                 break;
             }
 
             case (8):
             {
-                batteryEn.high();
-                Serial.println(batteryEn.get());
+                if (batteryVoltage_V < batteryMinimumVoltage_V)
+                {
+                    batteryEn.low();
+                }
+                else
+                    batteryEn.high();
 
                 break;
             }
@@ -187,11 +239,4 @@ void loop()
         }
         }
     }
-
-    if (batteryVoltage_V < 10.8)
-    {
-        batteryEn.low();
-    }
-    else
-        batteryEn.high();
 }
