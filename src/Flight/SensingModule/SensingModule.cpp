@@ -188,7 +188,8 @@ void task100Hz()
                                                   referencePressure_hPa, altitude_m, verticalSpeed_mps, verticalAcceleration_msp2, estimated, apogee, isFalling,
                                                   externalVoltage_V, batteryVoltage_V, busVoltage_V,
                                                   externalCurrent_mA, batteryCurrent_mA, busCurrent_mA,
-                                                  externalPower_mW, batteryPower_mW, busPower_mW);
+                                                  externalPower_mW, batteryPower_mW, busPower_mW,
+                                                  externalDieTemperature_C, batteryDieTemperature_C, busDieTemperature_C);
 
     if (doLogging)
     {
@@ -282,7 +283,10 @@ void task2Hz()
                                                            static_cast<int16_t>(busCurrent_mA * 10),
                                                            static_cast<int8_t>(externalPower_mW / 100),
                                                            static_cast<int8_t>(batteryPower_mW / 100),
-                                                           static_cast<int8_t>(busPower_mW / 100));
+                                                           static_cast<int8_t>(busPower_mW / 100),
+                                                           static_cast<int16_t>(externalDieTemperature_C * 10),
+                                                           static_cast<int16_t>(batteryDieTemperature_C * 10),
+                                                           static_cast<int16_t>(busDieTemperature_C * 10));
 
     telemeter.reserveData(airTelemetryPacket.data.data(), airTelemetryPacket.data.size());
     telemeter.sendReservedData();
@@ -362,6 +366,14 @@ void loop()
         case Var::Label::MONITOR_BATTERY:
         {
             can.receiveBatteryMonitor(&batteryVoltage_V, &batteryCurrent_mA, &batteryPower_mW, &batteryDieTemperature_C);
+            ledCanRx.toggle();
+
+            break;
+        }
+
+        case Var::Label::MONITOR_EXTERNAL:
+        {
+            can.receiveExternalMonitor(&externalVoltage_V, &externalCurrent_mA, &externalPower_mW, &externalDieTemperature_C);
             ledCanRx.toggle();
 
             break;
