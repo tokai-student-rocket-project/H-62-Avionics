@@ -26,54 +26,54 @@ B3MSC1170A mainValve;
 void closeMainValve()
 {
     mainValve.setPosition(0x01, -7000, 0);
-    int16_t mainValveCurrentPossition = mainValve.readCurrentPosition(0x01);
+    // int16_t mainValveCurrentPossition = mainValve.readCurrentPosition(0x01);
     // if (mainValveCurrentPossition < -5000 || mainValveCurrentPossition > -6000)
     // {
-    mainValve.setPosition(0x01, -7000, 0);
+    // mainValve.setPosition(0x01, -7000, 0);
     // }
 }
 void openMainValve()
 {
     mainValve.setPosition(0x01, 0, 0);
-    int16_t mainValveCurrentPossition = mainValve.readCurrentPosition(0x01);
+    // int16_t mainValveCurrentPossition = mainValve.readCurrentPosition(0x01);
     // if (mainValveCurrentPossition < -500 || mainValveCurrentPossition > 500)
     // {
-    mainValve.setPosition(0x01, 0, 0);
+    // mainValve.setPosition(0x01, 0, 0);
     // }
 }
 void closeMainValveToFlight()
 {
     mainValve.setPosition(0x01, -100, 200);
-    int16_t mainValveCurrentPossition = mainValve.readCurrentPosition(0x01);
+    // int16_t mainValveCurrentPossition = mainValve.readCurrentPosition(0x01)
     // if (mainValveCurrentPossition < -200 || mainValveCurrentPossition > 100)
     // {
     //   mainValve.setPosition(0x01, -100, 200);
     // }
-    mainValve.setPosition(0x01, -100, 200);
+    // mainValve.setPosition(0x01, -100, 200);
 }
 
 B3MSC1170A supplyValve;
 void openSupplyValve()
 {
     supplyValve.setPosition(0x02, 0, 0);
-    int16_t supplyValveCurrentPossition = supplyValve.readCurrentPosition(0x02);
-    if (supplyValveCurrentPossition < -500 || supplyValveCurrentPossition > 500)
-    {
-        supplyValve.setPosition(0x02, 0, 0);
-    }
+    // int16_t supplyValveCurrentPossition = supplyValve.readCurrentPosition(0x02);
+    // if (supplyValveCurrentPossition < -500 || supplyValveCurrentPossition > 500)
+    // {
+    //     supplyValve.setPosition(0x02, 0, 0);
+    // }
 }
 void closeSupplyValve()
 {
     supplyValve.setPosition(0x02, -9000, 0);
-    int16_t supplyValveCurrentPossition = supplyValve.readCurrentPosition(0x02);
-    if (supplyValveCurrentPossition < -8500 || supplyValveCurrentPossition > -9500)
-    {
-        supplyValve.setPosition(0x02, -9000, 0);
-    }
+    // int16_t supplyValveCurrentPossition = supplyValve.readCurrentPosition(0x02);
+    // if (supplyValveCurrentPossition < -8500 || supplyValveCurrentPossition > -9500)
+    // {
+    //     supplyValve.setPosition(0x02, -9000, 0);
+    // }
 }
 
-Var::ValveMode currentValveMode = Var::ValveMode::WAITING;
-Var::GseSignal currentGseSignal = Var::GseSignal::IGNITION_OFF;
+Var::ValveMode currentValveMode = Var::ValveMode::LAUNCH;
+Var::GseSignal currentGseSignal = Var::GseSignal::IGNITION_ON;
 
 GseSignal gseValve(6);   // OK
 GseSignal gseIgniter(7); // OK
@@ -84,7 +84,7 @@ CountDetector igniterSignalCounter(MODE_CHANGING_THRESHOLD);
 
 uint32_t retryCount = 0;
 uint32_t lastSendTime = 0;
-bool isVerified = true;
+bool isVerified = false;
 
 void setup()
 {
@@ -96,34 +96,40 @@ void setup()
     pinMode(greenled, OUTPUT);
     pinMode(blueled, OUTPUT);
 
+    pinMode(6, INPUT);
     pinMode(powerEN, OUTPUT);
-    digitalWrite(powerEN, LOW);
-
+    digitalWrite(powerEN, HIGH);
+    // changeMode(Var::ValveMode::WAITING);
+    // changeIgnition(Var::GseSignal::IGNITION_OFF);
     Status.init(11);
 
     mainValve.initialize(0x01);
     supplyValve.initialize(0x02);
 
-    Tasks.add("openMainValve", [&]()
-              { openMainValve(); });
-    Tasks.add("openSupplyValve", [&]()
-              { openSupplyValve(); });
+    // Tasks.add("openMainValve", [&]()
+    //           { openMainValve(); });
+    // Tasks.add("openSupplyValve", [&]()
+    //           { openSupplyValve(); });
 }
 
 void loop()
 {
-    Tasks.update();
+    // Tasks.update();
 
-    if (gseValve.isSignaled())
+    if (digitalRead(6))
     {
         openMainValve();
+        delay(500);
         closeSupplyValve();
         Status.noticedRed();
+        Serial.println("Arduino");
     }
     else
     {
         closeMainValve();
+        delay(500);
         openSupplyValve();
         Status.noticedGreen();
+        Serial.println("Hello");
     }
 }
