@@ -65,6 +65,9 @@ float currentPosition_SUPPLY, currentDesiredPosition_SUPPLY, currentVelocity_SUP
 bool sensingModuleAvailable = false;
 bool sensingModuleAvailableAnnounced = false;
 
+uint8_t servoId = 0;
+int16_t servoAngle = 0;
+
 void flightModeOn()
 {
   if (flightMode.isNot(Var::FlightMode::STANDBY))
@@ -421,6 +424,17 @@ void setup()
       45000, // SEPARATION_2_FORCE_TIME // 19382
       50000  // LANDING_TIME
   );
+
+  );
+
+  // LoRaコマンド(サーボ制御)
+  MsgPacketizer::subscribe(LoRa, 0xCC, [](uint8_t id, int16_t angle)
+  {
+    ledLoRaRx.toggle();
+    servoId = id;
+    servoAngle = angle;
+    can.sendServoCommand(servoId, servoAngle);
+  });
 
   if (flightPin.isOpen())
   {

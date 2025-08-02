@@ -76,7 +76,7 @@ void task5Hz()
     status.setBatteryStatus(batteryVoltage_V);
 }
 
-void task2Hz()
+void task1Hz()
 {
     Serial.print(">batteryEnable: ");
     Serial.println(batteryEn.get());
@@ -108,7 +108,7 @@ void setup()
     greenLed.high();
 
     Tasks.add(&task5Hz)->startFps(5);
-    Tasks.add(&task2Hz)->startFps(2);
+    Tasks.add(&task1Hz)->startFps(1);
 }
 
 void loop()
@@ -128,7 +128,7 @@ void loop()
             {
             case (0):
             {
-                status.noticedRainbow();
+                // status.noticedRainbow();
                 // if (externalVoltage_V > externalThresholdVoltage)
                 // {
                 //     batteryEn.high();

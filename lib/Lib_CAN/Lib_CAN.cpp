@@ -339,3 +339,18 @@ void CAN::receiveDynamics(float *force, float *jerk)
   memcpy(force, _latestData + 0, 4);
   memcpy(jerk, _latestData + 4, 4);
 }
+
+void CAN::sendServoCommand(uint8_t servoId, int16_t angle)
+{
+  uint8_t data[3];
+  data[0] = servoId;
+  memcpy(data + 1, &angle, 2);
+
+  _can->sendMsgBuf(static_cast<uint32_t>(Var::Label::SERVO_COMMAND), 0, 3, data);
+}
+
+void CAN::receiveServoCommand(uint8_t *servoId, int16_t *angle)
+{
+  *servoId = _latestData[0];
+  memcpy(angle, _latestData + 1, 2);
+}
