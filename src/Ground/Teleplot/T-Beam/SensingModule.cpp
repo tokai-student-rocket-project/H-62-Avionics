@@ -6,64 +6,170 @@
 #include <TaskManager.h>
 #include "LoRaBoards.h"
 #include <TinyGPS++.h>
+#include <Adafruit_GFX.h>
+#include <Adafruit_SSD1306.h>
 
-float onbordLatitude;
-float onbordLongtitude;
+#define BUTTON_PIN 38
+const unsigned long LONG_PRESS_TIME_MS = 1000;
+
+Adafruit_SSD1306 display(128, 64, &Wire, -1);
+int currentPage = 0;
+const int NUM_PAGES = 2;
+
 TinyGPSPlus onbordGps;
 
-void task5Hz()
-{
+float lastRssi = 0.0;
+float lastSnr = 0.0;
 
+unsigned long buttonPressTime = 0;
+bool longPressSent = false;
+
+void updateDisplay();
+void sendLoRaCommand();
+
+void displayPage0()
+{
+    display.clearDisplay();
+    display.setTextSize(1);
+    display.setTextColor(SSD1306_WHITE);
+    display.setCursor(0, 0);
+    display.println(F("--- GPS Info ---"));
+
+    if (onbordGps.location.isValid())
+    {
+        display.print(F("LAT: "));
+        display.println(onbordGps.location.lat(), 6);
+        display.print(F("LNG: "));
+        display.println(onbordGps.location.lng(), 6);
+        display.print(F("ALT: "));
+        display.print(onbordGps.altitude.meters(), 1);
+        display.println(F(" m"));
+        display.print(F("SAT: "));
+        display.println(onbordGps.satellites.value());
+    }
+    else
+    {
+        display.println(F("No valid GPS data."));
+    }
+    display.display();
+}
+
+void displayPage1()
+{
+    display.clearDisplay();
+    display.setTextSize(1);
+    display.setTextColor(SSD1306_WHITE);
+    display.setCursor(0, 0);
+    display.println(F("--- LoRa Info ---"));
+    display.print(F("RSSI: "));
+    display.print(lastRssi);
+    display.println(F(" dBm"));
+    display.print(F("SNR:  "));
+    display.print(lastSnr);
+    display.println(F(" dB"));
+    display.display();
+}
+
+void updateDisplay()
+{
+    switch (currentPage)
+    {
+    case 0:
+        displayPage0();
+        break;
+    case 1:
+        displayPage1();
+        break;
+    }
+}
+
+void sendLoRaCommand()
+{
+    Serial.println("Sending LoRa Command...");
+    // Example command: label 0xCC, ident 'G', payload 1
+    MsgPacketizer::send(LoRa, 0xCC, 'G', (uint8_t)1);
+
+    display.clearDisplay();
+    display.setTextSize(2);
+    display.setCursor(10, 25);
+    display.println("COMMAND");
+    display.display();
+    delay(1000);
+    updateDisplay();
+}
+
+void taskGpsUpdate()
+{
     while (SerialGPS.available())
     {
         onbordGps.encode(SerialGPS.read());
     }
 
-    if (onbordGps.location.isValid())
+    if (currentPage == 0)
     {
-        Serial.print(F("Lat: "));
-        Serial.print(onbordGps.location.lat(), 6);
-        Serial.print(F(", Lng: "));
-        Serial.print(onbordGps.location.lng(), 6);
-        Serial.print(F(", Alt: "));
-        Serial.print(onbordGps.altitude.meters(), 2);
-        Serial.print(F("m"));
+        updateDisplay();
+    }
+}
 
-        if (onbordGps.date.isValid() && onbordGps.time.isValid())
+void taskButtonCheck()
+{
+    bool buttonPressed = !digitalRead(BUTTON_PIN);
+
+    if (buttonPressed)
+    {
+        if (buttonPressTime == 0)
         {
-            Serial.print(F(", Date: "));
-            Serial.print(onbordGps.date.year());
-            Serial.print(F("-"));
-            Serial.print(onbordGps.date.month(), DEC);
-            Serial.print(F("-"));
-            Serial.print(onbordGps.date.day(), DEC);
-            Serial.print(F(", Time: "));
-            Serial.print(onbordGps.time.hour(), DEC);
-            Serial.print(F(":"));
-            Serial.print(onbordGps.time.minute(), DEC);
-            Serial.print(F(":"));
-            Serial.print(onbordGps.time.second(), DEC);
+            buttonPressTime = millis();
+            longPressSent = false;
         }
-
-        Serial.print(F(", Sats: "));
-        Serial.print(onbordGps.satellites.value());
-        Serial.print(F(", HDOP: "));
-        Serial.print(onbordGps.hdop.hdop(), 1);
-
-        Serial.println();
+        else if ((millis() - buttonPressTime > LONG_PRESS_TIME_MS) && !longPressSent)
+        {
+            sendLoRaCommand();
+            longPressSent = true;
+        }
     }
     else
     {
-        // GPSデータがまだ有効でない場合
-        Serial.println(F("No valid GPS data yet."));
+        if (buttonPressTime != 0 && !longPressSent)
+        {
+            currentPage = (currentPage + 1) % NUM_PAGES;
+            Serial.print("Button short press. Switching to page: ");
+            Serial.println(currentPage);
+            updateDisplay();
+        }
+        buttonPressTime = 0;
     }
 }
 
 void setup()
 {
     setupBoards();
+    pinMode(BUTTON_PIN, INPUT_PULLUP);
+
+    if (!display.begin(SSD1306_SWITCHCAPVCC, 0x3C))
+    {
+        Serial.println(F("SSD1306 allocation failed"));
+        for (;;)
+            ;
+    }
+    display.clearDisplay();
+    display.setCursor(0, 0);
+    display.setTextSize(1);
+    display.setTextColor(SSD1306_WHITE);
+    display.println("System Start");
+    display.display();
+    delay(1000);
+
     LoRa.setPins(RADIO_CS_PIN, RADIO_RST_PIN, RADIO_DIO0_PIN);
-    LoRa.begin(924.2E6);
+    if (!LoRa.begin(924.2E6))
+    {
+        Serial.println("Starting LoRa failed!");
+        display.clearDisplay();
+        display.println("LoRa Failed!");
+        display.display();
+        while (1)
+            ;
+    }
     LoRa.setSignalBandwidth(500E3);
 
     MsgPacketizer::subscribe(LoRa, 0x0A,
@@ -100,14 +206,18 @@ void setup()
                                  int16_t batteryDieTemperature_C,
                                  int16_t busDieTemperature_C)
                              {
+                                 lastRssi = LoRa.packetRssi();
+                                 lastSnr = LoRa.packetSnr();
+
+                                 if (currentPage == 1)
+                                 {
+                                     updateDisplay();
+                                 }
+
                                  Serial.print(">LoRa_RSSI_dBm: ");
-                                 float loraRssi = LoRa.packetRssi();
-                                 Serial.println(loraRssi);
-
-                                 float loraSnr = LoRa.packetSnr();
+                                 Serial.println(lastRssi);
                                  Serial.print(">LoRa_SNR_dBm: ");
-                                 Serial.println(loraSnr);
-
+                                 Serial.println(lastSnr);
                                  Serial.print(">upTime_sec: ");
                                  Serial.println((float)millis / 1000);
                                  Serial.print(">doLogging_bool: ");
@@ -116,7 +226,6 @@ void setup()
                                  Serial.println(loggerUsage);
                                  Serial.print(">framNumber: ");
                                  Serial.println(framNumber);
-
                                  Serial.print(">acceleration_mps2_norm: ");
                                  Serial.println((float)accelerationNorm_mps2 / 10.0);
                                  Serial.print(">acceleration_mps2_x: ");
@@ -135,7 +244,6 @@ void setup()
                                  Serial.println((float)forceX_N / 10.0);
                                  Serial.print(">jerkX_mps3: ");
                                  Serial.println((float)jerkX_mps3 / 10.0);
-
                                  Serial.print(">altitude_m: ");
                                  Serial.println((float)altitude_m / 10.0);
                                  Serial.print(">vertiaclSpeed_mps: ");
@@ -144,7 +252,6 @@ void setup()
                                  Serial.println((float)apogee / 10.0);
                                  Serial.print(">estimated_s: ");
                                  Serial.println((float)estimated / 10.0);
-
                                  Serial.print(">externalVoltage_V: ");
                                  Serial.println((float)externalVoltage_V / 100.0);
                                  Serial.print(">batteryVoltage_V: ");
@@ -163,19 +270,19 @@ void setup()
                                  Serial.println((float)batteryPower_mW / 100.0);
                                  Serial.print(">busPower_mW: ");
                                  Serial.println((float)busPower_mW / 10.0);
-
                                  Serial.print(">groundTemperature_degC: ");
                                  Serial.println((float)externalDieTemperature_C / 10.0);
                                  Serial.print(">batteryDieTemperature_degC: ");
                                  Serial.println((float)batteryDieTemperature_C / 10.0);
                                  Serial.print(">busDieTemperature_degC: ");
                                  Serial.println((float)busDieTemperature_C / 10.0);
-
                                  Serial.println();
                                  Serial.flush();
                              });
 
-    Tasks.add(&task5Hz)->startFps(5);
+    updateDisplay();
+    Tasks.add(&taskGpsUpdate)->startFps(5);
+    Tasks.add(&taskButtonCheck)->startFps(20);
 }
 
 void loop()
