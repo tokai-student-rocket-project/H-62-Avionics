@@ -79,6 +79,6 @@ void BNO055::readVector3D(uint8_t address, float lsb, float *x, float *y, float 
 
   // 座標軸を合わせるためにxyzを入れ替えているので注意
   *x = ((float)zRaw) / lsb;
-  *y = ((float)yRaw) / lsb;  // 軸の初期設定から90度反時計回りに動かしたので xRaw / Lsb のはず
-  *z = ((float)xRaw) / -lsb; // 軸の初期設定から90度反時計回りに動かしたので yRaw / -Lsb のはず
+  *y = ((float)xRaw) / lsb;  // 軸の初期設定から90度反時計回りに動かしたので xRaw / Lsb のはず
+  *z = ((float)yRaw) / -lsb; // 軸の初期設定から90度反時計回りに動かしたので yRaw / -Lsb のはず
 }
