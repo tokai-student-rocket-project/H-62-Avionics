@@ -232,19 +232,19 @@ void setup()
 
                              //フライトモードの表示
                              display.setCursor(0, 10); // Y座標10
-                             display.print("Elapsed Time:"); display.println((float)flightTime / 1000.0);
+                             display.print("Flight Time:"); display.println((float)flightTime / 1000.0);
 
                              //「すばる」からの測位データをT-Beamのディスプレイに映す．小数点以下6桁
                              display.setCursor(0, 20); // Y座標20
-                             display.print("TX Lat:"); display.println(latitude, 6); // 小数点以下6桁
+                             display.print("H62GPS Lat:"); display.println(latitude, 6); // 小数点以下6桁
                              display.setCursor(0, 30); // Y座標30
-                             display.print("TX Lon:"); display.println(longitude, 6); // 小数点以下6桁
+                             display.print("H62GPS Lon:"); display.println(longitude, 6); // 小数点以下6桁
 
                              //T-Beam内部のGPSモジュールからの測位データをディスプレイに映す．小数点以下6桁
                              display.setCursor(0, 40); // Y座標40
-                             display.print("RX Lat:"); display.println(onbordLatitude, 6); // 小数点以下6桁
+                             display.print("TBEAM Lat:"); display.println(onbordLatitude, 6); // 小数点以下6桁
                              display.setCursor(0, 50); // Y座標50(これがギリギリ128x64ディスプレイの最終行)
-                             display.print("RX Lon:"); display.println(onbordLongtitude, 6); // 小数点以下6桁
+                             display.print("TBEAM Lon:"); display.println(onbordLongtitude, 6); // 小数点以下6桁
                              // 注: RX Altは画面スペースの制約上、このレイアウトでは表示できない→すばる側の高度を消した
 
                              display.display(); // 画面更新
