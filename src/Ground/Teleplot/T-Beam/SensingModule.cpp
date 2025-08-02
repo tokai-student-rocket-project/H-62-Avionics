@@ -4,10 +4,60 @@
 #include <LoRa.h>
 #include <MsgPacketizer.h>
 #include <TaskManager.h>
-#include <ArduinoJson.h>
 #include "LoRaBoards.h"
+#include <TinyGPS++.h>
 
-StaticJsonDocument<4096> packet;
+float onbordLatitude;
+float onbordLongtitude;
+TinyGPSPlus onbordGps;
+
+void task5Hz()
+{
+
+    while (SerialGPS.available())
+    {
+        onbordGps.encode(SerialGPS.read());
+    }
+
+    if (onbordGps.location.isValid())
+    {
+        Serial.print(F("Lat: "));
+        Serial.print(onbordGps.location.lat(), 6);
+        Serial.print(F(", Lng: "));
+        Serial.print(onbordGps.location.lng(), 6);
+        Serial.print(F(", Alt: "));
+        Serial.print(onbordGps.altitude.meters(), 2);
+        Serial.print(F("m"));
+
+        if (onbordGps.date.isValid() && onbordGps.time.isValid())
+        {
+            Serial.print(F(", Date: "));
+            Serial.print(onbordGps.date.year());
+            Serial.print(F("-"));
+            Serial.print(onbordGps.date.month(), DEC);
+            Serial.print(F("-"));
+            Serial.print(onbordGps.date.day(), DEC);
+            Serial.print(F(", Time: "));
+            Serial.print(onbordGps.time.hour(), DEC);
+            Serial.print(F(":"));
+            Serial.print(onbordGps.time.minute(), DEC);
+            Serial.print(F(":"));
+            Serial.print(onbordGps.time.second(), DEC);
+        }
+
+        Serial.print(F(", Sats: "));
+        Serial.print(onbordGps.satellites.value());
+        Serial.print(F(", HDOP: "));
+        Serial.print(onbordGps.hdop.hdop(), 1);
+
+        Serial.println();
+    }
+    else
+    {
+        // GPSデータがまだ有効でない場合
+        Serial.println(F("No valid GPS data yet."));
+    }
+}
 
 void setup()
 {
@@ -37,17 +87,14 @@ void setup()
                                  int16_t verticalSpeed_mps,
                                  int16_t estimated,
                                  int16_t apogee,
-                                 uint8_t groundVoltage_V,
-                                 uint8_t batteryVoltage_V,
-                                 uint8_t tieVoltage_V,
-                                 uint8_t busVoltage_V,
-                                 int16_t groundCurrent_mA,
+                                 int16_t externalVoltage_V,
+                                 int16_t batteryVoltage_V,
+                                 int16_t busVoltage_V,
+                                 int16_t externalCurrent_mA,
                                  int16_t batteryCurrent_mA,
-                                 int16_t tieCurrent_mA,
                                  int16_t busCurrent_mA,
-                                 int8_t groundPower_mW,
+                                 int8_t externalPower_mW,
                                  int8_t batteryPower_mW,
-                                 int8_t tiePower_mW,
                                  int8_t busPower_mW,
                                  int16_t externalDieTemperature_C,
                                  int16_t batteryDieTemperature_C,
@@ -98,20 +145,22 @@ void setup()
                                  Serial.print(">estimated_s: ");
                                  Serial.println((float)estimated / 10.0);
 
-                                 Serial.print(">groundVoltage_V: ");
-                                 Serial.println((float)groundVoltage_V / 10.0);
+                                 Serial.print(">externalVoltage_V: ");
+                                 Serial.println((float)externalVoltage_V / 100.0);
                                  Serial.print(">batteryVoltage_V: ");
-                                 Serial.println((float)batteryVoltage_V / 10.0);
+                                 Serial.println((float)batteryVoltage_V / 100.0);
                                  Serial.print(">busVoltage_V: ");
-                                 Serial.println((float)busVoltage_V / 10.0);
-                                 Serial.print(">groundCurrent_mA: ");
-                                 Serial.println((float)groundCurrent_mA / 10.0);
+                                 Serial.println((float)busVoltage_V / 100.0);
+                                 Serial.print(">externalCurrent_mA: ");
+                                 Serial.println((float)externalCurrent_mA / 100.0);
                                  Serial.print(">batteryCurrent_mA: ");
-                                 Serial.println((float)batteryCurrent_mA / 10.0);
-                                 Serial.print(">groundPower_mW: ");
-                                 Serial.println((float)groundPower_mW / 10.0);
+                                 Serial.println((float)batteryCurrent_mA / 100.0);
+                                 Serial.print(">busCurrent_mA: ");
+                                 Serial.println((float)busCurrent_mA / 100.0);
+                                 Serial.print(">externalPower_mW: ");
+                                 Serial.println((float)externalPower_mW / 100.0);
                                  Serial.print(">batteryPower_mW");
-                                 Serial.println((float)batteryPower_mW / 10.0);
+                                 Serial.println((float)batteryPower_mW / 100.0);
                                  Serial.print(">busPower_mW: ");
                                  Serial.println((float)busPower_mW / 10.0);
 
@@ -125,6 +174,8 @@ void setup()
                                  Serial.println();
                                  Serial.flush();
                              });
+
+    Tasks.add(&task5Hz)->startFps(5);
 }
 
 void loop()
