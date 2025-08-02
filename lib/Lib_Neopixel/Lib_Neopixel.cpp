@@ -61,10 +61,41 @@ void Neopixel::noticedTime(bool permissionTime)
 }
 void Neopixel::noticedRainbow()
 {
+    static uint8_t colorIndex = 0;
     _neopixel->clear();
-    for (int i = 0; i < 16; i++)
-    {
-        _neopixel->setPixelColor(i, _neopixel->Color(0, 150, 0));
-        _neopixel->show();
+
+    switch(colorIndex) {
+        case 0: _neopixel->setPixelColor(0, _neopixel->Color(255, 0, 0)); break;   // Red
+        case 1: _neopixel->setPixelColor(0, _neopixel->Color(255, 165, 0)); break; // Orange
+        case 2: _neopixel->setPixelColor(0, _neopixel->Color(255, 255, 0)); break; // Yellow
+        case 3: _neopixel->setPixelColor(0, _neopixel->Color(0, 255, 0)); break;   // Green
+        case 4: _neopixel->setPixelColor(0, _neopixel->Color(0, 0, 255)); break;   // Blue
+        case 5: _neopixel->setPixelColor(0, _neopixel->Color(75, 0, 130)); break;  // Indigo
+        case 6: _neopixel->setPixelColor(0, _neopixel->Color(148, 0, 211)); break; // Violet
     }
+    
+    _neopixel->show();
+    
+    colorIndex = (colorIndex + 1) % 7;
+}
+
+void Neopixel::setBatteryStatus(float voltage)
+{
+    _neopixel->clear();
+    if (voltage >= 13.1)
+    {
+        // Green
+        _neopixel->setPixelColor(0, _neopixel->Color(0, 255, 0));
+    }
+    else if (voltage >= 11.5)
+    {
+        // Orange
+        _neopixel->setPixelColor(0, _neopixel->Color(255, 165, 0));
+    }
+    else
+    {
+        // Red
+        _neopixel->setPixelColor(0, _neopixel->Color(255, 0, 0));
+    }
+    _neopixel->show();
 }
