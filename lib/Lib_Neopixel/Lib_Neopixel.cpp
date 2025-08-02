@@ -59,3 +59,12 @@ void Neopixel::noticedTime(bool permissionTime)
         _neopixel->show();
     }
 }
+void Neopixel::noticedRainbow()
+{
+    _neopixel->clear();
+    for (int i = 0; i < 16; i++)
+    {
+        _neopixel->setPixelColor(i, _neopixel->Color(0, 150, 0));
+        _neopixel->show();
+    }
+}
