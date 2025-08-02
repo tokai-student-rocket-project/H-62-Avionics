@@ -17,7 +17,7 @@
 char ident = '\0';
 bool doLogging = false;
 uint8_t flightMode = 0;
-uint16_t flightTime = 0;
+uint32_t flightTime = 0;
 
 Neopixel Status(12); // OK
 
