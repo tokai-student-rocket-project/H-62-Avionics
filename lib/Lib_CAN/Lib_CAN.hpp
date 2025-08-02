@@ -13,8 +13,8 @@ public:
   bool available();
   Var::Label getLatestLabel();
 
-  void sendFlight(uint8_t flightMode, uint16_t flightTime, bool doLogging, char ident);
-  void receiveFlight(uint8_t *flightMode, uint16_t *flightTime, bool *doLogging, char *ident);
+  void sendFlight(uint8_t flightMode, uint32_t flightTime, bool doLogging, char ident);
+  void receiveFlight(uint8_t *flightMode, uint32_t *flightTime, bool *doLogging, char *ident);
 
   void sendTrajectory(bool isFalling, float altitude);
   void receiveTrajectory(bool *isFalling, float *altitude);

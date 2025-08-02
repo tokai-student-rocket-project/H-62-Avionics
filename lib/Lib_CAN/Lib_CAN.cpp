@@ -29,7 +29,7 @@ Var::Label CAN::getLatestLabel()
   return static_cast<Var::Label>(_latestLabel);
 }
 
-void CAN::sendFlight(uint8_t flightMode, uint16_t flightTime, bool doLogging, char ident)
+void CAN::sendFlight(uint8_t flightMode, uint32_t flightTime, bool doLogging, char ident)
 {
   uint8_t data[5];
   data[0] = flightMode;
@@ -40,7 +40,7 @@ void CAN::sendFlight(uint8_t flightMode, uint16_t flightTime, bool doLogging, ch
   _can->sendMsgBuf(static_cast<uint32_t>(Var::Label::FLIGHT_DATA), 0, 5, data);
 }
 
-void CAN::receiveFlight(uint8_t *flightMode, uint16_t *flightTime, bool *doLogging, char *ident)
+void CAN::receiveFlight(uint8_t *flightMode, uint32_t *flightTime, bool *doLogging, char *ident)
 {
   *flightMode = _latestData[0];
   memcpy(flightTime, _latestData + 1, 2);
@@ -106,7 +106,7 @@ void CAN::sendBusMonitor(float busVoltage, float busCurrent, float busPower, flo
   int16_t busVoltage_int = static_cast<int16_t>(busVoltage * 100.0);
   int16_t busCurrent_int = static_cast<int16_t>(busCurrent * 100.0);
   int16_t busPower_int = static_cast<int16_t>(busPower * 100.0);
-  int16_t busTemperature_int = static_cast<int16_t>(busTemperature * 100.0);
+  uint16_t busTemperature_int = static_cast<int16_t>(busTemperature * 100.0);
 
   uint8_t data[8];
   memcpy(data, &busVoltage_int, 2);
@@ -131,13 +131,13 @@ void CAN::receiveBusMonitor(float *busVoltage, float *busCurrent, float *busPowe
   *busPower = static_cast<float>(busPower_int) / 100.0;
   *busTemperature = static_cast<float>(busTemperature_int) / 100.0;
 
-  Serial.print(">busVoltage_V: ");
+  Serial.print(">CAN_busVoltage_V: ");
   Serial.println(*busVoltage);
-  Serial.print(">busCurrent_mA: ");
+  Serial.print(">CAN_busCurrent_mA: ");
   Serial.println(*busCurrent);
-  Serial.print(">busPower_mW: ");
+  Serial.print(">CAN_busPower_W: ");
   Serial.println(*busPower);
-  Serial.print(">busTemperature_C: ");
+  Serial.print(">CAN_busTemperature_C: ");
   Serial.println(*busTemperature);
 }
 
@@ -146,7 +146,7 @@ void CAN::sendBatteryMonitor(float batteryVoltage, float batteryCurrent, float b
   int16_t batteryVoltage_int = static_cast<int16_t>(batteryVoltage * 100.0);
   int16_t batteryCurrent_int = static_cast<int16_t>(batteryCurrent * 100.0);
   int16_t batteryPower_int = static_cast<int16_t>(batteryPower * 100.0);
-  int16_t batteryTemperature_int = static_cast<int16_t>(batteryTemperature * 100.0);
+  uint16_t batteryTemperature_int = static_cast<uint16_t>(batteryTemperature * 100.0);
 
   uint8_t data[8];
   memcpy(data, &batteryVoltage_int, 2);
@@ -171,13 +171,13 @@ void CAN::receiveBatteryMonitor(float *batteryVoltage, float *batteryCurrent, fl
   *batteryPower = static_cast<float>(batteryPower_int) / 100.0;
   *batteryTemperature = static_cast<float>(batteryTemperature_int) / 100.0;
 
-  Serial.print(">battexternalVoltage_V: ");
+  Serial.print(">CAN_batteryternalVoltage_V: ");
   Serial.println(*batteryVoltage);
-  Serial.print(">battexternalCurrent_mA: ");
+  Serial.print(">CAN_batteryternalCurrent_mA: ");
   Serial.println(*batteryCurrent);
-  Serial.print(">battexternalPower_mW: ");
+  Serial.print(">CAN_batteryternalPower_W: ");
   Serial.println(*batteryPower);
-  Serial.print(">battexternalTemperature_C: ");
+  Serial.print(">CAN_batteryternalTemperature_C: ");
   Serial.println(*batteryTemperature);
 }
 
@@ -186,7 +186,7 @@ void CAN::sendExternalMonitor(float externalVoltage, float externalCurrent, floa
   int16_t externalVoltage_int = static_cast<int16_t>(externalVoltage * 100.0);
   int16_t externalCurrent_int = static_cast<int16_t>(externalCurrent * 100.0);
   int16_t externalPower_int = static_cast<int16_t>(externalPower * 100.0);
-  int16_t externalTemperature_int = static_cast<int16_t>(externalTemperature * 100.0);
+  uint16_t externalTemperature_int = static_cast<uint16_t>(externalTemperature * 100.0);
 
   uint8_t data[8];
   memcpy(data, &externalVoltage_int, 2);
@@ -211,13 +211,13 @@ void CAN::receiveExternalMonitor(float *externalVoltage, float *externalCurrent,
   *externalPower = static_cast<float>(externalPower_int) / 100.0;
   *externalTemperature = static_cast<float>(externalTemperature_int) / 100.0;
 
-  Serial.print(">externalVoltage_V: ");
+  Serial.print(">CAN_externalVoltage_V: ");
   Serial.println(*externalVoltage);
-  Serial.print(">externalCurrent_mA: ");
+  Serial.print(">CAN_externalCurrent_mA: ");
   Serial.println(*externalCurrent);
-  Serial.print(">externalPower_mW: ");
+  Serial.print(">CAN_externalPower_W: ");
   Serial.println(*externalPower);
-  Serial.print(">externalTemperature_C: ");
+  Serial.print(">CAN_externalTemperature_C: ");
   Serial.println(*externalTemperature);
 }
 
