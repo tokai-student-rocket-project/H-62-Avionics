@@ -73,6 +73,7 @@ void task5Hz()
     can.sendBusMonitor(busVoltage_V, busCurrent_mA, busPower_W, busTemperature_C);
     can.sendBatteryMonitor(batteryVoltage_V, batteryCurrent_mA, batteryPower_W, batteryTemperature_C);
     can.sendExternalMonitor(externalVoltage_V, externalCurrent_mA, externalPower_W, externalTemperature_C);
+    status.setBatteryStatus(batteryVoltage_V);
 }
 
 void task2Hz()
@@ -127,6 +128,7 @@ void loop()
             {
             case (0):
             {
+                status.noticedRainbow();
                 // if (externalVoltage_V > externalThresholdVoltage)
                 // {
                 //     batteryEn.high();
