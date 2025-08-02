@@ -29,6 +29,8 @@ Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 float onbordLatitude;
 float onbordLongtitude;
 float onbordAltitude;
+float receiveLatitude;
+float receiveLongtitude;
 TinyGPSPlus onbordGps;
 
 void task5Hz(){
@@ -36,6 +38,7 @@ void task5Hz(){
    while (SerialGPS.available()) {
     onbordGps.encode(SerialGPS.read());
   }
+
 
   // GPSデータが有効な場合にのみ表示
   if (onbordGps.location.isValid()) {
@@ -73,6 +76,47 @@ void task5Hz(){
     // GPSデータがまだ有効でない場合
     Serial.println(F("No valid GPS data yet."));
   }
+
+    // ディスプレイ表示,追記箇所
+                             display.clearDisplay(); // 画面クリア
+                             display.setTextSize(1); // テキストサイズを1に設定 (すべての情報に適用)
+
+                             //1. GNSSにて測位した情報から現在の時間を表示
+                             display.setCursor(0, 0); // Y座標0
+                             display.print("TIME: ");
+                             if (onbordGps.time.isValid()) { // GPS時刻が有効な場合のみ表示
+                                 if (onbordGps.time.hour() < 10) display.print("0"); // 1桁の場合はゼロ埋め
+                                 display.print(onbordGps.time.hour());
+                                 display.print(":");
+                                 if (onbordGps.time.minute() < 10) display.print("0");
+                                 display.print(onbordGps.time.minute());
+                                 display.print(":");
+                                 if (onbordGps.time.second() < 10) display.print("0");
+                                 display.println(onbordGps.time.second());
+                             } else {
+                                 display.println("--:--:--"); // 無効な場合はハイフン表示
+                             }
+
+                             //フライトモードの表示
+                             display.setCursor(0, 10); // Y座標10
+                            //  display.print("Flight Time:"); display.println((float)flightTime / 1000.0);
+
+                             //「すばる」からの測位データをT-Beamのディスプレイに映す．小数点以下6桁
+                             display.setCursor(0, 20); // Y座標20
+                            //  display.print(" H-62 Lat:"); display.println(latitude, 6); // 小数点以下6桁
+                             display.setCursor(0, 30); // Y座標30
+                             display.print(" H-62 Lon:"); display.println(receiveLongtitude, 6); // 小数点以下6桁
+
+                             //T-Beam内部のGPSモジュールからの測位データをディスプレイに映す．小数点以下6桁
+                             display.setCursor(0, 40); // Y座標40
+                             onbordLatitude = onbordGps.location.lat();
+                             display.print("TBEAM Lat:"); display.println(onbordLatitude, 6); // 小数点以下6桁
+                             display.setCursor(0, 50); // Y座標50(これがギリギリ128x64ディスプレイの最終行)
+                             onbordLongtitude= onbordGps.location.();
+                             display.print("TBEAM Lon:"); display.println(onbordLongtitude, 6); // 小数点以下6桁
+                             // 注: RX Altは画面スペースの制約上、このレイアウトでは表示できない→すばる側の高度を消した
+
+                             display.display(); // 画面更新
 }
 
 void setup()
@@ -89,9 +133,6 @@ void setup()
   display.clearDisplay();
   display.setTextColor(SSD1306_WHITE); //テキストの色を白に設定
   display.setTextSize(1); //テキストサイズを1に設定
-
-  //GPSシリアルポートの初期化 (T-BEAMのGPSは通常UART1, 9600bps)
-  SerialGPS.begin(9600, SERIAL_8N1, 12, 15); // ESP32のGPIO12(RX), GPIO15(TX)
 
   LoRa.setPins(RADIO_CS_PIN, RADIO_RST_PIN, RADIO_DIO0_PIN);
   //LoRa初期化の成功チェックを追加
@@ -179,7 +220,7 @@ void setup()
                              packet["gnss"]["fixType"] = fixType;
                              packet["gnss"]["satellites"] = satelliteCount;
                              packet["gnss"]["latitude_deg"] = latitude;
-                             packet["gnss"]["longitude_deg"] = longitude;
+                             receiveLongtitude = longitude;
                              packet["gnss"]["height_m"] = (float)height / 10.0;
                              packet["gnss"]["speed_mps"] = (float)speed / 10.0;
                              packet["gnss"]["accuracy_m"] = (float)accuracy / 10.0;
@@ -210,45 +251,7 @@ void setup()
                              Serial.println();
                              Serial.flush();
 
-                             // ディスプレイ表示,追記箇所
-                             display.clearDisplay(); // 画面クリア
-                             display.setTextSize(1); // テキストサイズを1に設定 (すべての情報に適用)
-
-                             //1. GNSSにて測位した情報から現在の時間を表示
-                             display.setCursor(0, 0); // Y座標0
-                             display.print("TIME: ");
-                             if (onbordGps.time.isValid()) { // GPS時刻が有効な場合のみ表示
-                                 if (onbordGps.time.hour() < 10) display.print("0"); // 1桁の場合はゼロ埋め
-                                 display.print(onbordGps.time.hour());
-                                 display.print(":");
-                                 if (onbordGps.time.minute() < 10) display.print("0");
-                                 display.print(onbordGps.time.minute());
-                                 display.print(":");
-                                 if (onbordGps.time.second() < 10) display.print("0");
-                                 display.println(onbordGps.time.second());
-                             } else {
-                                 display.println("--:--:--"); // 無効な場合はハイフン表示
-                             }
-
-                             //フライトモードの表示
-                             display.setCursor(0, 10); // Y座標10
-                             display.print("Flight Time:"); display.println((float)flightTime / 1000.0);
-
-                             //「すばる」からの測位データをT-Beamのディスプレイに映す．小数点以下6桁
-                             display.setCursor(0, 20); // Y座標20
-                             display.print("H62GPS Lat:"); display.println(latitude, 6); // 小数点以下6桁
-                             display.setCursor(0, 30); // Y座標30
-                             display.print("H62GPS Lon:"); display.println(longitude, 6); // 小数点以下6桁
-
-                             //T-Beam内部のGPSモジュールからの測位データをディスプレイに映す．小数点以下6桁
-                             display.setCursor(0, 40); // Y座標40
-                             display.print("TBEAM Lat:"); display.println(onbordLatitude, 6); // 小数点以下6桁
-                             display.setCursor(0, 50); // Y座標50(これがギリギリ128x64ディスプレイの最終行)
-                             display.print("TBEAM Lon:"); display.println(onbordLongtitude, 6); // 小数点以下6桁
-                             // 注: RX Altは画面スペースの制約上、このレイアウトでは表示できない→すばる側の高度を消した
-
-                             display.display(); // 画面更新
-
+                             
                            });
 
     Tasks.add(&task5Hz)->startFps(5);
@@ -294,4 +297,7 @@ void loop()
   {
     MsgPacketizer::parse();
   }
+
+
+
 }
