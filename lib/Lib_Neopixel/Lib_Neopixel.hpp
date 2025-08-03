@@ -15,6 +15,8 @@ public:
     void noticedBlue();
     void noticedWhite();
     void noticedTime(bool permiddionTime);
+    void noticedRainbow();
+    void setBatteryStatus(float voltage);
 
 private:
     uint8_t _power;

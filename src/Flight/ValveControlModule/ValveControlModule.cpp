@@ -17,7 +17,7 @@
 char ident = '\0';
 bool doLogging = false;
 uint8_t flightMode = 0;
-uint16_t flightTime = 0;
+uint32_t flightTime = 0;
 
 Neopixel Status(12); // OK
 
@@ -50,6 +50,9 @@ int16_t inputVoltage;
 int16_t currentPosition;
 int16_t currentDesiredPosition;
 int16_t currentVelocity;
+
+uint8_t servoId = 0;
+int16_t servoAngle = 0;
 
 B3MSC1170A supplyValve;
 void openSupplyValve()
@@ -337,8 +340,21 @@ void syncFlightMode()
         break;
       }
       }
+      }
     }
     break;
+    }
+
+    case Var::Label::SERVO_COMMAND:
+    {
+      can.receiveServoCommand(&servoId, &servoAngle);
+      if (servoId == 1) {
+        mainValve.setPosition(servoId, servoAngle, 0);
+      } else if (servoId == 2) {
+        supplyValve.setPosition(servoId, servoAngle, 0);
+      }
+      break;
+    }
     }
   }
 }

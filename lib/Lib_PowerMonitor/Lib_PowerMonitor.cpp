@@ -38,11 +38,11 @@ void PowerMonitor::getCurrent(float *ground_mA, float *battery_mA, float *bus_mA
   *bus_mA = _bus->getCurrent_mA();
 }
 
-void PowerMonitor::getPower(float *ground_mW, float *battery_mW, float *bus_mW)
+void PowerMonitor::getPower(float *ground_W, float *battery_W, float *bus_W)
 {
-  *ground_mW = _ground->getPower_mW();
-  *battery_mW = _battery->getPower_mW();
-  *bus_mW = _bus->getPower_mW();
+  *ground_W = _ground->getPower_mW() / 1000.0;
+  *battery_W = _battery->getPower_mW() / 1000.0;
+  *bus_W = _bus->getPower_mW() / 1000.0;
 }
 
 void PowerMonitor::getTemperature(float *ground_C, float *battery_C, float *bus_C)

@@ -78,6 +78,10 @@ void printHeader()
   Serial.print(F("jerkX_mps3"));
   Serial.print(F(","));
 
+  Serial.print(F("primaryPressure_hPa"));
+  Serial.print(F(","));
+  Serial.print(F("secondaryPressure_hPa"));
+  Serial.print(F(","));
   Serial.print(F("referencePressure_hPa"));
   Serial.print(F(","));
   Serial.print(F("altitude_m"));
@@ -93,25 +97,32 @@ void printHeader()
   Serial.print(F("isFalling"));
   Serial.print(F(","));
 
-  Serial.print(F("groundVoltage_V"));
+  Serial.print(F("externalVoltage_V"));
   Serial.print(F(","));
   Serial.print(F("batteryVoltage_V"));
   Serial.print(F(","));
   Serial.print(F("busVoltage_V"));
   Serial.print(F(","));
 
-  Serial.print(F("groundCurrent_mA"));
+  Serial.print(F("externalCurrent_mA"));
   Serial.print(F(","));
   Serial.print(F("batteryCurrent_mA"));
   Serial.print(F(","));
   Serial.print(F("busCurrent_mA"));
   Serial.print(F(","));
 
-  Serial.print(F("groundPower_mW"));
+  Serial.print(F("externalPower_W"));
   Serial.print(F(","));
-  Serial.print(F("batteryPower_mW"));
+  Serial.print(F("batteryPower_W"));
   Serial.print(F(","));
-  Serial.print(F("busPower_mW"));
+  Serial.print(F("busPower_W"));
+  Serial.print(F(","));
+
+  Serial.print(F("externalDieTemperature_C"));
+  Serial.print(F(","));
+  Serial.print(F("batteryDieTemperature_C"));
+  Serial.print(F(","));
+  Serial.print(F("busDieTemperature_C"));
 
   Serial.print(F("\n"));
 }
@@ -122,25 +133,27 @@ void setup()
   SPI.begin();
 
   MsgPacketizer::subscribe_manual(0x0A,
-                                  [&](char ident, uint32_t millis, uint16_t flightTimeTest, uint8_t flightModeTest, float loggerUsage,
+                                  [&](char ident, uint32_t millis, uint32_t flightTime, uint8_t flightMode, float loggerUsage,
                                       float accelerationX_mps2, float accelerationY_mps2, float accelerationZ_mps2,
                                       float gyroscopeX_dps, float gyroscopeY_dps, float gyroscopeZ_dps,
                                       float magnetometerX_nT, float magnetometerY_nT, float magnetometerZ_nT,
                                       float roll_deg, float pitch_deg, float yaw_deg,
                                       float forceX_N, float jerkX_mps3,
-                                      float referencePressure_hPa, float altitude_m, float verticalSpeed_mps, float verticalAcceleration_msp2, float estimated, float apogee, bool isFalling,
-                                      float groundVoltage_V, float batteryVoltage_V, float busVoltage_V,
-                                      float groundCurrent_mA, float batteryCurrent_mA, float busCurrent_mA,
-                                      float groundPower_mW, float batteryPower_mW, float busPower_mW)
+                                      float primaryPressure_hPa, float secondaryPressure_hPa, float referencePressure_hPa, float altitude_m, float verticalSpeed_mps, float verticalAcceleration_msp2, float estimated, float apogee, bool isFalling,
+                                      float externalVoltage_V, float batteryVoltage_V, float busVoltage_V,
+                                      float externalCurrent_mA, float batteryCurrent_mA, float busCurrent_mA,
+                                      float externalPower_W, float batteryPower_W, float busPower_W,
+                                      float externalDieTemperature_C, float batteryDieTemperature_C, float busDieTemperature_C)
                                   {
                                     Serial.print(ident);
                                     Serial.print(F(","));
                                     Serial.print(millis);
                                     Serial.print(F(","));
-                                    Serial.print(flightTimeTest);
+                                    Serial.print(flightTime);
                                     Serial.print(F(","));
-                                    Serial.print(flightModeTest);
+                                    Serial.print(flightMode);
                                     Serial.print(F(","));
+
                                     Serial.print(loggerUsage);
                                     Serial.print(F(","));
 
@@ -177,6 +190,10 @@ void setup()
                                     Serial.print(jerkX_mps3);
                                     Serial.print(F(","));
 
+                                    Serial.print(primaryPressure_hPa);
+                                    Serial.print(F(","));
+                                    Serial.print(secondaryPressure_hPa);
+                                    Serial.print(F(","));
                                     Serial.print(referencePressure_hPa);
                                     Serial.print(F(","));
                                     Serial.print(altitude_m);
@@ -192,25 +209,32 @@ void setup()
                                     Serial.print(isFalling);
                                     Serial.print(F(","));
 
-                                    Serial.print(groundVoltage_V);
+                                    Serial.print(externalVoltage_V);
                                     Serial.print(F(","));
                                     Serial.print(batteryVoltage_V);
                                     Serial.print(F(","));
                                     Serial.print(busVoltage_V);
                                     Serial.print(F(","));
 
-                                    Serial.print(groundCurrent_mA);
+                                    Serial.print(externalCurrent_mA);
                                     Serial.print(F(","));
                                     Serial.print(batteryCurrent_mA);
                                     Serial.print(F(","));
                                     Serial.print(busCurrent_mA);
                                     Serial.print(F(","));
 
-                                    Serial.print(groundPower_mW);
+                                    Serial.print(externalPower_W);
                                     Serial.print(F(","));
-                                    Serial.print(batteryPower_mW);
+                                    Serial.print(batteryPower_W);
                                     Serial.print(F(","));
-                                    Serial.print(busPower_mW);
+                                    Serial.print(busPower_W);
+                                    Serial.print(F(","));
+
+                                    Serial.print(externalDieTemperature_C);
+                                    Serial.print(F(","));
+                                    Serial.print(batteryDieTemperature_C);
+                                    Serial.print(F(","));
+                                    Serial.print(busDieTemperature_C);
                                     Serial.print(F("\n"));
                                   });
 

@@ -30,7 +30,7 @@ OutputPin ledLoRaRx(4);
 OutputPin ledLoRaTx(5);
 
 uint8_t flightMode;
-uint16_t flightTime;
+uint32_t flightTime;
 RateMonitor monitor10Hz;
 RateMonitor monitor100Hz;
 
@@ -50,7 +50,7 @@ float magnetometerX_nT, magnetometerY_nT, magnetometerZ_nT;
 
 float externalVoltage_V, batteryVoltage_V, busVoltage_V;
 float externalCurrent_mA, batteryCurrent_mA, busCurrent_mA;
-float externalPower_mW, batteryPower_mW, busPower_mW;
+float externalPower_W, batteryPower_W, busPower_W;
 float externalDieTemperature_C, batteryDieTemperature_C, busDieTemperature_C;
 
 float referencePressure_hPa;
@@ -174,6 +174,13 @@ void task100Hz()
     // Serial.print(">yaw_deg:");
     // Serial.println(yaw_deg);
 
+    // Serial.print(">accelerationX_mps2: ");
+    // Serial.println(accelerationX_mps2);
+    // Serial.print(">accelerationY_mps2: ");
+    // Serial.println(accelerationY_mps2);
+    // Serial.print(">accelerationZ_mps2: ");
+    // Serial.println(accelerationZ_mps2);
+
     linearAccelerationX_mps2 = accelerationHighPassX.get(accelerationX_mps2 - gravityX_mps2, deltaTime);
     linearAccelerationY_mps2 = accelerationHighPassY.get(accelerationY_mps2 - gravityY_mps2, deltaTime);
     linearAccelerationZ_mps2 = accelerationHighPassZ.get(accelerationZ_mps2 - gravityZ_mps2, deltaTime);
@@ -185,10 +192,11 @@ void task100Hz()
                                                   magnetometerX_nT, magnetometerY_nT, magnetometerZ_nT,
                                                   roll_deg, pitch_deg, yaw_deg,
                                                   forceX_N, jerkX_mps3,
-                                                  referencePressure_hPa, altitude_m, verticalSpeed_mps, verticalAcceleration_msp2, estimated, apogee, isFalling,
+                                                  primaryPressure_hPa, secondaryPressure_hPa, referencePressure_hPa, altitude_m,
+                                                  verticalSpeed_mps, verticalAcceleration_msp2, estimated, apogee, isFalling,
                                                   externalVoltage_V, batteryVoltage_V, busVoltage_V,
                                                   externalCurrent_mA, batteryCurrent_mA, busCurrent_mA,
-                                                  externalPower_mW, batteryPower_mW, busPower_mW,
+                                                  externalPower_W, batteryPower_W, busPower_W,
                                                   externalDieTemperature_C, batteryDieTemperature_C, busDieTemperature_C);
 
     if (doLogging)
@@ -275,15 +283,15 @@ void task2Hz()
                                                            static_cast<int16_t>(verticalSpeed_mps * 10),
                                                            static_cast<int16_t>(estimated * 10),
                                                            static_cast<int16_t>(apogee * 10),
-                                                           static_cast<uint8_t>(externalVoltage_V * 10),
-                                                           static_cast<uint8_t>(batteryVoltage_V * 10),
-                                                           static_cast<uint8_t>(busVoltage_V * 10),
-                                                           static_cast<int16_t>(externalCurrent_mA * 10),
-                                                           static_cast<int16_t>(batteryCurrent_mA * 10),
-                                                           static_cast<int16_t>(busCurrent_mA * 10),
-                                                           static_cast<int8_t>(externalPower_mW / 100),
-                                                           static_cast<int8_t>(batteryPower_mW / 100),
-                                                           static_cast<int8_t>(busPower_mW / 100),
+                                                           static_cast<int16_t>(externalVoltage_V * 100),
+                                                           static_cast<int16_t>(batteryVoltage_V * 100),
+                                                           static_cast<int16_t>(busVoltage_V * 100),
+                                                           static_cast<int16_t>(externalCurrent_mA * 100),
+                                                           static_cast<int16_t>(batteryCurrent_mA * 100),
+                                                           static_cast<int16_t>(busCurrent_mA * 100),
+                                                           static_cast<int16_t>(externalPower_W * 100),
+                                                           static_cast<int16_t>(batteryPower_W * 100),
+                                                           static_cast<int16_t>(busPower_W * 100),
                                                            static_cast<int16_t>(externalDieTemperature_C * 10),
                                                            static_cast<int16_t>(batteryDieTemperature_C * 10),
                                                            static_cast<int16_t>(busDieTemperature_C * 10));
@@ -357,7 +365,7 @@ void loop()
         }
         case Var::Label::MONITOR_BUS:
         {
-            can.receiveBusMonitor(&busVoltage_V, &busCurrent_mA, &busPower_mW, &busDieTemperature_C);
+            can.receiveBusMonitor(&busVoltage_V, &busCurrent_mA, &busPower_W, &busDieTemperature_C);
             ledCanRx.toggle();
 
             break;
@@ -365,7 +373,7 @@ void loop()
 
         case Var::Label::MONITOR_BATTERY:
         {
-            can.receiveBatteryMonitor(&batteryVoltage_V, &batteryCurrent_mA, &batteryPower_mW, &batteryDieTemperature_C);
+            can.receiveBatteryMonitor(&batteryVoltage_V, &batteryCurrent_mA, &batteryPower_W, &batteryDieTemperature_C);
             ledCanRx.toggle();
 
             break;
@@ -373,7 +381,7 @@ void loop()
 
         case Var::Label::MONITOR_EXTERNAL:
         {
-            can.receiveExternalMonitor(&externalVoltage_V, &externalCurrent_mA, &externalPower_mW, &externalDieTemperature_C);
+            can.receiveExternalMonitor(&externalVoltage_V, &externalCurrent_mA, &externalPower_W, &externalDieTemperature_C);
             ledCanRx.toggle();
 
             break;

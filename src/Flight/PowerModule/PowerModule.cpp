@@ -9,7 +9,7 @@
 char ident = '\0';
 bool doLogging = false;
 uint8_t flightMode = 0;
-uint16_t flightTime = 0;
+uint32_t flightTime = 0;
 
 Neopixel status(12);
 
@@ -29,14 +29,14 @@ OutputPin blueLed(25);
 
 float externalVoltage_V, batteryVoltage_V, busVoltage_V;
 float externalCurrent_mA, batteryCurrent_mA, busCurrent_mA;
-float externalPower_mW, batteryPower_mW, busPower_mW;
+float externalPower_W, batteryPower_W, busPower_W;
 float externalTemperature_C, batteryTemperature_C, busTemperature_C;
 
 void task5Hz()
 {
     powerMonitor.getVoltage(&externalVoltage_V, &batteryVoltage_V, &busVoltage_V);
     powerMonitor.getCurrent(&externalCurrent_mA, &batteryCurrent_mA, &busCurrent_mA);
-    powerMonitor.getPower(&externalPower_mW, &batteryPower_mW, &busPower_mW);
+    powerMonitor.getPower(&externalPower_W, &batteryPower_W, &busPower_W);
     powerMonitor.getTemperature(&externalTemperature_C, &batteryTemperature_C, &busTemperature_C);
 
     // Ground
@@ -44,8 +44,8 @@ void task5Hz()
     Serial.println(externalVoltage_V);
     Serial.print(">Gpu_Current_mA: ");
     Serial.println(externalCurrent_mA);
-    Serial.print(">Gpu_Power_mW: ");
-    Serial.println(externalPower_mW);
+    Serial.print(">Gpu_Power_W: ");
+    Serial.println(externalPower_W);
     Serial.print(">Gpu_Temperature_C: ");
     Serial.println(externalTemperature_C);
 
@@ -54,8 +54,8 @@ void task5Hz()
     Serial.println(batteryVoltage_V);
     Serial.print(">Bat_Current_mA: ");
     Serial.println(batteryCurrent_mA);
-    Serial.print(">Bat_Power_mW: ");
-    Serial.println(batteryPower_mW);
+    Serial.print(">Bat_Power_W: ");
+    Serial.println(batteryPower_W);
     Serial.print(">Bat_Temperature_C: ");
     Serial.println(batteryTemperature_C);
 
@@ -64,18 +64,19 @@ void task5Hz()
     Serial.println(busVoltage_V);
     Serial.print(">Bus_Current_mA: ");
     Serial.println(busCurrent_mA);
-    Serial.print(">Bus_Power_mW: ");
-    Serial.println(busPower_mW);
+    Serial.print(">Bus_Power_W: ");
+    Serial.println(busPower_W);
     Serial.print(">Bus_Temperature_C: ");
     Serial.println(busTemperature_C);
 
     greenLed.toggle();
-    can.sendBusMonitor(busVoltage_V, busCurrent_mA, busPower_mW, busTemperature_C);
-    can.sendBatteryMonitor(batteryVoltage_V, batteryCurrent_mA, batteryPower_mW, batteryTemperature_C);
-    can.sendExternalMonitor(externalVoltage_V, externalCurrent_mA, externalPower_mW, externalTemperature_C);
+    can.sendBusMonitor(busVoltage_V, busCurrent_mA, busPower_W, busTemperature_C);
+    can.sendBatteryMonitor(batteryVoltage_V, batteryCurrent_mA, batteryPower_W, batteryTemperature_C);
+    can.sendExternalMonitor(externalVoltage_V, externalCurrent_mA, externalPower_W, externalTemperature_C);
+    status.setBatteryStatus(batteryVoltage_V);
 }
 
-void task2Hz()
+void task1Hz()
 {
     Serial.print(">batteryEnable: ");
     Serial.println(batteryEn.get());
@@ -107,7 +108,7 @@ void setup()
     greenLed.high();
 
     Tasks.add(&task5Hz)->startFps(5);
-    Tasks.add(&task2Hz)->startFps(2);
+    Tasks.add(&task1Hz)->startFps(1);
 }
 
 void loop()
@@ -127,12 +128,13 @@ void loop()
             {
             case (0):
             {
-                if (externalVoltage_V > externalThresholdVoltage)
-                {
-                    batteryEn.high();
-                }
-                else
-                    batteryEn.low();
+                // status.noticedRainbow();
+                // if (externalVoltage_V > externalThresholdVoltage)
+                // {
+                //     batteryEn.high();
+                // }
+                // else
+                batteryEn.low();
 
                 break;
             }
