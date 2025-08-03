@@ -81,21 +81,21 @@ void task5Hz(){
                              display.clearDisplay(); // 画面クリア
                              display.setTextSize(1); // テキストサイズを1に設定 (すべての情報に適用)
 
-                             //1. GNSSにて測位した情報から現在の時間を表示
-                             display.setCursor(0, 0); // Y座標0
-                             display.print("TIME: ");
-                             if (onbordGps.time.isValid()) { // GPS時刻が有効な場合のみ表示
-                                 if (onbordGps.time.hour() < 10) display.print("0"); // 1桁の場合はゼロ埋め
-                                 display.print(onbordGps.time.hour());
-                                 display.print(":");
-                                 if (onbordGps.time.minute() < 10) display.print("0");
-                                 display.print(onbordGps.time.minute());
-                                 display.print(":");
-                                 if (onbordGps.time.second() < 10) display.print("0");
-                                 display.println(onbordGps.time.second());
-                             } else {
-                                 display.println("--:--:--"); // 無効な場合はハイフン表示
-                             }
+                            //  //1. GNSSにて測位した情報から現在の時間を表示
+                            //  display.setCursor(0, 0); // Y座標0
+                            //  display.print("TIME: ");
+                            //  if (onbordGps.time.isValid()) { // GPS時刻が有効な場合のみ表示
+                            //      if (onbordGps.time.hour() < 10) display.print("0"); // 1桁の場合はゼロ埋め
+                            //      display.print(onbordGps.time.hour());
+                            //      display.print(":");
+                            //      if (onbordGps.time.minute() < 10) display.print("0");
+                            //      display.print(onbordGps.time.minute());
+                            //      display.print(":");
+                            //      if (onbordGps.time.second() < 10) display.print("0");
+                            //      display.println(onbordGps.time.second());
+                            //  } else {
+                            //      display.println("--:--:--"); // 無効な場合はハイフン表示
+                            //  }
 
 
 
@@ -113,6 +113,39 @@ void task5Hz(){
                              onbordLongtitude= onbordGps.location.lng();
                              display.print("TBEAM Lon:"); display.println(onbordLongtitude, 6); // 小数点以下6桁
                              // 注: RX Altは画面スペースの制約上、このレイアウトでは表示できない→すばる側の高度を消した
+
+                             display.setCursor(70, 0); // 表示開始位置
+
+    int rssi = LoRa.packetRssi();
+    int bars = 0;
+    if (rssi > -95.8) {
+        bars = 5;
+    } else if (rssi > -101.6) {
+        bars = 4;
+    } else if (rssi > -107.4) {
+        bars = 3;
+    } else if (rssi > -113.2) {
+        bars = 2;
+    } else {
+        bars = 1;
+    }
+
+    int barWidth = 5;
+    int barSpacing = 1;
+    int startX = 100;
+    int startY = 0;
+    int barHeight = 8;
+
+    for (int i = 0; i < 5; i++) {
+        int currentBarHeight = barHeight * (i + 1) / 5;
+        if (i < bars) {
+            display.fillRect(startX + i * (barWidth + barSpacing), startY + (barHeight - currentBarHeight), barWidth, currentBarHeight, SSD1306_WHITE);
+        }
+    }
+
+    // display.setCursor(0, 0);
+    //  display.print(" HDOP:"); display.println(LoRa.packetRssi(), 0.5); // 小数点以下6桁
+
 
                              display.display(); // 画面更新
 }
@@ -250,6 +283,9 @@ void setup()
                              Serial.flush();
 
                              //フライトタイムのディスプレイ表示
+                             display.clearDisplay(); // 画面クリア
+                             display.setTextSize(1); // テキストサイズを1に設定 (すべての情報に適用)
+
                              display.setCursor(0, 10); // Y座標10
                              display.print("Flight Time:"); display.println((float)flightTime / 1000.0);
 
