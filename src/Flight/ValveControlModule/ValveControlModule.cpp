@@ -51,8 +51,7 @@ int16_t currentPosition;
 int16_t currentDesiredPosition;
 int16_t currentVelocity;
 
-uint8_t servoId = 0;
-int16_t servoAngle = 0;
+uint8_t command = 0;
 
 B3MSC1170A supplyValve;
 void openSupplyValve()
@@ -340,22 +339,20 @@ void syncFlightMode()
         break;
       }
       }
-      }
     }
-    break;
-    }
-
-    case Var::Label::SERVO_COMMAND:
+    break; // Add break statement here
+    case Var::Label::VALVE_MODE:
     {
-      can.receiveServoCommand(&servoId, &servoAngle);
-      if (servoId == 1) {
-        mainValve.setPosition(servoId, servoAngle, 0);
-      } else if (servoId == 2) {
-        supplyValve.setPosition(servoId, servoAngle, 0);
+      can.receiveServoCommand(&command);
+      if (command == 76)
+      {
+        openMainValve();
+        Status.noticedBlue();
       }
       break;
     }
     }
+    // break;
   }
 }
 
