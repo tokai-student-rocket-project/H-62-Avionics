@@ -269,8 +269,10 @@ void CAN::receiveValveDataPart2(float *currentPosition, float *currentDesiredPos
   *currentDesiredPosition = (float)currentDesiredPositionRaw / 100.0;
   *currentVelocity = (float)currentVelocityRaw / 10.0;
 
-  Serial.print(">currentPosition_Main: ");
-  Serial.println(*currentPosition);
+  ////// 主流路角度表示
+  // Serial.print(">currentPosition_Main: ");
+  // Serial.println(*currentPosition);
+  //////
 }
 
 void CAN::sendValveDataPart3(int16_t motorTemperature, int16_t mcuTemperature, int16_t current, int16_t inputVoltage)
@@ -321,8 +323,10 @@ void CAN::receiveValveDataPart4(float *currentPosition, float *currentDesiredPos
   *currentDesiredPosition = (float)currentDesiredPositionRaw / 100.0;
   *currentVelocity = (float)currentVelocityRaw / 10.0;
 
-  Serial.print(">currentPosition_Supply: ");
-  Serial.println(*currentPosition);
+  ////// 供給路角度表示
+  // Serial.print(">currentPosition_Supply: ");
+  // Serial.println(*currentPosition);
+  //////
 }
 
 void CAN::sendDynamics(float force, float jerk)
@@ -340,17 +344,17 @@ void CAN::receiveDynamics(float *force, float *jerk)
   memcpy(jerk, _latestData + 4, 4);
 }
 
-void CAN::sendServoCommand(uint8_t servoId, int16_t angle)
+void CAN::sendServoCommand(uint8_t command)
 {
-  uint8_t data[3];
-  data[0] = servoId;
-  memcpy(data + 1, &angle, 2);
+  uint8_t data[0];
+  data[0] = command;
 
-  _can->sendMsgBuf(static_cast<uint32_t>(Var::Label::SERVO_COMMAND), 0, 3, data);
+  _can->sendMsgBuf(static_cast<uint32_t>(Var::Label::VALVE_MODE), 0, 1, data);
 }
 
-void CAN::receiveServoCommand(uint8_t *servoId, int16_t *angle)
+void CAN::receiveServoCommand(uint8_t *command)
 {
-  *servoId = _latestData[0];
-  memcpy(angle, _latestData + 1, 2);
+  *command = _latestData[0];
+  Serial.print(">commnad: ");
+  Serial.println(*command);
 }

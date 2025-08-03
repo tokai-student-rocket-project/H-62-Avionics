@@ -52,8 +52,8 @@ public:
   void sendDynamics(float force, float jerk);
   void receiveDynamics(float *force, float *jerk);
 
-  void sendServoCommand(uint8_t servoId, int16_t angle);
-  void receiveServoCommand(uint8_t *servoId, int16_t *angle);
+  void sendServoCommand(uint8_t command);
+  void receiveServoCommand(uint8_t *command);
 
 private:
   mcp2515_can *_can;
