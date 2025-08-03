@@ -83,7 +83,7 @@ void task1Hz()
 
     Serial.print(">ltc3119Powergood: ");
     Serial.println(digitalRead(1));
-    status.noticedRainbow();
+    // status.noticedRainbow();
 }
 
 void setup()
@@ -128,13 +128,14 @@ void loop()
             {
             case (0):
             {
-                // status.noticedRainbow();
-                // if (externalVoltage_V > externalThresholdVoltage)
-                // {
-                //     batteryEn.high();
-                // }
-                // else
-                batteryEn.low();
+                status.noticedRainbow();
+                if (externalVoltage_V > externalThresholdVoltage)
+                {
+                    batteryEn.high();
+                }
+                else
+                    batteryEn.low();
+                // batteryEn.high();
 
                 break;
             }
