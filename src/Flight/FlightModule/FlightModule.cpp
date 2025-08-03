@@ -66,6 +66,14 @@ bool sensingModuleAvailable = false;
 bool sensingModuleAvailableAnnounced = false;
 
 uint8_t receiveCommand = 0;
+bool isInRecoveryMode = false;
+
+void endRecoveryMode()
+{
+  isInRecoveryMode = false;
+  buzzer.beepLongOnce();
+  // Serial.println("Recovery mode finished.");
+}
 
 void flightModeOn()
 {
@@ -105,9 +113,22 @@ void flightModeReset()
 
 void recoveryMode()
 {
+  if (isInRecoveryMode)
+  {
+    return; // Already in recovery mode
+  }
+  isInRecoveryMode = true;
+  buzzer.beepOnce();
+
   uint8_t command = 76;
-  can.sendServoCommand(command);
-  buzzer.beepLongOnce();
+  for (int i = 0; i < 50; i++)
+  {
+    can.sendServoCommand(command);
+  }
+  // Serial.println("Recovery mode started for 5 seconds.");
+
+  // Schedule endRecoveryMode to be called after 5 seconds
+  Tasks["end-recovery"]->startOnceAfterMsec(5000);
 }
 
 void task100Hz()
@@ -265,7 +286,7 @@ void task100Hz()
     if (flightTime.isElapsed(flightTime.LANDING_TIME + 5000))
     {
       flightMode.change(Var::FlightMode::SHUTDOWN);
-      buzzer.beepEndless();
+      // buzzer.beepEndless(); // 海なので動作させない
       Serial.println("SDWN");
     }
 
@@ -444,6 +465,7 @@ void setup()
   Tasks.add(&task100Hz)->startFps(100);
   Tasks.add(&task10Hz)->startFps(10);
   Tasks.add(&task2Hz)->startFps(2);
+  Tasks.add("end-recovery", &endRecoveryMode);
 
   MsgPacketizer::subscribe(LoRa, 0xCC, [](uint8_t payload)
                            {
