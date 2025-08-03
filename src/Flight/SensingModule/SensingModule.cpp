@@ -289,9 +289,9 @@ void task2Hz()
                                                            static_cast<int16_t>(externalCurrent_mA * 100),
                                                            static_cast<int16_t>(batteryCurrent_mA * 100),
                                                            static_cast<int16_t>(busCurrent_mA * 100),
-                                                           static_cast<int16_t>(externalPower_W * 100),
-                                                           static_cast<int16_t>(batteryPower_W * 100),
-                                                           static_cast<int16_t>(busPower_W * 100),
+                                                           static_cast<int16_t>(externalPower_W * 10),
+                                                           static_cast<int16_t>(batteryPower_W * 10),
+                                                           static_cast<int16_t>(busPower_W * 10),
                                                            static_cast<int16_t>(externalDieTemperature_C * 10),
                                                            static_cast<int16_t>(batteryDieTemperature_C * 10),
                                                            static_cast<int16_t>(busDieTemperature_C * 10));
@@ -317,8 +317,8 @@ void setup()
 
     primary.initialize(0x5C);
     secondary.initialize(0x5D);
-    primary.setReferencePressure(1013.0);   // METARのQから始まる値を基準気圧に設定してみる．
-    secondary.setReferencePressure(1013.0); // METARのQから始まる値を基準気圧に設定してみる．
+    primary.setReferencePressure(1002.0);   // METARのQから始まる値を基準気圧に設定してみる．
+    secondary.setReferencePressure(1002.0); // METARのQから始まる値を基準気圧に設定してみる．
 
     Tasks.add(&task200Hz)->startFps(200);
     Tasks.add(&task100Hz)->startFps(100);
