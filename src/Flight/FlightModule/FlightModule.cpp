@@ -65,8 +65,7 @@ float currentPosition_SUPPLY, currentDesiredPosition_SUPPLY, currentVelocity_SUP
 bool sensingModuleAvailable = false;
 bool sensingModuleAvailableAnnounced = false;
 
-uint8_t servoId = 0;
-int16_t servoAngle = 0;
+uint8_t receiveCommand = 0;
 
 void flightModeOn()
 {
@@ -101,6 +100,13 @@ void flightModeReset()
   flightMode.change(Var::FlightMode::STANDBY);
   logger.reset();
   ident = static_cast<char>(random(65, 91));
+  buzzer.beepLongOnce();
+}
+
+void recoveryMode()
+{
+  uint8_t command = 76;
+  can.sendServoCommand(command);
   buzzer.beepLongOnce();
 }
 
@@ -342,9 +348,9 @@ void task10Hz()
   can.sendFlight(flightMode.currentNumber(), flightTime.get(), doLogging, ident);
   ledCanTx.toggle();
 
-  Serial.print(gnss.getLatitude(), 8);    // GNSSのテスト用
-  Serial.print(",");                      // GNSSのテスト用
-  Serial.println(gnss.getLongitude(), 8); // GNSSのテスト用
+  // Serial.print(gnss.getLatitude(), 8);    // GNSSのテスト用
+  // Serial.print(",");                      // GNSSのテスト用
+  // Serial.println(gnss.getLongitude(), 8); // GNSSのテスト用
 }
 
 void task2Hz()
@@ -425,17 +431,6 @@ void setup()
       50000  // LANDING_TIME
   );
 
-  );
-
-  // LoRaコマンド(サーボ制御)
-  MsgPacketizer::subscribe(LoRa, 0xCC, [](uint8_t id, int16_t angle)
-  {
-    ledLoRaRx.toggle();
-    servoId = id;
-    servoAngle = angle;
-    can.sendServoCommand(servoId, servoAngle);
-  });
-
   if (flightPin.isOpen())
   {
     flightMode.change(Var::FlightMode::DATA_PROTECTION);
@@ -443,12 +438,17 @@ void setup()
   }
   else
   {
-    buzzer.beepMorse("FM " + (String)ident);
+    // buzzer.beepMorse("FM " + (String)ident);
   }
 
   Tasks.add(&task100Hz)->startFps(100);
   Tasks.add(&task10Hz)->startFps(10);
   Tasks.add(&task2Hz)->startFps(2);
+
+  MsgPacketizer::subscribe(LoRa, 0xCC, [](uint8_t payload)
+                           {
+    ledLoRaRx.toggle();
+    recoveryMode(); });
 
   // フライトモードオン
   MsgPacketizer::subscribe(LoRa, 0xF1, [](uint8_t payload)
@@ -480,7 +480,7 @@ void loop()
   if (sensingModuleAvailable && !sensingModuleAvailableAnnounced && millis() > 5000)
   {
     sensingModuleAvailableAnnounced = true;
-    buzzer.beepMorse("SM");
+    // buzzer.beepMorse("SM");
   }
 
   Tasks.update();

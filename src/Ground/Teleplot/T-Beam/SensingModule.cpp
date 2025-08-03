@@ -18,8 +18,12 @@ const int NUM_PAGES = 2;
 
 TinyGPSPlus onbordGps;
 
+// テレメトリー
 float lastRssi = 0.0;
 float lastSnr = 0.0;
+float altitude = 0.0;
+float batteryVoltage = 0.0;
+float externalVoltage = 0.0;
 
 unsigned long buttonPressTime = 0;
 bool longPressSent = false;
@@ -67,6 +71,15 @@ void displayPage1()
     display.print(F("SNR:  "));
     display.print(lastSnr);
     display.println(F(" dB"));
+    display.print(F("ALT: "));
+    display.print(altitude);
+    display.println(F(" m"));
+    display.print(F("BAT: "));
+    display.print(batteryVoltage);
+    display.println(F(" V"));
+    display.print(F("EXT: "));
+    display.print(externalVoltage);
+    display.println(F(" V"));
     display.display();
 }
 
@@ -87,15 +100,20 @@ void sendLoRaCommand()
 {
     Serial.println("Sending LoRa Command...");
     // Example command: label 0xCC, ident 'G', payload 1
-    MsgPacketizer::send(LoRa, 0xCC, 'G', (uint8_t)1);
+    // MsgPacketizer::send(LoRa, 0xCC, 72, (uint8_t)0);
+
+    const auto &packet = MsgPacketizer::encode(0xCC, (uint8_t)1);
+    LoRa.beginPacket();
+    LoRa.write(packet.data.data(), packet.data.size());
+    LoRa.endPacket();
 
     display.clearDisplay();
     display.setTextSize(2);
     display.setCursor(10, 25);
     display.println("COMMAND");
     display.display();
-    delay(1000);
-    updateDisplay();
+
+    Tasks["update-display"]->startOnceAfterMsec(1000);
 }
 
 void taskGpsUpdate()
@@ -159,9 +177,8 @@ void setup()
     display.println("System Start");
     display.display();
     delay(1000);
-
     LoRa.setPins(RADIO_CS_PIN, RADIO_RST_PIN, RADIO_DIO0_PIN);
-    if (!LoRa.begin(924.2E6))
+    if (!LoRa.begin(925.6E6)) // 一時的にFlightModuleの周波数
     {
         Serial.println("Starting LoRa failed!");
         display.clearDisplay();
@@ -199,9 +216,9 @@ void setup()
                                  int16_t externalCurrent_mA,
                                  int16_t batteryCurrent_mA,
                                  int16_t busCurrent_mA,
-                                 int8_t externalPower_mW,
-                                 int8_t batteryPower_mW,
-                                 int8_t busPower_mW,
+                                 int16_t externalPower_W,
+                                 int16_t batteryPower_W,
+                                 int16_t busPower_W,
                                  int16_t externalDieTemperature_C,
                                  int16_t batteryDieTemperature_C,
                                  int16_t busDieTemperature_C)
@@ -246,6 +263,7 @@ void setup()
                                  Serial.println((float)jerkX_mps3 / 10.0);
                                  Serial.print(">altitude_m: ");
                                  Serial.println((float)altitude_m / 10.0);
+                                 altitude = (float)altitude_m / 10.0;
                                  Serial.print(">vertiaclSpeed_mps: ");
                                  Serial.println((float)verticalSpeed_mps / 10.0);
                                  Serial.print(">apogee_m: ");
@@ -254,8 +272,10 @@ void setup()
                                  Serial.println((float)estimated / 10.0);
                                  Serial.print(">externalVoltage_V: ");
                                  Serial.println((float)externalVoltage_V / 100.0);
+                                 externalVoltage = (float)externalVoltage_V / 100.0;
                                  Serial.print(">batteryVoltage_V: ");
                                  Serial.println((float)batteryVoltage_V / 100.0);
+                                 batteryVoltage = (float)batteryVoltage_V / 100.0;
                                  Serial.print(">busVoltage_V: ");
                                  Serial.println((float)busVoltage_V / 100.0);
                                  Serial.print(">externalCurrent_mA: ");
@@ -264,12 +284,12 @@ void setup()
                                  Serial.println((float)batteryCurrent_mA / 100.0);
                                  Serial.print(">busCurrent_mA: ");
                                  Serial.println((float)busCurrent_mA / 100.0);
-                                 Serial.print(">externalPower_mW: ");
-                                 Serial.println((float)externalPower_mW / 100.0);
-                                 Serial.print(">batteryPower_mW");
-                                 Serial.println((float)batteryPower_mW / 100.0);
-                                 Serial.print(">busPower_mW: ");
-                                 Serial.println((float)busPower_mW / 10.0);
+                                 Serial.print(">externalPower_W: ");
+                                 Serial.println((float)externalPower_W / 10.0);
+                                 Serial.print(">batteryPower_W");
+                                 Serial.println((float)batteryPower_W / 10.0);
+                                 Serial.print(">busPower_W: ");
+                                 Serial.println((float)busPower_W / 10.0);
                                  Serial.print(">groundTemperature_degC: ");
                                  Serial.println((float)externalDieTemperature_C / 10.0);
                                  Serial.print(">batteryDieTemperature_degC: ");
@@ -283,6 +303,7 @@ void setup()
     updateDisplay();
     Tasks.add(&taskGpsUpdate)->startFps(5);
     Tasks.add(&taskButtonCheck)->startFps(20);
+    Tasks.add("update-display", &updateDisplay);
 }
 
 void loop()
