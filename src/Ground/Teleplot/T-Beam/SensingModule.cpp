@@ -18,12 +18,15 @@ const int NUM_PAGES = 2;
 
 TinyGPSPlus onbordGps;
 
-// テレメトリー
+// テレメトリー Sensing
 float lastRssi = 0.0;
 float lastSnr = 0.0;
 float altitude = 0.0;
 float batteryVoltage = 0.0;
 float externalVoltage = 0.0;
+
+// テレメトリー Flight
+float mainPosition = 0.0;
 
 unsigned long buttonPressTime = 0;
 bool longPressSent = false;
@@ -80,6 +83,9 @@ void displayPage1()
     display.print(F("EXT: "));
     display.print(externalVoltage);
     display.println(F(" V"));
+    display.print(F("MAIN: "));
+    display.print(mainPosition);
+    display.println(F(" deg"));
     display.display();
 }
 
@@ -103,9 +109,12 @@ void sendLoRaCommand()
     // MsgPacketizer::send(LoRa, 0xCC, 72, (uint8_t)0);
 
     const auto &packet = MsgPacketizer::encode(0xCC, (uint8_t)1);
-    LoRa.beginPacket();
-    LoRa.write(packet.data.data(), packet.data.size());
-    LoRa.endPacket();
+    for (int i = 0; i < 10; i++)
+    {
+        LoRa.beginPacket();
+        LoRa.write(packet.data.data(), packet.data.size());
+        LoRa.endPacket();
+    }
 
     display.clearDisplay();
     display.setTextSize(2);
@@ -189,113 +198,219 @@ void setup()
     }
     LoRa.setSignalBandwidth(500E3);
 
+    // MsgPacketizer::subscribe(LoRa, 0x0A,
+
+    //                          [](
+    //                              uint32_t millis,
+    //                              char ident,
+    //                              uint8_t loggerUsage,
+    //                              bool doLogging,
+    //                              uint8_t framNumber,
+    //                              int16_t accelerationX_mps2,
+    //                              int16_t accelerationY_mps2,
+    //                              int16_t accelerationZ_mps2,
+    //                              int16_t accelerationNorm_mps2,
+    //                              int16_t roll_deg,
+    //                              int16_t pitch_deg,
+    //                              int16_t yaw_deg,
+    //                              int16_t forceX_N,
+    //                              int16_t jerkX_mps3,
+    //                              int16_t altitude_m,
+    //                              int16_t verticalSpeed_mps,
+    //                              int16_t estimated,
+    //                              int16_t apogee,
+    //                              int16_t externalVoltage_V,
+    //                              int16_t batteryVoltage_V,
+    //                              int16_t busVoltage_V,
+    //                              int16_t externalCurrent_mA,
+    //                              int16_t batteryCurrent_mA,
+    //                              int16_t busCurrent_mA,
+    //                              int16_t externalPower_W,
+    //                              int16_t batteryPower_W,
+    //                              int16_t busPower_W,
+    //                              int16_t externalDieTemperature_C,
+    //                              int16_t batteryDieTemperature_C,
+    //                              int16_t busDieTemperature_C)
+    //                          {
+    //                              lastRssi = LoRa.packetRssi();
+    //                              lastSnr = LoRa.packetSnr();
+
+    //                              if (currentPage == 1)
+    //                              {
+    //                                  updateDisplay();
+    //                              }
+
+    //                              Serial.print(">LoRa_RSSI_dBm: ");
+    //                              Serial.println(lastRssi);
+    //                              Serial.print(">LoRa_SNR_dBm: ");
+    //                              Serial.println(lastSnr);
+    //                              Serial.print(">upTime_sec: ");
+    //                              Serial.println((float)millis / 1000);
+    //                              Serial.print(">doLogging_bool: ");
+    //                              Serial.println(doLogging);
+    //                              Serial.print(">loggerUsage_%: ");
+    //                              Serial.println(loggerUsage);
+    //                              Serial.print(">framNumber: ");
+    //                              Serial.println(framNumber);
+    //                              Serial.print(">acceleration_mps2_norm: ");
+    //                              Serial.println((float)accelerationNorm_mps2 / 10.0);
+    //                              Serial.print(">acceleration_mps2_x: ");
+    //                              Serial.println((float)accelerationX_mps2 / 10.0);
+    //                              Serial.print(">acceleration_mps2_y: ");
+    //                              Serial.println((float)accelerationY_mps2 / 10.0);
+    //                              Serial.print(">acceleration_mps2_z: ");
+    //                              Serial.println((float)accelerationZ_mps2 / 10.0);
+    //                              Serial.print(">orientation_deg_roll: ");
+    //                              Serial.println((float)roll_deg / 10.0);
+    //                              Serial.print(">orientation_deg_pitch: ");
+    //                              Serial.println((float)pitch_deg / 10.0);
+    //                              Serial.print(">orientation_deg_yaw: ");
+    //                              Serial.println((float)yaw_deg / 10.0);
+    //                              Serial.print(">forceX_N: ");
+    //                              Serial.println((float)forceX_N / 10.0);
+    //                              Serial.print(">jerkX_mps3: ");
+    //                              Serial.println((float)jerkX_mps3 / 10.0);
+    //                              Serial.print(">altitude_m: ");
+    //                              Serial.println((float)altitude_m / 10.0);
+    //                              altitude = (float)altitude_m / 10.0;
+    //                              Serial.print(">vertiaclSpeed_mps: ");
+    //                              Serial.println((float)verticalSpeed_mps / 10.0);
+    //                              Serial.print(">apogee_m: ");
+    //                              Serial.println((float)apogee / 10.0);
+    //                              Serial.print(">estimated_s: ");
+    //                              Serial.println((float)estimated / 10.0);
+    //                              Serial.print(">externalVoltage_V: ");
+    //                              Serial.println((float)externalVoltage_V / 100.0);
+    //                              externalVoltage = (float)externalVoltage_V / 100.0;
+    //                              Serial.print(">batteryVoltage_V: ");
+    //                              Serial.println((float)batteryVoltage_V / 100.0);
+    //                              batteryVoltage = (float)batteryVoltage_V / 100.0;
+    //                              Serial.print(">busVoltage_V: ");
+    //                              Serial.println((float)busVoltage_V / 100.0);
+    //                              Serial.print(">externalCurrent_mA: ");
+    //                              Serial.println((float)externalCurrent_mA / 100.0);
+    //                              Serial.print(">batteryCurrent_mA: ");
+    //                              Serial.println((float)batteryCurrent_mA / 100.0);
+    //                              Serial.print(">busCurrent_mA: ");
+    //                              Serial.println((float)busCurrent_mA / 100.0);
+    //                              Serial.print(">externalPower_W: ");
+    //                              Serial.println((float)externalPower_W / 10.0);
+    //                              Serial.print(">batteryPower_W");
+    //                              Serial.println((float)batteryPower_W / 10.0);
+    //                              Serial.print(">busPower_W: ");
+    //                              Serial.println((float)busPower_W / 10.0);
+    //                              Serial.print(">groundTemperature_degC: ");
+    //                              Serial.println((float)externalDieTemperature_C / 10.0);
+    //                              Serial.print(">batteryDieTemperature_degC: ");
+    //                              Serial.println((float)batteryDieTemperature_C / 10.0);
+    //                              Serial.print(">busDieTemperature_degC: ");
+    //                              Serial.println((float)busDieTemperature_C / 10.0);
+    //                              Serial.println();
+    //                              Serial.flush();
+    //                          });
+
     MsgPacketizer::subscribe(LoRa, 0x0A,
 
                              [](
-                                 uint32_t millis,
                                  char ident,
+                                 uint32_t millis,
+                                 uint8_t flightMode,
+                                 uint16_t flightTime,
                                  uint8_t loggerUsage,
                                  bool doLogging,
                                  uint8_t framNumber,
-                                 int16_t accelerationX_mps2,
-                                 int16_t accelerationY_mps2,
-                                 int16_t accelerationZ_mps2,
-                                 int16_t accelerationNorm_mps2,
-                                 int16_t roll_deg,
-                                 int16_t pitch_deg,
-                                 int16_t yaw_deg,
-                                 int16_t forceX_N,
-                                 int16_t jerkX_mps3,
-                                 int16_t altitude_m,
-                                 int16_t verticalSpeed_mps,
-                                 int16_t estimated,
-                                 int16_t apogee,
-                                 int16_t externalVoltage_V,
-                                 int16_t batteryVoltage_V,
-                                 int16_t busVoltage_V,
-                                 int16_t externalCurrent_mA,
-                                 int16_t batteryCurrent_mA,
-                                 int16_t busCurrent_mA,
-                                 int16_t externalPower_W,
-                                 int16_t batteryPower_W,
-                                 int16_t busPower_W,
-                                 int16_t externalDieTemperature_C,
-                                 int16_t batteryDieTemperature_C,
-                                 int16_t busDieTemperature_C)
+                                 bool flightPinIsOpen,
+                                 bool sn3IsOn,
+                                 bool sn4IsOn,
+                                 bool isLaunchMode,
+                                 bool isFalling,
+                                 uint32_t unixEpoch,
+                                 uint8_t fixType,
+                                 uint8_t satelliteCount,
+                                 float latitude,
+                                 float longitude,
+                                 int16_t height,
+                                 int16_t speed,
+                                 uint16_t accuracy,
+                                 int16_t motorTemperature,
+                                 int16_t mcuTemperature,
+                                 uint16_t inputVoltage,
+                                 int16_t current,
+                                 int16_t currentPosition,
+                                 int16_t currentDesiredPosition,
+                                 int16_t currentVelocity,
+
+                                 int16_t motorTemperature_SUPPLY,
+                                 int16_t mcuTemperature_SUPPLY,
+                                 int16_t inputVoltage_SUPPLY,
+                                 int16_t current_SUPPLY,
+                                 int16_t currentPosition_SUPPLY,
+                                 int16_t currentDesiredPosition_SUPPLY,
+                                 int16_t currentVelocity_SUPPLY,
+                                 uint16_t separation1ProtectionTime,
+                                 uint16_t separation1ForceTime,
+                                 uint16_t separation2ProtectionTime,
+                                 uint16_t separation2ForceTime,
+                                 uint16_t landingTime)
                              {
-                                 lastRssi = LoRa.packetRssi();
-                                 lastSnr = LoRa.packetSnr();
+                                 Serial.print(">LoRa_RSSI_dBm: ");
+                                 float loraRssi = LoRa.packetRssi();
+                                 Serial.println(loraRssi);
+
+                                 float loraSnr = LoRa.packetSnr();
+                                 Serial.print(">LoRa_SNR_dBm: ");
+                                 Serial.println(loraSnr);
 
                                  if (currentPage == 1)
                                  {
                                      updateDisplay();
                                  }
 
-                                 Serial.print(">LoRa_RSSI_dBm: ");
-                                 Serial.println(lastRssi);
-                                 Serial.print(">LoRa_SNR_dBm: ");
-                                 Serial.println(lastSnr);
                                  Serial.print(">upTime_sec: ");
-                                 Serial.println((float)millis / 1000);
+                                 Serial.println(millis / 1000);
                                  Serial.print(">doLogging_bool: ");
                                  Serial.println(doLogging);
                                  Serial.print(">loggerUsage_%: ");
                                  Serial.println(loggerUsage);
                                  Serial.print(">framNumber: ");
                                  Serial.println(framNumber);
-                                 Serial.print(">acceleration_mps2_norm: ");
-                                 Serial.println((float)accelerationNorm_mps2 / 10.0);
-                                 Serial.print(">acceleration_mps2_x: ");
-                                 Serial.println((float)accelerationX_mps2 / 10.0);
-                                 Serial.print(">acceleration_mps2_y: ");
-                                 Serial.println((float)accelerationY_mps2 / 10.0);
-                                 Serial.print(">acceleration_mps2_z: ");
-                                 Serial.println((float)accelerationZ_mps2 / 10.0);
-                                 Serial.print(">orientation_deg_roll: ");
-                                 Serial.println((float)roll_deg / 10.0);
-                                 Serial.print(">orientation_deg_pitch: ");
-                                 Serial.println((float)pitch_deg / 10.0);
-                                 Serial.print(">orientation_deg_yaw: ");
-                                 Serial.println((float)yaw_deg / 10.0);
-                                 Serial.print(">forceX_N: ");
-                                 Serial.println((float)forceX_N / 10.0);
-                                 Serial.print(">jerkX_mps3: ");
-                                 Serial.println((float)jerkX_mps3 / 10.0);
-                                 Serial.print(">altitude_m: ");
-                                 Serial.println((float)altitude_m / 10.0);
-                                 altitude = (float)altitude_m / 10.0;
-                                 Serial.print(">vertiaclSpeed_mps: ");
-                                 Serial.println((float)verticalSpeed_mps / 10.0);
-                                 Serial.print(">apogee_m: ");
-                                 Serial.println((float)apogee / 10.0);
-                                 Serial.print(">estimated_s: ");
-                                 Serial.println((float)estimated / 10.0);
-                                 Serial.print(">externalVoltage_V: ");
-                                 Serial.println((float)externalVoltage_V / 100.0);
-                                 externalVoltage = (float)externalVoltage_V / 100.0;
-                                 Serial.print(">batteryVoltage_V: ");
-                                 Serial.println((float)batteryVoltage_V / 100.0);
-                                 batteryVoltage = (float)batteryVoltage_V / 100.0;
-                                 Serial.print(">busVoltage_V: ");
-                                 Serial.println((float)busVoltage_V / 100.0);
-                                 Serial.print(">externalCurrent_mA: ");
-                                 Serial.println((float)externalCurrent_mA / 100.0);
-                                 Serial.print(">batteryCurrent_mA: ");
-                                 Serial.println((float)batteryCurrent_mA / 100.0);
-                                 Serial.print(">busCurrent_mA: ");
-                                 Serial.println((float)busCurrent_mA / 100.0);
-                                 Serial.print(">externalPower_W: ");
-                                 Serial.println((float)externalPower_W / 10.0);
-                                 Serial.print(">batteryPower_W");
-                                 Serial.println((float)batteryPower_W / 10.0);
-                                 Serial.print(">busPower_W: ");
-                                 Serial.println((float)busPower_W / 10.0);
-                                 Serial.print(">groundTemperature_degC: ");
-                                 Serial.println((float)externalDieTemperature_C / 10.0);
-                                 Serial.print(">batteryDieTemperature_degC: ");
-                                 Serial.println((float)batteryDieTemperature_C / 10.0);
-                                 Serial.print(">busDieTemperature_degC: ");
-                                 Serial.println((float)busDieTemperature_C / 10.0);
+
+                                 Serial.print(">FLIGHTMODE: ");
+                                 Serial.println(flightMode);
+                                 Serial.print(">flightTime_s");
+                                 Serial.println((float)flightTime / 1000.0);
+
+                                 Serial.print(">MAIN_motorTemperature_*C: ");
+                                 Serial.println((float)motorTemperature / 100.0);
+                                 Serial.print(">MAIN_mcuTemperature_*C: ");
+                                 Serial.println((float)mcuTemperature / 100.0);
+                                 Serial.print(">MAIN_inputVoltageMain_V");
+                                 Serial.println((float)inputVoltage / 100.0);
+                                 Serial.print("MAIN_current_A: ");
+                                 Serial.println((float)current / 100.0);
+                                 Serial.print(">MAIN_ValvePosition_deg: ");
+                                 Serial.println((float)currentPosition / 100.0);
+                                 mainPosition = (float)currentPosition / 100.0;
+                                 Serial.print(">MAIN_desiredPosition_deg: ");
+                                 Serial.println((float)currentDesiredPosition / 100.0);
+                                 Serial.print(">MAIN_velocity_m/s^2: ");
+                                 Serial.println((float)currentVelocity / 100.0);
+
+                                 Serial.print(">SUPPLY_morotTemperature_*C: ");
+                                 Serial.println((float)mcuTemperature_SUPPLY / 100.0);
+                                 Serial.print(">SUPPLY_mcuTemperature_*C: ");
+                                 Serial.println((float)mcuTemperature_SUPPLY / 100.0);
+                                 Serial.print(">SUPPLY_inputVoltage_V");
+                                 Serial.println((float)inputVoltage_SUPPLY / 100.0);
+                                 Serial.print(">SUPPLY_current_A");
+                                 Serial.println((float)current_SUPPLY / 100.0);
+                                 Serial.print(">SUPPLY_ValvePosition_V: ");
+                                 Serial.println((float)currentPosition_SUPPLY / 100.0);
+                                 Serial.print(">SUPPLY_desiredPosition_deg: ");
+                                 Serial.println((float)currentDesiredPosition_SUPPLY / 100.0);
+                                 Serial.print(">SUPPLY_velocity_m/s^2");
+                                 Serial.println((float)currentVelocity_SUPPLY / 100.0);
+
                                  Serial.println();
                                  Serial.flush();
                              });
