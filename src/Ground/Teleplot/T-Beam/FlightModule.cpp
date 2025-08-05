@@ -9,11 +9,11 @@
 
 StaticJsonDocument<4096> packet;
 
-uint16_t separation1ProtectionTime = 8605;
-uint16_t separation1ForceTime = 11605;
-uint16_t separation2ProtectionTime = 1000;
-uint16_t separation2ForceTime = 1000;
-uint16_t landingTime = 30305;
+uint32_t separation1ProtectionTime = 8605;
+uint32_t separation1ForceTime = 11605;
+uint32_t separation2ProtectionTime = 1000;
+uint32_t separation2ForceTime = 1000;
+uint32_t landingTime = 30305;
 
 void setup()
 {
@@ -62,11 +62,11 @@ void setup()
                                  int16_t currentPosition_SUPPLY,
                                  int16_t currentDesiredPosition_SUPPLY,
                                  int16_t currentVelocity_SUPPLY,
-                                 uint16_t separation1ProtectionTime,
-                                 uint16_t separation1ForceTime,
-                                 uint16_t separation2ProtectionTime,
-                                 uint16_t separation2ForceTime,
-                                 uint16_t landingTime)
+                                 uint32_t separation1ProtectionTime,
+                                 uint32_t separation1ForceTime,
+                                 uint32_t separation2ProtectionTime,
+                                 uint32_t separation2ForceTime,
+                                 uint32_t landingTime)
                              {
                                  Serial.print(">LoRa_RSSI_dBm: ");
                                  float loraRssi = LoRa.packetRssi();
