@@ -24,6 +24,9 @@ float lastSnr = 0.0;
 float altitude = 0.0;
 float batteryVoltage = 0.0;
 float externalVoltage = 0.0;
+float receiveLatitude = 0.0;
+float receiveLongtitude = 0.0;
+float flightTime = 0.0;
 
 // テレメトリー Flight
 float mainPosition = 0.0;
@@ -40,17 +43,49 @@ void displayPage0()
     display.setTextSize(1);
     display.setTextColor(SSD1306_WHITE);
     display.setCursor(0, 0);
-    display.println(F("--- GPS Info ---"));
+    display.println(F("--- MAIN ---"));
+
+    display.setCursor(70, 0);
+    display.println();
+
+    int rssi = LoRa.packetRssi();
+    int bars = 0;
+    if (rssi > -95.8) {
+        bars = 5;
+    } else if (rssi > -101.6) {
+        bars = 4;
+    } else if (rssi > -107.4) {
+        bars = 3;
+    } else if (rssi > -113.2) {
+        bars = 2;
+    } else {
+        bars = 1;
+    }
+
+    int barWidth = 5;
+    int barSpacing = 1;
+    int startX = 100;
+    int startY = 0;
+    int barHeight = 8;
+
+    for (int i = 0; i < 5; i++) {
+        int currentBarHeight = barHeight * (i + 1) / 5;
+        if (i < bars) {
+            display.fillRect(startX + i * (barWidth + barSpacing), startY + (barHeight - currentBarHeight), barWidth, currentBarHeight, SSD1306_WHITE);
+        }
+    }
 
     if (onbordGps.location.isValid())
     {
-        display.print(F("LAT: "));
+        
+        display.print("Flight Time:"); display.println((float)flightTime / 1000.0);
+        display.println(receiveLatitude, 6);
+        display.print(" H-62 Lng:"); 
+        display.println(receiveLongtitude, 6);
+        display.print(F("TBEAM Lat: "));
         display.println(onbordGps.location.lat(), 6);
-        display.print(F("LNG: "));
+        display.print(F("TBEAM Lng: "));
         display.println(onbordGps.location.lng(), 6);
-        display.print(F("ALT: "));
-        display.print(onbordGps.altitude.meters(), 1);
-        display.println(F(" m"));
         display.print(F("SAT: "));
         display.println(onbordGps.satellites.value());
     }
@@ -67,7 +102,36 @@ void displayPage1()
     display.setTextSize(1);
     display.setTextColor(SSD1306_WHITE);
     display.setCursor(0, 0);
-    display.println(F("--- LoRa Info ---"));
+    display.println(F("--- LoRa ---"));
+    display.setCursor(70, 0);
+    display.println();
+
+    int rssi = LoRa.packetRssi();
+    int bars = 0;
+    if (rssi > -95.8) {
+        bars = 5;
+    } else if (rssi > -101.6) {
+        bars = 4;
+    } else if (rssi > -107.4) {
+        bars = 3;
+    } else if (rssi > -113.2) {
+        bars = 2;
+    } else {
+        bars = 1;
+    }
+
+    int barWidth = 5;
+    int barSpacing = 1;
+    int startX = 100;
+    int startY = 0;
+    int barHeight = 8;
+
+    for (int i = 0; i < 5; i++) {
+        int currentBarHeight = barHeight * (i + 1) / 5;
+        if (i < bars) {
+            display.fillRect(startX + i * (barWidth + barSpacing), startY + (barHeight - currentBarHeight), barWidth, currentBarHeight, SSD1306_WHITE);
+        }
+    }
     display.print(F("RSSI: "));
     display.print(lastRssi);
     display.println(F(" dBm"));
