@@ -71,26 +71,71 @@ void displayPage0()
             display.fillRect(startX + i * (barWidth + barSpacing), startY + (barHeight - currentBarHeight), barWidth, currentBarHeight, SSD1306_WHITE);
         }
     }
+   
 
-    if (onbordGps.location.isValid())
-    {
-        
-        display.print("Flight Time:"); display.println((float)flightTime / 1000.0);
-        display.println(receiveLatitude, 6);
-        display.print(" H-62 Lng:"); 
-        display.println(receiveLongtitude, 6);
-        display.print(F("TBEAM Lat: "));
-        display.println(onbordGps.location.lat(), 6);
-        display.print(F("TBEAM Lng: "));
-        display.println(onbordGps.location.lng(), 6);
-        display.print(F("SAT: "));
-        display.println(onbordGps.satellites.value());
-    }
-    else
-    {
-        display.println(F("No valid GPS data."));
-    }
+    display.print(F("SNR:  "));
+    display.print(lastSnr);
+    display.println(F(" dB"));
+    display.print(F("ALT: "));
+    display.print(altitude);
+    display.println(F(" m"));
+    display.print(F("BAT: "));
+    display.print(batteryVoltage);
+    display.println(F(" V"));
+    display.print(F("EXT: "));
+    display.print(externalVoltage);
+    display.println(F(" V"));
+   
     display.display();
+
+    // int rssi = LoRa.packetRssi();
+    // int bars = 0;
+    // if (rssi > -95.8) {
+    //     bars = 5;
+    // } else if (rssi > -101.6) {
+    //     bars = 4;
+    // } else if (rssi > -107.4) {
+    //     bars = 3;
+    // } else if (rssi > -113.2) {
+    //     bars = 2;
+    // } else {
+    //     bars = 1;
+    // }
+
+    // int barWidth = 5;
+    // int barSpacing = 1;
+    // int startX = 100;
+    // int startY = 0;
+    // int barHeight = 8;
+
+    // for (int i = 0; i < 5; i++) {
+    //     int currentBarHeight = barHeight * (i + 1) / 5;
+    //     if (i < bars) {
+    //         display.fillRect(startX + i * (barWidth + barSpacing), startY + (barHeight - currentBarHeight), barWidth, currentBarHeight, SSD1306_WHITE);
+    //     }
+    // }
+
+    //     display.print("Flight Time:"); 
+    //     display.println((float)flightTime / 1000.0);
+        
+    // if (onbordGps.location.isValid())
+    // {
+    //     display.print(" H-62 Lat:");
+    //     display.println(receiveLatitude, 6);
+    //     display.print(" H-62 Lng:"); 
+    //     display.println(receiveLongtitude, 6);
+    //     display.print(F("TBEAM Lat: "));
+    //     display.println(onbordGps.location.lat(), 6);
+    //     display.print(F("TBEAM Lng: "));
+    //     display.println(onbordGps.location.lng(), 6);
+    //     display.print(F("SAT: "));
+    //     display.println(onbordGps.satellites.value());
+    // }
+    // else
+    // {
+    //     display.println(F("No valid GPS data."));
+    // }
+    // display.display();
 }
 
 void displayPage1()
@@ -99,9 +144,10 @@ void displayPage1()
     display.setTextSize(1);
     display.setTextColor(SSD1306_WHITE);
     display.setCursor(0, 0);
-    display.println(F("--- LoRa ---"));
+    display.println(F("--- Sub ---"));
     display.setCursor(70, 0);
     display.println();
+    
 
     int rssi = LoRa.packetRssi();
     int bars = 0;
@@ -129,23 +175,78 @@ void displayPage1()
             display.fillRect(startX + i * (barWidth + barSpacing), startY + (barHeight - currentBarHeight), barWidth, currentBarHeight, SSD1306_WHITE);
         }
     }
-    display.print(F("RSSI: "));
-    display.print(lastRssi);
-    display.println(F(" dBm"));
-    display.print(F("SNR:  "));
-    display.print(lastSnr);
-    display.println(F(" dB"));
-    display.print(F("ALT: "));
-    display.print(altitude);
-    display.println(F(" m"));
-    display.print(F("BAT: "));
-    display.print(batteryVoltage);
-    display.println(F(" V"));
-    display.print(F("EXT: "));
-    display.print(externalVoltage);
-    display.println(F(" V"));
+        
+        display.print("Flight Time:"); 
+        display.println((float)flightTime / 1000.0);
+        display.print(" H-62 Lat:");
+        display.println(receiveLatitude, 6);
+        display.print(" H-62 Lng:"); 
+        display.println(receiveLongtitude, 6);
+        // display.println("Need to change the frequency band");
+
+        
+    if (onbordGps.location.isValid())
+    {
+        display.print(F("TBEAM Lat: "));
+        display.println(onbordGps.location.lat(), 6);
+        display.print(F("TBEAM Lng: "));
+        display.println(onbordGps.location.lng(), 6);
+        display.print(F("SAT: "));
+        display.println(onbordGps.satellites.value());
+    }
+    else
+    {
+        display.println(F("No valid GPS data."));
+    }
 
     display.display();
+
+    // display.setCursor(70, 0);
+    // display.println();
+
+    // int rssi = LoRa.packetRssi();
+    // int bars = 0;
+    // if (rssi > -95.8) {
+    //     bars = 5;
+    // } else if (rssi > -101.6) {
+    //     bars = 4;
+    // } else if (rssi > -107.4) {
+    //     bars = 3;
+    // } else if (rssi > -113.2) {
+    //     bars = 2;
+    // } else {
+    //     bars = 1;
+    // }
+
+    // int barWidth = 5;
+    // int barSpacing = 1;
+    // int startX = 100;
+    // int startY = 0;
+    // int barHeight = 8;
+
+    // for (int i = 0; i < 5; i++) {
+    //     int currentBarHeight = barHeight * (i + 1) / 5;
+    //     if (i < bars) {
+    //         display.fillRect(startX + i * (barWidth + barSpacing), startY + (barHeight - currentBarHeight), barWidth, currentBarHeight, SSD1306_WHITE);
+    //     }
+    // }
+    // display.print(F("RSSI: "));
+    // display.print(lastRssi);
+    // display.println(F(" dBm"));
+    // display.print(F("SNR:  "));
+    // display.print(lastSnr);
+    // display.println(F(" dB"));
+    // display.print(F("ALT: "));
+    // display.print(altitude);
+    // display.println(F(" m"));
+    // display.print(F("BAT: "));
+    // display.print(batteryVoltage);
+    // display.println(F(" V"));
+    // display.print(F("EXT: "));
+    // display.print(externalVoltage);
+    // display.println(F(" V"));
+   
+    // display.display();
 }
 
 void updateDisplay()
@@ -160,6 +261,30 @@ void updateDisplay()
         break;
     }
 }
+
+void sendLoRaCommand()
+{
+  Serial.println("Sending LoRa Command...");
+  // Example command: label 0xCC, ident 'G', payload 1
+  // MsgPacketizer::send(LoRa, 0xCC, 72, (uint8_t)0);
+
+  const auto &packet = MsgPacketizer::encode(0xCC, (uint8_t)1);
+  for (int i = 0; i < 10; i++)
+  {
+    LoRa.beginPacket();
+    LoRa.write(packet.data.data(), packet.data.size());
+    LoRa.endPacket();
+  }
+
+  display.clearDisplay();
+  display.setTextSize(2);
+  display.setCursor(10, 25);
+  display.println("COMMAND");
+  display.display();
+
+  Tasks["update-display"]->startOnceAfterMsec(1000);
+}
+
 
 void taskGpsUpdate()
 {
