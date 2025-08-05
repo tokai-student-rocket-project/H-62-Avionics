@@ -1,0 +1,125 @@
+{
+   "widgets": [
+      {
+         "type": "single_value_number",
+         "gridPos": {
+            "h": 6,
+            "w": 12,
+            "x": 0,
+            "y": 0
+         },
+         "series": [
+            {
+               "name": "altitude_m",
+               "sourceNames": [
+                  "altitude_m"
+               ],
+               "formula": "",
+               "options": {
+                  "stroke": "rgba(231,76,60,1)",
+                  "fill": "rgba(231,76,60,0.1)"
+               },
+               "type": "number"
+            }
+         ],
+         "precision_mode": 0
+      },
+      {
+         "type": "single_value_number",
+         "gridPos": {
+            "h": 6,
+            "w": 6,
+            "x": 0,
+            "y": 0
+         },
+         "series": [
+            {
+               "name": "batteryVoltage_V",
+               "sourceNames": [
+                  "batteryVoltage_V"
+               ],
+               "formula": "",
+               "options": {
+                  "stroke": "rgba(231,76,60,1)",
+                  "fill": "rgba(231,76,60,0.1)"
+               },
+               "type": "number"
+            }
+         ],
+         "precision_mode": 0
+      },
+      {
+         "type": "single_value_number",
+         "gridPos": {
+            "h": 6,
+            "w": 6,
+            "x": 0,
+            "y": 0
+         },
+         "series": [
+            {
+               "name": "externalVoltage_V",
+               "sourceNames": [
+                  "externalVoltage_V"
+               ],
+               "formula": "",
+               "options": {
+                  "stroke": "rgba(231,76,60,1)",
+                  "fill": "rgba(231,76,60,0.1)"
+               },
+               "type": "number"
+            }
+         ],
+         "precision_mode": 1
+      },
+      {
+         "type": "single_value_number",
+         "gridPos": {
+            "h": 6,
+            "w": 6,
+            "x": 0,
+            "y": 0
+         },
+         "series": [
+            {
+               "name": "LoRa_SNR_dBm",
+               "sourceNames": [
+                  "LoRa_SNR_dBm"
+               ],
+               "formula": "",
+               "options": {
+                  "stroke": "rgba(231,76,60,1)",
+                  "fill": "rgba(231,76,60,0.1)"
+               },
+               "type": "number"
+            }
+         ],
+         "precision_mode": 0
+      },
+      {
+         "type": "single_value_number",
+         "gridPos": {
+            "h": 6,
+            "w": 6,
+            "x": 0,
+            "y": 0
+         },
+         "series": [
+            {
+               "name": "LoRa_RSSI_dBm",
+               "sourceNames": [
+                  "LoRa_RSSI_dBm"
+               ],
+               "formula": "",
+               "options": {
+                  "stroke": "rgba(231,76,60,1)",
+                  "fill": "rgba(231,76,60,0.1)"
+               },
+               "type": "number"
+            }
+         ],
+         "precision_mode": 0
+      }
+   ],
+   "viewDuration": 15
+}
