@@ -3,16 +3,16 @@
       {
          "type": "single_value_number",
          "gridPos": {
-            "h": 3,
+            "h": 4,
             "w": 2,
             "x": 0,
             "y": 0
          },
          "series": [
             {
-               "name": "upTime_sec",
+               "name": "flightTime",
                "sourceNames": [
-                  "upTime_sec"
+                  "flightTime"
                ],
                "formula": "",
                "options": {
@@ -27,7 +27,7 @@
       {
          "type": "single_value_number",
          "gridPos": {
-            "h": 3,
+            "h": 4,
             "w": 2,
             "x": 0,
             "y": 0
@@ -51,31 +51,7 @@
       {
          "type": "single_value_number",
          "gridPos": {
-            "h": 3,
-            "w": 2,
-            "x": 0,
-            "y": 0
-         },
-         "series": [
-            {
-               "name": "LoRa_SNR_dBm",
-               "sourceNames": [
-                  "LoRa_SNR_dBm"
-               ],
-               "formula": "",
-               "options": {
-                  "stroke": "rgba(231,76,60,1)",
-                  "fill": "rgba(231,76,60,0.1)"
-               },
-               "type": "number"
-            }
-         ],
-         "precision_mode": 0
-      },
-      {
-         "type": "single_value_number",
-         "gridPos": {
-            "h": 3,
+            "h": 4,
             "w": 2,
             "x": 0,
             "y": 0
@@ -99,7 +75,31 @@
       {
          "type": "single_value_number",
          "gridPos": {
-            "h": 3,
+            "h": 4,
+            "w": 2,
+            "x": 0,
+            "y": 0
+         },
+         "series": [
+            {
+               "name": "LoRa_SNR_dBm",
+               "sourceNames": [
+                  "LoRa_SNR_dBm"
+               ],
+               "formula": "",
+               "options": {
+                  "stroke": "rgba(231,76,60,1)",
+                  "fill": "rgba(231,76,60,0.1)"
+               },
+               "type": "number"
+            }
+         ],
+         "precision_mode": 0
+      },
+      {
+         "type": "single_value_number",
+         "gridPos": {
+            "h": 4,
             "w": 2,
             "x": 0,
             "y": 0
@@ -123,7 +123,7 @@
       {
          "type": "single_value_number",
          "gridPos": {
-            "h": 3,
+            "h": 4,
             "w": 2,
             "x": 0,
             "y": 0
@@ -147,7 +147,7 @@
       {
          "type": "single_value_number",
          "gridPos": {
-            "h": 5,
+            "h": 4,
             "w": 6,
             "x": 0,
             "y": 0
@@ -171,7 +171,7 @@
       {
          "type": "single_value_number",
          "gridPos": {
-            "h": 5,
+            "h": 4,
             "w": 6,
             "x": 0,
             "y": 0
@@ -195,31 +195,7 @@
       {
          "type": "single_value_number",
          "gridPos": {
-            "h": 5,
-            "w": 6,
-            "x": 0,
-            "y": 0
-         },
-         "series": [
-            {
-               "name": "longitude",
-               "sourceNames": [
-                  "longitude"
-               ],
-               "formula": "",
-               "options": {
-                  "stroke": "rgba(231,76,60,1)",
-                  "fill": "rgba(231,76,60,0.1)"
-               },
-               "type": "number"
-            }
-         ],
-         "precision_mode": 0
-      },
-      {
-         "type": "single_value_number",
-         "gridPos": {
-            "h": 5,
+            "h": 4,
             "w": 6,
             "x": 0,
             "y": 0
@@ -243,8 +219,56 @@
       {
          "type": "single_value_number",
          "gridPos": {
-            "h": 3,
-            "w": 4,
+            "h": 4,
+            "w": 6,
+            "x": 0,
+            "y": 0
+         },
+         "series": [
+            {
+               "name": "longitude",
+               "sourceNames": [
+                  "longitude"
+               ],
+               "formula": "",
+               "options": {
+                  "stroke": "rgba(231,76,60,1)",
+                  "fill": "rgba(231,76,60,0.1)"
+               },
+               "type": "number"
+            }
+         ],
+         "precision_mode": 0
+      },
+      {
+         "type": "single_value_number",
+         "gridPos": {
+            "h": 4,
+            "w": 2,
+            "x": 0,
+            "y": 0
+         },
+         "series": [
+            {
+               "name": "upTime_sec",
+               "sourceNames": [
+                  "upTime_sec"
+               ],
+               "formula": "",
+               "options": {
+                  "stroke": "rgba(231,76,60,1)",
+                  "fill": "rgba(231,76,60,0.1)"
+               },
+               "type": "number"
+            }
+         ],
+         "precision_mode": 1
+      },
+      {
+         "type": "single_value_number",
+         "gridPos": {
+            "h": 4,
+            "w": 2,
             "x": 0,
             "y": 0
          },
@@ -267,16 +291,16 @@
       {
          "type": "single_value_number",
          "gridPos": {
-            "h": 3,
+            "h": 4,
             "w": 2,
             "x": 0,
             "y": 0
          },
          "series": [
             {
-               "name": "framNumber",
+               "name": "isFalling",
                "sourceNames": [
-                  "framNumber"
+                  "isFalling"
                ],
                "formula": "",
                "options": {
@@ -291,31 +315,7 @@
       {
          "type": "single_value_number",
          "gridPos": {
-            "h": 3,
-            "w": 2,
-            "x": 0,
-            "y": 0
-         },
-         "series": [
-            {
-               "name": "loggerUsage_%",
-               "sourceNames": [
-                  "loggerUsage_%"
-               ],
-               "formula": "",
-               "options": {
-                  "stroke": "rgba(231,76,60,1)",
-                  "fill": "rgba(231,76,60,0.1)"
-               },
-               "type": "number"
-            }
-         ],
-         "precision_mode": 0
-      },
-      {
-         "type": "single_value_number",
-         "gridPos": {
-            "h": 3,
+            "h": 4,
             "w": 2,
             "x": 0,
             "y": 0
@@ -339,16 +339,16 @@
       {
          "type": "single_value_number",
          "gridPos": {
-            "h": 3,
+            "h": 4,
             "w": 2,
             "x": 0,
             "y": 0
          },
          "series": [
             {
-               "name": "isFalling",
+               "name": "loggerUsage_%",
                "sourceNames": [
-                  "isFalling"
+                  "loggerUsage_%"
                ],
                "formula": "",
                "options": {
@@ -361,5 +361,5 @@
          "precision_mode": 0
       }
    ],
-   "viewDuration": 15
+   "viewDuration": "21600"
 }
