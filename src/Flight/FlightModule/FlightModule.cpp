@@ -464,6 +464,7 @@ void setup()
   Tasks.add(&task2Hz)->startFps(2);
   Tasks.add("end-recovery", &endRecoveryMode);
 
+  // リカバリーモードオン
   MsgPacketizer::subscribe(LoRa, 0xCC, [](uint8_t payload)
                            {
     ledLoRaRx.toggle();
