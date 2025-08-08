@@ -61,11 +61,11 @@ void setup()
                                  int16_t currentPosition_SUPPLY,
                                  int16_t currentDesiredPosition_SUPPLY,
                                  int16_t currentVelocity_SUPPLY,
-                                 uint16_t separation1ProtectionTime,
-                                 uint16_t separation1ForceTime,
-                                 uint16_t separation2ProtectionTime,
-                                 uint16_t separation2ForceTime,
-                                 uint16_t landingTime)
+                                 uint32_t separation1ProtectionTime,
+                                 uint32_t separation1ForceTime,
+                                 uint32_t separation2ProtectionTime,
+                                 uint32_t separation2ForceTime,
+                                 uint32_t landingTime)
                              {
                                  Serial.print(">LoRa_RSSI_dBm: ");
                                  float loraRssi = LoRa.packetRssi();
@@ -134,6 +134,17 @@ void setup()
                                  Serial.println((float)currentDesiredPosition_SUPPLY / 100.0);
                                  Serial.print(">SUPPLY_velocity_m/s^2");
                                  Serial.println((float)currentVelocity_SUPPLY / 100.0);
+
+                                 Serial.print(">separation1ProtectionTime:");
+                                 Serial.println(separation1ProtectionTime);
+                                 Serial.print(">separation1ForceTime");
+                                 Serial.println(separation1ForceTime);
+                                 Serial.print(">separation2ProtectionTime:");
+                                 Serial.println(separation2ProtectionTime);
+                                 Serial.print(">separation2ForceTime: ");
+                                 Serial.println(separation2ForceTime);
+                                 Serial.print(">landingTime: ");
+                                 Serial.println(landingTime);
 
                                  Serial.println();
                                  Serial.flush();
