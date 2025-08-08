@@ -383,7 +383,7 @@ void loop()
     can.receiveServoCommand(&command);
     if (command == 76) // Command for manual valve operation
     {
-      openMainValve();
+      openSupplyValve();
       Status.noticedBlue();
     }
     break;
