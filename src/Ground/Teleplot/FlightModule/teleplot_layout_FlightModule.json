@@ -22,7 +22,7 @@
                "type": "number"
             }
          ],
-         "precision_mode": 0
+         "precision_mode": 1
       },
       {
          "type": "single_value_number",
