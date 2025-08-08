@@ -161,8 +161,6 @@ void updateDisplay()
 void sendLoRaCommand()
 {
   Serial.println("Sending LoRa Command...");
-  // Example command: label 0xCC, ident 'G', payload 1
-  // MsgPacketizer::send(LoRa, 0xCC, 72, (uint8_t)0);
 
   const auto &packet = MsgPacketizer::encode(0xCC, (uint8_t)1);
   for (int i = 0; i < 10; i++)
