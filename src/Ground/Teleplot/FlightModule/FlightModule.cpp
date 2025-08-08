@@ -8,11 +8,11 @@
 
 StaticJsonDocument<4096> packet;
 
-uint32_t separation1ProtectionTime = 8605;
-uint32_t separation1ForceTime = 11605;
-uint32_t separation2ProtectionTime = 1000;
-uint32_t separation2ForceTime = 1000;
-uint32_t landingTime = 30305;
+uint32_t separation1ProtectionTime = 22390; // (- 1.0 s)
+uint32_t separation1ForceTime = 25390;      // (+ 2.0 s)
+uint32_t separation2ProtectionTime = 84290; // (- 1.0 s)
+uint32_t separation2ForceTime = 85290;      // (± 0 s)
+uint32_t landingTime = 88890;
 
 void setup()
 {
@@ -77,6 +77,8 @@ void setup()
 
                                  Serial.print(">upTime_sec: ");
                                  Serial.println(millis / 1000);
+                                 Serial.print(">flightTime: ");
+                                 Serial.println(flightTime / 1000);
                                  Serial.print(">doLogging_bool: ");
                                  Serial.println(doLogging);
                                  Serial.print(">loggerUsage_%: ");
@@ -126,7 +128,7 @@ void setup()
                                  Serial.println((float)inputVoltage_SUPPLY / 100.0);
                                  Serial.print(">SUPPLY_current_A");
                                  Serial.println((float)current_SUPPLY / 100.0);
-                                 Serial.print(">SUPPLY_ValvePosition_V: ");
+                                 Serial.print(">SUPPLY_ValvePosition_deg: ");
                                  Serial.println((float)currentPosition_SUPPLY / 100.0);
                                  Serial.print(">SUPPLY_desiredPosition_deg: ");
                                  Serial.println((float)currentDesiredPosition_SUPPLY / 100.0);
