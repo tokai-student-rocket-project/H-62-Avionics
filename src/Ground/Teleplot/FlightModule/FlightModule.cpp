@@ -84,10 +84,24 @@ void setup()
                                  Serial.print(">framNumber: ");
                                  Serial.println(framNumber);
 
+                                 Serial.print(">sn3IsOn: ");
+                                 Serial.println(sn3IsOn);
+                                 Serial.print(">sn4IsOn: ");
+                                 Serial.println(sn4IsOn);
+                                 Serial.print(">isFalling: ");
+                                 Serial.println(isFalling);
+
                                  Serial.print(">FLIGHTMODE: ");
                                  Serial.println(flightMode);
                                  Serial.print(">flightTime_s");
                                  Serial.println((float)flightTime / 1000.0);
+                                 Serial.print(">flightPinIsOpen: ");
+                                 Serial.println(flightPinIsOpen);
+
+                                 Serial.print(">latitude: ");
+                                 Serial.println(latitude);
+                                 Serial.print(">longitude: ");
+                                 Serial.println(longitude);
 
                                  Serial.print(">MAIN_motorTemperature_*C: ");
                                  Serial.println((float)motorTemperature / 100.0);
