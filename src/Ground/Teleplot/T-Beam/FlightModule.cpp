@@ -9,11 +9,11 @@
 
 StaticJsonDocument<4096> packet;
 
-uint32_t separation1ProtectionTime = 8605;
-uint32_t separation1ForceTime = 11605;
-uint32_t separation2ProtectionTime = 1000;
-uint32_t separation2ForceTime = 1000;
-uint32_t landingTime = 30305;
+uint32_t separation1ProtectionTime = 22390; // (- 1.0 s)
+uint32_t separation1ForceTime = 25390;      // (+ 2.0 s)
+uint32_t separation2ProtectionTime = 84290; // (- 1.0 s)
+uint32_t separation2ForceTime = 85290;      // (± 0 s)
+uint32_t landingTime = 88890;
 
 void setup()
 {
@@ -119,6 +119,17 @@ void setup()
                                  Serial.println((float)currentDesiredPosition_SUPPLY / 100.0);
                                  Serial.print(">SUPPLY_velocity_m/s^2");
                                  Serial.println((float)currentVelocity_SUPPLY / 100.0);
+
+                                 Serial.print(">separation1ProtectionTime:");
+                                 Serial.println(separation1ProtectionTime);
+                                 Serial.print(">separation1ForceTime");
+                                 Serial.println(separation1ForceTime);
+                                 Serial.print(">separation2ProtectionTime:");
+                                 Serial.println(separation2ProtectionTime);
+                                 Serial.print(">separation2ForceTime: ");
+                                 Serial.println(separation2ForceTime);
+                                 Serial.print(">landingTime: ");
+                                 Serial.println(landingTime);
 
                                  Serial.println();
                                  Serial.flush();
