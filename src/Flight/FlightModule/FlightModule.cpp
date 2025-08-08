@@ -72,7 +72,6 @@ void endRecoveryMode()
 {
   isInRecoveryMode = false;
   buzzer.beepLongOnce();
-  // Serial.println("Recovery mode finished.");
 }
 
 void flightModeOn()
@@ -125,10 +124,8 @@ void recoveryMode()
   {
     can.sendServoCommand(command);
   }
-  // Serial.println("Recovery mode started for 5 seconds.");
 
-  // Schedule endRecoveryMode to be called after 5 seconds
-  Tasks["end-recovery"]->startOnceAfterMsec(5000);
+  Tasks["end-recovery"]->startOnceAfterMsec(2000);
 }
 
 void task100Hz()
@@ -445,11 +442,11 @@ void setup()
   gnss.begin();
 
   setTimer(
-      23000, // SEPARATION_1_PROTECTION_TIME
-      30000, // SEPARATION_1_FORCE_TIME
-      40000, // SEPARATION_2_PROTECTION_TIME // 18382
-      45000, // SEPARATION_2_FORCE_TIME // 19382
-      50000  // LANDING_TIME
+      22390, // SEPARATION_1_PROTECTION_TIME (- 1.0 s)
+      25390, // SEPARATION_1_FORCE_TIME (+ 2.0 s)
+      84290, // SEPARATION_2_PROTECTION_TIME (- 1.0 s)
+      85290, // SEPARATION_2_FORCE_TIME (± 0.0 s)
+      88890  // LANDING_TIME
   );
 
   if (flightPin.isOpen())
@@ -459,7 +456,7 @@ void setup()
   }
   else
   {
-    // buzzer.beepMorse("FM " + (String)ident);
+    buzzer.beepMorse("FM " + (String)ident);
   }
 
   Tasks.add(&task100Hz)->startFps(100);
