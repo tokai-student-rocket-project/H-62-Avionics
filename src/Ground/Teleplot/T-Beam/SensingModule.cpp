@@ -107,18 +107,18 @@ void displayPage0()
 {
     displayHeader(" Status -");
     display.setCursor(0, 10);
-    display.print(F("RSSI: "));
+    display.print(F("RSSI   : "));
     display.print(telemetryRssi);
     display.println(F("dBm"));
-    display.print(F("SNR : "));
+    display.print(F("SNR    : "));
     display.print(telemetrySnr);
     display.println(F("dB"));
-    display.print(F("UP  : "));
+    display.print(F("UPTIME : "));
     display.print(telemetryUptime);
     display.println(F("s"));
-    display.print(F("LOG : "));
+    display.print(F("LOG    : "));
     display.println(telemetryDoLogging ? "ON" : "OFF");
-    display.print(F("MEM : "));
+    display.print(F("MEMORY : "));
     display.print(telemetryLoggerUsage);
     display.println(F("%"));
     display.print(F("FRAM: "));
