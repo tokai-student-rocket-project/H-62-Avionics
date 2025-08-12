@@ -45,6 +45,7 @@ constexpr uint32_t VERIFY_INITIAL_DELAY_MS = 300;
 constexpr uint8_t VERIFY_MAX_RETRIES = 5;
 constexpr float VALVE_ACTION_DELAY_SEC = 0.5f;
 constexpr float FLIGHT_CLOSE_DELAY_SEC = 1.0f;
+constexpr float FLIGHT_OPEN_DELAY_SEC = 2.0f;
 
 // --- グローバル変数 ---
 
@@ -313,7 +314,7 @@ void setup()
   changeMode(Var::ValveMode::WAITING);
   changeIgnition(Var::GseSignal::IGNITION_OFF);
 
-  Tasks.add(&syncFlightMode)->startFps(200);
+  Tasks.add(&syncFlightMode)->startFps(200); // 使っていないから削除でよい
   Tasks.add(&sendValveMode)->startFps(20);
   Tasks.add(&sendIgnition)->startFps(20);
   Tasks.add(&sendValveData)->startFps(20);
@@ -357,22 +358,23 @@ void loop()
 
     case static_cast<uint8_t>(Var::FlightMode::DROGUE_CHUTE_DESCENT):
       addTaskIfNotExisted("flight-close-main-valve", &closeMainValveToFlight);
+      addTaskIfNotExisted("flight-open-supply-valve", &openSupplyValve);
       Tasks["flight-close-main-valve"]->startOnceAfterSec(FLIGHT_CLOSE_DELAY_SEC);
-      closeSupplyValve();
+      Tasks["flight-open-supply-valve"]->startOnceAfterSec(FLIGHT_OPEN_DELAY_SEC);
+      // closeSupplyValve();　// 上空で供給路バルブを開放するためコメントアウト
       break;
 
     case static_cast<uint8_t>(Var::FlightMode::MAIN_CHUTE_DESCENT):
-      closeSupplyValve();
+      // closeSupplyValve();　// 上空で供給路バルブを開放するためコメントアウト
       break;
 
     case static_cast<uint8_t>(Var::FlightMode::LANDED):
-      // No action needed
+      mainValve.torqueOff(B3M_ID_MAIN_VALVE);
+      supplyValve.torqueOff(B3M_ID_SUPPLY_VALVE);
+      servoEn.low();
       break;
 
     case static_cast<uint8_t>(Var::FlightMode::SHUTDOWN):
-      // mainValve.torqueOff(B3M_ID_MAIN_VALVE);
-      // supplyValve.torqueOff(B3M_ID_SUPPLY_VALVE);
-      // servoEn.low();
       Status.off();
       break;
     }
