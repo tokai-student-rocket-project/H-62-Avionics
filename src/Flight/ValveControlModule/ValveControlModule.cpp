@@ -54,7 +54,7 @@ bool doLogging = false;
 uint8_t flightMode = 0;
 uint32_t flightTime = 0;
 
-Neopixel Status(PINNEOPIXEL);
+Neopixel status(PINNEOPIXEL);
 CAN can(PIN_CAN_TX);
 Logger logger(PIN_LOGGER_CS);
 
@@ -199,14 +199,14 @@ void changeMode(Var::ValveMode nextMode)
     closeSupplyValve();
     addTaskIfNotExisted("delayed-open-main-valve", &openMainValve);
     Tasks["delayed-open-main-valve"]->startOnceAfterMsec(VALVE_ACTION_DELAY_SEC * 1000);
-    Status.noticedRed();
+    status.noticedRed();
   }
   else if (nextMode == Var::ValveMode::WAITING)
   {
     closeMainValve();
     addTaskIfNotExisted("delayed-open-supply-valve", &openSupplyValve);
     Tasks["delayed-open-supply-valve"]->startOnceAfterMsec(VALVE_ACTION_DELAY_SEC * 1000);
-    Status.noticedGreen();
+    status.noticedGreen();
   }
 
   currentValveMode = nextMode;
@@ -219,11 +219,11 @@ void changeIgnition(Var::GseSignal nextMode)
 
   if (nextMode == Var::GseSignal::IGNITION_ON)
   {
-    Status.noticedPink();
+    status.noticedPink();
   }
   else if (nextMode == Var::GseSignal::IGNITION_OFF)
   {
-    Status.noticedWhite();
+    status.noticedWhite();
   }
 
   currentGseSignal = nextMode;
@@ -304,7 +304,7 @@ void setup()
   SPI.begin();
   can.begin();
 
-  Status.init(11);
+  status.init(11);
   redLed.high();
   greenLed.high();
   blueLed.high();
@@ -344,6 +344,7 @@ void loop()
       servoEn.high();
       verifyValve();
       valveInitialize();
+      status.noticedRainbow();
       break;
 
     case static_cast<uint8_t>(Var::FlightMode::READY_TO_FLY):
@@ -375,7 +376,7 @@ void loop()
       break;
 
     case static_cast<uint8_t>(Var::FlightMode::SHUTDOWN):
-      Status.off();
+      status.off();
       break;
     }
     break; // End of FLIGHT_DATA case
@@ -386,7 +387,7 @@ void loop()
     if (command == 76) // Command for manual valve operation
     {
       openSupplyValve();
-      Status.noticedBlue();
+      status.noticedBlue();
     }
     break;
   }
