@@ -10,9 +10,9 @@
          },
          "series": [
             {
-               "name": "flightTime",
+               "name": "flightTime_s",
                "sourceNames": [
-                  "flightTime"
+                  "flightTime_s"
                ],
                "formula": "",
                "options": {
@@ -34,9 +34,9 @@
          },
          "series": [
             {
-               "name": "FLIGHTMODE",
+               "name": "flightMode",
                "sourceNames": [
-                  "FLIGHTMODE"
+                  "flightMode"
                ],
                "formula": "",
                "options": {
@@ -106,9 +106,9 @@
          },
          "series": [
             {
-               "name": "sn3IsOn",
+               "name": "sn3IsOn_bool",
                "sourceNames": [
-                  "sn3IsOn"
+                  "sn3IsOn_bool"
                ],
                "formula": "",
                "options": {
@@ -130,9 +130,9 @@
          },
          "series": [
             {
-               "name": "sn4IsOn",
+               "name": "sn4IsOn_bool",
                "sourceNames": [
-                  "sn4IsOn"
+                  "sn4IsOn_bool"
                ],
                "formula": "",
                "options": {
@@ -147,16 +147,16 @@
       {
          "type": "single_value_number",
          "gridPos": {
-            "h": 4,
+            "h": 3,
             "w": 6,
             "x": 0,
             "y": 0
          },
          "series": [
             {
-               "name": "SUPPLY_ValvePosition_V",
+               "name": "SUPPLY_valvePosition_deg",
                "sourceNames": [
-                  "SUPPLY_ValvePosition_V"
+                  "SUPPLY_valvePosition_deg"
                ],
                "formula": "",
                "options": {
@@ -171,16 +171,16 @@
       {
          "type": "single_value_number",
          "gridPos": {
-            "h": 4,
+            "h": 3,
             "w": 6,
             "x": 0,
             "y": 0
          },
          "series": [
             {
-               "name": "MAIN_ValvePosition_deg",
+               "name": "MAIN_valvePosition_deg",
                "sourceNames": [
-                  "MAIN_ValvePosition_deg"
+                  "MAIN_valvePosition_deg"
                ],
                "formula": "",
                "options": {
@@ -195,16 +195,16 @@
       {
          "type": "single_value_number",
          "gridPos": {
-            "h": 4,
+            "h": 3,
             "w": 6,
             "x": 0,
             "y": 0
          },
          "series": [
             {
-               "name": "latitude",
+               "name": "latitude_deg",
                "sourceNames": [
-                  "latitude"
+                  "latitude_deg"
                ],
                "formula": "",
                "options": {
@@ -219,16 +219,16 @@
       {
          "type": "single_value_number",
          "gridPos": {
-            "h": 4,
+            "h": 3,
             "w": 6,
             "x": 0,
             "y": 0
          },
          "series": [
             {
-               "name": "longitude",
+               "name": "longitude_deg",
                "sourceNames": [
-                  "longitude"
+                  "longitude_deg"
                ],
                "formula": "",
                "options": {
@@ -250,9 +250,9 @@
          },
          "series": [
             {
-               "name": "upTime_sec",
+               "name": "upTime_s",
                "sourceNames": [
-                  "upTime_sec"
+                  "upTime_s"
                ],
                "formula": "",
                "options": {
@@ -274,9 +274,9 @@
          },
          "series": [
             {
-               "name": "flightPinIsOpen",
+               "name": "flightPinIsOpen_bool",
                "sourceNames": [
-                  "flightPinIsOpen"
+                  "flightPinIsOpen_bool"
                ],
                "formula": "",
                "options": {
@@ -298,9 +298,9 @@
          },
          "series": [
             {
-               "name": "isFalling",
+               "name": "isFalling_bool",
                "sourceNames": [
-                  "isFalling"
+                  "isFalling_bool"
                ],
                "formula": "",
                "options": {
@@ -346,9 +346,9 @@
          },
          "series": [
             {
-               "name": "loggerUsage_%",
+               "name": "loggerUsage_percent",
                "sourceNames": [
-                  "loggerUsage_%"
+                  "loggerUsage_percent"
                ],
                "formula": "",
                "options": {
