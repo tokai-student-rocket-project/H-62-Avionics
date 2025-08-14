@@ -114,7 +114,7 @@ void recoveryMode()
 {
   if (isInRecoveryMode)
   {
-    return; // Already in recovery mode
+    return;
   }
   isInRecoveryMode = true;
   buzzer.beepOnce();
@@ -130,7 +130,6 @@ void recoveryMode()
 
 void task100Hz()
 {
-  // gnss
   gnssIsAvailable = gnss.available();
   if (gnssIsAvailable)
   {
@@ -291,7 +290,7 @@ void task100Hz()
   }
   }
 
-  bool newDoLogging = flightMode.isBetween(Var::FlightMode::READY_TO_FLY, Var::FlightMode::SHUTDOWN); // LANDED // Var::FlightMode::SHUTDOWN まででもいいかも
+  bool newDoLogging = flightMode.isBetween(Var::FlightMode::READY_TO_FLY, Var::FlightMode::LANDED); // LANDED
 
   if (newDoLogging != doLogging)
   {
@@ -377,7 +376,7 @@ void task2Hz()
                                                       static_cast<char>(ident),
                                                       static_cast<uint32_t>(millis()),
                                                       static_cast<uint8_t>(flightMode.currentNumber()),
-                                                      static_cast<uint16_t>(flightMode.isBetween(Var::FlightMode::READY_TO_FLY, Var::FlightMode::LANDED) ? flightTime.get() : 0),
+                                                      static_cast<uint32_t>(flightMode.isBetween(Var::FlightMode::READY_TO_FLY, Var::FlightMode::LANDED) ? flightTime.get() : 0),
                                                       static_cast<uint8_t>(logger.getUsage()),
                                                       static_cast<bool>(doLogging),
                                                       static_cast<uint8_t>(logger.framNumber()),
@@ -408,11 +407,11 @@ void task2Hz()
                                                       static_cast<int16_t>(currentPosition_SUPPLY * 100),
                                                       static_cast<int16_t>(currentDesiredPosition_SUPPLY * 100),
                                                       static_cast<int16_t>(currentVelocity_SUPPLY * 100),
-                                                      static_cast<uint16_t>(flightTime.SEPARATION_1_PROTECTION_TIME),
-                                                      static_cast<uint16_t>(flightTime.SEPARATION_1_FORCE_TIME),
-                                                      static_cast<uint16_t>(flightTime.SEPARATION_2_PROTECTION_TIME),
-                                                      static_cast<uint16_t>(flightTime.SEPARATION_2_FORCE_TIME),
-                                                      static_cast<uint16_t>(flightTime.LANDING_TIME));
+                                                      static_cast<uint32_t>(flightTime.SEPARATION_1_PROTECTION_TIME),
+                                                      static_cast<uint32_t>(flightTime.SEPARATION_1_FORCE_TIME),
+                                                      static_cast<uint32_t>(flightTime.SEPARATION_2_PROTECTION_TIME),
+                                                      static_cast<uint32_t>(flightTime.SEPARATION_2_FORCE_TIME),
+                                                      static_cast<uint32_t>(flightTime.LANDING_TIME));
 
   telemeter.reserveData(telemetryPacket.data.data(), telemetryPacket.data.size());
   telemeter.sendReservedData();
@@ -483,7 +482,7 @@ void setup()
     flightModeReset(); });
 
   // タイマー設定
-  MsgPacketizer::subscribe(LoRa, 0xF3, [](uint16_t separation1ProtectionTime, uint16_t separation1ForceTime, uint16_t separation2ProtectionTime, uint16_t separation2ForceTime, uint16_t landingTime)
+  MsgPacketizer::subscribe(LoRa, 0xF3, [](uint32_t separation1ProtectionTime, uint32_t separation1ForceTime, uint32_t separation2ProtectionTime, uint32_t separation2ForceTime, uint32_t landingTime)
                            {
     ledLoRaRx.toggle();
     setTimer(
@@ -517,7 +516,7 @@ void loop()
     {
     case Var::Label::TRAJECTORY_DATA:
     {
-      can.receiveTrajectory(&isFalling, &altitude); // Altitude を送信していないのでいったんコメントアウト．
+      can.receiveTrajectory(&isFalling, &altitude);
       ledCanRx.toggle();
       sensingModuleAvailable = true;
 
