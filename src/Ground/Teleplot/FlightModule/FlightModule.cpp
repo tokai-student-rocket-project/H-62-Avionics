@@ -1,3 +1,5 @@
+// 点火点で運用する MKR WAN 1310 用
+
 #include <Arduino.h>
 #include <SPI.h>
 #include <Wire.h>
@@ -29,7 +31,7 @@ void setup()
                                  char ident,
                                  uint32_t millis,
                                  uint8_t flightMode,
-                                 uint16_t flightTime,
+                                 uint32_t flightTime,
                                  uint8_t loggerUsage,
                                  bool doLogging,
                                  uint8_t framNumber,
