@@ -317,8 +317,8 @@ void setup()
 
     primary.initialize(0x5C);
     secondary.initialize(0x5D);
-    primary.setReferencePressure(1002.0);   // METARのQから始まる値を基準気圧に設定してみる．
-    secondary.setReferencePressure(1002.0); // METARのQから始まる値を基準気圧に設定してみる．
+    primary.setReferencePressure(1014.0);   // METARのQから始まる値を基準気圧に設定してみる．
+    secondary.setReferencePressure(1014.0); // METARのQから始まる値を基準気圧に設定してみる．
 
     Tasks.add(&task200Hz)->startFps(200);
     Tasks.add(&task100Hz)->startFps(100);
