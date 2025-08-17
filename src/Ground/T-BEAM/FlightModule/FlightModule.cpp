@@ -207,7 +207,7 @@ void taskButtonCheck()
     }
     else if ((millis() - buttonPressTime > LONG_PRESS_TIME_MS) && !longPressSent)
     {
-      sendLoRaCommand();
+      // sendLoRaCommand(); 使用しないので機能をコメントアウト
       longPressSent = true;
     }
   }
