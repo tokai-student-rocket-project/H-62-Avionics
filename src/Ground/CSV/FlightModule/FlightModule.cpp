@@ -1,4 +1,4 @@
-// 点火点で運用する MKR WAN 1310 用
+// 退避所で運用する T-Beam 用
 
 #include <Arduino.h>
 #include <SPI.h>
