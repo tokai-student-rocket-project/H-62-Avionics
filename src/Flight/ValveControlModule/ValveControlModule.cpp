@@ -352,16 +352,20 @@ void loop()
       break;
 
     case static_cast<uint8_t>(Var::FlightMode::POWERED_CLIMB):
+      changeMode(Var::ValveMode::LAUNCH);
+
     case static_cast<uint8_t>(Var::FlightMode::FREE_CLIMB):
+      changeMode(Var::ValveMode::LAUNCH);
+
     case static_cast<uint8_t>(Var::FlightMode::FREE_DESCENT):
+      addTaskIfNotExisted("flight-open-supply-valve", &openSupplyValve);
+      Tasks["flight-open-supply-valve"]->startOnceAfterSec(FLIGHT_OPEN_DELAY_SEC);
       changeMode(Var::ValveMode::LAUNCH);
       break;
 
     case static_cast<uint8_t>(Var::FlightMode::DROGUE_CHUTE_DESCENT):
-      addTaskIfNotExisted("flight-close-main-valve", &closeMainValveToFlight);
-      addTaskIfNotExisted("flight-open-supply-valve", &openSupplyValve);
-      Tasks["flight-close-main-valve"]->startOnceAfterSec(FLIGHT_CLOSE_DELAY_SEC);
-      Tasks["flight-open-supply-valve"]->startOnceAfterSec(FLIGHT_OPEN_DELAY_SEC);
+      // addTaskIfNotExisted("flight-close-main-valve", &closeMainValveToFlight); // 主流路は開のためコメントアウト
+      // Tasks["flight-close-main-valve"]->startOnceAfterSec(FLIGHT_CLOSE_DELAY_SEC); // 主流路は開のためコメントアウト
       // closeSupplyValve();　// 上空で供給路バルブを開放するためコメントアウト
       break;
 
