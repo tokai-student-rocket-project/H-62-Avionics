@@ -1,3 +1,5 @@
+// 点火点で運用する MKR WAN 1310 用
+
 #include <Arduino.h>
 #include <SPI.h>
 #include <Wire.h>
