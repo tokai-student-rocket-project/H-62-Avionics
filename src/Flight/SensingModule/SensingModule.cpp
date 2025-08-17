@@ -57,6 +57,11 @@ float referencePressure_hPa;
 float primaryPressure_hPa, secondaryPressure_hPa;
 float primaryAltitude_m, secondaryAltitude_m, altitude_m;
 float primaryTemperature_C, secondaryTemperature_C;
+
+// --- 基準気圧設定 ---
+float PRIMARY_REFERENCE_PRESSURE = 1009.0;
+float SECONDARY_REFERENCE_PRESSURE = 1009.0;
+
 movingAvg altitudeAverage(10);
 Calculus::Differential<float> altitudeGradient(2); // 初期値 5
 Calculus::Differential<float> verticalSpeedGradient(0.5);
@@ -76,7 +81,7 @@ Filter::HPF<float> accelerationHighPassZ(5);
 
 constexpr float gravity_mps2 = 9.80665;
 constexpr float initialPitch_deg = 90.0;
-constexpr float characteristicMass_kg = 12.41;
+constexpr float characteristicMass_kg = 18.77;
 float gravityX_mps2, gravityY_mps2, gravityZ_mps2;
 float linearAccelerationX_mps2, linearAccelerationY_mps2, linearAccelerationZ_mps2;
 float forceX_N;
@@ -84,6 +89,7 @@ Calculus::Differential<float> linearAccelerationGradient(0.25);
 float jerkX_mps3;
 
 // 気象庁，毎日の全国データ一覧　https://www.data.jma.go.jp/stats/data/mdrr/synopday/index.html
+
 void calibrationPressure()
 {
     float referencePrimaryPressure_hPa = 0;
@@ -301,6 +307,12 @@ void task2Hz()
     ledLoRaTx.toggle();
 }
 
+void setReferencePressure(float primaryPressure, float secondaryPressure)
+{
+    primary.setReferencePressure(primaryPressure);
+    secondary.setReferencePressure(secondaryPressure);
+}
+
 void setup()
 {
     analogReadResolution(12);
@@ -317,8 +329,15 @@ void setup()
 
     primary.initialize(0x5C);
     secondary.initialize(0x5D);
-    primary.setReferencePressure(1014.0);   // METARのQから始まる値を基準気圧に設定してみる．
-    secondary.setReferencePressure(1014.0); // METARのQから始まる値を基準気圧に設定してみる．
+    // primary.setReferencePressure(1009.0); //削除
+    // secondary.setReferencePressure(1009.0); //削除
+
+    setReferencePressure(PRIMARY_REFERENCE_PRESSURE, SECONDARY_REFERENCE_PRESSURE); // METARのQから始まる値を基準気圧に設定してみる．
+
+    MsgPacketizer::subscribe(LoRa, 0xF4, [](uint32_t primaryPressure, uint32_t secondaryPressure)
+                             {
+                                 ledLoRaRx.toggle();
+                                 setReferencePressure(static_cast<float>(primaryPressure), static_cast<float>(secondaryPressure)); });
 
     Tasks.add(&task200Hz)->startFps(200);
     Tasks.add(&task100Hz)->startFps(100);
@@ -333,6 +352,11 @@ void setup()
 void loop()
 {
     Tasks.update();
+
+    if (LoRa.parsePacket())
+    {
+        MsgPacketizer::parse();
+    }
 
     if (can.available())
     {
