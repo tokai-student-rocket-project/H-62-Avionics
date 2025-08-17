@@ -18,6 +18,10 @@ const int NUM_PAGES = 9;
 
 TinyGPSPlus onbordGps;
 
+// --- 基準気圧設定 ---
+uint32_t primaryPressure = 1009;
+uint32_t secondaryPressure = 1009;
+
 // --- テレメトリーデータ ---
 float telemetryRssi = 0.0;
 float telemetrySnr = 0.0;
@@ -290,21 +294,10 @@ void updateDisplay()
 
 void sendLoRaCommand()
 {
-    Serial.println("Sending LoRa Command...");
-    const auto &packet = MsgPacketizer::encode(0xCC, (uint8_t)1);
-    for (int i = 0; i < 10; i++)
-    {
-        LoRa.beginPacket();
-        LoRa.write(packet.data.data(), packet.data.size());
-        LoRa.endPacket();
-    }
-
-    display.clearDisplay();
-    display.setTextSize(2);
-    display.setCursor(10, 25);
-    display.println("COMMAND");
-    display.display();
-    Tasks["update-display"]->startOnceAfterMsec(2000);
+    const auto &packet = MsgPacketizer::encode(0xF4, primaryPressure, secondaryPressure);
+    LoRa.beginPacket();
+    LoRa.write(packet.data.data(), packet.data.size());
+    LoRa.endPacket();
 }
 
 void taskGpsUpdate()
@@ -334,6 +327,7 @@ void taskButtonCheck()
         else if ((millis() - buttonPressTime > LONG_PRESS_TIME_MS) && !longPressSent)
         {
             // 長押し時の動作
+            sendLoRaCommand();
             longPressSent = true;
         }
     }
