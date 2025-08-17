@@ -10,9 +10,9 @@
          },
          "series": [
             {
-               "name": "flightTime_s",
+               "name": "FlightTime_s",
                "sourceNames": [
-                  "flightTime_s"
+                  "FlightTime_s"
                ],
                "formula": "",
                "options": {
@@ -22,7 +22,7 @@
                "type": "number"
             }
          ],
-         "precision_mode": 1
+         "precision_mode": 0
       },
       {
          "type": "single_value_number",
@@ -34,9 +34,9 @@
          },
          "series": [
             {
-               "name": "flightMode",
+               "name": "FlightMode",
                "sourceNames": [
-                  "flightMode"
+                  "FlightMode"
                ],
                "formula": "",
                "options": {
@@ -106,9 +106,9 @@
          },
          "series": [
             {
-               "name": "sn3IsOn_bool",
+               "name": "Sn3IsOn_bool",
                "sourceNames": [
-                  "sn3IsOn_bool"
+                  "Sn3IsOn_bool"
                ],
                "formula": "",
                "options": {
@@ -130,9 +130,9 @@
          },
          "series": [
             {
-               "name": "sn4IsOn_bool",
+               "name": "Sn4IsOn_bool",
                "sourceNames": [
-                  "sn4IsOn_bool"
+                  "Sn4IsOn_bool"
                ],
                "formula": "",
                "options": {
@@ -147,31 +147,7 @@
       {
          "type": "single_value_number",
          "gridPos": {
-            "h": 3,
-            "w": 6,
-            "x": 0,
-            "y": 0
-         },
-         "series": [
-            {
-               "name": "SUPPLY_valvePosition_deg",
-               "sourceNames": [
-                  "SUPPLY_valvePosition_deg"
-               ],
-               "formula": "",
-               "options": {
-                  "stroke": "rgba(231,76,60,1)",
-                  "fill": "rgba(231,76,60,0.1)"
-               },
-               "type": "number"
-            }
-         ],
-         "precision_mode": 0
-      },
-      {
-         "type": "single_value_number",
-         "gridPos": {
-            "h": 3,
+            "h": 5,
             "w": 6,
             "x": 0,
             "y": 0
@@ -195,16 +171,16 @@
       {
          "type": "single_value_number",
          "gridPos": {
-            "h": 3,
+            "h": 5,
             "w": 6,
             "x": 0,
             "y": 0
          },
          "series": [
             {
-               "name": "latitude_deg",
+               "name": "SUPPLY_valvePosition_deg",
                "sourceNames": [
-                  "latitude_deg"
+                  "SUPPLY_valvePosition_deg"
                ],
                "formula": "",
                "options": {
@@ -219,16 +195,40 @@
       {
          "type": "single_value_number",
          "gridPos": {
-            "h": 3,
+            "h": 5,
             "w": 6,
             "x": 0,
             "y": 0
          },
          "series": [
             {
-               "name": "longitude_deg",
+               "name": "Latitude",
                "sourceNames": [
-                  "longitude_deg"
+                  "Latitude"
+               ],
+               "formula": "",
+               "options": {
+                  "stroke": "rgba(231,76,60,1)",
+                  "fill": "rgba(231,76,60,0.1)"
+               },
+               "type": "number"
+            }
+         ],
+         "precision_mode": 0
+      },
+      {
+         "type": "single_value_number",
+         "gridPos": {
+            "h": 5,
+            "w": 6,
+            "x": 0,
+            "y": 0
+         },
+         "series": [
+            {
+               "name": "Longitude",
+               "sourceNames": [
+                  "Longitude"
                ],
                "formula": "",
                "options": {
@@ -244,15 +244,15 @@
          "type": "single_value_number",
          "gridPos": {
             "h": 4,
-            "w": 2,
+            "w": 3,
             "x": 0,
             "y": 0
          },
          "series": [
             {
-               "name": "upTime_s",
+               "name": "UpTime_s",
                "sourceNames": [
-                  "upTime_s"
+                  "UpTime_s"
                ],
                "formula": "",
                "options": {
@@ -274,9 +274,9 @@
          },
          "series": [
             {
-               "name": "flightPinIsOpen_bool",
+               "name": "FlightPinIsOpen_bool",
                "sourceNames": [
-                  "flightPinIsOpen_bool"
+                  "FlightPinIsOpen_bool"
                ],
                "formula": "",
                "options": {
@@ -298,9 +298,9 @@
          },
          "series": [
             {
-               "name": "isFalling_bool",
+               "name": "IsFalling_bool",
                "sourceNames": [
-                  "isFalling_bool"
+                  "IsFalling_bool"
                ],
                "formula": "",
                "options": {
@@ -322,9 +322,57 @@
          },
          "series": [
             {
-               "name": "doLogging_bool",
+               "name": "DoLogging_bool",
                "sourceNames": [
-                  "doLogging_bool"
+                  "DoLogging_bool"
+               ],
+               "formula": "",
+               "options": {
+                  "stroke": "rgba(231,76,60,1)",
+                  "fill": "rgba(231,76,60,0.1)"
+               },
+               "type": "number"
+            }
+         ],
+         "precision_mode": 0
+      },
+      {
+         "type": "single_value_number",
+         "gridPos": {
+            "h": 4,
+            "w": 3,
+            "x": 0,
+            "y": 0
+         },
+         "series": [
+            {
+               "name": "LoggerUsage_%",
+               "sourceNames": [
+                  "LoggerUsage_%"
+               ],
+               "formula": "",
+               "options": {
+                  "stroke": "rgba(231,76,60,1)",
+                  "fill": "rgba(231,76,60,0.1)"
+               },
+               "type": "number"
+            }
+         ],
+         "precision_mode": 0
+      },
+      {
+         "type": "single_value_number",
+         "gridPos": {
+            "h": 4,
+            "w": 3,
+            "x": 0,
+            "y": 0
+         },
+         "series": [
+            {
+               "name": "Separation1ProtectionTime_s",
+               "sourceNames": [
+                  "Separation1ProtectionTime_s"
                ],
                "formula": "",
                "options": {
@@ -346,9 +394,81 @@
          },
          "series": [
             {
-               "name": "loggerUsage_percent",
+               "name": "Separation1ForceTime_s",
                "sourceNames": [
-                  "loggerUsage_percent"
+                  "Separation1ForceTime_s"
+               ],
+               "formula": "",
+               "options": {
+                  "stroke": "rgba(231,76,60,1)",
+                  "fill": "rgba(231,76,60,0.1)"
+               },
+               "type": "number"
+            }
+         ],
+         "precision_mode": 0
+      },
+      {
+         "type": "single_value_number",
+         "gridPos": {
+            "h": 4,
+            "w": 3,
+            "x": 0,
+            "y": 0
+         },
+         "series": [
+            {
+               "name": "Separation2ProtectionTime_s",
+               "sourceNames": [
+                  "Separation2ProtectionTime_s"
+               ],
+               "formula": "",
+               "options": {
+                  "stroke": "rgba(231,76,60,1)",
+                  "fill": "rgba(231,76,60,0.1)"
+               },
+               "type": "number"
+            }
+         ],
+         "precision_mode": 0
+      },
+      {
+         "type": "single_value_number",
+         "gridPos": {
+            "h": 4,
+            "w": 2,
+            "x": 0,
+            "y": 0
+         },
+         "series": [
+            {
+               "name": "Separation2ForceTime_s",
+               "sourceNames": [
+                  "Separation2ForceTime_s"
+               ],
+               "formula": "",
+               "options": {
+                  "stroke": "rgba(231,76,60,1)",
+                  "fill": "rgba(231,76,60,0.1)"
+               },
+               "type": "number"
+            }
+         ],
+         "precision_mode": 0
+      },
+      {
+         "type": "single_value_number",
+         "gridPos": {
+            "h": 4,
+            "w": 2,
+            "x": 0,
+            "y": 0
+         },
+         "series": [
+            {
+               "name": "LandingTime_s",
+               "sourceNames": [
+                  "LandingTime_s"
                ],
                "formula": "",
                "options": {
