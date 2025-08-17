@@ -499,7 +499,7 @@ void loop()
   if (sensingModuleAvailable && !sensingModuleAvailableAnnounced && millis() > 5000)
   {
     sensingModuleAvailableAnnounced = true;
-    // buzzer.beepMorse("SM");
+    buzzer.beepMorse("SM");
   }
 
   Tasks.update();
