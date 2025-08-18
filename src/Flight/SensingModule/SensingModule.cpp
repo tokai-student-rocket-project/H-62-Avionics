@@ -59,8 +59,8 @@ float primaryAltitude_m, secondaryAltitude_m, altitude_m;
 float primaryTemperature_C, secondaryTemperature_C;
 
 // --- 基準気圧設定 ---
-float PRIMARY_REFERENCE_PRESSURE = 1009.0;
-float SECONDARY_REFERENCE_PRESSURE = 1009.0;
+float PRIMARY_REFERENCE_PRESSURE = 1015.0;
+float SECONDARY_REFERENCE_PRESSURE = 1015.0;
 
 movingAvg altitudeAverage(10);
 Calculus::Differential<float> altitudeGradient(2); // 初期値 5

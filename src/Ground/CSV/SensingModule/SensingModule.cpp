@@ -19,8 +19,8 @@ const int NUM_PAGES = 9;
 TinyGPSPlus onbordGps;
 
 // --- 基準気圧設定 ---
-uint32_t primaryPressure = 1009;
-uint32_t secondaryPressure = 1009;
+uint32_t primaryPressure = 1015;
+uint32_t secondaryPressure = 1015;
 
 // --- テレメトリーデータ ---
 float telemetryRssi = 0.0;
