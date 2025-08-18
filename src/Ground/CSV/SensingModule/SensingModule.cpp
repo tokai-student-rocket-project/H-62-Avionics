@@ -372,7 +372,7 @@ void setup()
     delay(1000);
 
     LoRa.setPins(RADIO_CS_PIN, RADIO_RST_PIN, RADIO_DIO0_PIN);
-    if (!LoRa.begin(924.2E6))
+    if (!LoRa.begin(923.8E6)) // 21st無線調整シートより
     {
         Serial.println("Starting LoRa failed!");
         display.clearDisplay();

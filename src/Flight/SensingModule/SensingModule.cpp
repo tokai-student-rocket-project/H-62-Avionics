@@ -321,7 +321,7 @@ void setup()
     SPI.begin();
 
     can.begin();
-    telemeter.initialize(924.2E6, 500E3);
+    telemeter.initialize(923.8E6, 500E3); // 能代宇宙イベント 21st無線調整シートより
 
     bno055.begin();
 

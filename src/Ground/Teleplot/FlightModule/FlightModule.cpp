@@ -22,7 +22,7 @@ void setup()
 
     pinMode(LED_BUILTIN, OUTPUT);
 
-    LoRa.begin(925.6E6);
+    LoRa.begin(924.6E6); // 21st無線調整シートより
     LoRa.setSignalBandwidth(500E3);
 
     MsgPacketizer::subscribe(LoRa, 0x0A,

@@ -24,7 +24,7 @@ uint32_t separation1ProtectionTime = 22390; // (- 1.0 s)
 uint32_t separation1ForceTime = 25390;      // (+ 2.0 s)
 uint32_t separation2ProtectionTime = 84290; // (- 1.0 s)
 uint32_t separation2ForceTime = 85290;      // (± 0 s)
-uint32_t landingTime = 108890;
+uint32_t landingTime = 88890;
 
 // --- テレメトリーデータ ---
 float telemetryRssi = 0.0;
@@ -361,7 +361,8 @@ void setup()
     Serial.println("loraRssi,loraSnr,millis,flightMode,flightTime,loggerUsage,doLogging,framNumber,flightPinIsOpen,sn3IsOn,sn4IsOn,isLaunchMode,isFalling,unixEpoch,fixType,satelliteCount,latitude,longitude,height,speed,accuracy,motorTemperature,mcuTemperature,inputVoltage,current,currentPosition,currentDesiredPosition,currentVelocity,motorTemperature_SUPPLY,mcuTemperature_SUPPLY,inputVoltage_SUPPLY,current_SUPPLY,currentPosition_SUPPLY,currentDesiredPosition_SUPPLY,currentVelocity_SUPPLY,separation1ProtectionTime,separation1ForceTime,separation2ProtectionTime,separation2ForceTime,landingTime");
 
     LoRa.setPins(RADIO_CS_PIN, RADIO_RST_PIN, RADIO_DIO0_PIN);
-    if (!LoRa.begin(925.6E6))
+
+    if (!LoRa.begin(924.6E6)) // 21st無線調整シートより
     {
         Serial.println("Starting LoRa failed!");
         display.clearDisplay();
