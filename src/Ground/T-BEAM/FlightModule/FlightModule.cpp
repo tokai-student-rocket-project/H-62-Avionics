@@ -54,23 +54,80 @@ void displayPage0()
   display.println(telemetryLatitude, 6);
   display.print("      Lng: ");
   display.println(telemetryLongitude, 6);
-  display.println("=====================");
 
   if (onbordGps.location.isValid())
   {
-    display.print(F(" Now Lat: "));
+    display.print(F(" You  Lat: "));
     display.println(onbordGps.location.lat(), 6);
-    display.print(F("     Lng: "));
+    display.print(F("      Lng: "));
     display.println(onbordGps.location.lng(), 6);
-    display.print(F("      Sat: "));
-    display.println(onbordGps.satellites.value());
   }
   else
   {
-    display.println(F(" Now Lat: --.------"));
-    display.println(F("     Lng: --.------"));
-    display.println(F("     Sat: --"));
+    display.println(F(" You  Lat: --.------"));
+    display.println(F("      Lng: --.------"));
   }
+  // display.println("=====================");
+
+  // 衛星数
+  display.print(F("      Sat: "));
+  display.println(onbordGps.satellites.value());
+
+  // 2点間の距離計算をテスト実装
+  /*
+  double distance = TinyGPSPlus::distanceBetween(
+      // onbordGps.location.lat(),
+      40.242816,
+      // onbordGps.location.lng(),
+      140.010444,
+      // telemetryLatitude,
+      40.246333,
+      // telemetryLongitude
+      139.996444);
+  display.print(F("You-> "));
+  if (distance < 1000)
+  {
+    display.print(distance, 0);
+    display.print(F("m"));
+    display.print(F(" ->Rocket"));
+  }
+  else
+  {
+    display.print(distance / 1000.0, 1);
+    display.print(F("km"));
+    display.print(F(" ->Rocket"));
+  }
+  */
+  // 2点間の距離計算をテスト実装
+
+  // ロケットと現在地間の距離を計算
+  if (onbordGps.location.isValid() && telemetryLatitude != 0.0)
+  {
+    double distance = TinyGPSPlus::distanceBetween(
+        onbordGps.location.lat(),
+        onbordGps.location.lng(),
+        telemetryLatitude,
+        telemetryLongitude);
+    display.print(F("You-> "));
+
+    if (distance < 1000)
+    {
+      display.print(distance, 0);
+      display.print(F("m"));
+      display.print(F(" ->Rocket"));
+    }
+    else
+    {
+      display.print(distance / 1000.0, 1);
+      display.print(F("km"));
+      display.print(F(" ->Rocket"));
+    }
+  }
+  else
+  {
+    display.print(F("No Data..."));
+  }
+
   display.display();
 }
 
@@ -310,6 +367,9 @@ void setup()
                              telemetrySnr = LoRa.packetSnr();
                              Serial.print(">LoRa_SNR_dBm: ");
                              Serial.println(telemetrySnr);
+
+                             telemetryLatitude = latitude;
+                             telemetryLongitude = longitude;
 
                              if (currentPage == 1)
                              {
