@@ -239,11 +239,16 @@ void setup()
   display.setCursor(0, 0);
   display.setTextSize(1);
   display.setTextColor(SSD1306_WHITE);
-  display.println("System Start");
+  display.println("SEA FLIGHT MODULE");
+  display.println("--- System Start ---");
+  display.println("====================");
+  display.println("   H-62  Avionics   ");
+  display.println("     SUBARU 1.3     ");
+  display.println("====================");
   display.display();
-  delay(1000);
+  delay(3000);
   LoRa.setPins(RADIO_CS_PIN, RADIO_RST_PIN, RADIO_DIO0_PIN);
-  if (!LoRa.begin(925.6E6))
+  if (!LoRa.begin(924.6E6))
   {
     Serial.println("Starting LoRa failed!");
     display.clearDisplay();
