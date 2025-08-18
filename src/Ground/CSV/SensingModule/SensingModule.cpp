@@ -19,8 +19,8 @@ const int NUM_PAGES = 9;
 TinyGPSPlus onbordGps;
 
 // --- 基準気圧設定 ---
-uint32_t primaryPressure = 1015;
-uint32_t secondaryPressure = 1015;
+uint32_t primaryPressure = 1014;
+uint32_t secondaryPressure = 1014;
 
 // --- テレメトリーデータ ---
 float telemetryRssi = 0.0;
@@ -185,8 +185,8 @@ void displayPage4()
     display.print(telemetryBusVoltage);
     display.println(F(" V"));
     display.print(F("I: "));
-    display.print(telemetryBusCurrent);
-    display.println(F(" mA"));
+    display.print(telemetryBusCurrent / 1000.0);
+    display.println(F(" A"));
     display.print(F("P: "));
     display.print(telemetryBusPower);
     display.println(F(" W"));
@@ -201,8 +201,8 @@ void displayPage5()
     display.print(telemetryBatteryVoltage);
     display.println(F(" V"));
     display.print(F("I: "));
-    display.print(telemetryBatteryCurrent);
-    display.println(F(" mA"));
+    display.print(telemetryBatteryCurrent / 1000.0);
+    display.println(F(" A"));
     display.print(F("P: "));
     display.print(telemetryBatteryPower);
     display.println(F(" W"));
@@ -217,8 +217,8 @@ void displayPage6()
     display.print(telemetryExternalVoltage);
     display.println(F(" V"));
     display.print(F("I: "));
-    display.print(telemetryExternalCurrent);
-    display.println(F(" mA"));
+    display.print(telemetryExternalCurrent / 1000.0);
+    display.println(F(" A"));
     display.print(F("P: "));
     display.print(telemetryExternalPower);
     display.println(F(" W"));
@@ -227,14 +227,20 @@ void displayPage6()
 
 void displayPage7()
 {
-    displayHeader(" Temperature [C] -");
+    displayHeader(" Temperature -");
     display.setCursor(0, 10);
     display.print(F("BUS: "));
-    display.println(telemetryBusDieTemperature);
+    display.print(telemetryBusDieTemperature);
+    display.println(" C");
+
     display.print(F("BAT: "));
-    display.println(telemetryBatteryDieTemperature);
+    display.print(telemetryBatteryDieTemperature);
+    display.println(" C");
+
     display.print(F("EXT: "));
-    display.println(telemetryExternalDieTemperature);
+    display.print(telemetryExternalDieTemperature);
+    display.println(" C");
+
     display.display();
 }
 
@@ -337,8 +343,6 @@ void taskButtonCheck()
         {
             // 短押し時の動作
             currentPage = (currentPage + 1) % NUM_PAGES;
-            Serial.print("Button short press. Switching to page: ");
-            Serial.println(currentPage);
             updateDisplay();
         }
         buttonPressTime = 0;
@@ -369,10 +373,10 @@ void setup()
     display.println("     SUBARU 1.3     ");
     display.println("====================");
     display.display();
-    delay(1000);
+    delay(3000);
 
     LoRa.setPins(RADIO_CS_PIN, RADIO_RST_PIN, RADIO_DIO0_PIN);
-    if (!LoRa.begin(923.8E6)) // 21st無線調整シートより
+    if (!LoRa.begin(923.8E6)) // 923.8E6 <-- 21st無線調整シートより
     {
         Serial.println("Starting LoRa failed!");
         display.clearDisplay();
