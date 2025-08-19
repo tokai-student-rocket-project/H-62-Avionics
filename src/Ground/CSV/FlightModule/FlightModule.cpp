@@ -1,4 +1,14 @@
-// 退避所で運用する T-Beam 用
+/**
+ * @file FlightModule.cpp
+ * @brief 地上局（退避所）用のフライトモジュールメインプログラム。
+ * @details
+ * T-Beamデバイス上で動作し、LoRa経由で受信したテレメトリーデータをOLEDディスプレイに表示し、シリアルポートにCSV形式で出力する。
+ * 指定はないが、TeraTermを用いることで自動ログ保存が可能。
+ * ボタン操作により表示ページの切り替えや、分離時間設定のLoRaコマンド送信が可能。
+ * microUSBポートから給電が可能。
+ * @author H-62 Avionics Team
+ * @date 2025-08-20
+ */
 
 #include <Arduino.h>
 #include <SPI.h>
@@ -12,70 +22,76 @@
 #include <Adafruit_SSD1306.h>
 #include <Lib_Var.hpp>
 
-#define BUTTON_PIN 38
-const unsigned long LONG_PRESS_TIME_MS = 1000;
+#define BUTTON_PIN 38                          ///< ボタンが接続されているGPIOピン
+const unsigned long LONG_PRESS_TIME_MS = 1000; ///< ボタン長押しと判定する時間 (ミリ秒)
 
-Adafruit_SSD1306 display(128, 64, &Wire, -1);
-int currentPage = 0;
-const int NUM_PAGES = 5;
+Adafruit_SSD1306 display(128, 64, &Wire, -1); ///< OLEDディスプレイ制御オブジェクト
+int currentPage = 0;                          ///< 現在表示中のページ番号
+const int NUM_PAGES = 5;                      ///< ディスプレイの総ページ数
 
 // --- 分離時間設定 ---
-uint32_t separation1ProtectionTime = 22390; // (- 1.0 s)
-uint32_t separation1ForceTime = 25390;      // (+ 2.0 s)
-uint32_t separation2ProtectionTime = 84290; // (- 1.0 s)
-uint32_t separation2ForceTime = 85290;      // (± 0 s)
-uint32_t landingTime = 88890;
+uint32_t separation1ProtectionTime = 22390; // (- 1.0 s) ///< 第1分離保護時間 (ms)
+uint32_t separation1ForceTime = 25390;      // (+ 2.0 s) ///< 第1分離強制時間 (ms)
+uint32_t separation2ProtectionTime = 84290; // (- 1.0 s) ///< 第2分離保護時間 (ms)
+uint32_t separation2ForceTime = 85290;      // (± 0 s) ///< 第2分離強制時間 (ms)
+uint32_t landingTime = 88890;               ///< 着地予定時間 (ms)
 
 // --- テレメトリーデータ ---
-float telemetryRssi = 0.0;
-float telemetrySnr = 0.0;
-char telemetryIdent = ' ';
-uint32_t telemetryMillis = 0;
-uint8_t telemetryFlightMode = 0;
-uint32_t telemetryFlightTime = 0;
-uint8_t telemetryLoggerUsage = 0;
-bool telemetryDoLogging = false;
-uint8_t telemetryFramNumber = 0;
-bool telemetryFlightPinIsOpen = false;
-bool telemetrySn3IsOn = false;
-bool telemetrySn4IsOn = false;
-bool telemetryIsLaunchMode = false;
-bool telemetryIsFalling = false;
-uint32_t telemetryUnixEpoch = 0;
-uint8_t telemetryFixType = 0;
-uint8_t telemetrySatelliteCount = 0;
-float telemetryLatitude = 0.0;
-float telemetryLongitude = 0.0;
-int16_t telemetryHeight = 0;
-int16_t telemetrySpeed = 0;
-uint16_t telemetryAccuracy = 0;
-float telemetryMotorTemperature = 0.0;
-float telemetryMcuTemperature = 0.0;
-float telemetryInputVoltage = 0.0;
-float telemetryCurrent = 0.0;
-float telemetryCurrentPosition = 0.0;
-float telemetryCurrentDesiredPosition = 0.0;
-float telemetryCurrentVelocity = 0.0;
-float telemetryMotorTemperature_SUPPLY = 0.0;
-float telemetryMcuTemperature_SUPPLY = 0.0;
-float telemetryInputVoltage_SUPPLY = 0.0;
-float telemetryCurrent_SUPPLY = 0.0;
-float telemetryCurrentPosition_SUPPLY = 0.0;
-float telemetryCurrentDesiredPosition_SUPPLY = 0.0;
-float telemetryCurrentVelocity_SUPPLY = 0.0;
-float telemetrySeparation1ProtectionTime = 0;
-float telemetrySeparation1ForceTime = 0;
-float telemetrySeparation2ProtectionTime = 0;
-float telemetrySeparation2ForceTime = 0;
-float telemetryLandingTime = 0;
+float telemetryRssi = 0.0;                          ///< LoRa RSSI値
+float telemetrySnr = 0.0;                           ///< LoRa SNR値
+char telemetryIdent = ' ';                          ///< テレメトリー識別子
+uint32_t telemetryMillis = 0;                       ///< テレメトリー受信時のミリ秒
+uint8_t telemetryFlightMode = 0;                    ///< フライトモード
+uint32_t telemetryFlightTime = 0;                   ///< フライト時間 (ms)
+uint8_t telemetryLoggerUsage = 0;                   ///< ロガー使用率 (%)
+bool telemetryDoLogging = false;                    ///< ロギング中か
+uint8_t telemetryFramNumber = 0;                    ///< FRAM番号
+bool telemetryFlightPinIsOpen = false;              ///< フライトピンが抜けているか
+bool telemetrySn3IsOn = false;                      ///< 不知火Ⅲ がONか
+bool telemetrySn4IsOn = false;                      ///< 不知火Ⅳ がONか
+bool telemetryIsLaunchMode = false;                 ///< ローンチモードか
+bool telemetryIsFalling = false;                    ///< 落下中か
+uint32_t telemetryUnixEpoch = 0;                    ///< GPS Unix Epoch時間
+uint8_t telemetryFixType = 0;                       ///< GPS Fixタイプ
+uint8_t telemetrySatelliteCount = 0;                ///< GPS衛星数
+float telemetryLatitude = 0.0;                      ///< GPS緯度
+float telemetryLongitude = 0.0;                     ///< GPS経度
+int16_t telemetryHeight = 0;                        ///< GPS高度 (m)
+int16_t telemetrySpeed = 0;                         ///< GPS速度
+uint16_t telemetryAccuracy = 0;                     ///< GPS精度
+float telemetryMotorTemperature = 0.0;              ///< 主流路モーター温度
+float telemetryMcuTemperature = 0.0;                ///< 主流路モーターMCU温度
+float telemetryInputVoltage = 0.0;                  ///< 主流路モーター入力電圧
+float telemetryCurrent = 0.0;                       ///< 主流路モーター電流
+float telemetryCurrentPosition = 0.0;               ///< 主流路モーター現在位置
+float telemetryCurrentDesiredPosition = 0.0;        ///< 主流路モーター目標位置
+float telemetryCurrentVelocity = 0.0;               ///< 主流路モーター現在速度
+float telemetryMotorTemperature_SUPPLY = 0.0;       ///< 供給路モーター温度
+float telemetryMcuTemperature_SUPPLY = 0.0;         ///< 供給路モーターMCU温度
+float telemetryInputVoltage_SUPPLY = 0.0;           ///< 供給路モーター入力電圧
+float telemetryCurrent_SUPPLY = 0.0;                ///< 供給路モーター電流
+float telemetryCurrentPosition_SUPPLY = 0.0;        ///< 供給路モーター現在位置
+float telemetryCurrentDesiredPosition_SUPPLY = 0.0; ///< 供給路モーター目標位置
+float telemetryCurrentVelocity_SUPPLY = 0.0;        ///< 供給路モーター現在速度
+float telemetrySeparation1ProtectionTime = 0;       ///< 第1分離保護時間
+float telemetrySeparation1ForceTime = 0;            ///< 第1分離強制時間
+float telemetrySeparation2ProtectionTime = 0;       ///< 第2分離保護時間
+float telemetrySeparation2ForceTime = 0;            ///< 第2分離強制時間
+float telemetryLandingTime = 0;                     ///< 着地時間
 
-unsigned long buttonPressTime = 0;
-bool longPressSent = false;
+unsigned long buttonPressTime = 0; ///< ボタンが押され始めた時刻
+bool longPressSent = false;        ///< 長押しコマンドが送信済みかどうかのフラグ
 
 void updateDisplay();
 void sendLoRaCommand();
 void loraRssiBar();
 
+/**
+ * @brief フライトモードの数値から対応する文字列を取得する。
+ * @param[in] mode フライトモードを示す数値 (Var::FlightMode)。
+ * @return const char* フライトモードを表す文字列。不明なモードの場合は "UNKNOWN" を返す。
+ * @see Var::FlightMode
+ */
 const char *getFlightModeString(uint8_t mode)
 {
     switch ((Var::FlightMode)mode)
@@ -105,6 +121,10 @@ const char *getFlightModeString(uint8_t mode)
     }
 }
 
+/**
+ * @brief 受信したRSSI値に基づいてアンテナピクトグラムを描画する。
+ * @note 画面右下に描画される。
+ */
 void loraRssiBar()
 {
     int rssi = LoRa.packetRssi();
@@ -136,6 +156,10 @@ void loraRssiBar()
     }
 }
 
+/**
+ * @brief 各表示ページのヘッダーを描画する。
+ * @param[in] title ページのタイトル文字列。
+ */
 void displayHeader(const char *title)
 {
     display.clearDisplay();
@@ -149,6 +173,9 @@ void displayHeader(const char *title)
     loraRssiBar();
 }
 
+/**
+ * @brief ページ0 (ステータス情報) を表示する。
+ */
 void displayPage0()
 {
     displayHeader(" Status -");
@@ -185,6 +212,9 @@ void displayPage0()
     display.display();
 }
 
+/**
+ * @brief ページ1 (GPS情報) を表示する。
+ */
 void displayPage1()
 {
     displayHeader(" GPS -");
@@ -205,6 +235,9 @@ void displayPage1()
     display.display();
 }
 
+/**
+ * @brief ページ2 (主流路バルブ情報) を表示する。
+ */
 void displayPage2()
 {
     displayHeader(" MAIN Valve -");
@@ -224,6 +257,9 @@ void displayPage2()
     display.display();
 }
 
+/**
+ * @brief ページ3 (供給路バルブ情報) を表示する。
+ */
 void displayPage3()
 {
     displayHeader(" SUPPLY Valve -");
@@ -243,6 +279,9 @@ void displayPage3()
     display.display();
 }
 
+/**
+ * @brief ページ4 (分離時間情報) を表示する。
+ */
 void displayPage4()
 {
     displayHeader(" SEPARATION -");
@@ -270,6 +309,9 @@ void displayPage4()
     display.display();
 }
 
+/**
+ * @brief 現在のページ番号に応じて対応する表示関数を呼び出す。
+ */
 void updateDisplay()
 {
     switch (currentPage)
@@ -292,6 +334,9 @@ void updateDisplay()
     }
 }
 
+/**
+ * @brief 分離時間設定をLoRaコマンドとして送信する。
+ */
 void sendLoRaCommand()
 {
     const auto &packet = MsgPacketizer::encode(0xF3, separation1ProtectionTime, separation1ForceTime, separation2ProtectionTime, separation2ForceTime, landingTime);
@@ -300,6 +345,10 @@ void sendLoRaCommand()
     LoRa.endPacket();
 }
 
+/**
+ * @brief ボタンの状態をチェックし、短押し・長押しに応じた処理を行うタスク。
+ * @details 短押しで表示ページを切り替え、長押しでLoRaコマンドを送信する。
+ */
 void taskButtonCheck()
 {
     bool buttonPressed = !digitalRead(BUTTON_PIN);
@@ -330,6 +379,10 @@ void taskButtonCheck()
     }
 }
 
+/**
+ * @brief 起動時に一度だけ実行されるセットアップ処理。
+ * @details ハードウェアの初期化、シリアル通信の開始、LoRaの設定、タスクの登録などを行う。
+ */
 void setup()
 {
     setupBoards();
@@ -550,6 +603,10 @@ void setup()
     Tasks.add("update-display", &updateDisplay);
 }
 
+/**
+ * @brief メインループ。継続的に実行される。
+ * @details タスクマネージャの更新、シリアルコマンドの受信処理、LoRaパケットの受信処理を行う。
+ */
 void loop()
 {
     Tasks.update();
