@@ -239,7 +239,7 @@ void task10Hz()
     verticalSpeed_mps = altitudeGradient.get(altitude_m, deltaTime);
     verticalAcceleration_msp2 = verticalSpeedGradient.get(verticalSpeed_mps, deltaTime);
 
-    estimated = -verticalSpeed_mps / verticalAcceleration_msp2;
+    estimated = -verticalSpeed_mps / verticalAcceleration_msp2; // 意味ない
     apogee = altitude_m + (verticalSpeed_mps * estimated + 0.5 * verticalAcceleration_msp2 * estimated * estimated);
     isFalling = verticalSpeed_mps < 0;
 
