@@ -14,6 +14,10 @@
 #include <SPI.h>
 #include <Wire.h>
 #include <LoRa.h>
+#include <WiFi.h>
+#include <WebServer.h>
+#include <ESPAsyncWebServer.h>
+#include <SPIFFS.h>
 #include <MsgPacketizer.h>
 #include <TaskManager.h>
 #include <ArduinoJson.h>
@@ -21,6 +25,13 @@
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
 #include <Lib_Var.hpp>
+#include <TinyGPS++.h>
+
+constexpr char ssid[] = "T-Beam Flight Module";
+constexpr char password[] = "tsrp123456";
+const IPAddress ip(192, 168, 123, 45);
+const IPAddress subnet(255, 255, 255, 0);
+AsyncWebServer server(80);
 
 #define BUTTON_PIN 38                          ///< ボタンが接続されているGPIOピン
 const unsigned long LONG_PRESS_TIME_MS = 1000; ///< ボタン長押しと判定する時間 (ミリ秒)
@@ -28,6 +39,8 @@ const unsigned long LONG_PRESS_TIME_MS = 1000; ///< ボタン長押しと判定�
 Adafruit_SSD1306 display(128, 64, &Wire, -1); ///< OLEDディスプレイ制御オブジェクト
 int currentPage = 0;                          ///< 現在表示中のページ番号
 const int NUM_PAGES = 5;                      ///< ディスプレイの総ページ数
+
+TinyGPSPlus onboardGps; ///< 搭載されたGPSモジュール制御オブジェクト
 
 // --- 分離時間設定 ---
 uint32_t separation1ProtectionTime = 22390; // (- 1.0 s) ///< 第1分離保護時間 (ms)
@@ -232,6 +245,32 @@ void displayPage1()
     display.print(F("SAT: "));
     display.println(telemetrySatelliteCount);
 
+    display.print(F("DST: "));
+
+    if (onboardGps.location.isValid() && telemetryLatitude != 0.0)
+    {
+        double distance = TinyGPSPlus::distanceBetween(
+            onboardGps.location.lat(),
+            onboardGps.location.lng(),
+            telemetryLatitude,
+            telemetryLongitude);
+
+        if (distance < 1000)
+        {
+            display.print(distance, 0);
+            display.println(F("m"));
+        }
+        else
+        {
+            display.print(distance / 1000.0, 1);
+            display.println(F("km"));
+        }
+    }
+    else
+    {
+        display.print(F("No Data..."));
+    }
+
     display.display();
 }
 
@@ -387,6 +426,34 @@ void setup()
 {
     setupBoards();
     pinMode(BUTTON_PIN, INPUT_PULLUP);
+
+    if (!SPIFFS.begin(true))
+    {
+        Serial.println("Error SPIFFS");
+        return;
+    }
+    WiFi.softAP(ssid, password);
+    delay(1000);
+    WiFi.softAPConfig(ip, ip, subnet);
+    IPAddress myIP = WiFi.softAPIP();
+
+    Serial.print("SSID: ");
+    Serial.println(ssid);
+    Serial.print("AP IP address: ");
+    Serial.println(myIP);
+
+    // GETリクエストに対するハンドラーを登録
+    // rootにアクセスされた時のレスポンス
+    server.on("/", HTTP_GET, [](AsyncWebServerRequest *request)
+              { request->send(SPIFFS, "/index.html"); });
+    // style.cssにアクセスされた時のレスポンス
+    server.on("/style.css", HTTP_GET, [](AsyncWebServerRequest *request)
+              { request->send(SPIFFS, "/style.css", "text/css"); });
+
+    // サーバースタート
+    server.begin();
+
+    Serial.println("Server start!");
 
     if (!display.begin(SSD1306_SWITCHCAPVCC, 0x3C))
     {
