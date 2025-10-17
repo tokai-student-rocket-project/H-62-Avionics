@@ -25,7 +25,7 @@ const uint8_t powerEN = 29;
 B3MSC1170A mainValve;
 void closeMainValve()
 {
-    mainValve.setPosition(0x01, -7000, 0);
+    mainValve.setPosition(0x01, 0, 0);
     // int16_t mainValveCurrentPossition = mainValve.readCurrentPosition(0x01);
     // if (mainValveCurrentPossition < -5000 || mainValveCurrentPossition > -6000)
     // {
@@ -34,22 +34,12 @@ void closeMainValve()
 }
 void openMainValve()
 {
-    mainValve.setPosition(0x01, 0, 0);
+    mainValve.setPosition(0x01, 7000, 0);
     // int16_t mainValveCurrentPossition = mainValve.readCurrentPosition(0x01);
     // if (mainValveCurrentPossition < -500 || mainValveCurrentPossition > 500)
     // {
     // mainValve.setPosition(0x01, 0, 0);
     // }
-}
-void closeMainValveToFlight()
-{
-    mainValve.setPosition(0x01, -100, 200);
-    // int16_t mainValveCurrentPossition = mainValve.readCurrentPosition(0x01)
-    // if (mainValveCurrentPossition < -200 || mainValveCurrentPossition > 100)
-    // {
-    //   mainValve.setPosition(0x01, -100, 200);
-    // }
-    // mainValve.setPosition(0x01, -100, 200);
 }
 
 B3MSC1170A supplyValve;
@@ -105,6 +95,8 @@ void setup()
 
     mainValve.initialize(0x01);
     supplyValve.initialize(0x02);
+    closeMainValve();
+    openSupplyValve();
 
     // Tasks.add("openMainValve", [&]()
     //           { openMainValve(); });
