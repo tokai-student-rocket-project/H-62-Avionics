@@ -225,8 +225,6 @@ void handleData(AsyncWebServerRequest *request)
     request->send(200, "application/json", json);
 }
 
-// --- ここから下の関数は、前回のコードから変更ありません ---
-
 const char *getFlightModeString(uint8_t mode)
 {
     switch ((Var::FlightMode)mode)
