@@ -1894,8 +1894,8 @@
 	)
 	(text_box "From DCDC"
 		(exclude_from_sim no)
-		(at 170.18 41.91 0)
-		(size 12.7 2.54)
+		(at 168.91 41.91 0)
+		(size 15.24 2.54)
 		(margins 0.9525 0.9525 0.9525 0.9525)
 		(stroke
 			(width 0)
