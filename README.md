@@ -12,7 +12,7 @@ H-62搭載計器　すばる1.3 | 2025年度 夏季 能代 NOGO
 ## ドキュメント
 - [PDR](./Document/PDR/Subaru1.3_PDR.pdf)
 - [CDR](./Document/CDR/Subaru1.3_CDR.pdf)
-- [報告書](./Document/)
+- [報告書](./Document/Report/Report.md)
 
 ## ディレクトリ構成
 ### [Document](./Document/)
