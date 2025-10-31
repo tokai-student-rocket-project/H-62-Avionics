@@ -22,9 +22,11 @@
       - [4.2.2. PlatformIO CLIを使用する方法](#422-platformio-cliを使用する方法)
     - [4.3. 主要なビルド環境](#43-主要なビルド環境)
   - [5. Webダッシュボード (地上局)](#5-webダッシュボード-地上局)
-    - [5.1. 使い方](#51-使い方)
+    - [5.1. 手順](#51-手順)
     - [5.2. 機能](#52-機能)
   - [6. ログの読み出し](#6-ログの読み出し)
+    - [6.2. ビルド環境](#62-ビルド環境)
+    - [6.3. 手順](#63-手順)
   - [00. 添付資料](#00-添付資料)
 
 ---
@@ -224,7 +226,7 @@ pio device monitor -e <環境名>
 
 地上局 (Webサーバー付き) (`CSVGroundFlightModule`) は、受信したデータをリアルタイムで表示するWebダッシュボード機能を持つ。
 
-### 5.1. 使い方
+### 5.1. 手順
 
 1. `src/Ground/CSV/FlightModule/FlightModule.cpp` のWi-Fi設定を自身の環境に合わせて変更する。
    ```cpp
@@ -245,11 +247,14 @@ pio device monitor -e <環境名>
 
 ログを読み出す際は，ログダンパー(LogDumoer)というビルド環境をマイコンに書き込む。
 
+### 6.2. ビルド環境
 
 | 用途                     | 環境名 (`env:***`)       | ボード       | ソースコード                                    |
 | :----------------------- | :----------------------- | :----------- | :---------------------------------------------- |
 | **フライトモジュール**   | `LogDumper_FlightModule` | `mkrwan1310` | `src/LogDumper/FlightModule/FlightModule.cpp`   |
 | **センシングモジュール** | `LogDumperSensingModule` | `mkrwan1310` | `src/LogDumper/SensingModule/SensingModule.cpp` |
+
+### 6.3. 手順
 
 1. VSCodeの左側にあるPlatformIOアイコン (エイリアンの頭のようなアイコン) をクリックする。
 2. `Project Tasks` の中から、対象の環境 (`env:***`) を見つける。
