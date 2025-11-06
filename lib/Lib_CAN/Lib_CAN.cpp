@@ -31,21 +31,21 @@ Var::Label CAN::getLatestLabel()
 
 void CAN::sendFlight(uint8_t flightMode, uint32_t flightTime, bool doLogging, char ident)
 {
-  uint8_t data[5];
+  uint8_t data[7];
   data[0] = flightMode;
-  memcpy(data + 1, &flightTime, 2);
-  data[3] = doLogging;
-  data[4] = ident;
+  memcpy(data + 1, &flightTime, 4);
+  data[5] = doLogging;
+  data[6] = ident;
 
-  _can->sendMsgBuf(static_cast<uint32_t>(Var::Label::FLIGHT_DATA), 0, 5, data);
+  _can->sendMsgBuf(static_cast<uint32_t>(Var::Label::FLIGHT_DATA), 0, 7, data);
 }
 
 void CAN::receiveFlight(uint8_t *flightMode, uint32_t *flightTime, bool *doLogging, char *ident)
 {
   *flightMode = _latestData[0];
-  memcpy(flightTime, _latestData + 1, 2);
-  *doLogging = _latestData[3];
-  *ident = _latestData[4];
+  memcpy(flightTime, _latestData + 1, 4);
+  *doLogging = _latestData[5];
+  *ident = _latestData[6];
 }
 
 void CAN::sendTrajectory(bool isFalling, float altitude)
