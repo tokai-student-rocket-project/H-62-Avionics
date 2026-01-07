@@ -125,6 +125,21 @@ lib_deps =
 
 - **PowerModule**: バッテリーから各モジュールへ電源を供給・管理するモジュール。
   - **MCU**: `Seeed XIAO RP2040`
+  - **CAN**: `MCP2515 & MCP2562`
+    - MCP2515とマイコンをSPI通信で接続しCAN通信を行う
+    - MCP2562によりCAN通信の物理層を実装する
+    - 必要に応じて終端抵抗(120Ω)が必要
+  - **Power Management IC**: [`LTC4353`](https://www.digikey.jp/ja/products/detail/analog-devices-inc/LTC4353IMS-PBF/3305800)
+    - 外付けのMOSFETを制御し理想ダイオードをの機能を実装する
+    - MOSFETの選定には[`Si26DY`](https://www.digikey.jp/ja/products/detail/vishay-siliconix/SI4126DY-T1-GE3/1978841)がおすすめ
+    - パッケージは複数あるがLTC4353IMS`#PBF`にすることで「足」が生えているためはんだ不良を検査しやすい
+  - **DCDC Convertor**:[`LTC3119`](https://strawberry-linux.com/catalog/items?code=13119)
+    - 最大負荷5Aに対応し18Vまで対応しているため便利で扱いやすい
+    - ただし価格がお高め
+  - [CAD | KiCAD はこちら](../../KiCAD/PowerControlModule/)
+
+> [!NOTE]
+> Power Module の詳細は [こちら](./PowerModuleInfo.md)
 
   <img src="../Image/3DModel/PowerModule/PowerModule.png" alt="Power Module" style="width: 20%;">
 
