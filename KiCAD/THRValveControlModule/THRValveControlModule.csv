@@ -1,0 +1,24 @@
+Reference,Qty,Value,DNP,Exclude from BOM,Exclude from Board,Footprint,Datasheet,Supplyer
+"C1,C2,C3,C4,C5,C6,C7",7,0.1u,,,,,~,
+J3,1,DF51A-4P-2DSA,,,,TSRP_Connector_Hirose:DF51A-4P-2DSA,~,
+"R1,R4",2,120,,,,,~,
+"R2,R3,R5,R6,R7,R8,R14,R15",8,10k,,,,,~,
+"R9,R10,R11,R12,R13",5,4.7k,,,,,~,
+U4,1,ICM-42688,,,,TSRP_IC:StrawberryLinux_ICM-42688-P,https://strawberry-linux.com/pub/icm-42688-manual.pdf,
+U5,1,SC8721,,,,TSRP_IC:StrawberryLinux_SC8721,https://strawberry-linux.com/pub/sc8721-manual.pdf,
+U8,1,ADXL375,,,,TSRP_IC:StrawberryLinux_ADXL375,https://strawberry-linux.com/pub/adxl375-manual.pdf,
+D1,1,RB160M-30TR,,,,Diode_SMD:D_SOD-123,https://akizukidenshi.com/goodsaffix/RB160M-30_j.pdf,https://akizukidenshi.com/catalog/g/g101398/
+D3,1,MA10EB045,,,,TSRP_Diode:MA_DO-221BC,https://akizukidenshi.com/goodsaffix/MA10EB045-file.pdf,https://akizukidenshi.com/catalog/g/g101398/
+SW1,1,IS-2235,,,,Button_Switch_THT:SW_CK_JS202011CQN_DPDT_Straight,https://akizukidenshi.com/goodsaffix/IS-2235-G_20191212.pdf,https://akizukidenshi.com/catalog/g/g102627/
+"C8,C9,C10",3,470u,,,,Capacitor_THT:CP_Radial_D10.0mm_P5.00mm,https://akizukidenshi.com/goodsaffix/zlh.pdf,https://akizukidenshi.com/catalog/g/g102719/
+"D2,D4,D5",3,SK54,,,,Diode_SMD:D_SMC,https://akizukidenshi.com/goodsaffix/SK52_SERIES_141003_REV_04.pdf,https://akizukidenshi.com/catalog/g/g104128/
+"SW2,SW4",2,SKRPACE010,,,,TSRP_Button_Switch_SMD:SKRPACE010,https://tech.alpsalpine.com/prod/j/html/tact/surfacemount/skrp/skrpace010.html,https://akizukidenshi.com/catalog/g/g106185/
+U9,1,BP5293-50,,,,TSRP_IC:BP5293-50,https://akizukidenshi.com/goodsaffix/BP5293_DataSheet_J_VerC_161013.pdf,https://akizukidenshi.com/catalog/g/g111188/
+J4,1,SSD1306,,,,Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical,~,https://akizukidenshi.com/catalog/g/g112031/
+"J5,J6",2,B3B-XH-A(LF)(SN),,,,Connector_JST:JST_XH_B3B-XH-A_1x03_P2.50mm_Vertical,https://akizukidenshi.com/goodsaffix/xh.pdf,https://akizukidenshi.com/catalog/g/g112248/
+J1,1,B4B-XH-A(LF)(SN),,,,Connector_JST:JST_XH_B4B-XH-A_1x04_P2.50mm_Vertical,https://akizukidenshi.com/goodsaffix/xh.pdf,https://akizukidenshi.com/catalog/g/g112249/
+"U6,U7",2,TC7S14F,,,,Package_TO_SOT_SMD:SOT-23-5,https://www.ti.com/lit/ds/symlink/sn74lvc1g14.pdf,https://akizukidenshi.com/catalog/g/g114737/
+U3,1,MAX485E,,,,Package_SO:SOIC-8_3.9x4.9mm_P1.27mm,https://datasheets.maximintegrated.com/en/ds/MAX1487E-MAX491E.pdf,https://akizukidenshi.com/catalog/g/g116568/
+J2,1,XT30PW-M,,,,Connector_AMASS:AMASS_XT30PW-M_1x02_P2.50mm_Horizontal,https://akizukidenshi.com/goodsaffix/XT30PW-M.pdf,https://akizukidenshi.com/catalog/g/g117949/
+U2,1,ATA6561,,,,Package_SO:SOIC-8_3.9x4.9mm_P1.27mm,https://akizukidenshi.com/goodsaffix/ATA6560_1.pdf,https://akizukidenshi.com/catalog/g/g130008/
+U1,1,XIAO-RA4M1-SMD,,,,TSRP_Seeed_XIAO:XIAO-RA4M1-SMD,,https://akizukidenshi.com/catalog/g/g131171/
