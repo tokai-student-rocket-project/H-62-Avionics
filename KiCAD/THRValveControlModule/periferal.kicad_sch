@@ -4904,7 +4904,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.hirose.com/ja/product/p/CL0543-5107-0-00"
 			(at 30.48 86.36 0)
 			(effects
 				(font
@@ -4989,7 +4989,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.ramxeed.com/jp/home/wp-content/uploads/2024/12/MB85RQ8MX-DS1v1-J.pdf"
 			(at 162.56 119.126 0)
 			(effects
 				(font
@@ -5704,7 +5704,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://akizukidenshi.com/goodsaffix/UGCT7525AN4.pdf"
 			(at 84.836 121.92 0)
 			(effects
 				(font
@@ -5937,6 +5937,15 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
+			(at 168.91 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Supplyer" "https://akizukidenshi.com/catalog/g/g113374/"
 			(at 168.91 106.68 0)
 			(effects
 				(font

@@ -2462,7 +2462,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://wiki.seeedstudio.com/ja/getting_started_xiao_ra4m1/"
 			(at 151.13 77.47 0)
 			(effects
 				(font
@@ -3370,7 +3370,7 @@
 			)
 		)
 		(instances
-			(project "THRCombustionExperimentModule"
+			(project "THRValveControlModule"
 				(path "/dc98d680-5dd3-4db2-b9e5-37ad629f3456"
 					(page "2")
 				)
@@ -3412,7 +3412,7 @@
 			)
 		)
 		(instances
-			(project "THRCombustionExperimentModule"
+			(project "THRValveControlModule"
 				(path "/dc98d680-5dd3-4db2-b9e5-37ad629f3456"
 					(page "4")
 				)
@@ -3454,7 +3454,7 @@
 			)
 		)
 		(instances
-			(project "THRCombustionExperimentModule"
+			(project "THRValveControlModule"
 				(path "/dc98d680-5dd3-4db2-b9e5-37ad629f3456"
 					(page "5")
 				)
@@ -3496,7 +3496,7 @@
 			)
 		)
 		(instances
-			(project "THRCombustionExperimentModule"
+			(project "THRValveControlModule"
 				(path "/dc98d680-5dd3-4db2-b9e5-37ad629f3456"
 					(page "6")
 				)
@@ -3538,7 +3538,7 @@
 			)
 		)
 		(instances
-			(project "THRCombustionExperimentModule"
+			(project "THRValveControlModule"
 				(path "/dc98d680-5dd3-4db2-b9e5-37ad629f3456"
 					(page "3")
 				)

@@ -2694,6 +2694,15 @@
 				(hide yes)
 			)
 		)
+		(property "Supplyer" "https://akizukidenshi.com/catalog/g/g129635/"
+			(at 118.11 77.47 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "edcbef48-e028-4f23-a6bb-92b7ebdc69ba")
 		)
