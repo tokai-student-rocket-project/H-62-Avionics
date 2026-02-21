@@ -1,38 +1,23 @@
 #include <Arduino.h>
 #include <SPI.h>
 #include <Lib_ADXL375.hpp>
-
+#include <TaskManager.h>
 // CSピンの定義 (STM32F756ZG D10)
 #define ADXL375_CS D10
 
 // ADXL375インスタンスの作成 (ハードウェアSPI)
 ADXL375 accel(ADXL375_CS, &SPI);
 
-void setup()
-{
-    Serial.begin(115200);
-    while (!Serial)
-        delay(100);
+// ピンの動作確認用
+static uint32_t pinName = PG1;
+static uint32_t ledBlue = PB7;
+static uint32_t ledRed = PB14;
 
-    Serial.println("ADXL375 SPI Sample Start");
-
-    // SPI通信の初期化
-    SPI.begin();
-
-    // センサの初期化
-    if (!accel.begin())
-    {
-        Serial.println("ADXL375 not found. Check wiring!");
-        while (1)
-            ;
-    }
-    Serial.println("ADXL375 Initialized");
-
-    // 保存されたオフセットがあればここで設定する
-    accel.setTrimOffsets(1, -3, -5);
-
-    Serial.println("Send 'c' to Calibrate.");
-}
+void calibrateSensor();
+void task800Hz();
+void getPinStatus();
+void spiPinConfig();
+bool checkFreeFall();
 
 void calibrateSensor()
 {
@@ -106,8 +91,124 @@ void calibrateSensor()
     Serial.println("----------------------------------------");
 }
 
+bool checkFreeFall()
+{
+    float x_acc, y_acc, z_acc;
+    accel.getAcceleration(&x_acc, &y_acc, &z_acc);
+
+    // G単位に変換 ( m/s^2 を 9.80665 で割る)
+    float acc_mag = sqrt(x_acc * x_acc + y_acc * y_acc + z_acc * z_acc) / 9.80665f;
+
+    static uint32_t fallStartTime = 0;
+    const float threshold = 0.3f; // 閾値を 0.25G に設定
+    const uint32_t requiredTime = 10;
+
+    if (acc_mag < threshold)
+    {
+        if (fallStartTime == 0)
+            fallStartTime = millis();
+        if (millis() - fallStartTime > requiredTime)
+        {
+            return true;
+        }
+    }
+    else
+    {
+        fallStartTime = 0;
+    }
+    return false;
+}
+
+void task800Hz()
+{
+    static uint32_t startTime = millis();
+
+    // 加速度データの取得 (単位: m/s^2)
+    float x_acc, y_acc, z_acc;
+    accel.getAcceleration(&x_acc, &y_acc, &z_acc);
+
+    // データの表示
+    Serial.print("> Time: ");
+    Serial.println((millis() - startTime) / 1000.0);
+    Serial.print("> X: ");
+    Serial.println(x_acc);
+    Serial.print("> Y: ");
+    Serial.println(y_acc);
+    Serial.print("> Z: ");
+    Serial.println(z_acc);
+
+    // CSV形式で出力: 時間[ms], X, Y, Z
+
+    // Serial.print((millis() - startTime) / 1000);
+    // Serial.print(",");
+    // Serial.print(x_acc);
+    // Serial.print(",");
+    // Serial.print(y_acc);
+    // Serial.print(",");
+    // Serial.println(z_acc);
+    Serial.print("> Freefall: ");
+    Serial.println(checkFreeFall());
+}
+
+void getPinStatus()
+{
+    digitalWrite(pinName, !digitalRead(pinName));
+    if (digitalRead(pinName) == 1)
+    {
+        digitalWrite(ledBlue, HIGH);
+        digitalWrite(ledRed, HIGH);
+    }
+    else
+    {
+        digitalWrite(ledBlue, LOW);
+        digitalWrite(ledRed, LOW);
+    }
+
+    Serial.println(digitalRead(pinName));
+}
+
+void spiPinConfig()
+{
+    SPI.setMISO(PB4);
+    SPI.setMOSI(PB5);
+    SPI.setSCLK(PB3);
+}
+
+void setup()
+{
+    Serial.begin(115200);
+    while (!Serial)
+        delay(100);
+
+    // SPI通信の初期化
+    spiPinConfig();
+    SPI.begin();
+
+    // センサの初期化
+    if (!accel.begin())
+    {
+        while (1)
+            ;
+    }
+
+    pinMode(pinName, OUTPUT);
+    pinMode(ledBlue, OUTPUT);
+    pinMode(ledRed, OUTPUT);
+
+    // 保存されたオフセットがあればここで設定する
+    accel.setTrimOffsets(1, -3, -5);
+
+    // CSVヘッダーの出力
+    Serial.println("time_ms,acc_x,acc_y,acc_z");
+
+    Tasks.add(&task800Hz)->startFps(800);
+    Tasks.add(&getPinStatus)->startFps(2);
+}
+
 void loop()
 {
+    Tasks.update();
+
     if (Serial.available())
     {
         char ch = Serial.read();
@@ -116,21 +217,4 @@ void loop()
             calibrateSensor();
         }
     }
-
-    // 加速度データの取得 (単位: m/s^2)
-    float x_acc, y_acc, z_acc;
-    accel.getAcceleration(&x_acc, &y_acc, &z_acc);
-
-    // データの表示
-    Serial.print("> X: ");
-    Serial.println(x_acc);
-    Serial.print("> Y: ");
-    Serial.println(y_acc);
-    Serial.print("> Z: ");
-    Serial.println(z_acc);
-
-    // RAW値も確認したい場合は以下を使用
-    // int16_t x, y, z;
-    // accel.getXYZ(&x, &y, &z);
-    // Serial.print(" | RAW Z: "); Serial.print(z);
 }

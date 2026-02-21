@@ -97,21 +97,23 @@ void AMG_MODE()
     float pitch = madgwick.getPitch();
     float roll = madgwick.getYaw();
 
-    Serial.print(">Roll:");
+    Serial.print("> Roll:");
     Serial.println(roll);
-    Serial.print(">Pitch:");
+    Serial.print("> Pitch:");
     Serial.println(pitch);
-    Serial.print(">Yaw:");
+    Serial.print("> Yaw:");
     Serial.println(yaw);
 }
 
 void setup()
 {
     Serial.begin(115200);
-    while (!Serial)
-        ;
+    // while (!Serial)
+    //     ;
 
     Wire.begin();
+    // Wire.setClock(10000); // Removed 10kHz workaround
+
     Serial.println("\n--- I2C Scanner ---");
     byte error, address;
     int nDevices = 0;

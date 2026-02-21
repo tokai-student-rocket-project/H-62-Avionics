@@ -4,10 +4,12 @@
 #include <TaskManager.h>
 #include <Wire.h>
 #include <Lib_FlightTime.hpp>
+#include <Lib_EKF.hpp>
 
 MPU9250 mpu9250;
 Madgwick madgwickFilter;
 FlightTime flightTime;
+EKF ekf;
 
 float ax, ay, az;
 float gx, gy, gz;
@@ -57,13 +59,18 @@ void task100Hz()
     // Serial.print(">Mag_Z_uT:");
     // Serial.println(mz);
 
-    madgwickFilter.update(gx, gy, gz, ax, ay, az, mx, my, mz);
+    madgwickFilter.update(gx, gy, gz, ax, ay, az, my, mx, -mz);
+    ekf.update(gx, gy, gz, ax, ay, az, my, mx, -mz);
 
     if (count++ % 5 == 0)
     {
-        float roll = madgwickFilter.getRoll();
-        float pitch = madgwickFilter.getPitch();
-        float yaw = madgwickFilter.getYaw();
+        // float roll = madgwickFilter.getYaw();
+        // float pitch = madgwickFilter.getPitch();
+        // float yaw = madgwickFilter.getRoll();
+
+        float roll = ekf.getYaw();
+        float pitch = ekf.getPitch();
+        float yaw = ekf.getRoll();
 
         Serial.print(">Roll:");
         Serial.println(roll);
@@ -72,11 +79,8 @@ void task100Hz()
         Serial.print(">Yaw:");
         Serial.println(yaw);
         // Serial.print(">Gravity_X:");
-        // Serial.println(ggx);
-        // Serial.print(">Gravity_Y:");
-        // Serial.println(ggy);
-        // Serial.print(">Gravity_Z:");
-        // Serial.println(ggz);
+        // Serial.println(ax);
+
         // Serial.print(">Linear_Accel_X:");
         // Serial.println(lin_ax);
         // Serial.print(">Linear_Accel_Y:");
@@ -98,7 +102,7 @@ void taskCsv()
     mpu9250.getMagnetometer(&mx, &my, &mz);
 
     // madgwickFilter.updateIMU(gx, gy, gz, ax, ay, az);
-    madgwickFilter.update(gx, gy, gz, ax, ay, az, mx, my, mz);
+    madgwickFilter.update(gz, gy, gx, az, ay, ay, my, mx, -mz);
 
     float roll = madgwickFilter.getRoll();
     float pitch = madgwickFilter.getPitch();
@@ -125,8 +129,6 @@ void setup()
     digitalWrite(LED_BUILTIN, LOW);
 
     mpu9250.begin();
-    mpu9250.setAxisRemap(2, 1, 0, 1.0, 1.0, -1.0);
-    mpu9250.setMagRemap(0, 1, 2, 1.0, 1.0, -1.0);
     mpu9250.setAccelRange(MPU9250::AFS_16G);
     mpu9250.setGyroRange(MPU9250::GFS_1000DPS);
     mpu9250.setDLPFBandwidth(MPU9250::DLPF_41HZ);
@@ -136,12 +138,13 @@ void setup()
     // mpu9250.calibrateGyro();
     // mpu9250.calibrateMag();
 
-    madgwickFilter.begin(SAMPLE_RATE);
-    madgwickFilter.setZeta(0);
+    // madgwickFilter.begin(SAMPLE_RATE);
+    // madgwickFilter.setZeta(0);
+    ekf.begin(SAMPLE_RATE);
 
-    mpu9250.setAccelCalibration(0.1077, -0.0311, 0.2801, 0.9944, 0.9853, 0.9727);
-    mpu9250.setGyroBias(0.4014, 0.9471, -0.2233);
-    mpu9250.setMagCalibration(-23.5512, -11.0801, 6.1318, 0.7675, 0.7894, 2.3243);
+    mpu9250.setAccelCalibration(0.0670, 0.0287, 0.3400, 0.9757, 0.9913, 0.9832);
+    mpu9250.setGyroBias(-0.1145, 0.6864, 0.3636);
+    mpu9250.setMagCalibration(6.4066, -20.2529, 2.4527, 0.5614, 1.5111, 1.7952);
 
     // Serial.println("Accel_X_m/s^2,Accel_Y_m/s^2,Accel_Z_m/s^2,Gyro_X_dps,Gyro_Y_dps,Gyro_Z_dps,Mag_X_uT,Mag_Y_uT,Mag_Z_uT");
     Serial.println("time,roll,pitch,yaw");
