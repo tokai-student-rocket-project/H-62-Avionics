@@ -472,6 +472,7 @@ void taskButtonCheck()
         else if ((millis() - buttonPressTime > LONG_PRESS_TIME_MS) && !longPressSent) // 長押しと判断できる時間が経っていて、まだコマンドを送っていなければ
         {
             // 長押し時の動作
+
             sendLoRaCommand();    // LoRaコマンドを送ります。
             longPressSent = true; // 長押しコマンドは送られたことにします。
         }
