@@ -7,6 +7,15 @@
 #include <Calculus.h>
 #include <Filters.h>
 #include "Lib_Var.hpp"
+#include <Arduino.h>
+#include <SPI.h>
+#include <Wire.h>
+#include <TaskManager.h>
+#include <MsgPacketizer.h>
+#include <movingAvg.h>
+#include <Calculus.h>
+#include <Filters.h>
+#include "Lib_Var.hpp"
 #include "Lib_CAN.hpp"
 #include "Lib_Telemeter.hpp"
 #include "Lib_BNO055.hpp"
@@ -15,6 +24,7 @@
 #include "Lib_Thermistor.hpp"
 #include "Lib_RateMonitor.hpp"
 #include "Lib_OutputPin.hpp"
+#include "Lib_Madgwick.hpp"
 
 char ident = '\0';
 bool doLogging = false;
@@ -37,6 +47,7 @@ RateMonitor monitor100Hz;
 Altimeter primary;
 Altimeter secondary;
 BNO055 bno055;
+Madgwick filter;
 Thermistor regulator1(A3);
 Thermistor regulator2(A4);
 Thermistor regulator3(A5);
@@ -75,9 +86,9 @@ Calculus::Integral<float> gyroscopeIntegralX;
 Calculus::Integral<float> gyroscopeIntegralY;
 Calculus::Integral<float> gyroscopeIntegralZ;
 
-Filter::HPF<float> accelerationHighPassX(5);
-Filter::HPF<float> accelerationHighPassY(5);
-Filter::HPF<float> accelerationHighPassZ(5);
+// Filter::HPF<float> accelerationHighPassX(5);
+// Filter::HPF<float> accelerationHighPassY(5);
+// Filter::HPF<float> accelerationHighPassZ(5);
 
 constexpr float gravity_mps2 = 9.80665;
 constexpr float initialPitch_deg = 90.0;
@@ -142,6 +153,18 @@ void task100Hz()
     bno055.getAcceleration(&accelerationX_mps2, &accelerationY_mps2, &accelerationZ_mps2);
     bno055.getGyroscope(&gyroscopeX_dps, &gyroscopeY_dps, &gyroscopeZ_dps);
 
+    // Madgwick Filter Update
+    filter.updateIMU(gyroscopeX_dps, gyroscopeY_dps, gyroscopeZ_dps, accelerationX_mps2, accelerationY_mps2, accelerationZ_mps2);
+
+    roll_deg = filter.getRoll();
+    pitch_deg = filter.getPitch();
+    yaw_deg = filter.getYaw();
+
+    // Calculate Linear Acceleration (Gravity Removed)
+    filter.getLinearAcceleration(accelerationX_mps2, accelerationY_mps2, accelerationZ_mps2, 
+                                 &linearAccelerationX_mps2, &linearAccelerationY_mps2, &linearAccelerationZ_mps2);
+
+    /* Legacy Logic Removed
     roll_deg = gyroscopeIntegralX.get(gyroscopeX_dps, deltaTime);
     pitch_deg = gyroscopeIntegralY.get(gyroscopeY_dps, deltaTime) + initialPitch_deg;
     yaw_deg = gyroscopeIntegralZ.get(gyroscopeZ_dps, deltaTime);
@@ -149,6 +172,7 @@ void task100Hz()
     gravityX_mps2 = gravity_mps2 * sin(radians(pitch_deg)) * cos(radians(yaw_deg));
     gravityY_mps2 = gravity_mps2 * sin(radians(yaw_deg)) * cos(radians(roll_deg));
     gravityZ_mps2 = gravity_mps2 * cos(radians(pitch_deg)) * cos(radians(roll_deg));
+    */
 
     /*
     // task10Hzから移植
@@ -187,9 +211,203 @@ void task100Hz()
     // Serial.print(">accelerationZ_mps2: ");
     // Serial.println(accelerationZ_mps2);
 
-    linearAccelerationX_mps2 = accelerationHighPassX.get(accelerationX_mps2 - gravityX_mps2, deltaTime);
-    linearAccelerationY_mps2 = accelerationHighPassY.get(accelerationY_mps2 - gravityY_mps2, deltaTime);
-    linearAccelerationZ_mps2 = accelerationHighPassZ.get(accelerationZ_mps2 - gravityZ_mps2, deltaTime);
+    // linearAccelerationX_mps2 = accelerationHighPassX.get(accelerationX_mps2 - gravityX_mps2, deltaTime);
+    // linearAccelerationY_mps2 = accelerationHighPassY.get(accelerationY_mps2 - gravityY_mps2, deltaTime);
+    // linearAccelerationZ_mps2 = accelerationHighPassZ.get(accelerationZ_mps2 - gravityZ_mps2, deltaTime);
+
+    const auto &logPacket = MsgPacketizer::encode(0x0A,
+                                                  ident, millis(), flightTime, flightMode, logger.getUsage(),
+                                                  accelerationX_mps2, accelerationY_mps2, accelerationZ_mps2,
+                                                  gyroscopeX_dps, gyroscopeY_dps, gyroscopeZ_dps,
+                                                  magnetometerX_nT, magnetometerY_nT, magnetometerZ_nT,
+                                                  roll_deg, pitch_deg, yaw_deg,
+                                                  forceX_N, jerkX_mps3,
+                                                  primaryPressure_hPa, secondaryPressure_hPa, referencePressure_hPa, altitude_m,
+                                                  verticalSpeed_mps, verticalAcceleration_msp2, estimated, apogee, isFalling,
+                                                  externalVoltage_V, batteryVoltage_V, busVoltage_V,
+                                                  externalCurrent_mA, batteryCurrent_mA, busCurrent_mA,
+                                                  externalPower_W, batteryPower_W, busPower_W,
+                                                  externalDieTemperature_C, batteryDieTemperature_C, busDieTemperature_C);
+
+    if (doLogging)
+    {
+        logger.write(logPacket.data.data(), logPacket.data.size());
+    }
+}
+
+void task50Hz()
+{
+    // 現状特になし
+}
+
+void task20Hz()
+{
+    ledWork.toggle();
+
+    bno055.getMagnetometer(&magnetometerX_nT, &magnetometerY_nT, &magnetometerZ_nT);
+}
+
+void task10Hz()
+{
+    ledWork.toggle();
+
+    float deltaTime = 1.0 / monitor10Hz.updateRate();
+
+    forceX_N = characteristicMass_kg * linearAccelerationX_mps2;
+    jerkX_mps3 = linearAccelerationGradient.get(linearAccelerationX_mps2, deltaTime);
+
+    can.sendDynamics(forceX_N, jerkX_mps3);
+
+    // verticalSpeed_mps = altitudeGradient.get((float)altitudeAverage.reading((int16_t)(altitude_m * 10)) / 10.0, deltaTime); // LPS28DFW内で平均化処理を行ってもらう．
+
+    verticalSpeed_mps = altitudeGradient.get(altitude_m, deltaTime);
+    verticalAcceleration_msp2 = verticalSpeedGradient.get(verticalSpeed_mps, deltaTime);
+
+    estimated = -verticalSpeed_mps / verticalAcceleration_msp2; // 意味ない
+    apogee = altitude_m + (verticalSpeed_mps * estimated + 0.5 * verticalAcceleration_msp2 * estimated * estimated);
+    isFalling = verticalSpeed_mps < 0;
+
+    can.sendTrajectory(isFalling, altitude_m);
+
+    ledCanTx.toggle();
+
+    /*x
+    Serial.print(">isFalling: ");
+    Serial.println(isFalling);
+
+    Serial.print(">verticalSpeed_mps: ");
+    Serial.println(verticalSpeed_mps);
+
+    Serial.print(">jerkX_mps3: ");
+    Serial.println(jerkX_mps3);
+
+    Serial.print(">Altitude: ");
+    Serial.println(altitude_m);
+    */
+}
+
+void task5Hz()
+{
+    ledWork.toggle();
+    // temperatureInside_degC = altimeter.getTemperature();
+}
+
+void task2Hz()
+{
+    const auto &airTelemetryPacket = MsgPacketizer::encode(0x0A,
+                                                           static_cast<uint32_t>(millis()),
+                                                           static_cast<char>(ident),
+                                                           static_cast<uint8_t>(logger.getUsage()),
+                                                           static_cast<bool>(doLogging),
+                                                           static_cast<uint8_t>(logger.framNumber()),
+                                                           static_cast<int16_t>(accelerationX_mps2 * 10),
+                                                           static_cast<int16_t>(accelerationY_mps2 * 10),
+                                                           static_cast<int16_t>(accelerationZ_mps2 * 10),
+                                                           static_cast<int16_t>(sqrt(accelerationX_mps2 * accelerationX_mps2 + accelerationY_mps2 * accelerationY_mps2 + accelerationZ_mps2 * accelerationZ_mps2) * 10),
+                                                           static_cast<int16_t>(roll_deg * 10),
+                                                           static_cast<int16_t>(pitch_deg * 10),
+                                                           static_cast<int16_t>(yaw_deg * 10),
+                                                           static_cast<int16_t>(forceX_N * 10),
+                                                           static_cast<int16_t>(jerkX_mps3 * 10),
+                                                           static_cast<int16_t>(altitude_m * 10),
+                                                           static_cast<int16_t>(verticalSpeed_mps * 10),
+                                                           static_cast<int16_t>(estimated * 10),
+                                                           static_cast<int16_t>(apogee * 10),
+                                                           static_cast<int16_t>(externalVoltage_V * 100),
+                                                           static_cast<int16_t>(batteryVoltage_V * 100),
+                                                           static_cast<int16_t>(busVoltage_V * 100),
+                                                           static_cast<int16_t>(externalCurrent_mA * 100),
+                                                           static_cast<int16_t>(batteryCurrent_mA * 100),
+                                                           static_cast<int16_t>(busCurrent_mA * 100),
+                                                           static_cast<int16_t>(externalPower_W * 10),
+                                                           static_cast<int16_t>(batteryPower_W * 10),
+                                                           static_cast<int16_t>(busPower_W * 10),
+                                                           static_cast<int16_t>(externalDieTemperature_C * 10),
+                                                           static_cast<int16_t>(batteryDieTemperature_C * 10),
+                                                           static_cast<int16_t>(busDieTemperature_C * 10));
+
+    telemeter.reserveData(airTelemetryPacket.data.data(), airTelemetryPacket.data.size());
+    telemeter.sendReservedData();
+    ledLoRaTx.toggle();
+}
+
+void setReferencePressure(float primaryPressure, float secondaryPressure)
+{
+    primary.setReferencePressure(primaryPressure);
+    secondary.setReferencePressure(secondaryPressure);
+}
+
+void setup()
+{
+    analogReadResolution(12);
+    Serial.begin(115200);
+    Wire.begin();
+    float deltaTime = 1.0 / monitor100Hz.updateRate();
+
+    bno055.getAcceleration(&accelerationX_mps2, &accelerationY_mps2, &accelerationZ_mps2);
+    bno055.getGyroscope(&gyroscopeX_dps, &gyroscopeY_dps, &gyroscopeZ_dps);
+
+    // Madgwick Filter Update
+    filter.updateIMU(gyroscopeX_dps, gyroscopeY_dps, gyroscopeZ_dps, accelerationX_mps2, accelerationY_mps2, accelerationZ_mps2);
+
+    roll_deg = filter.getRoll();
+    pitch_deg = filter.getPitch();
+    yaw_deg = filter.getYaw();
+
+    // Calculate Linear Acceleration (Gravity Removed)
+    filter.getLinearAcceleration(accelerationX_mps2, accelerationY_mps2, accelerationZ_mps2, 
+                                 &linearAccelerationX_mps2, &linearAccelerationY_mps2, &linearAccelerationZ_mps2);
+
+    /* Legacy Logic Removed
+    roll_deg = gyroscopeIntegralX.get(gyroscopeX_dps, deltaTime);
+    pitch_deg = gyroscopeIntegralY.get(gyroscopeY_dps, deltaTime) + initialPitch_deg;
+    yaw_deg = gyroscopeIntegralZ.get(gyroscopeZ_dps, deltaTime);
+
+    gravityX_mps2 = gravity_mps2 * sin(radians(pitch_deg)) * cos(radians(yaw_deg));
+    gravityY_mps2 = gravity_mps2 * sin(radians(yaw_deg)) * cos(radians(roll_deg));
+    gravityZ_mps2 = gravity_mps2 * cos(radians(pitch_deg)) * cos(radians(roll_deg));
+    */
+
+    /*
+    // task10Hzから移植
+    verticalSpeed_mps = altitudeGradient.get(altitude_m, deltaTime);
+    verticalAcceleration_msp2 = verticalSpeedGradient.get(verticalSpeed_mps, deltaTime);
+
+    estimated = -verticalSpeed_mps / verticalAcceleration_msp2;
+    apogee = altitude_m + (verticalSpeed_mps * estimated + 0.5 * verticalAcceleration_msp2 * estimated * estimated);
+    isFalling = verticalSpeed_mps < 0;
+
+    Serial.print(">isFalling: ");
+    Serial.println(isFalling);
+
+    Serial.print(">verticalSpeed_mps: ");
+    Serial.println(verticalSpeed_mps);
+    ////
+    */
+
+    // Serial.print(">gravityX_mps2:");
+    // Serial.println(gravityX_mps2);
+    // Serial.print(">gravityY_mps2:");
+    // Serial.println(gravityY_mps2);
+    // Serial.print(">gravityZ_mps2:");
+    // Serial.println(gravityZ_mps2);
+    // Serial.print(">roll_deg:");
+    // Serial.println(roll_deg);
+    // Serial.print(">pitch_deg:");
+    // Serial.println(pitch_deg);
+    // Serial.print(">yaw_deg:");
+    // Serial.println(yaw_deg);
+
+    // Serial.print(">accelerationX_mps2: ");
+    // Serial.println(accelerationX_mps2);
+    // Serial.print(">accelerationY_mps2: ");
+    // Serial.println(accelerationY_mps2);
+    // Serial.print(">accelerationZ_mps2: ");
+    // Serial.println(accelerationZ_mps2);
+
+    // linearAccelerationX_mps2 = accelerationHighPassX.get(accelerationX_mps2 - gravityX_mps2, deltaTime);
+    // linearAccelerationY_mps2 = accelerationHighPassY.get(accelerationY_mps2 - gravityY_mps2, deltaTime);
+    // linearAccelerationZ_mps2 = accelerationHighPassZ.get(accelerationZ_mps2 - gravityZ_mps2, deltaTime);
 
     const auto &logPacket = MsgPacketizer::encode(0x0A,
                                                   ident, millis(), flightTime, flightMode, logger.getUsage(),
@@ -324,6 +542,7 @@ void setup()
     telemeter.initialize(923.8E6, 500E3); // 能代宇宙イベント 21st無線調整シートより
 
     bno055.begin();
+    filter.begin(100.0f); // 100Hz sample rate
 
     // altitudeAverage.begin(); // LPS28DFW内部で実行してもらっているのでソフト側では処理しない．
 
