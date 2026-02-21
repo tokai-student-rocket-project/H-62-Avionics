@@ -95,6 +95,6 @@ private:
 
     void write(uint8_t reg, uint8_t data);
     uint8_t read(uint8_t reg);
-    void readLen(uint8_t reg, uint8_t* buffer, uint8_t len);
+    bool readLen(uint8_t reg, uint8_t* buffer, uint8_t len);
     void readVector3D(uint8_t reg, float lsb, float* x, float* y, float* z);
 };
